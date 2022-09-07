@@ -4,8 +4,12 @@ $secondary: #C2E7C9;
 $dark: #495057;
 
 //////// TIPOGRAFIA ////////
-$font-family-sans-serif: "Roboto", sans-serif;
+$font-family-sans-serif: "Poppins", sans-serif;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 //////// CUSTOM CSS ////////
+#inicio {
+    background-image: url("../images/background.svg");
+    background-size: cover;
+}
