@@ -1,6 +1,6 @@
 //////// PATRON DE COLORES ////////
 $primary: #004643;
-$secondary: #C2E7C9;
+$secondary: #c2e7c9;
 $dark: #495057;
 
 //////// TIPOGRAFIA ////////
@@ -10,6 +10,13 @@ $font-family-sans-serif: "Poppins", sans-serif;
 
 //////// CUSTOM CSS ////////
 #inicio {
-    background-image: url("../images/background.svg");
-    background-size: cover;
+  background-image: url("../images/background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#inicioNombre {
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 96px;
 }
