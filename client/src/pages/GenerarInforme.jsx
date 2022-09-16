@@ -5,7 +5,7 @@ const GenerarInforme = () => {
   return (
     <div className="m-2">
       <div className="bg-primary text-white">
-        <h2 className="m-0 ps-4 py-2 fs-5">Generacion de informes</h2>
+        <h5 className="m-0 ps-4 py-2">Generacion de informes</h5>
         </div>
         <div className="bg-secondary">
           <form>
@@ -26,6 +26,9 @@ const GenerarInforme = () => {
               <span className="ms-2">Generar</span>
             </button>
           </form>
+        </div>
+        <div>
+          {/* En este div se encuentra el informe generado */}
         </div>
       </div>
   )
