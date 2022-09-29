@@ -1,64 +1,104 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const ListadoInformes = () => {
   return (
-    <div>
-        <div>
-          <div className="bg-primary">
-            {/* <!--Primera fila--> */}
-            <button className="btn btn-secondary text-primary">
-              <FontAwesomeIcon icon={faDownload}/>
-            </button>
-            <button className="btn btn-secondary text-primary">
-            <FontAwesomeIcon icon={faTrashCan}/>
-            </button>
-            <h5 className="text-white m-0">34 informes</h5>
-          </div>
-          <table className="w-100">
+    <div className="container">
+      <div className="row">
+        <div className="bg-primary d-flex p-2 position-relative rounded-top mt-3 align-items-center">
+          {/* <!--Primera fila--> */}
+          <button className="btn btn-secondary text-primary me-2">
+            <FontAwesomeIcon icon={faDownload} />
+          </button>
+          <button className="btn btn-secondary text-primary">
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
+          <h5 className="text-white m-0 mx-auto">34 informes</h5>
+        </div>
+        <div className="row">
+          <table className="table table-bordered table-hover table-striped">
             <thead className="bg-primary text-white">
-              <tr>
-                <th></th>
-                <th>
-                  <label htmlFor="compania" className="d-block">Compañía</label>
-                  <select name="compania" id="compania">
-                    <option selected value="" disabled>Seleccionar...</option>
-                    <option value="FAM">Fundacion alto magdalena</option>
-                    <option value="varisur">Varisur</option>
-                    <option value="LCC">Liga contra el cancer</option>
-                  </select>
+              <tr className="row">
+                <th className="d-flex flex-column justify-content-center col">
+
                 </th>
-                <th>
-                  <label htmlFor="fechaCreacion" className="d-block">Fecha de creación</label>
-                  <input type="date" name="fechaCreacion" id="fechaCreacion" />
+                <th className="d-flex flex-column justify-content-center col">
+                  <label htmlFor="compania" className="form-label text-center">
+                    Compañía
+                  </label>
+                  <div className="mx-auto">
+                    <select
+                      name="compania"
+                      id="compania"
+                      className="form-select"
+                    >
+                      <option selected value="" disabled>
+                        Seleccionar...
+                      </option>
+                      <option value="FAM">Fundacion alto magdalena</option>
+                      <option value="varisur">Varisur</option>
+                      <option value="LCC">Liga contra el cancer</option>
+                    </select>
+                  </div>
+                </th>
+                <th className="d-flex flex-column justify-content-center col">
+                  <label
+                    htmlFor="fechaCreacion"
+                    className="form-label text-center"
+                  >
+                    Fecha de creación
+                  </label>
+                  <div className="mx-auto">
+                    <input
+                      type="date"
+                      name="fechaCreacion"
+                      id="fechaCreacion"
+                      className="form-control"
+                    />
+                  </div>
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-secondary text-primary">
+            <tbody className="bg-secondary">
               <tr>
-                <td><input type="checkbox" name="" id="" /></td>
-                <td><p>IT TECHNOLOGY</p></td>
-                <td><p>21-Abril-2022</p></td>
+                <td>
+                  <input type="checkbox" name="" id="" />
+                </td>
+                <td>
+                  <p>IT TECHNOLOGY</p>
+                </td>
+                <td>
+                  <p>21-Abril-2022</p>
+                </td>
               </tr>
               <tr>
-                <td><input type="checkbox" name="" id="" /></td>
-                <td><p>IT TECHNOLOGY</p></td>
-                <td><p>30-Agosto-2022</p></td>
+                <td>
+                  <input type="checkbox" name="" id="" />
+                </td>
+                <td>
+                  <p>IT TECHNOLOGY</p>
+                </td>
+                <td>
+                  <p>30-Agosto-2022</p>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div>
-          {/* <!--Botones--> */}
-          <button className="btn btn-primary text-white">1</button>
-          <button className="btn btn-primary text-white">2</button>
-          <button className="btn btn-primary text-white">3</button>
-          <button className="btn btn-primary text-white">4</button>
-          <button className="btn btn-primary text-white">5</button>
-          <button className="btn btn-primary text-white">...</button>
+      </div>
+      <div className="d-flex">
+        {/* <!--Botones--> */}
+        <div className="mx-auto">
+          <button className="btn btn-primary text-white mx-1">1</button>
+          <button className="btn btn-primary text-white mx-1">2</button>
+          <button className="btn btn-primary text-white mx-1">3</button>
+          <button className="btn btn-primary text-white mx-1">4</button>
+          <button className="btn btn-primary text-white mx-1">5</button>
+          <button className="btn btn-primary text-white mx-1">...</button>
         </div>
       </div>
-  )
-}
+    </div>
+  );
+};
 
-export default ListadoInformes
+export default ListadoInformes;
