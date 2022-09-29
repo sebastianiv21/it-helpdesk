@@ -7,7 +7,7 @@ const ListadoInformes = () => {
       <div className="row">
         <div className="bg-primary d-flex p-2 position-relative rounded-top mt-3 align-items-center">
           {/* <!--Primera fila--> */}
-          <button className="btn btn-secondary text-primary me-2">
+          <button className="btn btn-secondary text-primary me-2 ms-2">
             <FontAwesomeIcon icon={faDownload} />
           </button>
           <button className="btn btn-secondary text-primary">
@@ -15,14 +15,14 @@ const ListadoInformes = () => {
           </button>
           <h5 className="text-white m-0 mx-auto">34 informes</h5>
         </div>
-        <div className="row">
-          <table className="table table-bordered table-hover table-striped">
+        <div className="p-0">
+          <table className="table table-bordered table-hover text-center">
             <thead className="bg-primary text-white">
-              <tr className="row">
-                <th className="d-flex flex-column justify-content-center col">
+              <tr>
+                <th>
 
                 </th>
-                <th className="d-flex flex-column justify-content-center col">
+                <th>
                   <label htmlFor="compania" className="form-label text-center">
                     Compañía
                   </label>
@@ -41,7 +41,7 @@ const ListadoInformes = () => {
                     </select>
                   </div>
                 </th>
-                <th className="d-flex flex-column justify-content-center col">
+                <th>
                   <label
                     htmlFor="fechaCreacion"
                     className="form-label text-center"
@@ -65,10 +65,10 @@ const ListadoInformes = () => {
                   <input type="checkbox" name="" id="" />
                 </td>
                 <td>
-                  <p>IT TECHNOLOGY</p>
+                  <p className="m-0">IT TECHNOLOGY</p>
                 </td>
                 <td>
-                  <p>21-Abril-2022</p>
+                  <p className="m-0">21-Abril-2022</p>
                 </td>
               </tr>
               <tr>
@@ -76,10 +76,10 @@ const ListadoInformes = () => {
                   <input type="checkbox" name="" id="" />
                 </td>
                 <td>
-                  <p>IT TECHNOLOGY</p>
+                  <p className="m-0">IT TECHNOLOGY</p>
                 </td>
                 <td>
-                  <p>30-Agosto-2022</p>
+                  <p className="m-0">30-Agosto-2022</p>
                 </td>
               </tr>
             </tbody>

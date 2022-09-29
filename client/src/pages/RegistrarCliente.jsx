@@ -44,7 +44,7 @@ const RegistrarCliente = () => {
               />
             </div>
           </div>
-          <div className="d-flex justify-content-around mb-5">
+          <div className="d-flex justify-content-around mb-3">
             <div>
           <label htmlFor="tel" className="form-label m-0">Teléfono(*)</label>
           <input type="text" name="tel" id="tel" className="form-control" />

@@ -8,23 +8,24 @@ import {
 
 const ListadoClientes = () => {
   return (
-    <div>
+    <div className="container d-flex flex-column gap-3 mt-3">
       <div>
         {/* <!--modulo busqueda--> */}
 
-        <h5 className="bg-primary text-white p-2 m-0">Búsqueda</h5>
-        <form className="bg-secondary">
+        <h5 className="bg-primary text-white p-2 m-0 rounded-top">Búsqueda</h5>
+        <form className="bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around">
           <input
             type="text"
             name="busqueda"
             id="busqueda"
+            className="form-control m-2"
             placeholder="Ingrese nombre, apellido, email o teléfono del contacto"
           />
-          <button className="btn btn-primary text-white">
+          <button className="btn btn-primary text-white d-flex align-items-center m-2">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
             <span className="ms-2">Buscar</span>
           </button>
-          <button className="btn btn-primary text-white">
+          <button className="btn btn-primary text-white d-flex align-items-center m-2">
             <FontAwesomeIcon icon={faEraser} />
             <span className="ms-2">Limpiar</span>
           </button>
@@ -34,16 +35,16 @@ const ListadoClientes = () => {
         {/* <!--listado de contactos--> */}
         <div>
           {/* <!--Primera fila--> */}
-          <div className="bg-primary">
+          <div className="bg-primary rounded-top p-2 d-flex gap-2">
             <button className="btn btn-secondary text-primary">
               <FontAwesomeIcon icon={faUserPlus} />
             </button>
             <button className="btn btn-secondary text-primary">
               <FontAwesomeIcon icon={faTrashCan} />
             </button>
-            <h5 className="text-white m-0">62 contactos</h5>
+            <h5 className="text-white m-0 mx-auto">62 contactos</h5>
           </div>
-          <table className="w-100">
+          <table className="table table-hover table-bordered text-center">
             <thead className="bg-primary text-white">
               <tr>
                 <th></th>
@@ -81,7 +82,7 @@ const ListadoClientes = () => {
             </tbody>
           </table>
         </div>
-        <div>
+        <div className="mt-2 d-flex justify-content-center gap-1">
           {/* <!--Botones--> */}
           <button className="btn btn-primary text-white">1</button>
           <button className="btn btn-primary text-white">2</button>
