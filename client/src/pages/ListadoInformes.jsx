@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { Pagination, PaginationItem, PaginationLink, Table } from "reactstrap";
 
 const ListadoInformes = () => {
   return (
@@ -16,12 +17,17 @@ const ListadoInformes = () => {
           <h5 className="text-white m-0 mx-auto">34 informes</h5>
         </div>
         <div className="p-0">
-          <table className="table table-bordered table-hover text-center">
+          {/* <table className="table table-bordered table-hover text-center"> */}
+          <Table
+  bordered
+  hover
+  responsive
+  striped
+  className="text-center"
+>
             <thead className="bg-primary text-white">
               <tr>
-                <th>
-
-                </th>
+                <th></th>
                 <th>
                   <label htmlFor="compania" className="form-label text-center">
                     Compañía
@@ -83,19 +89,49 @@ const ListadoInformes = () => {
                 </td>
               </tr>
             </tbody>
-          </table>
+          {/* </table> */}
+          </Table>
         </div>
       </div>
-      <div className="d-flex">
+      <div className="d-flex justify-content-center">
         {/* <!--Botones--> */}
-        <div className="mx-auto">
+        {/* <div className="mx-auto">
           <button className="btn btn-primary text-white mx-1">1</button>
           <button className="btn btn-primary text-white mx-1">2</button>
           <button className="btn btn-primary text-white mx-1">3</button>
           <button className="btn btn-primary text-white mx-1">4</button>
           <button className="btn btn-primary text-white mx-1">5</button>
           <button className="btn btn-primary text-white mx-1">...</button>
-        </div>
+        </div> */}
+        <Pagination>
+          <PaginationItem>
+            <PaginationLink first href="#" className="bg-primary text-white" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" previous className="bg-primary text-white"  />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >3</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >4</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >5</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" next className="bg-primary text-white"  />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" last className="bg-primary text-white"  />
+          </PaginationItem>
+        </Pagination>
       </div>
     </div>
   );
