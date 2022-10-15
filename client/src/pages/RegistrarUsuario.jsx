@@ -3,79 +3,93 @@ import { faEraser, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 
 const RegistrarUsuario = () => {
   return (
-   <div>
-    <div className="container-lg">
-        <form  id ="formulario" className="bg-secondary" method ="post" enctype="multipart/form-data">    
-            <table className="p-0">
-                <tr className="bg-primary w-100 text-white">
-                    <th>Nuevo usuario</th> 
-                    <th></th>
-                </tr> 
-                <tbody>
-                    <tr> 
-                        <td>
-                            <br />
-                            Nombre<input type="text" placeholder="Nombre" size="49"/>
-                        </td>
-                        <td width="710 px">
-                            <br/>
-                             Apellidos <input type="text" placeholder="Apellidos" size="50"/>
-                        </td>
-                    </tr>
-                    <tr class="rw-selector" >
-                        <td>
-                            <br/>
-                            <form> Tipo de documento
-                                <select class="selector">
-                                    <option>Seleccione una opcion</option>
-                                    <option>Cedula de Ciudadania</option>
-                                    <option>Cedula Extranjera</option>
-                                    <option>Tarjeta de Identidad</option>
-                                </select>  
-                            </form>
-                            <td>
-                                <br/>
-                                Numero de documento <input type="text" placeholder="Numero de Documento" size="40" />
-                            </td>
-                        </td>    
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            Correo electronico <input type="text" placeholder="Correo" size="40" />
-                        </td>
-                        <td>
-                            <br/>
-                            Celular<input type="text" placeholder="Numero de celular" size="52"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            Cargo <input type="text" placeholder="Cargo" size="50" />
-                        </td>
-                        <td>
-                            <br/>
-                            Direccion <input type="text" placeholder="Direccion" size="50"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            Foto
-                            <label for="Foto"></label>
-                            <input type="file"  name="Imagen" id="Imagen" size="488"/>
-                        </td>  
-                        <td>
-                            <br/>
-                                <button class="btn btn-light" type="submit" ><FontAwesomeIcon icon={faFloppyDisk}/>Guardar</button>
-                                <button class="btn btn-light" type="reset"><FontAwesomeIcon icon={faEraser}/>Limpiar</button>
-                        </td> 
-                    </tr>    
-                </tbody>
-            </table>
-        </form>   
-    </div>
+    <div className="container m-4 mx-auto">
+      <div className="bg-primary text-white rounded-top">
+        <h5 className="m-0 ps-4 py-3">Nuevo Usuario</h5>
+      </div>
+      <div className="bg-secondary p-3 rounded-bottom text-primary">
+        <form>
+          <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="Nombres" className="form-label m-0 me-2">
+                Nombres(*)
+              </label>
+              <div className="w-100"> 
+              <input
+                type="text"
+                name="Nombres"
+                id="Nombres"
+                className="form-control"
+              />
+              </div>
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="email" className="form-label m-0 me-2">
+                Apellidos(*)
+              </label>
+              <div className="w-100">
+              <input
+                type="text"
+                name="Apellidos"
+                id="Apellidos"
+                className="form-control"
+              />
+              </div>
+            </div>
+          </div>
+          <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="Tipo de Documento" className="form-label m-0 me-2">Tipo de Documento(*)</label>
+              <select name="Tipo de Documento" className="form-select">
+                <option>Seleccione una opcion</option>
+                <option>Cedula de Ciudadania</option>
+                <option>Cedula Extranjera</option>
+                <option>Tarjeta de identidad</option>
+              </select>
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="numero de documento" className="form-label m-0 me-2">Numero de Documento(*)</label>
+              <input type="text" name="numero de documento" id="numero de documento" className="form-control" />
+            </div>
+         </div>
+         <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="Tipo de Documento" className="form-label m-0 me-2">Correo Electronico(*)</label>
+              <input type="text" name="email" id="email" className="form-control"/>
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="numero de documento" className="form-label m-0 me-2">Numero de Celular(*)</label>
+              <input type="text" name="numero de celular" id="numero de celular" className="form-control" />
+            </div>
+         </div>
+         <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="Tipo de Documento" className="form-label m-0 me-2">Cargo(*)</label>
+              <input type="text" name="cargo" id="cargo" className="form-control"/>
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="numero de documento" className="form-label m-0 me-2">Direccion Residencial(*)</label>
+              <input type="text" name="direccion residencial" id="direccion residencial" className="form-control" />
+            </div>
+         </div>
+         <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="Tipo de Documento" className="form-label m-0 me-2">Foto(*)</label>
+              <input type="file" name="foto" id="foto" className="form-control"/>
+            </div>
+         </div>
+          <div className="d-flex justify-content-end">
+            <button className="btn btn-primary text-white me-3">
+              <FontAwesomeIcon icon={faEraser} />
+              <span className="ms-2">Limpiar</span>
+            </button>
+            <button className="btn btn-primary text-white me-5">
+              <FontAwesomeIcon icon={faFloppyDisk} />
+              <span className="ms-2">Guardar</span>
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
