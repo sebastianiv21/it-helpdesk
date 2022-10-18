@@ -1,3 +1,2 @@
 ﻿# it-helpdesk
-oli
-Yaaaaaaaasdadadasdaa
+Help desk for IT Technology R&M SAS
