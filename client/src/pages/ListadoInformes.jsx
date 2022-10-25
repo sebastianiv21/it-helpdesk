@@ -33,7 +33,7 @@ const ListadoInformes = () => {
             colorBtn='secondary'
             colorTxt='primary'
           />
-          <h5 className='text-white m-0 mx-auto'>34 informes</h5>
+          <h5 className='text-white m-0 mx-auto'>{informes.length} informes</h5>
         </div>
         <div className='p-0'>
           {/* <table className="table table-bordered table-hover text-center"> */}

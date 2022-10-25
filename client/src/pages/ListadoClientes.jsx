@@ -30,7 +30,9 @@ const ListadoClientes = () => {
       <div>
         {/* <!--modulo busqueda--> */}
 
-        <h5 className='bg-primary text-white p-2 m-0 rounded-top'>Búsqueda</h5>
+        <h5 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
+          Búsqueda
+        </h5>
         <form className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'>
           <input
             type='text'
@@ -70,7 +72,9 @@ const ListadoClientes = () => {
               colorBtn='secondary'
               colorTxt='primary'
             />
-            <h5 className='text-white m-0 mx-auto'>62 contactos</h5>
+            <h5 className='text-white m-0 mx-auto align-self-center'>
+              {clientes.length} contactos
+            </h5>
           </div>
           {/* <table className="table table-hover table-bordered text-center"> */}
           <Table
