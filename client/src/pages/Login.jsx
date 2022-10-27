@@ -2,7 +2,7 @@
 
 const Login = () => {
   return (
-    <div className="container m-4 mx-auto d-flex">
+    <div className="container mt-5 mx-auto d-flex">
       <div className="rounded shadow-lg p-3 align-self-center mx-auto mt-5">
         <form>
         <div className="col-auto d-flex align-items-center mb-3 fs-4">
