@@ -43,11 +43,15 @@ const RegistrarCliente = () => {
               texto='Cancelar'
               icono={faBan}
               estilos='me-3'
+              colorBtn='primary'
+              colorTxt='white'
             />
             <Boton
               texto='Guardar'
               icono={faFloppyDisk}
               estilos='me-5'
+              colorBtn='primary'
+              colorTxt='white'
             />
           </div>
         </form>

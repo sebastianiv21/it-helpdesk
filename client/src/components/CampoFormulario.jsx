@@ -5,7 +5,7 @@ const CampoFormulario = ({ nombre, etiqueta }) => {
         htmlFor={nombre}
         className='form-label m-0'
       >
-        {etiqueta}(*)
+        {etiqueta} (*)
       </label>
       <input
         type='text'
