@@ -9,18 +9,18 @@ const RegistrarUsuario = () => {
       </div>
       <div className="bg-secondary p-3 rounded-bottom text-primary">
         <form>
-          <div className="row justify-content-left mb-3">
-            <div className="col-auto d-flex align-items-center w-75">
-              <CampoResgistrarUsuario 
+        <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+            <CampoResgistrarUsuario 
               usuario='nombres' 
               etiqueta='Nombres' />
-              <div className="col-auto d-flex align-items-center w-50">
-              <CampoResgistrarUsuario 
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+            <CampoResgistrarUsuario 
               usuario='apellidos' 
               etiqueta='Apellidos' />
-              </div>
             </div>
-          </div>
+        </div>
           <div className="row justify-content-left mb-3">
             <div className="col-auto d-flex align-items-center w-50">
               <label htmlFor="tipo de Documento" className="form-label m-0 me-2">Tipo de Documento(*)</label>
@@ -32,33 +32,38 @@ const RegistrarUsuario = () => {
               </select>
             </div>
             <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="numero de documento" className="form-label m-0 me-2">Numero de Documento(*)</label>
-              <input type="text" name="numero de documento" id="numero de documento" className="form-control" />
+            <CampoResgistrarUsuario 
+              usuario='numero de documento' 
+              etiqueta='Numero de Documento' />
             </div>
          </div>
          <div className="row justify-content-left mb-3">
             <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="tipo de Documento" className="form-label m-0 me-2">Correo Electronico(*)</label>
-              <input type="text" name="email" id="email" className="form-control"/>
+            <CampoResgistrarUsuario 
+              usuario='email' 
+              etiqueta='Correo Electronico' />
             </div>
             <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="numero de documento" className="form-label m-0 me-2">Numero de Celular(*)</label>
-              <input type="text" name="numero de celular" id="numero de celular" className="form-control" />
-            </div>
-         </div>
-         <div className="row justify-content-left mb-3">
-            <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="tipo de Documento" className="form-label m-0 me-2">Cargo(*)</label>
-              <input type="text" name="cargo" id="cargo" className="form-control"/>
-            </div>
-            <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="numero de documento" className="form-label m-0 me-2">Direccion Residencial(*)</label>
-              <input type="text" name="direccion residencial" id="direccion residencial" className="form-control" />
+            <CampoResgistrarUsuario 
+              usuario='numero de celular' 
+              etiqueta='Numero de Celular' />
             </div>
          </div>
          <div className="row justify-content-left mb-3">
             <div className="col-auto d-flex align-items-center w-50">
-              <label htmlFor="tipo de Documento" className="form-label m-0 me-2">Foto(*)</label>
+            <CampoResgistrarUsuario 
+              usuario='cargo' 
+              etiqueta='Cargo' />
+            </div>
+            <div className="col-auto d-flex align-items-center w-50">
+            <CampoResgistrarUsuario 
+              usuario='direccion residencial' 
+              etiqueta='Direccion Residencial' />
+            </div>
+         </div>
+         <div className="row justify-content-left mb-3">
+            <div className="col-auto d-flex align-items-center w-50">
+              <label htmlFor="foto" className="form-label m-0 me-2">Foto(*)</label>
               <input type="file" name="foto" id="foto" className="form-control"/>
             </div>
          </div>
