@@ -1,19 +1,17 @@
 import { useState } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Pagination, PaginationItem, PaginationLink, Table } from "reactstrap";
+import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap'
 import {
   faMagnifyingGlass,
-  faArrowsRotate,
   faFileExcel,
   faFilePdf,
-  faRotate,
-} from "@fortawesome/free-solid-svg-icons";
-import ListadoTicketData from '../shared/ListadoTicketData.js';
-import FilaTicket from "../components/FilaTicket";
-import Boton from '../components/Boton.jsx';
+  faEraser,
+  faDownload,
+} from '@fortawesome/free-solid-svg-icons'
+import ListadoTicketData from '../shared/ListadoTicketData.js'
+import FilaTicket from '../components/FilaTicket'
+import Boton from '../components/Boton.jsx'
 
 const ListadoTickets = () => {
-
   const [tickets, setTickets] = useState(ListadoTicketData)
   const listaTickets = tickets.map((item) => (
     <FilaTicket
@@ -30,7 +28,7 @@ const ListadoTickets = () => {
   ))
 
   return (
-    <div className="container d-flex flex-column gap-3 mt-3">
+    <div className='container d-flex flex-column gap-3 mt-3 p-0'>
       <div>
         <h5 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
           Búsqueda
@@ -51,7 +49,7 @@ const ListadoTickets = () => {
             estilos='d-flex align-items-center m-2'
           />
           <Boton
-            icono={faRotate}
+            icono={faEraser}
             colorBtn='primary'
             colorTxt='white'
             texto='Limpiar'
@@ -59,29 +57,39 @@ const ListadoTickets = () => {
           />
         </form>
       </div>
-      
-      <div className="bg-primary p-2 rounded-top">
-          {/* <!-- Ver como agregar boton de envio--> */}
-          <div className='row'>
-          <div className='col-auto mb-3 gap-1'>
-          <Boton colorBtn='secondary' colorTxt='primary' texto='Generar'/>          
-          <select name="informe" className="form-select border-success text-primary bg-secondary " id="informe">
-            <option value="informe">Informe</option>
-            <option value="cerrar">Cerrar</option>
-            <option value="eliminar">Eliminar</option>
-            <option value="cambiarEstado">Cambiar Estado</option>
-            <option value="cambiarPrioridad">Cambiar Prioridad</option>
-            <option value="cambiarCategoria">Cambiar Categoria</option>
-          </select>
-          </div>
-          <div className="col-auto d-flex justify-content-center">
-        <h5 className="text-white m-0 mx-auto"> {tickets.length} ITEMS </h5>
-        </div>
-          </div>
-      </div>
+
       <div>
-        <table border={1} className="table table-hover table-bordered text-center">
-          <thead className="text-primary bg-light text-center">
+        {/* <!-- Ver como agregar boton de envio--> */}
+        <div className='row p-2 mx-auto bg-primary rounded-top'>
+          <div className='col input-group gap-1 p-0'>
+            <Boton
+              colorBtn='secondary'
+              colorTxt='primary'
+              texto='Generar'
+              icono={faDownload}
+            />
+            <select
+              name='informe'
+              className='form-select border-success text-primary bg-secondary '
+              id='informe'
+            >
+              <option value='informe'>Informe</option>
+              <option value='cerrar'>Cerrar</option>
+              <option value='eliminar'>Eliminar</option>
+              <option value='cambiarEstado'>Cambiar Estado</option>
+              <option value='cambiarPrioridad'>Cambiar Prioridad</option>
+              <option value='cambiarCategoria'>Cambiar Categoria</option>
+            </select>
+          </div>
+          <div className='col-8 d-flex bg-primary justify-content-center align-items-center'>
+            <h5 className='text-white m-0'> {tickets.length} tickets</h5>
+          </div>
+        </div>
+        <table
+          border={1}
+          className='table table-hover table-bordered text-center'
+        >
+          <thead className='text-primary bg-light text-center'>
             <tr>
               <th></th>
               <th>ID</th>
@@ -94,29 +102,27 @@ const ListadoTickets = () => {
               <th>Fecha de creacion</th>
             </tr>
           </thead>
-          <tbody className="bg-secondary">
-            {listaTickets}
-          </tbody>
+          <tbody className='bg-secondary'>{listaTickets}</tbody>
         </table>
       </div>
-      <div className="row mb-4">
+      <div className='row mb-4'>
         {/* <!--Botones--> */}
-        <div className="col-sm">
-        <Boton
+        <div className='col-sm'>
+          <Boton
             icono={faFileExcel}
             colorBtn='primary'
             colorTxt='white'
-            estilos= 'me-md-2'
+            estilos='me-md-2'
           />
-                  <Boton
+          <Boton
             icono={faFilePdf}
             colorBtn='primary'
             colorTxt='white'
           />
         </div>
-        <div className="col-sm d-flex justify-content-center">
-        {/* <!--Botones--> */}
-        {/* <div className="mx-auto">
+        <div className='col-sm d-flex justify-content-center'>
+          {/* <!--Botones--> */}
+          {/* <div className="mx-auto">
           <button className="btn btn-primary text-white mx-1">1</button>
           <button className="btn btn-primary text-white mx-1">2</button>
           <button className="btn btn-primary text-white mx-1">3</button>
@@ -124,39 +130,80 @@ const ListadoTickets = () => {
           <button className="btn btn-primary text-white mx-1">5</button>
           <button className="btn btn-primary text-white mx-1">...</button>
         </div> */}
-        <Pagination>
-          <PaginationItem>
-            <PaginationLink first href="#" className="bg-primary text-white" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" previous className="bg-primary text-white"  />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" className="bg-primary text-white" >1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" className="bg-primary text-white" >2</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" className="bg-primary text-white" >3</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" className="bg-primary text-white" >4</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" className="bg-primary text-white" >5</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" next className="bg-primary text-white"  />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#" last className="bg-primary text-white"  />
-          </PaginationItem>
-        </Pagination>
-      </div>
+          <Pagination>
+            <PaginationItem>
+              <PaginationLink
+                first
+                href='#'
+                className='bg-primary text-white'
+              />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                previous
+                className='bg-primary text-white'
+              />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                className='bg-primary text-white'
+              >
+                1
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                className='bg-primary text-white'
+              >
+                2
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                className='bg-primary text-white'
+              >
+                3
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                className='bg-primary text-white'
+              >
+                4
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                className='bg-primary text-white'
+              >
+                5
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                next
+                className='bg-primary text-white'
+              />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink
+                href='#'
+                last
+                className='bg-primary text-white'
+              />
+            </PaginationItem>
+          </Pagination>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ListadoTickets;
+export default ListadoTickets

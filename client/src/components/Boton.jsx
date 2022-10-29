@@ -4,7 +4,7 @@ const Boton = ({ texto, icono, estilos, colorBtn, colorTxt }) => {
   return (
     <button className={`btn btn-${colorBtn} text-${colorTxt} ${estilos}`}>
       <FontAwesomeIcon icon={icono} />
-      <span className={texto && `ms-2`}>{texto}</span>
+      <span className={texto && icono && `ms-2`}>{texto}</span>
     </button>
   )
 }
