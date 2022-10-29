@@ -1,22 +1,71 @@
+import { useState } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Pagination, PaginationItem, PaginationLink, Table } from "reactstrap";
 import {
   faMagnifyingGlass,
   faArrowsRotate,
   faFileExcel,
   faFilePdf,
+  faRotate,
 } from "@fortawesome/free-solid-svg-icons";
+import ListadoTicketData from '../shared/ListadoTicketData.js';
+import FilaTicket from "../components/FilaTicket";
+import Boton from '../components/Boton.jsx';
 
 const ListadoTickets = () => {
+
+  const [tickets, setTickets] = useState(ListadoTicketData)
+  const listaTickets = tickets.map((item) => (
+    <FilaTicket
+      id={item.id}
+      titulo={item.titulo}
+      key={item.id}
+      prioridad={item.prioridad}
+      estado={item.estado}
+      categoria={item.categoria}
+      anssla={item.anssla}
+      resolucionsla={item.resolucionsla}
+      fechadecreacion={item.fechadecreacion}
+    />
+  ))
+
   return (
-    <div className="container mt-4 p-0">
-      <div className="bg-primary p-2 d-flex align-items-center justify-content-around">
-        <div>
+    <div className="container d-flex flex-column gap-3 mt-3">
+      <div>
+        <h5 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
+          Búsqueda
+        </h5>
+        <form className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'>
+          <input
+            type='text'
+            name='busqueda'
+            id='busqueda'
+            className='form-control m-2'
+            placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoria o fecha de creación'
+          />
+          <Boton
+            icono={faMagnifyingGlass}
+            colorBtn='primary'
+            colorTxt='white'
+            texto='Buscar'
+            estilos='d-flex align-items-center m-2'
+          />
+          <Boton
+            icono={faRotate}
+            colorBtn='primary'
+            colorTxt='white'
+            texto='Limpiar'
+            estilos='d-flex align-items-center m-2'
+          />
+        </form>
+      </div>
+      
+      <div className="bg-primary p-2 rounded-top">
           {/* <!-- Ver como agregar boton de envio--> */}
-          <select
-            name="informe"
-            className="form-select border-success text-primary bg-secondary "
-            id="informe"
-          >
+          <div className='row'>
+          <div className='col-auto mb-3 gap-1'>
+          <Boton colorBtn='secondary' colorTxt='primary' texto='Generar'/>          
+          <select name="informe" className="form-select border-success text-primary bg-secondary " id="informe">
             <option value="informe">Informe</option>
             <option value="cerrar">Cerrar</option>
             <option value="eliminar">Eliminar</option>
@@ -24,30 +73,11 @@ const ListadoTickets = () => {
             <option value="cambiarPrioridad">Cambiar Prioridad</option>
             <option value="cambiarCategoria">Cambiar Categoria</option>
           </select>
+          </div>
+          <div className="col-auto d-flex justify-content-center">
+        <h5 className="text-white m-0 mx-auto"> {tickets.length} ITEMS </h5>
         </div>
-        <div className="text-center">
-          <span className="text-primary form-control border-success bg-secondary">
-            {" "}
-            10 ITEMS{" "}
-          </span>
-        </div>
-        <div className="d-flex align-items-center justify-content-center gap-2">
-          <input
-            type="text"
-            className="bg-secondary text-primary form-control border-success "
-            placeholder="Buscar"
-            required
-          />
-          <button
-            type="button"
-            className="btn btn-secondary text-primary"
-          >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-          <button type="refresh" className="btn btn-secondary text-primary">
-            <FontAwesomeIcon icon={faArrowsRotate} />
-          </button>
-        </div>
+          </div>
       </div>
       <div>
         <table border={1} className="table table-hover table-bordered text-center">
@@ -65,183 +95,65 @@ const ListadoTickets = () => {
             </tr>
           </thead>
           <tbody className="bg-secondary">
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td>344</td>
-              <td>Se daño el wifi</td>
-              <td>alta</td>
-              <td>Abierto</td>
-              <td>Software</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            {listaTickets}
           </tbody>
         </table>
       </div>
       <div className="row mb-4">
         {/* <!--Botones--> */}
         <div className="col-sm">
-          <button type="submit" className="btn btn-primary me-md-2">
-            <FontAwesomeIcon icon={faFileExcel} />
-          </button>
-          <button type="submit" className="btn btn-primary">
-            <FontAwesomeIcon icon={faFilePdf} />
-          </button>
+        <Boton
+            icono={faFileExcel}
+            colorBtn='primary'
+            colorTxt='white'
+            estilos= 'me-md-2'
+          />
+                  <Boton
+            icono={faFilePdf}
+            colorBtn='primary'
+            colorTxt='white'
+          />
         </div>
-        <div className="col-sm text-center ">
-          <button className="btn btn-primary text-white me-md-2">1</button>
-          <button className="btn btn-primary text-white me-md-2">2</button>
-          <button className="btn btn-primary text-white me-md-2">3</button>
-          <button className="btn btn-primary text-white me-md-2">4</button>
-          <button className="btn btn-primary text-white me-md-2">5</button>
-          <button className="btn btn-primary text-white me-md-2">...</button>
-        </div>
+        <div className="col-sm d-flex justify-content-center">
+        {/* <!--Botones--> */}
+        {/* <div className="mx-auto">
+          <button className="btn btn-primary text-white mx-1">1</button>
+          <button className="btn btn-primary text-white mx-1">2</button>
+          <button className="btn btn-primary text-white mx-1">3</button>
+          <button className="btn btn-primary text-white mx-1">4</button>
+          <button className="btn btn-primary text-white mx-1">5</button>
+          <button className="btn btn-primary text-white mx-1">...</button>
+        </div> */}
+        <Pagination>
+          <PaginationItem>
+            <PaginationLink first href="#" className="bg-primary text-white" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" previous className="bg-primary text-white"  />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >3</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >4</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" className="bg-primary text-white" >5</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" next className="bg-primary text-white"  />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#" last className="bg-primary text-white"  />
+          </PaginationItem>
+        </Pagination>
+      </div>
       </div>
     </div>
   );
