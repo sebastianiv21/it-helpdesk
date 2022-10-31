@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/it-helpdesk/static/css/main.3d10672c.css",
+    "main.js": "/it-helpdesk/static/js/main.d66ed901.js",
+    "index.html": "/it-helpdesk/index.html",
+    "main.3d10672c.css.map": "/it-helpdesk/static/css/main.3d10672c.css.map",
+    "main.d66ed901.js.map": "/it-helpdesk/static/js/main.d66ed901.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d10672c.css",
+    "static/js/main.d66ed901.js"
+  ]
+}
