@@ -4,9 +4,10 @@ const FilaTicket = ({
     prioridad,
     estado,
     categoria,
-    anssla,
-    resolucionsla,
     fechadecreacion,
+    horadecreacion,
+    fechadecierre,
+    horadecierre,
   }) => {
     return (
       <tr>
@@ -18,9 +19,10 @@ const FilaTicket = ({
             <td>{prioridad}</td>
             <td>{estado}</td>
             <td>{categoria}</td>
-            <td>{anssla}</td>
-            <td>{resolucionsla}</td>
             <td>{fechadecreacion}</td>
+            <td>{horadecreacion}</td>
+            <td>{fechadecierre}</td>
+            <td>{horadecierre}</td>
       </tr>
     )
   }
