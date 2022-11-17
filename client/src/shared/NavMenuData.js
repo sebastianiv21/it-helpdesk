@@ -23,7 +23,6 @@ const NavMenuData = [
     iName: "informes",
     submenu: [
       ["Generar informe", "/generar-informe"],
-      ["Listado de informes", "/listado-informes"],
     ],
   },
 ];

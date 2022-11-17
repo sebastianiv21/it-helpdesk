@@ -1,4 +1,4 @@
-import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import {faFileExcel,faFilePdf} from '@fortawesome/free-solid-svg-icons'
 import Boton from '../components/Boton'
 
 const GenerarInforme = () => {
@@ -63,8 +63,15 @@ const GenerarInforme = () => {
             />
           </div>
           <Boton
-            texto='Generar'
-            icono={faDownload}
+            texto='Generar formato Excel'
+            icono={faFileExcel}
+            estilos='m-2 my-3'
+            colorBtn='primary'
+            colorTxt='white'
+          />
+           <Boton
+            texto='Generar formato PDF'
+            icono={faFilePdf}
             estilos='m-2 my-3'
             colorBtn='primary'
             colorTxt='white'

@@ -15,10 +15,6 @@ import RegistrarCliente from "../pages/RegistrarCliente"
 import ListadoClientes from "../pages/ListadoClientes"
 //  Informes
 import GenerarInforme from "../pages/GenerarInforme"
-import ListadoInformes from "../pages/ListadoInformes"
-//  Usuarios
-import RegistrarUsuario from "../pages/RegistrarUsuario"
-import ListadoUsuarios from "../pages/ListadoUsuarios"
 //  Not found
 import NotFound from "../pages/NotFound";
 
@@ -35,9 +31,6 @@ const Main = () => {
           <Route path="/registrar-cliente" element={<RegistrarCliente />} />
           <Route path="/listado-clientes" element={<ListadoClientes />} />
           <Route path="/generar-informe" element={<GenerarInforme />} />
-          <Route path="/listado-informes" element={<ListadoInformes />} />
-          <Route path="/registrar-usuario" element={<RegistrarUsuario />} />
-          <Route path="/listado-usuarios" element={<ListadoUsuarios />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </DataProvider>

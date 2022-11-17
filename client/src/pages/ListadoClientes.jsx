@@ -4,6 +4,7 @@ import {
   faEraser,
   faUserPlus,
   faTrashCan,
+  faPenToSquare,  
 } from '@fortawesome/free-solid-svg-icons'
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap'
 import FilaCliente from '../components/FilaCliente'
@@ -11,7 +12,7 @@ import Boton from '../components/Boton'
 import ListadoClientesData from '../shared/ListadoClientesData'
 
 const ListadoClientes = () => {
-  const [clientes, setClientes] = useState(ListadoClientesData)
+  const [clientes,setClientes] = useState(ListadoClientesData)
 
   const listaCliente = clientes.map((item) => (
     <FilaCliente
@@ -69,6 +70,11 @@ const ListadoClientes = () => {
             />
             <Boton
               icono={faTrashCan}
+              colorBtn='secondary'
+              colorTxt='primary'
+            />
+             <Boton
+              icono={faPenToSquare}
               colorBtn='secondary'
               colorTxt='primary'
             />
