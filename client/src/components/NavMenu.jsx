@@ -27,13 +27,6 @@ const NavMenu = ({ user }) => {
           {/* Menu admin */}
           {user.name === "Admin" ? (
             <li className="text-white">
-              <DropdownCustom
-                title={"Usuarios"}
-                submenu={[
-                  ["Registrar usuario", "/registrar-usuario"],
-                  ["Listado de usuarios", "/listado-usuarios"],
-                ]}
-              />
             </li>
           ) : (
             <></>
