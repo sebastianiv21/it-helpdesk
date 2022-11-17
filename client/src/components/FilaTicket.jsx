@@ -1,3 +1,6 @@
+import {faPencil,faTrash} from "@fortawesome/free-solid-svg-icons";
+import Boton from "../components/Boton"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const FilaTicket = ({
     id,
     titulo,
@@ -5,9 +8,8 @@ const FilaTicket = ({
     estado,
     categoria,
     fechadecreacion,
-    horadecreacion,
     fechadecierre,
-    horadecierre,
+    accion,
   }) => {
     return (
       <tr>
@@ -20,9 +22,25 @@ const FilaTicket = ({
             <td>{estado}</td>
             <td>{categoria}</td>
             <td>{fechadecreacion}</td>
-            <td>{horadecreacion}</td>
             <td>{fechadecierre}</td>
-            <td>{horadecierre}</td>
+            <td>{accion} 
+            <div className="d-flex justify-content-end">
+            <Boton
+            icono={faPencil}
+            colorBtn='primary'
+            colorTxt='white'
+            texto='Editar'
+            estilos='d-flex align-items-center m-2'
+          />
+          <Boton
+            icono={faTrash}
+            colorBtn='primary'
+            colorTxt='white'
+            texto='Eliminar   '
+            estilos='d-flex align-items-center m-2'
+          />
+            </div>
+          </td>
       </tr>
     )
   }

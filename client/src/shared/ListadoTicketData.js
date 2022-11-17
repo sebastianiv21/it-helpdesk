@@ -6,9 +6,7 @@ const ListadoTicketData = [
     estado: 'cerrado',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
     
   },
   {
@@ -18,9 +16,7 @@ const ListadoTicketData = [
     estado: 'abierto',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 3,
@@ -29,9 +25,7 @@ const ListadoTicketData = [
     estado: 'cerrado',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 4,
@@ -40,9 +34,7 @@ const ListadoTicketData = [
     estado: 'abierto',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 5,
@@ -51,9 +43,7 @@ const ListadoTicketData = [
     estado: 'cerrado',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 6,
@@ -62,9 +52,7 @@ const ListadoTicketData = [
     estado: 'cerrado',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 7,
@@ -73,9 +61,7 @@ const ListadoTicketData = [
     estado: 'abierto',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 8,
@@ -84,9 +70,7 @@ const ListadoTicketData = [
     estado: 'abierto',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 9,
@@ -95,9 +79,7 @@ const ListadoTicketData = [
     estado: 'cerrado',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
   {
     id: 10,
@@ -106,9 +88,7 @@ const ListadoTicketData = [
     estado: 'abierto',
     categoria: 'software',
     fechadecreacion: '24-10-2022',
-    horadecreacion: '8:00 am',
     fechadecierre: '24-10-2022',
-    horadecierre: '10:00 am',
   },
 ]
 

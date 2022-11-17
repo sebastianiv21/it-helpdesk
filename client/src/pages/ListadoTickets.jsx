@@ -30,9 +30,8 @@ const ListadoTickets = () => {
       estado={item.estado}
       categoria={item.categoria}
       fechadecreacion={item.fechadecreacion}
-      horadecreacion={item.horadecreacion}
       fechadecierre={item.fechadecierre}
-      horadecierre={item.horadecierre}
+      accion={item.accion}
     />
   ))
   return (
@@ -86,9 +85,8 @@ const ListadoTickets = () => {
               <th>Estado</th>
               <th>Categoria</th>
               <th>Fecha de Creacion</th>
-              <th>Hora de Creacion</th>
               <th>Fecha de Cierre</th>
-              <th>Hora de Cierre</th>
+              <th>Accion</th>
             </tr>
           </thead>
           <tbody className='bg-secondary text-primary'>{listaTickets}</tbody>
