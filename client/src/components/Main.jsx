@@ -9,7 +9,6 @@ import Inicio from "../pages/Inicio"
 import Login from "../pages/Login"
 //  Tickets
 import CrearTicket from "../pages/CrearTicket"
-import CrearTicketRapido from "../pages/CrearTicketRapido"
 import ListadoTickets from "../pages/ListadoTickets"
 //  Clientes
 import RegistrarCliente from "../pages/RegistrarCliente"
@@ -32,7 +31,6 @@ const Main = () => {
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/crear-ticket" element={<CrearTicket />} />
-          <Route path="/crear-ticket-rapido" element={<CrearTicketRapido />} />
           <Route path="/listado-tickets" element={<ListadoTickets />} />
           <Route path="/registrar-cliente" element={<RegistrarCliente />} />
           <Route path="/listado-clientes" element={<ListadoClientes />} />

@@ -4,19 +4,7 @@ import { Input, FormGroup, Label } from "reactstrap";
 import { faBan, faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 import Boton from '../components/Boton.jsx';
 import CampoFormulario from '../components/CampoFormulario'
-import ListadoAccionData from '../shared/ListadoAccionData.js';
-import FilaAccion from '../components/FilaAccion.jsx';
 const CrearTicket = () => {
-    const [accion, setAccion] = useState(ListadoAccionData)
-    const listaAccion = accion.map((item) => (
-      <FilaAccion
-        anexos={item.anexos}
-        fecha={item.fecha}
-        key={item.id}
-        encargado={item.encargado}
-        accion={item.accion}
-      />
-    ))  
   return (
     <div class="container d-flex flex-column gap-3 mt-3">
         <div>
@@ -113,130 +101,38 @@ const CrearTicket = () => {
                             </div>
                             <div class="row text-center mt-3 text-primary">
                                 <div class="col-sm">
-                                    <label htmlFor="respuestaAns" className="form-label"> Respuesta ANS (SLA)</label>
-                                    <Input
-                                        type="datetime-local"
-                                    />
+                                <label htmlFor="cliente"> Cliente (*)</label>   
+                                <select name="cliente" className="form-select" id="cliente">
+                                <option value="salazar">Daniel Felipe Salazar</option>
+                                </select>            
                                 </div>
-                                <div class="col-sm">
-                                    <label htmlFor="resolucionAns" className="form-label"> Resolucion ANS (SLA)</label>
-                                    <Input
-                                        type="datetime-local"
-                                        />
+                                <div className="col-sm">
+                                    <label htmlFor="empresa"> Empresa (*)</label>
+                                    <select name="empresa" className="form-select" id="empresa">
+                                    <option value="ittecnhology">It tecnology</option>
+                                    </select>                        
                                 </div>
+                            </div>
+                            <div className='mt-3 d-flex justify-content-end'>
+                                <Boton
+                                texto='Cancelar'
+                                icono={faBan}
+                                estilos='me-3'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
+                                <Boton
+                                texto='Guardar'
+                                icono={faFloppyDisk}
+                                estilos='me-5'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
                             </div>
                 </form>
             </div>
         </div> 
-        <div>
-            <div className="bg-primary text-white rounded-top">
-            <h4 class="m-0 ps-4 py-3">Historial de acciones</h4>
-            </div>
-            <div className="bg-secondary p-3 rounded-bottom text-primary">
-                        <form >
-                            <div className="row">
-                            <div class="col-md">
-                            <input className=" btn bg-white" type="text" id="valor" /> <Boton colorBtn='primary' colorTxt='white' texto='Filtrar' />
-                            </div>
-                            <div class=" col-md d-flex align-items-center justify-content-center gap-1">
-                            <select name="estado" className="form-select " id="estado">
-                            <option value="itTechnology">It Technology</option>
-                            </select><Boton colorBtn='primary' colorTxt='white' texto='Encargado' />                            
-                            </div>
-                            </div>
-                    <div class="row">
-                            <div class="col-6 mt-2 ">
-                                <table border={1} class="table table-hover table-bordered" id="datatable">
-                                    <thead>
-                                        <tr className="text-white text-center bg-primary">
-                                            <th>Anexos</th>
-                                            <th>Fecha</th>
-                                            <th>Encargado</th> 
-                                            <th>Accion</th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-primary bg-white">
-                                        {listaAccion}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="col-6 mt-2">
-                                <FormGroup>
-                                <Label for="exampleText" className="form-control bg-primary text-white text-center">
-                                Nueva accion
-                                </Label>
-                                <Input id="exampleText" name="text" type="textarea" cols="60" rows="10" placeholder='Ingrese la accione y/o procedimiento ejecutado'/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                            </div>
-                            <div class="col-6">
-                                    <FormGroup className="custom-file">
-                                        <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Insertar Anexo</Label>
-                                        <Input id="exampleFile" name="file" type="file" className="bg-white custom-file-input"/>
-                                    </FormGroup>
-                            </div>
-                        </div>
-                    </form>
-            </div>
-            <div className="mt-3 ">
-            <div className='bg-primary text-white rounded-top'>
-                    <h5 className='m-0 ps-4 py-3'>Contacto</h5>
-                    </div>
-                    <div className='bg-secondary p-3 rounded-bottom text-primary'>
-                        <form>
-                        <div className='d-flex justify-content-around mb-3'>
-                            <CampoFormulario
-                            nombre='email'
-                            etiqueta='Email'
-                            />
-                            <CampoFormulario
-                            nombre='nombres'
-                            etiqueta='Nombres'
-                            />
-                            <CampoFormulario
-                            nombre='apellidos'
-                            etiqueta='Apellidos'
-                            />
-                        </div>
-                        <div className='d-flex justify-content-around mb-3'>
-                            <CampoFormulario
-                            nombre='tel'
-                            etiqueta='Teléfono'
-                            />
-                            <CampoFormulario
-                            nombre='compania'
-                            etiqueta='Compañía'
-                            />
-                            <CampoFormulario
-                            nombre='ubicacion'
-                            etiqueta='Ubicación'
-                            />
-                        </div>
-                        <div className='d-flex justify-content-end'>
-                            <Boton
-                            texto='Cancelar'
-                            icono={faBan}
-                            estilos='me-3'
-                            colorBtn='primary'
-                            colorTxt='white'
-                            />
-                            <Boton
-                            texto='Guardar'
-                            icono={faFloppyDisk}
-                            estilos='me-5'
-                            colorBtn='primary'
-                            colorTxt='white'
-                            />
-                        </div>
-                        </form>
-            </div>
-                    </div>           
-        </div>
     </div>
-        
   )
 }
 
