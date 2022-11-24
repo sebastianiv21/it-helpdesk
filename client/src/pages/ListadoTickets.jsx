@@ -64,7 +64,6 @@ const ListadoTickets = () => {
           />
         </form>
       </div>
-
       <div>
         {/* <!-- Ver como agregar boton de envio--> */}
         <div className='p-2 mx-auto bg-primary rounded-top'>
@@ -78,7 +77,6 @@ const ListadoTickets = () => {
         >
           <thead className='text-primary bg-light text-center'>
             <tr>
-              <th></th>
               <th>ID</th>
               <th>Titulo</th>
               <th>Prioridad</th>

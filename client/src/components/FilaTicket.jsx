@@ -13,9 +13,6 @@ const FilaTicket = ({
   }) => {
     return (
       <tr>
-            <td>
-            <input type="checkbox" name="" id="" />
-            </td>
             <td>{id}</td>
             <td>{titulo}</td>
             <td>{prioridad}</td>
