@@ -9,9 +9,11 @@ const accionSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  // revisar tipo de dato
   ticket: {
-    type: Object,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: 'Ticket',
   },
   usuarioEncargado: {
     type: String,

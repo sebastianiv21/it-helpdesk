@@ -6,9 +6,11 @@ const ticketSchema = new mongoose.Schema({
     required: true,
   },
   cliente: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
+    ref: 'Cliente',
   },
+  // revisar tipo de dato
   empresa: {
     type: String,
     required: true,
@@ -29,13 +31,12 @@ const ticketSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  accion: {
+  // revisar tipo de dato
+  acciones: [{
     type: Array,
-    required: true,
-  },
+  },],
   anexo: {
     type: File,
-    required: true,
   },
   fechadecreacion: {
     type: Date,
