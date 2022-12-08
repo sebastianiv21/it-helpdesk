@@ -35,17 +35,13 @@ const ticketSchema = new mongoose.Schema({
   acciones: [{
     type: Array,
   },],
-  anexo: {
-    type: File,
-  },
+  anexo: File,
+  // revisar
   fechadecreacion: {
     type: Date,
     required: true,
   },
-  fechadecierre: {
-    type: Date,
-    required: true,
-  },
+  fechadecierre: Date,
 
 },{
     timestamps: true,
