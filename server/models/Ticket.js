@@ -12,11 +12,10 @@ const ticketSchema = new mongoose.Schema({
   },
   // revisar tipo de dato
   empresa: {
-    type: String,
-    required: true,
+    type: String
   },
   estado: {
-    type: Number,
+    type: String,
     required: true,
   },
   prioridad: {
