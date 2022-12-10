@@ -20,6 +20,7 @@ app.use(express.json())
 // permite analizar (parse) cookies
 app.use(cookieParser())
 
+app.use('/auth', require('./routes/authRoutes'))
 app.use('/clientes', require('./routes/clienteRoutes'))
 app.use('/tickets', require('./routes/ticketRoutes'))
 app.use('/acciones', require('./routes/accionRoutes'))
