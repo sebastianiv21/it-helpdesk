@@ -19,7 +19,7 @@ const accionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  anexo: File
+  anexo: String
  
 })
 

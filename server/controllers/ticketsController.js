@@ -6,24 +6,25 @@ const asyncHandler = require('express-async-handler')
 // @route GET /tickets
 // @access Private
 const getAllTickets = asyncHandler(async (req, res) => {
-    const tickets = await Ticket.find().lean()
+    const tickets = await Ticket.find().lean().populate('acciones cliente', {ticket: 0})
 
     // si no hay tickets
   if (!tickets?.length) {
     return res.status(400).json({ message: 'No se encontraron tickets' })
   }
 
-  const ticketsWithClient = await Promise.all(
-    tickets.map(async (ticket) => {
-      // se usa exec porque se esta pasando un parametro de busqueda
-      const client = await Cliente.findById(ticket.cliente)
-        .select('-_id')
-        .lean()
-        .exec()
-      return { ...ticket, ...client }
-    })
-  )
-  res.json(ticketsWithClient)
+  // const ticketsWithClient = await Promise.all(
+  //   tickets.map(async (ticket) => {
+  //     // se usa exec porque se esta pasando un parametro de busqueda
+  //     const client = await Cliente.findById(ticket.cliente)
+  //       .select('-_id')
+  //       .lean()
+  //       .exec()
+  //     return { ...ticket, ...client }
+  //   })
+  //)
+  //res.json(ticketsWithClient)
+  res.json(tickets)
 })
 
 // @desc Create new ticket

@@ -5,34 +5,39 @@ const asyncHandler = require('express-async-handler')
 // @route GET /acciones
 // @access Private
 const getAllAcciones = asyncHandler(async (req, res) => {
-    const acciones = await Cliente.find().lean()
+    const acciones = await Accion.find().lean()
 
     // si no hay clientes
-  if (!clientes?.length) {
-    return res.status(400).json({ message: 'No se encontraron clientes' })
+  if (!acciones?.length) {
+    return res.status(400).json({ message: 'No se encontraron acciones' })
   }
 
-  res.json(clientes)
+  res.json(acciones)
 })
 
-// @desc Create new cliente
-// @route POST /clientes
+// @desc Create new accion
+// @route POST /acciones
 // @access Private
-const createNewCliente = asyncHandler(async (req, res) => {
-    const { email, nombre, apellidos, telefono, empresa, ubicacion } = req.body
+const createNewAccion = asyncHandler(async (req, res) => {
+    const { descripcion, fecha, ticket, usuarioEncargado, anexo } = req.body
 
      // Confirm data
-  if (!email || !nombre || !apellidos || !telefono || !empresa || !ubicacion) {
+  if (!descripcion || !fecha || !ticket || !usuarioEncargado) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
-  // Create and store the new cliente
-  const cliente = await Cliente.create({ email, nombre, apellidos, telefono, empresa, ubicacion })
+  // Create and store the new accion
+  const accion = await Accion.create({ descripcion, fecha, ticket, usuarioEncargado, anexo })
 
-  if (cliente) {
+  if (accion) {
     // Created
-    return res.status(201).json({ message: 'Cliente creado exitosamente' })
+    return res.status(201).json({ message: 'Accion creada exitosamente' })
   } else {
     return res.status(400).json({ message: 'Datos recibidos inválidos' })
   }
 })
+
+module.exports = {
+  getAllAcciones,
+  createNewAccion
+}

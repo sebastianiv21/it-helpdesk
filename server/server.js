@@ -22,6 +22,7 @@ app.use(cookieParser())
 
 app.use('/clientes', require('./routes/clienteRoutes'))
 app.use('/tickets', require('./routes/ticketRoutes'))
+app.use('/acciones', require('./routes/accionRoutes'))
 
 // 404 route
 app.all('*', (req, res) => {

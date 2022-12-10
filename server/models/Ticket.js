@@ -32,7 +32,8 @@ const ticketSchema = new mongoose.Schema({
   },
   // revisar tipo de dato
   acciones: [{
-    type: Array,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Accion'
   },],
   fechadecierre: Date,
 },{
