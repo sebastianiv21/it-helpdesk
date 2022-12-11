@@ -1,14 +1,16 @@
 import useData from '../hooks/useData';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+
 import axios from '../api/axios';
 const LOGIN_URL = '/auth';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
   const { setAuth } = useData();
-  const [success, setSuccess] = useState(false);
   const [user, setUser] = useState('')
   const [pwd, setPwd] = useState('');
   const [errMsg, setErrMsg] = useState('');
@@ -19,10 +21,8 @@ const Login = () => {
     if (errMsg) {
       toast.error(errMsg, { theme: 'colored' });
     }
-    if (success) {
-      navigate('/listado-tickets');
-    }
-  }, [errMsg, success, user, pwd, navigate]);
+
+  }, [errMsg, user, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const Login = () => {
       setAuth({nombreUsuario: user, contrasenha: pwd, accessToken})
       setUser('');
       setPwd('');
-      setSuccess(true);
+      navigate(from, {replace: true})
     } catch (err) {
       if (!err?.response) {
         setErrMsg('El servidor no responde');

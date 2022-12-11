@@ -1,22 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-import { DataProvider } from "../context/DataContext";
+import { Routes, Route } from 'react-router-dom';
+import { DataProvider } from '../context/DataContext';
 
 //Components
-import Navbar from "./Navbar";
+import Navbar from './Navbar';
+import Layout from './Layout';
+import RequireAuth from './RequireAuth';
 
 //Pages
-import Inicio from "../pages/Inicio"
-import Login from "../pages/Login"
+import Inicio from '../pages/Inicio';
+import Login from '../pages/Login';
 //  Tickets
-import CrearTicket from "../pages/CrearTicket"
-import ListadoTickets from "../pages/ListadoTickets"
+import CrearTicket from '../pages/CrearTicket';
+import ListadoTickets from '../pages/ListadoTickets';
 //  Clientes
-import RegistrarCliente from "../pages/RegistrarCliente"
-import ListadoClientes from "../pages/ListadoClientes"
+import RegistrarCliente from '../pages/RegistrarCliente';
+import ListadoClientes from '../pages/ListadoClientes';
 //  Informes
-import GenerarInforme from "../pages/GenerarInforme"
+import GenerarInforme from '../pages/GenerarInforme';
 //  Not found
-import NotFound from "../pages/NotFound";
+import NotFound from '../pages/NotFound';
 
 const Main = () => {
   return (
@@ -24,14 +26,45 @@ const Main = () => {
       <DataProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/crear-ticket" element={<CrearTicket />} />
-          <Route path="/listado-tickets" element={<ListadoTickets />} />
-          <Route path="/registrar-cliente" element={<RegistrarCliente />} />
-          <Route path="/listado-clientes" element={<ListadoClientes />} />
-          <Route path="/generar-informe" element={<GenerarInforme />} />
-          <Route path="*" element={<NotFound />} />
+          <Route
+            path='/'
+            element={<Layout />}
+          >
+            <Route
+              path='/'
+              element={<Inicio />}
+            />
+            <Route
+              path='/login'
+              element={<Login />}
+            />
+            <Route element={<RequireAuth />}>
+              <Route
+                path='/crear-ticket'
+                element={<CrearTicket />}
+              />
+              <Route
+                path='/listado-tickets'
+                element={<ListadoTickets />}
+              />
+              <Route
+                path='/registrar-cliente'
+                element={<RegistrarCliente />}
+              />
+              <Route
+                path='/listado-clientes'
+                element={<ListadoClientes />}
+              />
+              <Route
+                path='/generar-informe'
+                element={<GenerarInforme />}
+              />
+            </Route>
+            <Route
+              path='*'
+              element={<NotFound />}
+            />
+          </Route>
         </Routes>
       </DataProvider>
     </>

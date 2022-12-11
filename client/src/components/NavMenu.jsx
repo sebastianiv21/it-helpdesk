@@ -28,7 +28,7 @@ const NavMenu = () => {
             </li>
           ))}
         </ul>
-        {auth?.accessToken ? (
+        {auth.nombreUsuario ? (
           <Link to="/" className="nav-item text-white text-decoration-none">
             <FontAwesomeIcon icon={faRightFromBracket} />
             <span className="ms-2">Cerrar sesión</span>
