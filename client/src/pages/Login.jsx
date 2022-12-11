@@ -1,6 +1,60 @@
-import CampoLogin from '../components/CampoLogin'
-import Boton from '../components/Boton'
+import useData from '../hooks/useData';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from '../api/axios';
+const LOGIN_URL = '/auth';
+
 const Login = () => {
+  const navigate = useNavigate();
+  const { setAuth } = useData();
+  const [success, setSuccess] = useState(false);
+  const [user, setUser] = useState('')
+  const [pwd, setPwd] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+
+  useEffect(() => {
+    setErrMsg('');
+
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' });
+    }
+    if (success) {
+      navigate('/listado-tickets');
+    }
+  }, [errMsg, success, user, pwd, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        LOGIN_URL,
+        JSON.stringify({ nombreUsuario: user, contrasenha: pwd }),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      setAuth({nombreUsuario: user, contrasenha: pwd, accessToken})
+      setUser('');
+      setPwd('');
+      setSuccess(true);
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else if (err.response?.status === 401) {
+        setErrMsg('Usuario o contraseña incorrectos');
+      } else {
+        setErrMsg('El inicio de sesión falló');
+      }
+    }
+  };
+
   return (
     <div className='container mt-5 mx-auto d-flex'>
       <div
@@ -11,31 +65,56 @@ const Login = () => {
           backgroundSize: 'contain',
         }}
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='col-auto d-flex align-items-center mb-3 fs-4'>
-            <CampoLogin
-              identificacion='usuario'
-              etiqueta='Usuario'
-            />
+            <label
+              htmlFor='nombreUsuario'
+              className='form-label m-0 me-2 text-primary'
+            >
+              Usuario
+            </label>
+            <div className='w-100'>
+              <input
+                type='text'
+                name='nombreUsuario'
+                id='nombreUsuario'
+                className='form-control'
+                autoComplete='off'
+                onChange={(e) => setUser(e.target.value)}
+                value={user}
+                required
+              />
+            </div>
           </div>
           <div className='col-auto d-flex align-items-center mb-3 fs-4'>
-            <CampoLogin
-              identificacion='contraseña'
-              etiqueta='Contraseña'
-            />
+            <label
+              htmlFor='contrasenha'
+              className='form-label m-0 me-2 text-primary'
+            >
+              Contraseña
+            </label>
+            <div className='w-100'>
+              <input
+                type='password'
+                name='contrasenha'
+                id='contrasenha'
+                className='form-control'
+                onChange={(e) => setPwd(e.target.value)}
+                value={pwd}
+                required
+              />
+            </div>
           </div>
+          {/* <p className={errMsg ? 'text-'}>No autorizado</p> */}
           <div className='d-flex justify-content-end'>
-            <Boton
-              colorBtn='primary'
-              colorTxt='white'
-              estilos='me-3'
-              texto='Iniciar sesión'
-            />
+            <button className='btn btn-primary text-white me-3'>
+              Iniciar sesión
+            </button>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

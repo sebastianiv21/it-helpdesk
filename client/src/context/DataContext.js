@@ -1,21 +1,15 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState} from "react";
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-  //INICIO DATOS DE PRUEBA
-  const usuario = {
-    name: "Admin",
-    lastname: ""
-  };
-  //FIN DATOS DE PRUEBA
-  const [user, setUser] = useState(usuario);
+  const [auth, setAuth] = useState({});
 
   return (
     <DataContext.Provider
       value={{
-        user,
-        setUser,
+        auth,
+        setAuth
       }}
     >
       {children}

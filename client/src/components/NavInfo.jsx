@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-
-const NavInfo = ({ user }) => {
+const NavInfo = () => {
   return (
     <header className="navbar bg-secondary">
       <Link

@@ -5,11 +5,14 @@ import {
   faRightToBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import NavMenuData from "../shared/NavMenuData";
+import useData from "../hooks/useData";
 
 // Components
 import DropdownCustom from "./DropdownCustom";
 
-const NavMenu = ({ user }) => {
+const NavMenu = () => {
+  const { auth } = useData();
+
   return (
     <nav className="navbar bg-primary p-1">
       <div className="container-fluid">
@@ -24,15 +27,8 @@ const NavMenu = ({ user }) => {
               <DropdownCustom title={item.title} submenu={item.submenu} />
             </li>
           ))}
-          {/* Menu admin */}
-          {user.name === "Admin" ? (
-            <li className="text-white">
-            </li>
-          ) : (
-            <></>
-          )}
         </ul>
-        {user ? (
+        {auth?.accessToken ? (
           <Link to="/" className="nav-item text-white text-decoration-none">
             <FontAwesomeIcon icon={faRightFromBracket} />
             <span className="ms-2">Cerrar sesión</span>
