@@ -175,23 +175,23 @@ const ListadoTickets = () => {
       </div>
       <div>
             <div className="bg-primary text-white rounded-top">
-            <h4 class="m-0 ps-4 py-3">Historial de acciones</h4>
+            <h4 className="m-0 ps-4 py-3">Historial de acciones</h4>
             </div>
             <div className="bg-secondary p-3 rounded-bottom text-primary">
                         <form >
                             <div className="row">
-                            <div class="col-md">
+                            <div className="col-md">
                             <input className=" btn bg-white" type="text" id="valor"  placeholder='Ingrese Fecha, Ecargado , Accion, Estado,' /> <Boton colorBtn='primary' colorTxt='white' texto='Filtrar' />
                             </div>
-                            <div class=" col-md d-flex align-items-center justify-content-center gap-1">
+                            <div className=" col-md d-flex align-items-center justify-content-center gap-1">
                             <select name="estado" className="form-select " id="estado">
                             <option value="itTechnology">It Technology</option>
                             </select><Boton colorBtn='primary' colorTxt='white' texto='Encargado' />                            
                             </div>
                             </div>
-                    <div class="row">
-                            <div class="col-6 mt-2 ">
-                                <table border={1} class="table table-hover table-bordered" id="datatable">
+                    <div className="row">
+                            <div className="col-6 mt-2 ">
+                                <table border={1} className="table table-hover table-bordered" id="datatable">
                                     <thead>
                                         <tr className="text-white text-center bg-primary">
                                             <th>Anexos</th>
@@ -214,10 +214,10 @@ const ListadoTickets = () => {
                                 </FormGroup>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
+                        <div className="row">
+                            <div className="col-6">
                             </div>
-                            <div class="col-6">
+                            <div className="col-6">
                                     <FormGroup className="custom-file">
                                         <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Insertar Anexo</Label>
                                         <Input id="exampleFile" name="file" type="file" className="bg-white custom-file-input"/>

@@ -21,7 +21,7 @@ const FilaTicket = ({
             <td>{fechadecreacion}</td>
             <td>{fechadecierre}</td>
             <td>{accion} 
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-evenly">
             <Boton
             icono={faPencil}
             colorBtn='primary'
