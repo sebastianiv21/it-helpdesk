@@ -39,7 +39,7 @@ const CrearTicket = () => {
                                     </select>        
                                 </div>
                             </div>    
-                            <div class="row text-center mt-3 text-primary">
+                            <div class="row d-flex justify-content-around mb-2 text-center">
                                 <div class="col-sm">
                                 <label htmlFor="categoria"> Categoria (*)</label>   
                                 <select name="categoria" className="form-select" id="categoria">
@@ -96,24 +96,24 @@ const CrearTicket = () => {
                                     <option value="vpn">VPN</option>
                                     <option value="web">Web</option>
                                     <option value="wifi">WiFi</option>
-                                    </select>                        
-                                </div>
+                                    </select> 
+                                    </div>
+                                    <div className='row d-flex justify-content-around mb-2 text-center mt-3'>
+                                    <div class="col-sm">
+                                    <label htmlFor="cliente"> Cliente (*)</label>   
+                                    <select name="cliente" className="form-select" id="cliente">
+                                    <option value="salazar">Daniel Felipe Salazar</option>
+                                    </select>            
+                                    </div>                 
+                                    <div class="col-sm">
+                                    <label htmlFor="empresa">Empresa(*)</label>   
+                                    <select name="empresa" className="form-select" id="emrpesa">
+                                    <option value="salazar">It Tecnology </option>
+                                    </select>            
+                                    </div>     
+                                    </div>
                             </div>
-                            <div class="row text-center mt-3 text-primary">
-                                <div class="col-sm">
-                                <label htmlFor="cliente"> Cliente (*)</label>   
-                                <select name="cliente" className="form-select" id="cliente">
-                                <option value="salazar">Daniel Felipe Salazar</option>
-                                </select>            
-                                </div>
-                                <div className="col-sm">
-                                    <label htmlFor="empresa"> Empresa (*)</label>
-                                    <select name="empresa" className="form-select" id="empresa">
-                                    <option value="ittecnhology">It tecnology</option>
-                                    </select>                        
-                                </div>
-                            </div>
-                            <div className='mt-3 d-flex justify-content-end'>
+                            <div className='d-flex justify-content-end'>
                                 <Boton
                                 texto='Cancelar'
                                 icono={faBan}

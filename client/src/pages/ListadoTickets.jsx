@@ -3,6 +3,8 @@ import { Pagination, PaginationItem, PaginationLink, Table, Input, FormGroup, La
 import {
   faMagnifyingGlass,
   faEraser,
+  faBan,
+  faFloppyDisk,
 } from '@fortawesome/free-solid-svg-icons'
 import ListadoTicketData from '../shared/ListadoTicketData.js'
 import FilaTicket from '../components/FilaTicket'
@@ -172,6 +174,49 @@ const ListadoTickets = () => {
             </PaginationItem>
           </Pagination>
         </div>
+      </div>
+      <div className='bg-secondary'>
+      <div className='bg-primary rounded-top p-2 d-flex gap-2'>
+      <h4 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
+          Edición de Ticket
+        </h4>
+          </div>
+        <div className="row d-flex justify-content-around mb-2 text-center mt-2 ">
+                                <div className="col-5">
+                                    <label htmlFor="prioridad"> Prioridad (*)</label>
+                                    <select name="prioridad" className="form-select text-center mt-2" id="prioridad">
+                                    <option value="critica">Critica</option>
+                                    <option value="alta">Alta</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="baja">Baja</option>
+                                    </select>        
+                                </div>
+                                <div className="col-5">
+                                    <label for="estado"> Estado (*)</label>
+                                    <select name="estado" className="form-select text-center mt-2" id="estado">
+                                    <option value="abierto">Abierto</option>
+                                    <option value="enEsperaUsuario">En espera Usuario</option>
+                                    <option value="respondidoUsuario">Respondido Usuario</option>
+                                    <option value="cerrado">Cerrado</option>
+                                    </select>        
+                                </div>
+                            </div>  
+                            <div className='d-flex justify-content-end p-2'>
+                                <Boton
+                                texto='Cancelar'
+                                icono={faBan}
+                                estilos='me-3'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
+                                <Boton
+                                texto='Guardar'
+                                icono={faFloppyDisk}
+                                estilos='me-5'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
+                            </div>  
       </div>
       <div>
             <div className="bg-primary text-white rounded-top">
