@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Pagination, PaginationItem, PaginationLink, FormGroup, Label, Input } from 'reactstrap';
 import {
   faMagnifyingGlass,
   faEraser,

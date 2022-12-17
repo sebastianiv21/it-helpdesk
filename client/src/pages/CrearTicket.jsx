@@ -6,9 +6,9 @@ import Boton from '../components/Boton.jsx';
 import CampoFormulario from '../components/CampoFormulario'
 const CrearTicket = () => {
   return (
-    <div class="container d-flex flex-column gap-3 mt-3">
+    <div className="container d-flex flex-column gap-3 mt-3">
         <div>
-                <div class="bg-primary text-white rounded-top">
+                <div className="bg-primary text-white rounded-top">
                         <div className="bg-primary rounded-bottom p-2 px-4 d-flex gap-3 rounded-top">
                         <h4 className="ps-4 py-1 me-auto">Creacion del Ticket</h4>
                          </div>
@@ -16,12 +16,12 @@ const CrearTicket = () => {
             <div className="bg-secondary p-3 rounded-bottom text-primary">
                 <form>
                     <div className="row d-flex justify-content-around mb-3 text-center">
-                                <div class="col-sm">
+                                <div className="col-sm">
                                         <label hmlfor ="titulo"> Titulo (*)</label> 
                                         <input type="text" className="form-control" name="titulo" id="titulo" placeholder='Ingrese el nombre del ticket'/>
                                 </div>
                                 <div className="col-sm">
-                                    <label for="estado"> Estado (*)</label>
+                                    <label htmlFor="estado"> Estado (*)</label>
                                     <select name="estado" className="form-select " id="estado">
                                     <option value="abierto">Abierto</option>
                                     <option value="enEsperaUsuario">En espera Usuario</option>
@@ -39,8 +39,8 @@ const CrearTicket = () => {
                                     </select>        
                                 </div>
                             </div>    
-                            <div class="row d-flex justify-content-around mb-2 text-center">
-                                <div class="col-sm">
+                            <div className="row d-flex justify-content-around mb-2 text-center">
+                                <div className="col-sm">
                                 <label htmlFor="categoria"> Categoria (*)</label>   
                                 <select name="categoria" className="form-select" id="categoria">
                                 <option value="actualizacion">Actualización</option>
@@ -99,13 +99,13 @@ const CrearTicket = () => {
                                     </select> 
                                     </div>
                                     <div className='row d-flex justify-content-around mb-2 text-center mt-3'>
-                                    <div class="col-sm">
+                                    <div className="col-sm">
                                     <label htmlFor="cliente"> Cliente (*)</label>   
                                     <select name="cliente" className="form-select" id="cliente">
                                     <option value="salazar">Daniel Felipe Salazar</option>
                                     </select>            
                                     </div>                 
-                                    <div class="col-sm">
+                                    <div className="col-sm">
                                     <label htmlFor="empresa">Empresa(*)</label>   
                                     <select name="empresa" className="form-select" id="emrpesa">
                                     <option value="salazar">It Tecnology </option>
