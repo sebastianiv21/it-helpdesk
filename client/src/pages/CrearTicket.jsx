@@ -9,11 +9,11 @@ const CrearTicket = () => {
     <div className="container d-flex flex-column gap-3 mt-3">
         <div>
                 <div className="bg-primary text-white rounded-top">
-                        <div className="bg-primary rounded-bottom p-2 px-4 d-flex gap-3 rounded-top">
-                        <h4 className="ps-4 py-1 me-auto">Creacion del Ticket</h4>
+                        <div className="bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top">
+                        <h4 className="ps-1 py-0 me-auto mb-auto">Creacion del Ticket</h4>
                          </div>
                 </div> 
-            <div className="bg-secondary p-3 rounded-bottom text-primary">
+            <div className="bg-secondary p-2 rounded-bottom text-primary">
                 <form>
                     <div className="row d-flex justify-content-around mb-3 text-center">
                                 <div className="col-sm">
@@ -107,13 +107,12 @@ const CrearTicket = () => {
                                     </div>                 
                                     <div className="col-sm">
                                     <label htmlFor="empresa">Empresa(*)</label>   
-                                    <select name="empresa" className="form-select" id="emrpesa">
+                                    <select name="empresa" className="form-select" id="empresa">
                                     <option value="salazar">It Tecnology </option>
                                     </select>            
-                                    </div>     
-                                    </div>
+                                </div>     
                             </div>
-                            <div className='d-flex justify-content-end'>
+                            <div className='d-flex justify-content-end p-2'>
                                 <Boton
                                 texto='Cancelar'
                                 icono={faBan}
@@ -124,7 +123,7 @@ const CrearTicket = () => {
                                 <Boton
                                 texto='Guardar'
                                 icono={faFloppyDisk}
-                                estilos='me-5'
+                                estilos='me-3'
                                 colorBtn='primary'
                                 colorTxt='white'
                                 />

@@ -10,10 +10,6 @@ const ticketSchema = new mongoose.Schema({
     required: true,
     ref: 'Cliente',
   },
-  // revisar tipo de dato
-  empresa: {
-    type: String
-  },
   estado: {
     type: String,
     required: true,

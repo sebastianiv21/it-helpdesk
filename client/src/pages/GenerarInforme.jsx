@@ -12,14 +12,14 @@ const GenerarInforme = () => {
           {/* <!--Este es el formulario de la generacion de informes--> */}
           <div className='d-flex flex-column'>
             <label
-              htmlFor='compania'
+              htmlFor='empresa'
               className='form-label'
             >
-              Compañía
+              Empresa
             </label>
             <select
-              name='compania'
-              id='compania'
+              name='empresa'
+              id='empresa'
               className='form-select'
             >
               <option
@@ -63,16 +63,16 @@ const GenerarInforme = () => {
             />
           </div>
           <Boton
-            texto='Generar formato Excel'
+            texto='Generar Excel'
             icono={faFileExcel}
-            estilos='m-2 my-3'
+            estilos='m-0 my-3'
             colorBtn='primary'
             colorTxt='white'
           />
            <Boton
-            texto='Generar formato PDF'
+            texto='Generar PDF'
             icono={faFilePdf}
-            estilos='m-2 my-3'
+            estilos='m-0 my-3'
             colorBtn='primary'
             colorTxt='white'
           />
