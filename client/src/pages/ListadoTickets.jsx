@@ -251,7 +251,7 @@ const ListadoTickets = () => {
                               <FormGroup className="col-sm custom-file" >
                               <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Busqueda</Label>
                               <div className='input-group'>
-                              <input type='text' name='filtrar' id='filtrar' className='form-control btn bg-white' placeholder='Ingrese fecha o ecargado de la acción'
+                              <input type='text' name='filtrar' id='filtrar' className='form-control btn bg-white' placeholder='Ingrese fecha o encargado de la acción'
                               />
                                 <Boton
                                 icono={faMagnifyingGlass}
