@@ -14,7 +14,7 @@ const NavMenu = () => {
   const { auth } = useData();
 
   return (
-    <nav className="navbar bg-primary p-1">
+    <><nav className="navbar bg-primary p-1">
       <div className="container-fluid">
         <ul className="navbar-nav d-flex flex-row align-items-center gap-1 me-auto">
           <li className="nav-item">
@@ -41,6 +41,13 @@ const NavMenu = () => {
         )}
       </div>
     </nav>
+    <div className=" container-fluid dropdown p-0">
+        <button className="btn btn-secondary btn-md dropdown-toggle text-primary p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Pestaña Informativa
+        </button>
+        
+    </div>
+   </>
   );
 };
 

@@ -201,7 +201,7 @@ const ListadoTickets = () => {
                                     </select>        
                                 </div>
                             </div>  
-                            <div className='d-flex justify-content-end p-2'>
+                            <div className='d-flex justify-content-end p-3'>
                                 <Boton
                                 texto='Cancelar'
                                 icono={faBan}

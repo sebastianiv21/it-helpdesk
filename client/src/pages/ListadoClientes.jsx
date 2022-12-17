@@ -97,7 +97,7 @@ const ListadoClientes = () => {
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Teléfono</th>
-                <th>Compañía</th>
+                <th>Empresa</th>
                 <th>Ubicación</th>
               </tr>
             </thead>
