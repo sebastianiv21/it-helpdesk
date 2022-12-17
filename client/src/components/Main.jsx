@@ -59,7 +59,7 @@ const Main = () => {
                 path='/generar-informe'
                 element={<GenerarInforme />}
               />
-            </Route>
+            {/* </Route> */}
             <Route
               path='*'
               element={<NotFound />}

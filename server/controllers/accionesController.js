@@ -19,7 +19,7 @@ const getAllAcciones = asyncHandler(async (req, res) => {
 // @route POST /acciones
 // @access Private
 const createNewAccion = asyncHandler(async (req, res) => {
-    const { descripcion, fecha, ticket, usuarioEncargado, anexo } = req.body
+    const { descripcion, fecha, ticket, usuarioEncargado } = req.body
 
      // Confirm data
   if (!descripcion || !fecha || !ticket || !usuarioEncargado) {
@@ -27,7 +27,7 @@ const createNewAccion = asyncHandler(async (req, res) => {
   }
 
   // Create and store the new accion
-  const accion = await Accion.create({ descripcion, fecha, ticket, usuarioEncargado, anexo })
+  const accion = await Accion.create({ descripcion, fecha, ticket, usuarioEncargado})
 
   if (accion) {
     // Created
