@@ -15,7 +15,6 @@ const ListadoTickets = () => {
   const [accion, setAccion] = useState(ListadoAccionData)
   const listaAccion = accion.map((item) => (
     <FilaAccion
-      anexos={item.anexos}
       fecha={item.fecha}
       key={item.id}
       encargado={item.encargado}
@@ -178,7 +177,7 @@ const ListadoTickets = () => {
       <div className='bg-secondary'>
       <div className='bg-primary rounded-top p-2 d-flex gap-2'>
       <h4 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
-          Edición de Ticket
+          Modulo de edición
         </h4>
           </div>
         <div className="row d-flex justify-content-around mb-2 text-center mt-2 ">
@@ -223,23 +222,48 @@ const ListadoTickets = () => {
             <h4 className="m-0 ps-4 py-3">Historial de acciones</h4>
             </div>
             <div className="bg-secondary p-3 rounded-bottom text-primary">
+              <div className='row'>
+              </div>
                         <form >
                             <div className="row">
-                            <div className="col-md">
-                            <input className=" btn bg-white" type="text" id="valor"  placeholder='Ingrese Fecha, Ecargado , Accion, Estado,' /> <Boton colorBtn='primary' colorTxt='white' texto='Filtrar' />
-                            </div>
-                            <div className=" col-md d-flex align-items-center justify-content-center gap-1">
-                            <select name="estado" className="form-select " id="estado">
-                            <option value="itTechnology">It Technology</option>
-                            </select><Boton colorBtn='primary' colorTxt='white' texto='Encargado' />                            
-                            </div>
+                              <div className='col-6'>
+                              <FormGroup className="custom-file">
+                                        <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Encargado de la acción</Label>
+                                        <input className=" form-control btn bg-white" type="text" id="valor"  placeholder='Digite el nombre del responsable de la ejecución'/>
+                                    </FormGroup>
+                              </div>
+                              <div className='col-6'>
+                              <form className='bg-secondary rounded-bottom  d-flex justify-content-around'>
+                              <FormGroup className="col-sm custom-file" >
+                              <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Busqueda</Label>
+                              <div className='input-group'>
+                              <input type='text' name='filtrar' id='filtrar' className='form-control btn bg-white' placeholder='Ingrese fecha o ecargado de la acción'
+                              />
+                                <Boton
+                                icono={faMagnifyingGlass}
+                                colorBtn='primary'
+                                colorTxt='white'
+                                texto='Filtrar'
+                                estilos='d-flex align-items-center'
+                              />
+                              </div>
+                               </FormGroup>
+                              </form>
+                              </div>
                             </div>
                     <div className="row">
+                    <div className="col-6 mt-2">
+                                <FormGroup>
+                                <Label for="exampleText" className="form-control bg-primary text-white text-center">
+                                Nueva acción
+                                </Label>
+                                <Input id="exampleText" name="text" type="textarea" cols="60" rows="10" placeholder='Ingrese la accion y/o procedimiento realizado'/>
+                                </FormGroup>
+                            </div>
                             <div className="col-6 mt-2 ">
                                 <table border={1} className="table table-hover table-bordered" id="datatable">
                                     <thead>
                                         <tr className="text-white text-center bg-primary">
-                                            <th>Anexos</th>
                                             <th>Fecha</th>
                                             <th>Encargado</th> 
                                             <th>Accion</th> 
@@ -250,26 +274,24 @@ const ListadoTickets = () => {
                                     </tbody>
                                 </table>
                             </div>
-                            <div className="col-6 mt-2">
-                                <FormGroup>
-                                <Label for="exampleText" className="form-control bg-primary text-white text-center">
-                                Nueva accion
-                                </Label>
-                                <Input id="exampleText" name="text" type="textarea" cols="60" rows="10" placeholder='Ingrese la accione y/o procedimiento ejecutado'/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6">
-                            </div>
-                            <div className="col-6">
-                                    <FormGroup className="custom-file">
-                                        <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Insertar Anexo</Label>
-                                        <Input id="exampleFile" name="file" type="file" className="bg-white custom-file-input"/>
-                                    </FormGroup>
-                            </div>
                         </div>
                     </form>
+                    <div className='d-flex justify-content-end'>
+                                <Boton
+                                texto='Cancelar'
+                                icono={faBan}
+                                estilos='me-3'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
+                                <Boton
+                                texto='Guardar'
+                                icono={faFloppyDisk}
+                                estilos='me-5'
+                                colorBtn='primary'
+                                colorTxt='white'
+                                />
+                    </div>  
             </div>
         </div>
     </div>
