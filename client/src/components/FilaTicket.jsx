@@ -1,28 +1,29 @@
-import {faPencil,faTrash} from "@fortawesome/free-solid-svg-icons";
-import Boton from "../components/Boton"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import Boton from '../components/Boton';
+
 const FilaTicket = ({
-    id,
-    titulo,
-    prioridad,
-    estado,
-    categoria,
-    fechadecreacion,
-    fechadecierre,
-    accion,
-  }) => {
-    return (
-      <tr>
-            <td>{id}</td>
-            <td>{titulo}</td>
-            <td>{prioridad}</td>
-            <td>{estado}</td>
-            <td>{categoria}</td>
-            <td>{fechadecreacion}</td>
-            <td>{fechadecierre}</td>
-            <td>{accion} 
-            <div className="d-flex justify-content-evenly">
-            <Boton
+  id,
+  titulo,
+  prioridad,
+  estado,
+  categoria,
+  fechadecreacion,
+  fechadecierre,
+  accion,
+}) => {
+  return (
+    <tr className=''>
+      <td >{id}</td>
+      <td>{titulo}</td>
+      <td>{prioridad}</td>
+      <td>{estado}</td>
+      <td>{categoria}</td>
+      <td>{fechadecreacion}</td>
+      <td>{fechadecierre}</td>
+      <td>
+        {accion}
+        <div className='d-flex justify-content-evenly'>
+          <Boton
             icono={faPencil}
             colorBtn='primary'
             colorTxt='white'
@@ -36,11 +37,10 @@ const FilaTicket = ({
             texto='Eliminar   '
             estilos='d-flex align-items-center m-2'
           />
-            </div>
-          </td>
-      </tr>
-    )
-  }
-  
-  export default FilaTicket
-  
+        </div>
+      </td>
+    </tr>
+  );
+};
+
+export default FilaTicket;

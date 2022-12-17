@@ -1,16 +1,35 @@
-import { useState } from 'react'
-import { Pagination, PaginationItem, PaginationLink, Table, Input, FormGroup, Label} from 'reactstrap'
+import { useState, useEffect } from 'react';
 import {
-  faMagnifyingGlass,
-  faEraser,
-} from '@fortawesome/free-solid-svg-icons'
-import ListadoTicketData from '../shared/ListadoTicketData.js'
-import FilaTicket from '../components/FilaTicket'
-import Boton from '../components/Boton.jsx'
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Table,
+  Input,
+  FormGroup,
+  Label,
+} from 'reactstrap';
+import { faMagnifyingGlass, faEraser } from '@fortawesome/free-solid-svg-icons';
+import ListadoTicketData from '../shared/ListadoTicketData.js';
+import FilaTicket from '../components/FilaTicket';
+import Boton from '../components/Boton.jsx';
 import ListadoAccionData from '../shared/ListadoAccionData.js';
 import FilaAccion from '../components/FilaAccion.jsx';
+import useData from '../hooks/useData.js';
+
 const ListadoTickets = () => {
-  const [accion, setAccion] = useState(ListadoAccionData)
+  const { getTickets } = useData();
+  const [accion, setAccion] = useState(ListadoAccionData);
+  const [tickets, setTickets] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    getTickets().then((json) => {
+      setTickets(json);
+      setSearchResults(json);
+      return json;
+    });
+  }, []);
+
   const listaAccion = accion.map((item) => (
     <FilaAccion
       anexos={item.anexos}
@@ -19,21 +38,21 @@ const ListadoTickets = () => {
       encargado={item.encargado}
       accion={item.accion}
     />
-  ))  
-  const [tickets, setTickets] = useState(ListadoTicketData)
+  ));
+
   const listaTickets = tickets.map((item) => (
     <FilaTicket
-      id={item.id}
+      id={item._id}
       titulo={item.titulo}
-      key={item.id}
+      key={item._id}
       prioridad={item.prioridad}
       estado={item.estado}
       categoria={item.categoria}
-      fechadecreacion={item.fechadecreacion}
-      fechadecierre={item.fechadecierre}
+      fechadecreacion={item.createdAt?.split('T')[0]}
+      fechadecierre={item.fechadecierre?.split('T')[0] ?? 'En trámite'}
       accion={item.accion}
     />
-  ))
+  ));
   return (
     <div className='container d-flex flex-column gap-3 mt-3 p-0'>
       <div>
@@ -174,60 +193,100 @@ const ListadoTickets = () => {
         </div>
       </div>
       <div>
-            <div className="bg-primary text-white rounded-top">
-            <h4 className="m-0 ps-4 py-3">Historial de acciones</h4>
-            </div>
-            <div className="bg-secondary p-3 rounded-bottom text-primary">
-                        <form >
-                            <div className="row">
-                            <div className="col-md">
-                            <input className=" btn bg-white" type="text" id="valor"  placeholder='Ingrese Fecha, Ecargado , Accion, Estado,' /> <Boton colorBtn='primary' colorTxt='white' texto='Filtrar' />
-                            </div>
-                            <div className=" col-md d-flex align-items-center justify-content-center gap-1">
-                            <select name="estado" className="form-select " id="estado">
-                            <option value="itTechnology">It Technology</option>
-                            </select><Boton colorBtn='primary' colorTxt='white' texto='Encargado' />                            
-                            </div>
-                            </div>
-                    <div className="row">
-                            <div className="col-6 mt-2 ">
-                                <table border={1} className="table table-hover table-bordered" id="datatable">
-                                    <thead>
-                                        <tr className="text-white text-center bg-primary">
-                                            <th>Anexos</th>
-                                            <th>Fecha</th>
-                                            <th>Encargado</th> 
-                                            <th>Accion</th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-primary bg-white">
-                                        {listaAccion}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="col-6 mt-2">
-                                <FormGroup>
-                                <Label for="exampleText" className="form-control bg-primary text-white text-center">
-                                Nueva accion
-                                </Label>
-                                <Input id="exampleText" name="text" type="textarea" cols="60" rows="10" placeholder='Ingrese la accione y/o procedimiento ejecutado'/>
-                                </FormGroup>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6">
-                            </div>
-                            <div className="col-6">
-                                    <FormGroup className="custom-file">
-                                        <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Insertar Anexo</Label>
-                                        <Input id="exampleFile" name="file" type="file" className="bg-white custom-file-input"/>
-                                    </FormGroup>
-                            </div>
-                        </div>
-                    </form>
-            </div>
+        <div className='bg-primary text-white rounded-top'>
+          <h4 className='m-0 ps-4 py-3'>Historial de acciones</h4>
         </div>
+        <div className='bg-secondary p-3 rounded-bottom text-primary'>
+          <form>
+            <div className='row'>
+              <div className='col-md'>
+                <input
+                  className=' btn bg-white'
+                  type='text'
+                  id='valor'
+                  placeholder='Ingrese Fecha, Ecargado , Accion, Estado,'
+                />{' '}
+                <Boton
+                  colorBtn='primary'
+                  colorTxt='white'
+                  texto='Filtrar'
+                />
+              </div>
+              <div className=' col-md d-flex align-items-center justify-content-center gap-1'>
+                <select
+                  name='estado'
+                  className='form-select '
+                  id='estado'
+                >
+                  <option value='itTechnology'>It Technology</option>
+                </select>
+                <Boton
+                  colorBtn='primary'
+                  colorTxt='white'
+                  texto='Encargado'
+                />
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-6 mt-2 '>
+                <table
+                  border={1}
+                  className='table table-hover table-bordered'
+                  id='datatable'
+                >
+                  <thead>
+                    <tr className='text-white text-center bg-primary'>
+                      <th>Anexos</th>
+                      <th>Fecha</th>
+                      <th>Encargado</th>
+                      <th>Accion</th>
+                    </tr>
+                  </thead>
+                  <tbody className='text-primary bg-white'>{listaAccion}</tbody>
+                </table>
+              </div>
+              <div className='col-6 mt-2'>
+                <FormGroup>
+                  <Label
+                    for='exampleText'
+                    className='form-control bg-primary text-white text-center'
+                  >
+                    Nueva accion
+                  </Label>
+                  <Input
+                    id='exampleText'
+                    name='text'
+                    type='textarea'
+                    cols='60'
+                    rows='10'
+                    placeholder='Ingrese la accione y/o procedimiento ejecutado'
+                  />
+                </FormGroup>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-6'></div>
+              <div className='col-6'>
+                <FormGroup className='custom-file'>
+                  <Label
+                    for='exampleFile'
+                    className='bg-primary form-control text-white text-center mt-3'
+                  >
+                    Insertar Anexo
+                  </Label>
+                  <Input
+                    id='exampleFile'
+                    name='file'
+                    type='file'
+                    className='bg-white custom-file-input'
+                  />
+                </FormGroup>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  )
-}
-export default ListadoTickets
+  );
+};
+export default ListadoTickets;

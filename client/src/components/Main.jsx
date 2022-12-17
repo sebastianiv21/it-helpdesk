@@ -38,7 +38,7 @@ const Main = () => {
               path='/login'
               element={<Login />}
             />
-            <Route element={<RequireAuth />}>
+            {/* <Route element={<RequireAuth />}> */}
               <Route
                 path='/crear-ticket'
                 element={<CrearTicket />}
@@ -64,7 +64,7 @@ const Main = () => {
               path='*'
               element={<NotFound />}
             />
-          </Route>
+          {/* </Route> */}
         </Routes>
       </DataProvider>
     </>
