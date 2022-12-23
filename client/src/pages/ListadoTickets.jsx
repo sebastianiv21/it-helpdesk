@@ -102,7 +102,7 @@ const ListadoTickets = () => {
               <th>Accion</th>
             </tr>
           </thead>
-          <tbody className='bg-secondary text-primary'>{listaTickets}</tbody>
+          <tbody className='bg-secondary text-primary '>{listaTickets}</tbody>
         </table>
       </div>
       <div className='row mb-4'>
@@ -188,16 +188,16 @@ const ListadoTickets = () => {
           </Pagination>
         </div>
       </div>
-      <div className='bg-secondary'>
+      <div className='bg-secondary rounded'>
       <div className='bg-primary rounded-top p-2 d-flex gap-2'>
       <h4 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
           Modulo de edición
         </h4>
           </div>
-        <div className="row d-flex justify-content-around mb-2 text-center mt-2 ">
+        <div className="row d-flex justify-content-around mb-2 text-center mt-2 p-4">
                                 <div className="col-5">
                                     <label htmlFor="prioridad"> Prioridad (*)</label>
-                                    <select name="prioridad" className="form-select text-center mt-2" id="prioridad">
+                                    <select name="prioridad" className="form-select text-center mt-1" id="prioridad">
                                     <option value="critica">Critica</option>
                                     <option value="alta">Alta</option>
                                     <option value="normal">Normal</option>
@@ -206,30 +206,14 @@ const ListadoTickets = () => {
                                 </div>
                                 <div className="col-5">
                                     <label for="estado"> Estado (*)</label>
-                                    <select name="estado" className="form-select text-center mt-2" id="estado">
+                                    <select name="estado" className="form-select text-center mt-1" id="estado">
                                     <option value="abierto">Abierto</option>
                                     <option value="enEsperaUsuario">En espera Usuario</option>
                                     <option value="respondidoUsuario">Respondido Usuario</option>
                                     <option value="cerrado">Cerrado</option>
                                     </select>        
                                 </div>
-                            </div>  
-                            <div className='d-flex justify-content-end p-3'>
-                                <Boton
-                                texto='Cancelar'
-                                icono={faBan}
-                                estilos='me-3'
-                                colorBtn='primary'
-                                colorTxt='white'
-                                />
-                                <Boton
-                                texto='Guardar'
-                                icono={faFloppyDisk}
-                                estilos='me-5'
-                                colorBtn='primary'
-                                colorTxt='white'
-                                />
-                            </div>  
+                            </div> 
       </div>
       <div>
             <div className="bg-primary text-white rounded-top">
@@ -243,16 +227,29 @@ const ListadoTickets = () => {
                               <div className='col-6'>
                               <FormGroup className="custom-file">
                                         <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Encargado de la acción</Label>
-                                        <input className=" form-control btn bg-white" type="text" id="valor"  placeholder='Digite el nombre del responsable de la ejecución'/>
-                                    </FormGroup>
+                                        <div className='input-group'>
+                                          <input
+                                          type='text'
+                                          name='valor'
+                                          id='valor'
+                                          className='form-control m-0'
+                                          placeholder='Digite el nombre del responsable de la ejecución'
+                                          />
+                                        </div>
+                              </FormGroup>
                               </div>
                               <div className='col-6'>
                               <form className='bg-secondary rounded-bottom  d-flex justify-content-around'>
                               <FormGroup className="col-sm custom-file" >
                               <Label for="exampleFile" className="bg-primary form-control text-white text-center mt-3">Busqueda</Label>
                               <div className='input-group'>
-                              <input type='text' name='filtrar' id='filtrar' className='form-control btn bg-white' placeholder='Ingrese fecha o encargado de la acción'
-                              />
+                              <input
+                                  type='text'
+                                  name='busqueda'
+                                  id='busqueda'
+                                  className='form-control m-0'
+                                  placeholder='Ingrese fecha o encargado de la acción'
+                                />
                                 <Boton
                                 icono={faMagnifyingGlass}
                                 colorBtn='primary'
@@ -269,7 +266,7 @@ const ListadoTickets = () => {
                     <div className="col-6 mt-2">
                                 <FormGroup>
                                 <Label for="exampleText" className="form-control bg-primary text-white text-center">
-                                Nueva acción
+                                Descripción de la  acción
                                 </Label>
                                 <Input id="exampleText" name="text" type="textarea" cols="60" rows="10" placeholder='Ingrese la accion y/o procedimiento realizado'/>
                                 </FormGroup>

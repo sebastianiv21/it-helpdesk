@@ -4,9 +4,9 @@ import Boton from '../components/Boton.jsx';
 
 const CrearTicket = () => {
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'>
-      <div>
-        <div className='bg-primary text-white rounded-top'>
+    <div className='container d-flex flex-column gap-3 mt-3'> 
+    <div>
+         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
             <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
           </div>
@@ -144,28 +144,18 @@ const CrearTicket = () => {
                   <option value='wifi'>WiFi</option>
                 </select>
                 </div>
+                <div className='col-sm'>
+                <label htmlFor='cliente'> Cliente (*)</label>
+                <select
+                  name='cliente'
+                  className='form-select '
+                  id='cliente'
+                >
+                  <option value='salazar'>Daniel Felipe Salazar</option>
+                  <option value='ibarra'>Luis Sebastian Ibarra</option>
+                  <option value='polania'>Alvaro Jose Polania Alvarez</option>
+                </select>
               </div>
-              <div className='row d-flex justify-content-around mb-2 text-center mt-3'>
-                <div className='col-sm'>
-                  <label htmlFor='cliente'> Cliente (*)</label>
-                  <select
-                    name='cliente'
-                    className='form-select'
-                    id='cliente'
-                  >
-                    <option value='salazar'>Daniel Felipe Salazar</option>
-                  </select>
-                </div>
-                <div className='col-sm'>
-                  <label htmlFor='empresa'>Empresa(*)</label>
-                  <select
-                    name='empresa'
-                    className='form-select'
-                    id='empresa'
-                  >
-                    <option value='salazar'>It Tecnology </option>
-                  </select>
-                </div>
               </div>
             <div className='d-flex justify-content-end p-2'>
               <Boton
@@ -185,8 +175,9 @@ const CrearTicket = () => {
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div></div>
+      
+       
   );
 };
 
