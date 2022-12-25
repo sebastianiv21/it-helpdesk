@@ -6,7 +6,7 @@ const Inicio = () => {
     <div className="container-fluid vh-100 d-flex flex-column p-0 " id="inicio">
       <div className="align-self-center mt-5 pt-5">
       <div className="container-fluid ">
-          <div class="row ">
+          <div className="row ">
             <div className="col-sm me-5 ">
               <div className="container d-flex bg-primary text-white">
               <h5>Tickets Generados</h5>
