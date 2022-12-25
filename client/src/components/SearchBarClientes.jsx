@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-const SearchBar = ({ items, setSearchResults }) => {
+const SearchBarClientes = ({ items, setSearchResults }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -13,13 +13,12 @@ const SearchBar = ({ items, setSearchResults }) => {
 
     const resultsArray = items.filter(
       (item) =>
-        item._id.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.titulo.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.prioridad.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.estado.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.categoria.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.createdAt.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.fechadecierre?.toLowerCase().includes(e.target.value.toLowerCase())
+        item.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.nombre.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.apellidos.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.telefono.toString().includes(e.target.value) ||
+        item.empresa.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.ubicacion.toLowerCase().includes(e.target.value.toLowerCase()) 
       // keys.some(key => item[key].toLowerCase().includes(e.target.value.toLowerCase()))
     );
 
@@ -45,7 +44,7 @@ const SearchBar = ({ items, setSearchResults }) => {
           id='busqueda'
           onChange={handleSearchChange}
           className='form-control m-2'
-          placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoria, fecha de creación o fecha de cierre'
+          placeholder='Ingrese email, nombres, apellidos, teléfono, empresa o ubicación'
         />
         <button
           type='reset'
@@ -60,4 +59,4 @@ const SearchBar = ({ items, setSearchResults }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBarClientes;

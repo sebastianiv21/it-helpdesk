@@ -9,11 +9,9 @@ import {
 } from 'reactstrap';
 import {
   faMagnifyingGlass,
-  faEraser,
   faBan,
   faFloppyDisk,
 } from '@fortawesome/free-solid-svg-icons';
-import ListadoTicketData from '../shared/ListadoTicketData.js';
 import FilaTicket from '../components/FilaTicket';
 import Boton from '../components/Boton.jsx';
 import ListadoAccionData from '../shared/ListadoAccionData.js';
@@ -52,8 +50,8 @@ const ListadoTickets = () => {
       >
         <PaginationLink
           //href='!#'
-          className={`bg-${currPage == number ? 'secondary' : 'primary'} text-${
-            currPage == number ? 'primary' : 'white'
+          className={`bg-${currPage === number ? 'secondary' : 'primary'} text-${
+            currPage === number ? 'primary' : 'white'
           }`}
         >
           {number}
@@ -111,7 +109,7 @@ const ListadoTickets = () => {
           border={1}
           className='table table-hover table-bordered text-center'
         >
-          <thead className='text-primary bg-light text-center'>
+          <thead className='text-white bg-primary text-center'>
             <tr>
               <th>ID</th>
               <th>Titulo</th>
@@ -146,9 +144,9 @@ const ListadoTickets = () => {
                 previous
                 onClick={() => setCurrPage((curr) => curr - 1)}
                 className={`text-white bg-${
-                  currPage == 1 ? 'dark' : 'primary'
+                  currPage === 1 ? 'dark' : 'primary'
                 }`}
-                disabled={currPage == 1}
+                disabled={currPage === 1}
               />
             </PaginationItem>
             {renderPageNumbers}
@@ -158,9 +156,9 @@ const ListadoTickets = () => {
                 next
                 onClick={() => setCurrPage((curr) => curr + 1)}
                 className={`text-white bg-${
-                  currPage == pages.length ? 'dark' : 'primary'
+                  currPage === pages.length ? 'dark' : 'primary'
                 }`}
-                disabled={currPage == pages.length}
+                disabled={currPage === pages.length}
               />
             </PaginationItem>
             <PaginationItem onClick={() => setCurrPage(pages.length)}>
