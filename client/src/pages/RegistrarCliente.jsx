@@ -6,7 +6,7 @@ const RegistrarCliente = () => {
   return (
     <div className='container m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
-        <h5 className='m-0 ps-4 py-3'>Contacto</h5>
+        <h5 className='m-0 ps-4 py-3'>Registrar Cliente</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
         <form>
@@ -30,8 +30,8 @@ const RegistrarCliente = () => {
               etiqueta='Teléfono'
             />
             <CampoFormulario
-              nombre='compania'
-              etiqueta='Compañía'
+              nombre='empresa'
+              etiqueta='Empresa'
             />
             <CampoFormulario
               nombre='ubicacion'

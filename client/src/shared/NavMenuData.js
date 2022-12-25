@@ -5,7 +5,6 @@ const NavMenuData = [
     iName: "tickets",
     submenu: [
       ["Crear ticket", "/crear-ticket"],
-      ["Crear ticket rápido", "/crear-ticket-rapido"],
       ["Listado de tickets", "/listado-tickets"],
     ],
   },
@@ -24,7 +23,6 @@ const NavMenuData = [
     iName: "informes",
     submenu: [
       ["Generar informe", "/generar-informe"],
-      ["Listado de informes", "/listado-informes"],
     ],
   },
 ];

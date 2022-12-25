@@ -1,21 +1,38 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from 'react';
+import axios from '../api/axios';
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-  //INICIO DATOS DE PRUEBA
-  const usuario = {
-    name: "Admin",
-    lastname: ""
+  const [auth, setAuth] = useState({});
+
+  const getTickets = async () => {
+    try {
+      const response = await axios.get('/tickets');
+      // console.log(response.data.reverse());
+      return response.data.reverse();
+    } catch (err) {
+      console.error(err);
+    }
   };
-  //FIN DATOS DE PRUEBA
-  const [user, setUser] = useState(usuario);
+
+  const getClientes = async () => {
+    try {
+      const response = await axios.get('/clientes');
+      // console.log(response.data);
+      return response.data.reverse();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <DataContext.Provider
       value={{
-        user,
-        setUser,
+        auth,
+        setAuth,
+        getTickets,
+        getClientes
       }}
     >
       {children}
