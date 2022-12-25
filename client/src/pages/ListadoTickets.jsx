@@ -135,7 +135,10 @@ const ListadoTickets = () => {
               <PaginationLink
                 first
                 //href='#'
-                className='bg-primary text-white'
+                className={`text-white bg-${
+                  currPage === 1 ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === 1}
               />
             </PaginationItem>
             <PaginationItem>
@@ -165,7 +168,10 @@ const ListadoTickets = () => {
               <PaginationLink
                 //href='#'
                 last
-                className='bg-primary text-white'
+                className={`text-white bg-${
+                  currPage === pages.length ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === pages.length}
               />
             </PaginationItem>
           </Pagination>

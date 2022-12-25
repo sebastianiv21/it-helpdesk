@@ -1,6 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFaceSadTear } from "@fortawesome/free-solid-svg-icons";
-
 const Inicio = () => {
   return (
     <div className="container-fluid vh-100 d-flex flex-column p-0 " id="inicio">

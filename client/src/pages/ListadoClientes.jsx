@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import {
-  faMagnifyingGlass,
-  faEraser,
   faUserPlus,
   faTrashCan,
   faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
 import FilaCliente from '../components/FilaCliente';
 import Boton from '../components/Boton';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
+import { useNavigate } from 'react-router-dom';
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
   const [clientes, setClientes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   // Pagination
   const [currPage, setCurrPage] = useState(1);
@@ -80,20 +81,21 @@ const ListadoClientes = () => {
       <div>
         {/* <!--modulo busqueda--> */}
         <SearchBarClientes
-        items={clientes}
-        setSearchResults={setSearchResults}
-      />        
+          items={clientes}
+          setSearchResults={setSearchResults}
+        />
       </div>
       <div>
         {/* <!--listado de contactos--> */}
         <div>
           {/* <!--Primera fila--> */}
           <div className='bg-primary rounded-top p-2 d-flex gap-2'>
-            <Boton
-              icono={faUserPlus}
-              colorBtn='secondary'
-              colorTxt='primary'
-            />
+            <button
+              className='btn btn-secondary text-primary'
+              onClick={() => navigate('/registrar-cliente')}
+            >
+              <FontAwesomeIcon icon={faUserPlus} />
+            </button>
             <Boton
               icono={faTrashCan}
               colorBtn='secondary'
@@ -105,10 +107,9 @@ const ListadoClientes = () => {
               colorTxt='primary'
             />
             <h5 className='text-white m-0 mx-auto align-self-center'>
-            {searchResults.length} clientes
+              {searchResults.length} clientes
             </h5>
           </div>
-          {/* <table className="table table-hover table-bordered text-center"> */}
           <Table
             bordered
             hover
@@ -127,8 +128,9 @@ const ListadoClientes = () => {
                 <th>Ubicación</th>
               </tr>
             </thead>
-            <tbody className='bg-secondary text-primary'>{listaCliente(currItems)}</tbody>
-            {/* </table> */}
+            <tbody className='bg-secondary text-primary'>
+              {listaCliente(currItems)}
+            </tbody>
           </Table>
         </div>
         <div className='mt-2 d-flex justify-content-center'>
@@ -138,7 +140,10 @@ const ListadoClientes = () => {
               <PaginationLink
                 first
                 //href='#'
-                className='bg-primary text-white'
+                className={`text-white bg-${
+                  currPage === 1 ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === 1}
               />
             </PaginationItem>
             <PaginationItem>
@@ -168,7 +173,10 @@ const ListadoClientes = () => {
               <PaginationLink
                 //href='#'
                 last
-                className='bg-primary text-white'
+                className={`text-white bg-${
+                  currPage === pages.length ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === pages.length}
               />
             </PaginationItem>
           </Pagination>
