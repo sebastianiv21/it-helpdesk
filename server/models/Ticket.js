@@ -31,7 +31,7 @@ const ticketSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Accion'
   },],
-  fechadecierre: Date,
+  fechadecierre: Date
 },{
     timestamps: true,
 })
