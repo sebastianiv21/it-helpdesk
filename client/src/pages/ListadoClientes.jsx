@@ -1,88 +1,115 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
 import {
-  faMagnifyingGlass,
-  faEraser,
   faUserPlus,
   faTrashCan,
-  faPenToSquare,  
-} from '@fortawesome/free-solid-svg-icons'
-import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap'
-import FilaCliente from '../components/FilaCliente'
-import Boton from '../components/Boton'
-import ListadoClientesData from '../shared/ListadoClientesData'
+  faPenToSquare,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
+import FilaCliente from '../components/FilaCliente';
+import Boton from '../components/Boton';
+import useData from '../hooks/useData';
+import SearchBarClientes from '../components/SearchBarClientes';
+import { useNavigate } from 'react-router-dom';
 
 const ListadoClientes = () => {
-  const [clientes,setClientes] = useState(ListadoClientesData)
+  const { getClientes } = useData();
+  const [clientes, setClientes] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
-  const listaCliente = clientes.map((item) => (
-    <FilaCliente
-      email={item.email}
-      nombres={item.nombres}
-      apellidos={item.apellidos}
-      telefono={item.telefono}
-      compania={item.compania}
-      ubicacion={item.ubicacion}
-      key={item.id}
-    />
-  ))
+  // Pagination
+  const [currPage, setCurrPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const handleClick = (pageNumber) => {
+    setCurrPage(pageNumber);
+  };
+
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(searchResults.length / itemsPerPage); i++) {
+    pages.push(i);
+  }
+
+  const indexOfLastItem = currPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+
+  const renderPageNumbers = pages.map((number) => {
+    return (
+      <PaginationItem
+        key={number}
+        id={number}
+        onClick={() => handleClick(number)}
+      >
+        <PaginationLink
+          //href='!#'
+          className={`bg-${
+            currPage === number ? 'secondary' : 'primary'
+          } text-${currPage === number ? 'primary' : 'white'}`}
+        >
+          {number}
+        </PaginationLink>
+      </PaginationItem>
+    );
+  });
+
+  useEffect(() => {
+    getClientes().then((json) => {
+      setClientes(json);
+      setSearchResults(json);
+      return json;
+    });
+  }, [getClientes]);
+
+  const listaCliente = (data) => {
+    return data.map((item) => (
+      <FilaCliente
+        key={item._id}
+        email={item.email}
+        nombres={item.nombre}
+        apellidos={item.apellidos}
+        telefono={item.telefono}
+        compania={item.empresa}
+        ubicacion={item.ubicacion}
+      />
+    ));
+  };
 
   return (
     <div className='container d-flex flex-column gap-3 mt-3'>
       <div>
         {/* <!--modulo busqueda--> */}
-
-        <h5 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
-          Búsqueda
-        </h5>
-        <form className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'>
-          <input
-            type='text'
-            name='busqueda'
-            id='busqueda'
-            className='form-control m-2'
-            placeholder='Ingrese nombre, apellido, email o teléfono del contacto'
-          />
-          <Boton
-            icono={faMagnifyingGlass}
-            colorBtn='primary'
-            colorTxt='white'
-            texto='Buscar'
-            estilos='d-flex align-items-center m-2'
-          />
-          <Boton
-            icono={faEraser}
-            colorBtn='primary'
-            colorTxt='white'
-            texto='Limpiar'
-            estilos='d-flex align-items-center m-2'
-          />
-        </form>
+        <SearchBarClientes
+          items={clientes}
+          setSearchResults={setSearchResults}
+        />
       </div>
       <div>
         {/* <!--listado de contactos--> */}
         <div>
           {/* <!--Primera fila--> */}
           <div className='bg-primary rounded-top p-2 d-flex gap-2'>
-            <Boton
-              icono={faUserPlus}
-              colorBtn='secondary'
-              colorTxt='primary'
-            />
+            <button
+              className='btn btn-secondary text-primary'
+              onClick={() => navigate('/registrar-cliente')}
+            >
+              <FontAwesomeIcon icon={faUserPlus} />
+            </button>
             <Boton
               icono={faTrashCan}
               colorBtn='secondary'
               colorTxt='primary'
             />
-             <Boton
+            <Boton
               icono={faPenToSquare}
               colorBtn='secondary'
               colorTxt='primary'
             />
             <h5 className='text-white m-0 mx-auto align-self-center'>
-              {clientes.length} contactos
+              {searchResults.length} clientes
             </h5>
           </div>
-          {/* <table className="table table-hover table-bordered text-center"> */}
           <Table
             bordered
             hover
@@ -101,92 +128,62 @@ const ListadoClientes = () => {
                 <th>Ubicación</th>
               </tr>
             </thead>
-            <tbody className='bg-secondary text-primary'>{listaCliente}</tbody>
-            {/* </table> */}
+            <tbody className='bg-secondary text-primary'>
+              {listaCliente(currItems)}
+            </tbody>
           </Table>
         </div>
         <div className='mt-2 d-flex justify-content-center'>
           {/* <!--Botones--> */}
-          {/* <button className="btn btn-primary text-white">1</button>
-          <button className="btn btn-primary text-white">2</button>
-          <button className="btn btn-primary text-white">3</button>
-          <button className="btn btn-primary text-white">4</button>
-          <button className="btn btn-primary text-white">5</button>
-          <button className="btn btn-primary text-white">...</button> */}
           <Pagination>
-            <PaginationItem>
+            <PaginationItem onClick={() => setCurrPage(1)}>
               <PaginationLink
                 first
-                href='#'
-                className='bg-primary text-white'
+                //href='#'
+                className={`text-white bg-${
+                  currPage === 1 ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === 1}
               />
             </PaginationItem>
             <PaginationItem>
               <PaginationLink
-                href='#'
+                //href='#'
                 previous
-                className='bg-primary text-white'
+                onClick={() => setCurrPage((curr) => curr - 1)}
+                className={`text-white bg-${
+                  currPage === 1 ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === 1}
               />
             </PaginationItem>
+            {renderPageNumbers}
             <PaginationItem>
               <PaginationLink
-                href='#'
-                className='bg-primary text-white'
-              >
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href='#'
-                className='bg-primary text-white'
-              >
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href='#'
-                className='bg-primary text-white'
-              >
-                3
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href='#'
-                className='bg-primary text-white'
-              >
-                4
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href='#'
-                className='bg-primary text-white'
-              >
-                5
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                href='#'
+                //href='#'
                 next
-                className='bg-primary text-white'
+                onClick={() => setCurrPage((curr) => curr + 1)}
+                className={`text-white bg-${
+                  currPage === pages.length ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === pages.length}
               />
             </PaginationItem>
-            <PaginationItem>
+            <PaginationItem onClick={() => setCurrPage(pages.length)}>
               <PaginationLink
-                href='#'
+                //href='#'
                 last
-                className='bg-primary text-white'
+                className={`text-white bg-${
+                  currPage === pages.length ? 'dark' : 'primary'
+                }`}
+                disabled={currPage === pages.length}
               />
             </PaginationItem>
           </Pagination>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ListadoClientes
+export default ListadoClientes;
