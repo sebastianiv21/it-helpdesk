@@ -191,9 +191,8 @@ const ListadoTickets = () => {
               className='form-select text-center mt-2'
               id='prioridad'
             >
-              <option value='critica'>Critica</option>
               <option value='alta'>Alta</option>
-              <option value='normal'>Normal</option>
+              <option value='media'>Media</option>
               <option value='baja'>Baja</option>
             </select>
           </div>
@@ -205,8 +204,6 @@ const ListadoTickets = () => {
               id='estado'
             >
               <option value='abierto'>Abierto</option>
-              <option value='enEsperaUsuario'>En espera Usuario</option>
-              <option value='respondidoUsuario'>Respondido Usuario</option>
               <option value='cerrado'>Cerrado</option>
             </select>
           </div>
