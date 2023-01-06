@@ -41,6 +41,7 @@ const Login = () => {
       setAuth({nombreUsuario: user, contrasenha: pwd, accessToken})
       setUser('');
       setPwd('');
+      toast.info('Sesión iniciada', { theme: 'colored' });
       navigate(from, {replace: true})
     } catch (err) {
       if (!err?.response) {

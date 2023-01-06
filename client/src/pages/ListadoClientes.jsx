@@ -43,7 +43,6 @@ const ListadoClientes = () => {
         onClick={() => handleClick(number)}
       >
         <PaginationLink
-          //href='!#'
           className={`bg-${
             currPage === number ? 'secondary' : 'primary'
           } text-${currPage === number ? 'primary' : 'white'}`}
@@ -139,7 +138,6 @@ const ListadoClientes = () => {
             <PaginationItem onClick={() => setCurrPage(1)}>
               <PaginationLink
                 first
-                //href='#'
                 className={`text-white bg-${
                   currPage === 1 ? 'dark' : 'primary'
                 }`}
@@ -148,7 +146,6 @@ const ListadoClientes = () => {
             </PaginationItem>
             <PaginationItem>
               <PaginationLink
-                //href='#'
                 previous
                 onClick={() => setCurrPage((curr) => curr - 1)}
                 className={`text-white bg-${
@@ -160,7 +157,6 @@ const ListadoClientes = () => {
             {renderPageNumbers}
             <PaginationItem>
               <PaginationLink
-                //href='#'
                 next
                 onClick={() => setCurrPage((curr) => curr + 1)}
                 className={`text-white bg-${
@@ -171,7 +167,6 @@ const ListadoClientes = () => {
             </PaginationItem>
             <PaginationItem onClick={() => setCurrPage(pages.length)}>
               <PaginationLink
-                //href='#'
                 last
                 className={`text-white bg-${
                   currPage === pages.length ? 'dark' : 'primary'

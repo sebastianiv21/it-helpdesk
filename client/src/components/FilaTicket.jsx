@@ -13,7 +13,7 @@ const FilaTicket = ({
 }) => {
   return (
     <tr className=''>
-      <td >{id}</td>
+      <td >{id.slice(-6)}</td>
       <td>{titulo}</td>
       <td>{prioridad}</td>
       <td>{estado}</td>
