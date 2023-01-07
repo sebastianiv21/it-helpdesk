@@ -1,18 +1,116 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import Boton from '../components/Boton.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useData from '../hooks/useData.js';
+import axios from '../api/axios.js';
+import { toast } from 'react-toastify';
 
 const CrearTicket = () => {
+  const { getClientes } = useData();
+  const [clientes, setClientes] = useState([]);
+
+  //? inicio formulario
+  const TICKETS_URL = '/tickets';
+  const [errMsg, setErrMsg] = useState('');
+
+  const [formData, setFormData] = useState({
+    titulo: '',
+    cliente: '',
+    estado: '',
+    prioridad: '',
+    categoria: '',
+    subcategoria: '',
+  });
+
+  useEffect(() => {
+    setErrMsg('');
+
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' });
+    }
+  }, [errMsg, formData]);
+
+  const { titulo, cliente, estado, prioridad, categoria, subcategoria } =
+    formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const ticketData = {
+      titulo,
+      cliente,
+      estado,
+      prioridad,
+      categoria,
+      subcategoria,
+    };
+
+    try {
+      const response = await axios.post(
+        TICKETS_URL,
+        JSON.stringify(ticketData),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      setFormData({
+        titulo: '',
+        cliente: '',
+        estado: '',
+        prioridad: '',
+        categoria: '',
+        subcategoria: '',
+      });
+      toast.info('Ticket creado exitosamente', { theme: 'colored' });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('La creación del ticket falló');
+      }
+    }
+    console.log(ticketData);
+  };
+
+  //? fin formulario
+
+  useEffect(() => {
+    getClientes().then((json) => {
+      setClientes(json);
+      return json;
+    });
+  }, [getClientes]);
+
+  const optClientes = clientes.map((cliente, index) => {
+    return (
+      <option
+        key={index}
+        value={`${cliente._id}`}
+      >{`${cliente.nombre} ${cliente.apellidos}`}</option>
+    );
+  });
+
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'> 
-    <div>
-         <div className='bg-primary text-white rounded-top'>
+    <div className='container d-flex flex-column gap-3 mt-3'>
+      <div>
+        <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
             <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
           </div>
         </div>
         <div className='bg-secondary p-2 rounded-bottom text-primary'>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className='row d-flex justify-content-around mb-3 text-center'>
               <div className='col-sm'>
                 <label hmlfor='titulo'> Titulo (*)</label>
@@ -22,6 +120,7 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  onChange={onChange}
                 />
               </div>
               <div className='col-sm'>
@@ -30,7 +129,9 @@ const CrearTicket = () => {
                   name='estado'
                   className='form-select '
                   id='estado'
+                  onChange={onChange}
                 >
+                  <option value=''>Seleccione estado</option>
                   <option value='abierto'>Abierto</option>
                   <option value='cerrado'>Cerrado</option>
                 </select>
@@ -41,7 +142,9 @@ const CrearTicket = () => {
                   name='prioridad'
                   className='form-select'
                   id='prioridad'
+                  onChange={onChange}
                 >
+                  <option value=''>Seleccione prioridad</option>
                   <option value='alta'>Alta</option>
                   <option value='media'>Media</option>
                   <option value='baja'>Baja</option>
@@ -55,7 +158,9 @@ const CrearTicket = () => {
                   name='categoria'
                   className='form-select'
                   id='categoria'
+                  onChange={onChange}
                 >
+                  <option value=''>Seleccione categoría</option>
                   <option value='actualizacion'>Actualización</option>
                   <option value='cambio'>Cambio</option>
                   <option value='configuracion'>Configuración</option>
@@ -72,7 +177,9 @@ const CrearTicket = () => {
                   name='subcategoria'
                   className='form-select'
                   id='subcategoria'
+                  onChange={onChange}
                 >
+                  <option value=''>Seleccione subcategoría</option>
                   <option value='antivirus'>Antivirus</option>
                   <option value='cambioDeRadioEnlace'>
                     Cambio de radio enlace
@@ -140,41 +247,37 @@ const CrearTicket = () => {
                   <option value='web'>Web</option>
                   <option value='wifi'>WiFi</option>
                 </select>
-                </div>
-                <div className='col-sm'>
+              </div>
+              <div className='col-sm'>
                 <label htmlFor='cliente'> Cliente (*)</label>
                 <select
                   name='cliente'
                   className='form-select '
                   id='cliente'
+                  onChange={onChange}
                 >
-                  <option value='salazar'>Daniel Felipe Salazar</option>
-                  <option value='ibarra'>Luis Sebastian Ibarra</option>
-                  <option value='polania'>Alvaro Jose Polania Alvarez</option>
+                  <option value=''>Seleccione cliente</option>
+                  {optClientes}
                 </select>
               </div>
-              </div>
+            </div>
             <div className='d-flex justify-content-end p-2'>
-              <Boton
-                texto='Cancelar'
-                icono={faBan}
-                estilos='me-3'
-                colorBtn='primary'
-                colorTxt='white'
-              />
-              <Boton
-                texto='Guardar'
-                icono={faFloppyDisk}
-                estilos='me-3'
-                colorBtn='primary'
-                colorTxt='white'
-              />
+              <button
+                type='reset'
+                className='btn btn-primary text-white me-3'
+              >
+                <FontAwesomeIcon icon={faBan} />
+                <span className='ms-2'>Cancelar</span>
+              </button>
+              <button className='btn btn-primary text-white me-5'>
+                <FontAwesomeIcon icon={faFloppyDisk} />
+                <span className='ms-2'>Guardar</span>
+              </button>
             </div>
           </form>
         </div>
-      </div></div>
-      
-       
+      </div>
+    </div>
   );
 };
 

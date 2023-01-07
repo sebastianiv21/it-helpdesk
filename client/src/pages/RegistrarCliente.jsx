@@ -9,8 +9,6 @@ const RegistrarCliente = () => {
 const CLIENTES_URL = '/clientes';
 const [errMsg, setErrMsg] = useState('');
 
-
-
   const [formData, setFormData] = useState({
     email: '',
     nombre: '',
@@ -79,7 +77,6 @@ const [errMsg, setErrMsg] = useState('');
       }
     }
     console.log(clientData);
-    // dispatch(login(userData));
   };
 
   return (
