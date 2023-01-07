@@ -28,9 +28,15 @@ const ticketSchema = new mongoose.Schema({
   },
   // revisar tipo de dato
   acciones: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Accion'
-  },],
+    descripcion: {
+      type: String,
+    },
+    fecha: {
+      type: Date,
+    },
+    usuarioEncargado: {
+      type: String,
+    }}],
   fechadecierre: Date
 },{
     timestamps: true,

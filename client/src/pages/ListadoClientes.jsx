@@ -3,6 +3,8 @@ import {
   faUserPlus,
   faTrashCan,
   faPenToSquare,
+  faBan,
+  faFloppyDisk,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
@@ -11,6 +13,7 @@ import Boton from '../components/Boton';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
 import { useNavigate } from 'react-router-dom';
+import CampoFormulario from '../components/CampoFormulario'
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
@@ -76,13 +79,12 @@ const ListadoClientes = () => {
   };
 
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'>
+    <><div className='container d-flex flex-column gap-3 mt-3'>
       <div>
         {/* <!--modulo busqueda--> */}
         <SearchBarClientes
           items={clientes}
-          setSearchResults={setSearchResults}
-        />
+          setSearchResults={setSearchResults} />
       </div>
       <div>
         {/* <!--listado de contactos--> */}
@@ -98,13 +100,11 @@ const ListadoClientes = () => {
             <Boton
               icono={faTrashCan}
               colorBtn='secondary'
-              colorTxt='primary'
-            />
+              colorTxt='primary' />
             <Boton
               icono={faPenToSquare}
               colorBtn='secondary'
-              colorTxt='primary'
-            />
+              colorTxt='primary' />
             <h5 className='text-white m-0 mx-auto align-self-center'>
               {searchResults.length} clientes
             </h5>
@@ -148,37 +148,82 @@ const ListadoClientes = () => {
               <PaginationLink
                 previous
                 onClick={() => setCurrPage((curr) => curr - 1)}
-                className={`text-white bg-${
-                  currPage === 1 ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === 1}
-              />
+                className={`text-white bg-${currPage === 1 ? 'dark' : 'primary'}`}
+                disabled={currPage === 1} />
             </PaginationItem>
             {renderPageNumbers}
             <PaginationItem>
               <PaginationLink
                 next
                 onClick={() => setCurrPage((curr) => curr + 1)}
-                className={`text-white bg-${
-                  currPage === pages.length ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === pages.length}
-              />
+                className={`text-white bg-${currPage === pages.length ? 'dark' : 'primary'}`}
+                disabled={currPage === pages.length} />
             </PaginationItem>
             <PaginationItem onClick={() => setCurrPage(pages.length)}>
               <PaginationLink
                 last
-                className={`text-white bg-${
-                  currPage === pages.length ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === pages.length}
-              />
+                className={`text-white bg-${currPage === pages.length ? 'dark' : 'primary'}`}
+                disabled={currPage === pages.length} />
             </PaginationItem>
           </Pagination>
         </div>
       </div>
     </div>
+    <div className='container m-4 mx-auto'>
+      <div className='bg-primary text-white rounded-top'>
+        <h5 className='m-0 ps-4 py-3'>Edicion de Cliente</h5>
+      </div>
+      <div className='bg-secondary p-3 rounded-bottom text-primary'>
+        <form>
+          <div className='d-flex justify-content-around mb-3'>
+            <CampoFormulario
+              nombre='email'
+              etiqueta='Email'
+            />
+            <CampoFormulario
+              nombre='nombres'
+              etiqueta='Nombres'
+            />
+            <CampoFormulario
+              nombre='apellidos'
+              etiqueta='Apellidos'
+            />
+          </div>
+          <div className='d-flex justify-content-around mb-3'>
+            <CampoFormulario
+              nombre='tel'
+              etiqueta='Teléfono'
+            />
+            <CampoFormulario
+              nombre='empresa'
+              etiqueta='Empresa'
+            />
+            <CampoFormulario
+              nombre='ubicacion'
+              etiqueta='Ubicación'
+            />
+          </div>
+          <div className='d-flex justify-content-end'>
+            <Boton
+              texto='Cancelar'
+              icono={faBan}
+              estilos='me-3'
+              colorBtn='primary'
+              colorTxt='white'
+            />
+            <Boton
+              texto='Guardar'
+              icono={faFloppyDisk}
+              estilos='me-5'
+              colorBtn='primary'
+              colorTxt='white'
+            />
+          </div>
+        </form>
+      </div>
+    </div></>
   );
 };
+
 
 export default ListadoClientes;
