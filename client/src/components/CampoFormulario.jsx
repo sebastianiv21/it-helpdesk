@@ -1,4 +1,4 @@
-const CampoFormulario = ({ nombre, etiqueta }) => {
+const CampoFormulario = ({ nombre, etiqueta, onChange }) => {
   return (
     <div>
       <label
@@ -12,6 +12,7 @@ const CampoFormulario = ({ nombre, etiqueta }) => {
         name={nombre}
         id={nombre}
         className='form-control'
+        onChange={onChange}
       />
     </div>
   )

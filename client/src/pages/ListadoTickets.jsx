@@ -50,9 +50,9 @@ const ListadoTickets = () => {
       >
         <PaginationLink
           //href='!#'
-          className={`bg-${currPage === number ? 'secondary' : 'primary'} text-${
-            currPage === number ? 'primary' : 'white'
-          }`}
+          className={`bg-${
+            currPage === number ? 'secondary' : 'primary'
+          } text-${currPage === number ? 'primary' : 'white'}`}
         >
           {number}
         </PaginationLink>
@@ -183,7 +183,7 @@ const ListadoTickets = () => {
             Modulo de edición
           </h4>
         </div>
-        <div className='row d-flex justify-content-around mb-2 text-center mt-2 '>
+        <div className='row d-flex justify-content-around mb-2 text-center mt-2'>
           <div className='col-5'>
             <label htmlFor='prioridad'> Prioridad (*)</label>
             <select
@@ -196,7 +196,7 @@ const ListadoTickets = () => {
               <option value='baja'>Baja</option>
             </select>
           </div>
-          <div className='col-5'>
+          <div className='col-5 pb-3'>
             <label htmlFor='estado'> Estado (*)</label>
             <select
               name='estado'
@@ -207,22 +207,6 @@ const ListadoTickets = () => {
               <option value='cerrado'>Cerrado</option>
             </select>
           </div>
-        </div>
-        <div className='d-flex justify-content-end p-3'>
-          <Boton
-            texto='Cancelar'
-            icono={faBan}
-            estilos='me-3'
-            colorBtn='primary'
-            colorTxt='white'
-          />
-          <Boton
-            texto='Guardar'
-            icono={faFloppyDisk}
-            estilos='me-5'
-            colorBtn='primary'
-            colorTxt='white'
-          />
         </div>
       </div>
       <div>
@@ -236,24 +220,27 @@ const ListadoTickets = () => {
               <div className='col-6'>
                 <FormGroup className='custom-file'>
                   <Label
-                    htmlFor='exampleFile'
+                    for='exampleFile'
                     className='bg-primary form-control text-white text-center mt-3'
                   >
                     Encargado de la acción
                   </Label>
-                  <input
-                    className=' form-control btn bg-white'
-                    type='text'
-                    id='valor'
-                    placeholder='Digite el nombre del responsable de la ejecución'
-                  />
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      name='valor'
+                      id='valor'
+                      className='form-control m-0'
+                      placeholder='Digite el nombre del responsable de la ejecución'
+                    />
+                  </div>
                 </FormGroup>
               </div>
               <div className='col-6'>
                 <form className='bg-secondary rounded-bottom  d-flex justify-content-around'>
                   <FormGroup className='col-sm custom-file'>
                     <Label
-                      htmlFor='exampleFile'
+                      for='exampleFile'
                       className='bg-primary form-control text-white text-center mt-3'
                     >
                       Busqueda
@@ -261,9 +248,9 @@ const ListadoTickets = () => {
                     <div className='input-group'>
                       <input
                         type='text'
-                        name='filtrar'
-                        id='filtrar'
-                        className='form-control btn bg-white'
+                        name='busqueda'
+                        id='busqueda'
+                        className='form-control m-0'
                         placeholder='Ingrese fecha o encargado de la acción'
                       />
                       <Boton
@@ -282,10 +269,10 @@ const ListadoTickets = () => {
               <div className='col-6 mt-2'>
                 <FormGroup>
                   <Label
-                    htmlFor='exampleText'
+                    for='exampleText'
                     className='form-control bg-primary text-white text-center'
                   >
-                    Nueva acción
+                    Descripción de la acción
                   </Label>
                   <Input
                     id='exampleText'
