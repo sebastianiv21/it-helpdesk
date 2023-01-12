@@ -132,8 +132,8 @@ const CrearTicket = () => {
                   onChange={onChange}
                 >
                   <option value=''>Seleccione estado</option>
-                  <option value='abierto'>Abierto</option>
-                  <option value='cerrado'>Cerrado</option>
+                  <option value='Abierto'>Abierto</option>
+                  <option value='Cerrado'>Cerrado</option>
                 </select>
               </div>
               <div className='col-sm'>
@@ -145,9 +145,9 @@ const CrearTicket = () => {
                   onChange={onChange}
                 >
                   <option value=''>Seleccione prioridad</option>
-                  <option value='alta'>Alta</option>
-                  <option value='media'>Media</option>
-                  <option value='baja'>Baja</option>
+                  <option value='Alta'>Alta</option>
+                  <option value='Media'>Media</option>
+                  <option value='Baja'>Baja</option>
                 </select>
               </div>
             </div>
@@ -161,14 +161,14 @@ const CrearTicket = () => {
                   onChange={onChange}
                 >
                   <option value=''>Seleccione categoría</option>
-                  <option value='actualizacion'>Actualización</option>
-                  <option value='cambio'>Cambio</option>
-                  <option value='configuracion'>Configuración</option>
-                  <option value='hadware'>Hadware</option>
-                  <option value='software'>Software</option>
-                  <option value='instalacion'>Instalación</option>
-                  <option value='otro'>Otro</option>
-                  <option value='redes'>Redes</option>
+                  <option value='Actualización'>Actualización</option>
+                  <option value='Cambio'>Cambio</option>
+                  <option value='Configuración'>Configuración</option>
+                  <option value='Hadware'>Hadware</option>
+                  <option value='Software'>Software</option>
+                  <option value='Instalación'>Instalación</option>
+                  <option value='Otro'>Otro</option>
+                  <option value='Redes'>Redes</option>
                 </select>
               </div>
               <div className='col-sm'>
@@ -180,72 +180,72 @@ const CrearTicket = () => {
                   onChange={onChange}
                 >
                   <option value=''>Seleccione subcategoría</option>
-                  <option value='antivirus'>Antivirus</option>
-                  <option value='cambioDeRadioEnlace'>
+                  <option value='Antivirus'>Antivirus</option>
+                  <option value='Cambio de radio enlace'>
                     Cambio de radio enlace
                   </option>
-                  <option value='certificacionDeCableado'>
+                  <option value='Certificación de cableado'>
                     Certificación de cableado
                   </option>
-                  <option value='contraseña'>Contraseña</option>
-                  <option value='creacionDeBackup'>Creacion de Backup</option>
-                  <option value='crm'>CRM</option>
-                  <option value='desinstalacionDeRadioEnlace'>
+                  <option value='Contraseña'>Contraseña</option>
+                  <option value='Creacion de Backup'>Creacion de Backup</option>
+                  <option value='CRM'>CRM</option>
+                  <option value='Desinstalación de radio enlace'>
                     Desinstalación de radio enlace
                   </option>
-                  <option value='email'>Email</option>
-                  <option value='erp'>ERP</option>
-                  <option value='firewall'>Firewall</option>
-                  <option value='impresora'>Impresora</option>
-                  <option value='instalacionDeAp'>Instalación de Ap</option>
-                  <option value='instalacionDeEnlaceSatelital'>
+                  <option value='Email'>Email</option>
+                  <option value='ERP'>ERP</option>
+                  <option value='Firewall'>Firewall</option>
+                  <option value='Impresora'>Impresora</option>
+                  <option value='Instalación de Ap'>Instalación de Ap</option>
+                  <option value='Instalacion de enlace satelital'>
                     Instalacion de enlace satelital
                   </option>
-                  <option value='instalacionDeRadioEnlace'>
+                  <option value=' Instalación de radio enlace'>
                     Instalación de radio enlace
                   </option>
-                  <option value='instalacionDeSolucionSolar'>
+                  <option value=' Instalación de solución solar'>
                     Instalación de solución solar
                   </option>
-                  <option value='instalacionDeUps'>Instalacion de ups</option>
-                  <option value='instalacionDeCableadoEstructural'>
+                  <option value='Instalacion de ups'>Instalacion de ups</option>
+                  <option value='Instalación de cableado estructural'>
                     Instalación de cableado estructural
                   </option>
-                  <option value='internet'>Internet</option>
-                  <option value='intranet'>Intranet</option>
-                  <option value='lan'>LAN</option>
-                  <option value='mantenimientoDeRadioEnlace'>
+                  <option value='Internet'>Internet</option>
+                  <option value='Intranet'>Intranet</option>
+                  <option value='LAN'>LAN</option>
+                  <option value='Mantenimiento de radio enlace'>
                     Mantenimiento de radio enlace
                   </option>
-                  <option value='mantenimientoDeUps'>
+                  <option value='Mantenimiento de ups'>
                     Mantenimiento de ups
                   </option>
-                  <option value='monitor'>Monitor</option>
-                  <option value='office'>Office</option>
-                  <option value='otro'>Otro</option>
-                  <option value='pc'>PC</option>
-                  <option value='perifericos'>Periféricos</option>
-                  <option value='portatil'>Portatil</option>
-                  <option value='recuperacionDeInformacion'>
+                  <option value='Monitor'>Monitor</option>
+                  <option value='Office'>Office</option>
+                  <option value='Otro'>Otro</option>
+                  <option value='PC'>PC</option>
+                  <option value='Periféricos'>Periféricos</option>
+                  <option value='Portatil'>Portatil</option>
+                  <option value='Recuperación de información'>
                     Recuperación de información
                   </option>
-                  <option value='restauracionDeBackup'>
+                  <option value='Restauración de backup'>
                     Restauración de backup
                   </option>
-                  <option value='revisionDeEnlaceSatelital'>
+                  <option value='Revisión de enlace satelital'>
                     Revisión de enlace satelital
                   </option>
-                  <option value='revisionDePuentosDeRed'>
+                  <option value='Revisión de enlace de red'>
                     Revisión de enlace de red
                   </option>
-                  <option value='servidor'>Servidor</option>
-                  <option value='sistemaOperativo'>Sistema Operativo</option>
-                  <option value='smartphone'>Smartphone</option>
-                  <option value='telefono'>Teléfono</option>
-                  <option value='videoconferencia'>Videoconferencia</option>
-                  <option value='vpn'>VPN</option>
-                  <option value='web'>Web</option>
-                  <option value='wifi'>WiFi</option>
+                  <option value='Servidor'>Servidor</option>
+                  <option value='Sistema Operativo'>Sistema Operativo</option>
+                  <option value='Smartphone'>Smartphone</option>
+                  <option value='Teléfono'>Teléfono</option>
+                  <option value='Videoconferencia'>Videoconferencia</option>
+                  <option value='VPN'>VPN</option>
+                  <option value='Web'>Web</option>
+                  <option value='WiFi'>WiFi</option>
                 </select>
               </div>
               <div className='col-sm'>
