@@ -98,9 +98,7 @@ const ListadoTickets = () => {
           </div>
         </div>
         <table
-          border={1}
-          className='table table-hover table-bordered text-center align-middle'
-        >
+          className='table table-hover table-bordered text-center align-middle'>
           <thead className='text-white bg-primary text-center'>
             <tr>
               <th>ID</th>
