@@ -36,6 +36,10 @@ export const DataProvider = ({ children }) => {
     return [...new Set(array.map(object => object[property]).filter(property => property !== null && property !== undefined))];
   }
 
+  const countObjectsWithPropertyValue = (arr, prop, value) => {
+    return arr.filter((obj) => obj[prop] === value).length;
+  }
+
   return (
     <DataContext.Provider
       value={{
@@ -43,7 +47,8 @@ export const DataProvider = ({ children }) => {
         setAuth,
         getTickets,
         getClientes,
-        uniqueProperty
+        uniqueProperty,
+        countObjectsWithPropertyValue
       }}
     >
       {children}

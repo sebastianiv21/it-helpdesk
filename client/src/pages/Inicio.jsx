@@ -2,8 +2,16 @@ import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
 
 const Inicio = () => {
-  const { getTickets } = useData();
+  const { getTickets, countObjectsWithPropertyValue } = useData();
   const [pendientes, setPendientes] = useState(0);
+
+  useEffect(() => {
+    getTickets().then((json) => {
+      const pendientes = countObjectsWithPropertyValue(json, 'estado', 'Abierto');
+      setPendientes(pendientes);
+      return pendientes;
+    });
+  }, [getTickets, countObjectsWithPropertyValue]);
 
   return (
     <div
