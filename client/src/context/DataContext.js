@@ -32,13 +32,23 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const uniqueProperty = (array, property) => {
+    return [...new Set(array.map(object => object[property]).filter(property => property !== null && property !== undefined))];
+  }
+
+  const countObjectsWithPropertyValue = (arr, prop, value) => {
+    return arr.filter((obj) => obj[prop] === value).length;
+  }
+
   return (
     <DataContext.Provider
       value={{
         auth,
         setAuth,
         getTickets,
-        getClientes
+        getClientes,
+        uniqueProperty,
+        countObjectsWithPropertyValue
       }}
     >
       {children}

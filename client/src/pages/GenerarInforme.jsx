@@ -1,7 +1,29 @@
 import {faFileExcel,faFilePdf} from '@fortawesome/free-solid-svg-icons'
 import Boton from '../components/Boton'
+import { useState, useEffect } from 'react';
+import useData from '../hooks/useData';
 
 const GenerarInforme = () => {
+  const { getClientes, uniqueProperty } = useData();
+  const [empresas, setEmpresas] = useState([]);
+
+  useEffect(() => {
+    getClientes().then((json) => {
+      const empresas = uniqueProperty(json, 'empresa')
+      setEmpresas(empresas);
+      return empresas;
+    });
+  }, [getClientes, uniqueProperty]);
+
+  const optEmpresas = empresas.map((empresa, index) => {
+    return (
+      <option
+        key={index}
+        value={`${empresa}`}
+      >{`${empresa}`}</option>
+    );
+  });
+
   return (
     <div className='container m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
@@ -22,16 +44,8 @@ const GenerarInforme = () => {
               id='empresa'
               className='form-select'
             >
-              <option
-                selected
-                value=''
-                disabled
-              >
-                Seleccionar...
-              </option>
-              <option value='FAM'>Fundacion alto magdalena</option>
-              <option value='varisur'>Varisur</option>
-              <option value='LCC'>Liga contra el cancer</option>
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
             </select>
           </div>
           <div className='d-flex flex-column'>
