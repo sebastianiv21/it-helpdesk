@@ -1,19 +1,39 @@
 import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
-
-
+import { Table } from 'reactstrap';
+import FilaPrioritarios from '../components/FilaPrioritarios';
 
 const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData();
   const [pendientes, setPendientes] = useState(0);
+  const [prioritarios, setPrioritarios] = useState([]);
 
   useEffect(() => {
     getTickets().then((json) => {
-      const pendientes = countObjectsWithPropertyValue(json, 'estado', 'Abierto');
+      const [pendientesArr, pendientes] = countObjectsWithPropertyValue(
+        json,
+        'estado',
+        'Abierto'
+      );
+      const [prioritariosArr, prioritarios] = countObjectsWithPropertyValue(
+        pendientesArr,
+        'prioridad',
+        'Alta'
+      );
       setPendientes(pendientes);
-      return pendientes;
+      setPrioritarios(prioritariosArr);
+      return pendientes, prioritariosArr;
     });
   }, [getTickets, countObjectsWithPropertyValue]);
+
+  const listaPrioritarios = prioritarios.map(({ _id, categoria, cliente }) => {
+    return <FilaPrioritarios
+      key={_id}
+      id={_id.slice(-6)}
+      categoria={categoria}
+      empresa={cliente.empresa}
+    />;
+  });
 
   return (
     <div
@@ -40,44 +60,19 @@ const Inicio = () => {
                 Tickets Prioritarios
               </div>
               <div className='card-body'>
-              <table responsive
-          className='table table-sm table-striped text-center align-middle '
-        >
-          <thead className='text-primary bg-white text-center'>
-            <tr>
-              <th>ID</th>
-              <th>TITULO</th>
-              <th>EMPRESA</th>
-            </tr>
-          </thead>
-          <tbody >
-          <tr>
-            <th scope="row">507e6c</th>
-            <td>Pantallazo azul de la muerte 2</td>
-            <td>Claro</td>
-          </tr>
-          <tr>
-            <th scope="row">0d61d7</th>
-            <td>El Servidor no arranca</td>
-            <td>ADN 21</td>
-          </tr>
-          <tr>
-            <th scope="row">0d61cd</th>
-            <td>Ampliación de licencias</td>
-            <td>Coomotor</td>
-          </tr>
-          <tr>
-            <th scope="row">0d61af</th>
-            <td>Falla switch comunicaciones</td>
-            <td>IT.Tecnhology</td>
-          </tr>
-          <tr>
-            <th scope="row">0d61ad</th>
-            <td>Falla internet Cegen</td>
-            <td>Varisur</td>
-          </tr>
-          </tbody>
-        </table>
+                <Table
+                  responsive
+                  className='table table-sm table-striped text-center align-middle '
+                >
+                  <thead className='text-primary bg-white text-center'>
+                    <tr>
+                      <th>ID</th>
+                      <th>CATEGORIA</th>
+                      <th>EMPRESA</th>
+                    </tr>
+                  </thead>
+                  <tbody>{listaPrioritarios}</tbody>
+                </Table>
               </div>
             </div>
           </div>

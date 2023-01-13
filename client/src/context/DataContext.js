@@ -17,7 +17,7 @@ export const DataProvider = ({ children }) => {
       return response.data.reverse();
     } catch (err) {
       console.error(err);
-      navigate('/login', {state: {from: location}, replace: true});
+      navigate('/login', { state: { from: location }, replace: true });
     }
   };
 
@@ -28,17 +28,24 @@ export const DataProvider = ({ children }) => {
       return response.data.reverse();
     } catch (err) {
       console.error(err);
-      navigate('/login', {state: {from: location}, replace: true});
+      navigate('/login', { state: { from: location }, replace: true });
     }
   };
 
   const uniqueProperty = (array, property) => {
-    return [...new Set(array.map(object => object[property]).filter(property => property !== null && property !== undefined))];
-  }
+    return [
+      ...new Set(
+        array
+          .map((object) => object[property])
+          .filter((property) => property !== null && property !== undefined)
+      ),
+    ];
+  };
 
   const countObjectsWithPropertyValue = (arr, prop, value) => {
-    return arr.filter((obj) => obj[prop] === value).length;
-  }
+    const filteredArr = arr.filter((obj) => obj[prop] === value);
+    return [filteredArr, filteredArr.length];
+  };
 
   return (
     <DataContext.Provider
@@ -48,7 +55,7 @@ export const DataProvider = ({ children }) => {
         getTickets,
         getClientes,
         uniqueProperty,
-        countObjectsWithPropertyValue
+        countObjectsWithPropertyValue,
       }}
     >
       {children}
