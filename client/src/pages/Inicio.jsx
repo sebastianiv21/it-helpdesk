@@ -28,7 +28,7 @@ const Inicio = () => {
                 Tickets pendientes
               </div>
               <div className='card-body'>
-                <strong className='fs-1'>
+                <strong id='numero'>
                   <span id='daily_revenue'>{`${pendientes}`}</span>
                 </strong>
               </div>
