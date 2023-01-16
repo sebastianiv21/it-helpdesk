@@ -80,7 +80,7 @@ const ListadoTickets = () => {
         categoria={item.categoria}
         fechadecreacion={item.createdAt?.slice(0, 10)}
         fechadecierre={item.fechadecierre?.slice(0, 10) ?? 'En trámite'}
-        accion={item.accion}
+        acciones={item.acciones}
       />
     ));
   };

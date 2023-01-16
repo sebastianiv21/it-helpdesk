@@ -1,15 +1,8 @@
 import Boton from '../components/Boton.jsx';
-import {
-    faBan,
-    faFloppyDisk,
-  } from '@fortawesome/free-solid-svg-icons';
-  import {
-    FormGroup,
-    Label,
-    Input,
-  } from 'reactstrap';
+import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, Label, Input } from 'reactstrap';
 
-const ModuloEdicionTicket = ({listaAccion}) => {
+const ModuloEdicionTicket = ({ listaAccion }) => {
   return (
     <>
       <div className='bg-secondary'>
@@ -49,7 +42,6 @@ const ModuloEdicionTicket = ({listaAccion}) => {
           <h4 className='m-0 ps-4 py-3'>Historial de acciones</h4>
         </div>
         <div className='bg-secondary p-3 rounded-bottom text-primary'>
-          <div className='row'></div>
           <form>
             <div className='row'>
               <div className='col-6'>
@@ -72,7 +64,7 @@ const ModuloEdicionTicket = ({listaAccion}) => {
                 </FormGroup>
               </div>
               <div className='col-6'>
-                <form className='bg-secondary rounded-bottom  d-flex justify-content-around'>
+                <div className='bg-secondary rounded-bottom  d-flex justify-content-around'>
                   <FormGroup className='col-sm custom-file'>
                     <Label
                       for='exampleFile'
@@ -80,15 +72,15 @@ const ModuloEdicionTicket = ({listaAccion}) => {
                     >
                       Busqueda
                     </Label>
-                      <input
-                        type='text'
-                        name='busqueda'
-                        id='busqueda'
-                        className='form-control m-0'
-                        placeholder='Ingrese fecha o encargado de la acción'
-                      />
+                    <input
+                      type='text'
+                      name='busqueda'
+                      id='busqueda'
+                      className='form-control m-0'
+                      placeholder='Ingrese fecha o encargado de la acción'
+                    />
                   </FormGroup>
-                </form>
+                </div>
               </div>
             </div>
             <div className='row'>
@@ -127,23 +119,23 @@ const ModuloEdicionTicket = ({listaAccion}) => {
                 </table>
               </div>
             </div>
+            <div className='d-flex justify-content-end'>
+              <Boton
+                texto='Cancelar'
+                icono={faBan}
+                estilos='me-3'
+                colorBtn='primary'
+                colorTxt='white'
+              />
+              <Boton
+                texto='Guardar'
+                icono={faFloppyDisk}
+                estilos='me-5'
+                colorBtn='primary'
+                colorTxt='white'
+              />
+            </div>
           </form>
-          <div className='d-flex justify-content-end'>
-            <Boton
-              texto='Cancelar'
-              icono={faBan}
-              estilos='me-3'
-              colorBtn='primary'
-              colorTxt='white'
-            />
-            <Boton
-              texto='Guardar'
-              icono={faFloppyDisk}
-              estilos='me-5'
-              colorBtn='primary'
-              colorTxt='white'
-            />
-          </div>
         </div>
       </div>
     </>
