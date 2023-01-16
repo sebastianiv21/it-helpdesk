@@ -48,7 +48,7 @@ const Inicio = () => {
                 Tickets pendientes
               </div>
               <div className='card-body'>
-                <strong className='fs-1'>
+                <strong id='numero'>
                   <span id='daily_revenue'>{`${pendientes}`}</span>
                 </strong>
               </div>
@@ -77,20 +77,6 @@ const Inicio = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className='align-self-center mt-0 pt-3'>
-        <img
-          src='./images/logo.svg'
-          alt='logo'
-          className='img-fluid mx-auto d-block'
-          width='400'
-        />
-        <h1
-          className='text-center text-primary fst-italic'
-          id='inicioNombre'
-        >
-          IT TECHNOLOGY R&M S.A.S
-        </h1>
       </div>
     </div>
   );
