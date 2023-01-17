@@ -1,7 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPencil,
+  faTrash,
+  faBan,
+  faFloppyDisk,
+} from '@fortawesome/free-solid-svg-icons';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ModuloEdicionTicket from './ModuloEdicionTicket';
+import axios from '../api/axios';
+import { toast } from 'react-toastify';
 
 const FilaTicket = ({
   id,
@@ -13,9 +21,49 @@ const FilaTicket = ({
   fechadecierre,
   acciones,
 }) => {
+
   const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
   const toggle = () => setModal(!modal);
+  const toggleEdit = () => setModalEdit(!modalEdit);
+
+  const TICKETS_URL = '/tickets';
+  const [errMsg, setErrMsg] = useState('');
+
+  useEffect(() => {
+    setErrMsg('');
+  
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' });
+    }
+  
+  }, [errMsg, id]);
+
+  const handleDelete = async (e) => {
+    console.log(id);
+    const ticketId = { id };
+
+    try {
+      const response = await axios.delete(
+        TICKETS_URL,
+        {
+          data: ticketId
+        }
+        );
+      toast.info(`Ticket ${id.slice(-6)} eliminado exitosamente`, { theme: 'colored' });
+      toggle()
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('No se pudo eliminar el ticket');
+      }
+    }
+  }
+
   return (
     <>
       <tr>
@@ -31,7 +79,8 @@ const FilaTicket = ({
             <Button
               color='primary'
               className='d-flex align-items-center m-2 gap-2'
-              onClick={() => console.log(id)}
+              // onClick={() => console.log(id)}
+              onClick={toggleEdit}
             >
               <FontAwesomeIcon icon={faPencil} />
               Editar
@@ -47,32 +96,67 @@ const FilaTicket = ({
           </div>
         </td>
       </tr>
+      {/* modal de eliminacion */}
       <Modal
         isOpen={modal}
         toggle={toggle}
+        centered
       >
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          Eliminar Ticket <strong>{id.slice(-6)}</strong>
+        </ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          Está seguro que desea eliminar permanentemente el ticket{' '}
+          <strong>{id.slice(-6)}</strong>?
         </ModalBody>
         <ModalFooter>
           <Button
             color='primary'
+            className='d-flex align-items-center m-2 gap-2'
             onClick={toggle}
           >
-            Do Something
+            <FontAwesomeIcon icon={faBan} />
+            Cancelar
           </Button>{' '}
           <Button
-            color='secondary'
-            onClick={toggle}
+            color='primary'
+            className='d-flex align-items-center m-2 gap-2'
+            onClick={handleDelete}
           >
-            Cancel
+            <FontAwesomeIcon icon={faTrash} />
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
+      <Modal
+        isOpen={modalEdit}
+        toggle={toggleEdit}
+        centered
+        fullscreen
+      >
+        <ModalHeader toggle={toggleEdit}>
+          Editar Ticket <strong>{id.slice(-6)}</strong>
+        </ModalHeader>
+        <ModalBody>
+          <ModuloEdicionTicket />
+        </ModalBody>
+        <ModalFooter>
+          <Button
+            color='primary'
+              className='d-flex align-items-center m-2 gap-2'
+              onClick={toggleEdit}
+          >
+            <FontAwesomeIcon icon={faBan} />
+            Cancelar
+          </Button>{' '}
+          <Button
+            color='primary'
+            className='d-flex align-items-center m-2 gap-2'
+            onClick={toggleEdit}
+          >
+            <FontAwesomeIcon icon={faFloppyDisk} />
+            Guardar
           </Button>
         </ModalFooter>
       </Modal>

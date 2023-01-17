@@ -58,7 +58,7 @@ const ListadoTickets = () => {
       setSearchResults(json);
       return json;
     });
-  }, [getTickets]);
+  }, [getTickets, tickets]);
 
   const listaAccion = accion.map((item) => (
     <FilaAccion
@@ -167,7 +167,7 @@ const ListadoTickets = () => {
           </Pagination>
         </div>
       </div>
-      <ModuloEdicionTicket listaAccion={listaAccion} />
+      {/* <ModuloEdicionTicket listaAccion={listaAccion} /> */}
     </div>
   );
 };

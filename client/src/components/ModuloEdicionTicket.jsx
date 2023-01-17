@@ -1,5 +1,3 @@
-import Boton from '../components/Boton.jsx';
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, Label, Input } from 'reactstrap';
 
 const ModuloEdicionTicket = ({ listaAccion }) => {
@@ -118,22 +116,6 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
                   <tbody className='text-primary bg-white'>{listaAccion}</tbody>
                 </table>
               </div>
-            </div>
-            <div className='d-flex justify-content-end'>
-              <Boton
-                texto='Cancelar'
-                icono={faBan}
-                estilos='me-3'
-                colorBtn='primary'
-                colorTxt='white'
-              />
-              <Boton
-                texto='Guardar'
-                icono={faFloppyDisk}
-                estilos='me-5'
-                colorBtn='primary'
-                colorTxt='white'
-              />
             </div>
           </form>
         </div>
