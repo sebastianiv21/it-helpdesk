@@ -1,63 +1,139 @@
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
-import CampoFormulario from '../components/CampoFormulario'
-import Boton from '../components/Boton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from 'react';
+import CampoFormulario from '../components/CampoFormulario';
+import axios from '../api/axios';
+import { toast } from 'react-toastify';
 
 const RegistrarCliente = () => {
+const CLIENTES_URL = '/clientes';
+const [errMsg, setErrMsg] = useState('');
+
+  const [formData, setFormData] = useState({
+    email: '',
+    nombre: '',
+    apellidos: '',
+    telefono: '',
+    empresa: '',
+    ubicacion: '',
+  });
+
+  useEffect(() => {
+    setErrMsg('');
+  
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' });
+    }
+  
+  }, [errMsg, formData]);
+
+  const { email, nombre, apellidos, telefono, empresa, ubicacion } = formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const clientData = {
+      email,
+      nombre,
+      apellidos,
+      telefono,
+      empresa,
+      ubicacion,
+    };
+
+    try {
+      const response = await axios.post(
+        CLIENTES_URL,
+        JSON.stringify(clientData),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      setFormData({
+        email: '',
+        nombre: '',
+        apellidos: '',
+        telefono: '',
+        empresa: '',
+        ubicacion: '',
+      })
+      toast.info('Cliente creado exitosamente', { theme: 'colored' });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('La creación de cliente falló');
+      }
+    }
+    console.log(clientData);
+  };
+
   return (
     <div className='container m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
         <h5 className='m-0 ps-4 py-3'>Registrar Cliente</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className='d-flex justify-content-around mb-3'>
             <CampoFormulario
               nombre='email'
               etiqueta='Email'
+              onChange={onChange}
             />
             <CampoFormulario
-              nombre='nombres'
+              nombre='nombre'
               etiqueta='Nombres'
+              onChange={onChange}
             />
             <CampoFormulario
               nombre='apellidos'
               etiqueta='Apellidos'
+              onChange={onChange}
             />
           </div>
           <div className='d-flex justify-content-around mb-3'>
             <CampoFormulario
-              nombre='tel'
+              nombre='telefono'
               etiqueta='Teléfono'
+              onChange={onChange}
             />
             <CampoFormulario
               nombre='empresa'
               etiqueta='Empresa'
+              onChange={onChange}
             />
             <CampoFormulario
               nombre='ubicacion'
               etiqueta='Ubicación'
+              onChange={onChange}
             />
           </div>
           <div className='d-flex justify-content-end'>
-            <Boton
-              texto='Cancelar'
-              icono={faBan}
-              estilos='me-3'
-              colorBtn='primary'
-              colorTxt='white'
-            />
-            <Boton
-              texto='Guardar'
-              icono={faFloppyDisk}
-              estilos='me-5'
-              colorBtn='primary'
-              colorTxt='white'
-            />
+            <button type='reset' className='btn btn-primary text-white me-3'>
+              <FontAwesomeIcon icon={faBan} />
+              <span className='ms-2'>Cancelar</span>
+            </button>
+            <button className='btn btn-primary text-white me-5'>
+              <FontAwesomeIcon icon={faFloppyDisk} />
+              <span className='ms-2'>Guardar</span>
+            </button>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegistrarCliente
+export default RegistrarCliente;

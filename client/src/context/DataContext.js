@@ -1,29 +1,50 @@
 import { createContext, useState } from 'react';
-import axios from '../api/axios';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getTickets = async () => {
     try {
-      const response = await axios.get('/tickets');
+      const response = await axiosPrivate.get('/tickets');
       // console.log(response.data.reverse());
       return response.data.reverse();
     } catch (err) {
       console.error(err);
+      navigate('/login', { state: { from: location }, replace: true });
     }
   };
 
   const getClientes = async () => {
     try {
-      const response = await axios.get('/clientes');
+      const response = await axiosPrivate.get('/clientes');
       // console.log(response.data);
       return response.data.reverse();
     } catch (err) {
       console.error(err);
+      navigate('/login', { state: { from: location }, replace: true });
     }
+  };
+
+  const uniqueProperty = (array, property) => {
+    return [
+      ...new Set(
+        array
+          .map((object) => object[property])
+          .filter((property) => property !== null && property !== undefined)
+      ),
+    ];
+  };
+
+  const countObjectsWithPropertyValue = (arr, prop, value) => {
+    const filteredArr = arr.filter((obj) => obj[prop] === value);
+    return [filteredArr, filteredArr.length];
   };
 
   return (
@@ -32,7 +53,9 @@ export const DataProvider = ({ children }) => {
         auth,
         setAuth,
         getTickets,
-        getClientes
+        getClientes,
+        uniqueProperty,
+        countObjectsWithPropertyValue,
       }}
     >
       {children}

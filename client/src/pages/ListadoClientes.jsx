@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react';
 import {
-  faMagnifyingGlass,
-  faEraser,
   faUserPlus,
   faTrashCan,
   faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
 import FilaCliente from '../components/FilaCliente';
 import Boton from '../components/Boton';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
+import { useNavigate } from 'react-router-dom';
+import ModuloEdicionCliente from '../components/ModuloEdicionCliente';
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
   const [clientes, setClientes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   // Pagination
   const [currPage, setCurrPage] = useState(1);
@@ -42,7 +44,6 @@ const ListadoClientes = () => {
         onClick={() => handleClick(number)}
       >
         <PaginationLink
-          //href='!#'
           className={`bg-${
             currPage === number ? 'secondary' : 'primary'
           } text-${currPage === number ? 'primary' : 'white'}`}
@@ -76,105 +77,111 @@ const ListadoClientes = () => {
   };
 
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'>
-      <div>
-        {/* <!--modulo busqueda--> */}
-        <SearchBarClientes
-        items={clientes}
-        setSearchResults={setSearchResults}
-      />        
-      </div>
-      <div>
-        {/* <!--listado de contactos--> */}
+    <>
+      <div className='container d-flex flex-column gap-3 mt-3'>
         <div>
-          {/* <!--Primera fila--> */}
-          <div className='bg-primary rounded-top p-2 d-flex gap-2'>
-            <Boton
-              icono={faUserPlus}
-              colorBtn='secondary'
-              colorTxt='primary'
-            />
-            <Boton
-              icono={faTrashCan}
-              colorBtn='secondary'
-              colorTxt='primary'
-            />
-            <Boton
-              icono={faPenToSquare}
-              colorBtn='secondary'
-              colorTxt='primary'
-            />
-            <h5 className='text-white m-0 mx-auto align-self-center'>
-            {searchResults.length} clientes
-            </h5>
-          </div>
-          {/* <table className="table table-hover table-bordered text-center"> */}
-          <Table
-            bordered
-            hover
-            responsive
-            striped
-            className='text-center'
-          >
-            <thead className='bg-primary text-white'>
-              <tr>
-                <th></th>
-                <th>Email</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Teléfono</th>
-                <th>Empresa</th>
-                <th>Ubicación</th>
-              </tr>
-            </thead>
-            <tbody className='bg-secondary text-primary'>{listaCliente(currItems)}</tbody>
-            {/* </table> */}
-          </Table>
+          {/* <!--modulo busqueda--> */}
+          <SearchBarClientes
+            items={clientes}
+            setSearchResults={setSearchResults}
+          />
         </div>
-        <div className='mt-2 d-flex justify-content-center'>
-          {/* <!--Botones--> */}
-          <Pagination>
-            <PaginationItem onClick={() => setCurrPage(1)}>
-              <PaginationLink
-                first
-                //href='#'
-                className='bg-primary text-white'
+        <div>
+          {/* <!--listado de contactos--> */}
+          <div>
+            {/* <!--Primera fila--> */}
+            <div className='bg-primary rounded-top p-2 d-flex gap-2'>
+              <button
+                className='btn btn-secondary text-primary'
+                onClick={() => navigate('/registrar-cliente')}
+              >
+                <FontAwesomeIcon icon={faUserPlus} />
+              </button>
+              <Boton
+                icono={faTrashCan}
+                colorBtn='secondary'
+                colorTxt='primary'
               />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                //href='#'
-                previous
-                onClick={() => setCurrPage((curr) => curr - 1)}
-                className={`text-white bg-${
-                  currPage === 1 ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === 1}
+              <Boton
+                icono={faPenToSquare}
+                colorBtn='secondary'
+                colorTxt='primary'
               />
-            </PaginationItem>
-            {renderPageNumbers}
-            <PaginationItem>
-              <PaginationLink
-                //href='#'
-                next
-                onClick={() => setCurrPage((curr) => curr + 1)}
-                className={`text-white bg-${
-                  currPage === pages.length ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === pages.length}
-              />
-            </PaginationItem>
-            <PaginationItem onClick={() => setCurrPage(pages.length)}>
-              <PaginationLink
-                //href='#'
-                last
-                className='bg-primary text-white'
-              />
-            </PaginationItem>
-          </Pagination>
+              <h5 className='text-white m-0 mx-auto align-self-center'>
+                {searchResults.length} clientes
+              </h5>
+            </div>
+            <Table
+              bordered
+              hover
+              responsive
+              striped
+              className='text-center'
+            >
+              <thead className='bg-primary text-white'>
+                <tr>
+                  <th></th>
+                  <th>Email</th>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Teléfono</th>
+                  <th>Empresa</th>
+                  <th>Ubicación</th>
+                </tr>
+              </thead>
+              <tbody className='bg-secondary text-primary'>
+                {listaCliente(currItems)}
+              </tbody>
+            </Table>
+          </div>
+          <div className='mt-2 d-flex justify-content-center'>
+            {/* <!--Botones--> */}
+            <Pagination>
+              <PaginationItem onClick={() => setCurrPage(1)}>
+                <PaginationLink
+                  first
+                  className={`text-white bg-${
+                    currPage === 1 ? 'dark' : 'primary'
+                  }`}
+                  disabled={currPage === 1}
+                />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink
+                  previous
+                  onClick={() => setCurrPage((curr) => curr - 1)}
+                  className={`text-white bg-${
+                    currPage === 1 ? 'dark' : 'primary'
+                  }`}
+                  disabled={currPage === 1}
+                />
+              </PaginationItem>
+              {renderPageNumbers}
+              <PaginationItem>
+                <PaginationLink
+                  next
+                  onClick={() => setCurrPage((curr) => curr + 1)}
+                  className={`text-white bg-${
+                    currPage === pages.length ? 'dark' : 'primary'
+                  }`}
+                  disabled={currPage === pages.length}
+                />
+              </PaginationItem>
+              <PaginationItem onClick={() => setCurrPage(pages.length)}>
+                <PaginationLink
+                  last
+                  className={`text-white bg-${
+                    currPage === pages.length ? 'dark' : 'primary'
+                  }`}
+                  disabled={currPage === pages.length}
+                />
+              </PaginationItem>
+            </Pagination>
+          </div>
         </div>
       </div>
-    </div>
+      <ModuloEdicionCliente />
+    </>
   );
 };
 

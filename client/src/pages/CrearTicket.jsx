@@ -1,8 +1,106 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import Boton from '../components/Boton.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import useData from '../hooks/useData.js';
+import axios from '../api/axios.js';
+import { toast } from 'react-toastify';
 
 const CrearTicket = () => {
+  const { getClientes } = useData();
+  const [clientes, setClientes] = useState([]);
+
+  //? inicio formulario
+  const TICKETS_URL = '/tickets';
+  const [errMsg, setErrMsg] = useState('');
+
+  const [formData, setFormData] = useState({
+    titulo: '',
+    cliente: '',
+    estado: '',
+    prioridad: '',
+    categoria: '',
+    subcategoria: '',
+  });
+
+  useEffect(() => {
+    setErrMsg('');
+
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' });
+    }
+  }, [errMsg, formData]);
+
+  const { titulo, cliente, estado, prioridad, categoria, subcategoria } =
+    formData;
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const ticketData = {
+      titulo,
+      cliente,
+      estado,
+      prioridad,
+      categoria,
+      subcategoria,
+    };
+
+    try {
+      const response = await axios.post(
+        TICKETS_URL,
+        JSON.stringify(ticketData),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      setFormData({
+        titulo: '',
+        cliente: '',
+        estado: '',
+        prioridad: '',
+        categoria: '',
+        subcategoria: '',
+      });
+      toast.info('Ticket creado exitosamente', { theme: 'colored' });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('La creación del ticket falló');
+      }
+    }
+    console.log(ticketData);
+  };
+
+  //? fin formulario
+
+  useEffect(() => {
+    getClientes().then((json) => {
+      setClientes(json);
+      return json;
+    });
+  }, [getClientes]);
+
+  const optClientes = clientes.map((cliente, index) => {
+    return (
+      <option
+        key={index}
+        value={`${cliente._id}`}
+      >{`${cliente.nombre} ${cliente.apellidos}`}</option>
+    );
+  });
+
   return (
     <div className='container d-flex flex-column gap-3 mt-3'>
       <div>
@@ -12,7 +110,7 @@ const CrearTicket = () => {
           </div>
         </div>
         <div className='bg-secondary p-2 rounded-bottom text-primary'>
-          <form>
+          <form onSubmit={onSubmit}>
             <div className='row d-flex justify-content-around mb-3 text-center'>
               <div className='col-sm'>
                 <label hmlfor='titulo'> Titulo (*)</label>
@@ -22,6 +120,7 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  onChange={onChange}
                 />
               </div>
               <div className='col-sm'>
@@ -30,11 +129,11 @@ const CrearTicket = () => {
                   name='estado'
                   className='form-select '
                   id='estado'
+                  onChange={onChange}
                 >
-                  <option value='abierto'>Abierto</option>
-                  <option value='enEsperaUsuario'>En espera Usuario</option>
-                  <option value='respondidoUsuario'>Respondido Usuario</option>
-                  <option value='cerrado'>Cerrado</option>
+                  <option value=''>Seleccione estado</option>
+                  <option value='Abierto'>Abierto</option>
+                  <option value='Cerrado'>Cerrado</option>
                 </select>
               </div>
               <div className='col-sm'>
@@ -43,11 +142,12 @@ const CrearTicket = () => {
                   name='prioridad'
                   className='form-select'
                   id='prioridad'
+                  onChange={onChange}
                 >
-                  <option value='critica'>Critica</option>
-                  <option value='alta'>Alta</option>
-                  <option value='normal'>Normal</option>
-                  <option value='baja'>Baja</option>
+                  <option value=''>Seleccione prioridad</option>
+                  <option value='Alta'>Alta</option>
+                  <option value='Media'>Media</option>
+                  <option value='Baja'>Baja</option>
                 </select>
               </div>
             </div>
@@ -58,15 +158,17 @@ const CrearTicket = () => {
                   name='categoria'
                   className='form-select'
                   id='categoria'
+                  onChange={onChange}
                 >
-                  <option value='actualizacion'>Actualización</option>
-                  <option value='cambio'>Cambio</option>
-                  <option value='configuracion'>Configuración</option>
-                  <option value='hadware'>Hadware</option>
-                  <option value='software'>Software</option>
-                  <option value='instalacion'>Instalación</option>
-                  <option value='otro'>Otro</option>
-                  <option value='redes'>Redes</option>
+                  <option value=''>Seleccione categoría</option>
+                  <option value='Actualización'>Actualización</option>
+                  <option value='Cambio'>Cambio</option>
+                  <option value='Configuración'>Configuración</option>
+                  <option value='Hadware'>Hadware</option>
+                  <option value='Software'>Software</option>
+                  <option value='Instalación'>Instalación</option>
+                  <option value='Otro'>Otro</option>
+                  <option value='Redes'>Redes</option>
                 </select>
               </div>
               <div className='col-sm'>
@@ -75,113 +177,102 @@ const CrearTicket = () => {
                   name='subcategoria'
                   className='form-select'
                   id='subcategoria'
+                  onChange={onChange}
                 >
-                  <option value='antivirus'>Antivirus</option>
-                  <option value='cambioDeRadioEnlace'>
+                  <option value=''>Seleccione subcategoría</option>
+                  <option value='Antivirus'>Antivirus</option>
+                  <option value='Cambio de radio enlace'>
                     Cambio de radio enlace
                   </option>
-                  <option value='certificacionDeCableado'>
+                  <option value='Certificación de cableado'>
                     Certificación de cableado
                   </option>
-                  <option value='contraseña'>Contraseña</option>
-                  <option value='creacionDeBackup'>Creacion de Backup</option>
-                  <option value='crm'>CRM</option>
-                  <option value='desinstalacionDeRadioEnlace'>
+                  <option value='Contraseña'>Contraseña</option>
+                  <option value='Creacion de Backup'>Creacion de Backup</option>
+                  <option value='CRM'>CRM</option>
+                  <option value='Desinstalación de radio enlace'>
                     Desinstalación de radio enlace
                   </option>
-                  <option value='email'>Email</option>
-                  <option value='erp'>ERP</option>
-                  <option value='firewall'>Firewall</option>
-                  <option value='impresora'>Impresora</option>
-                  <option value='instalacionDeAp'>Instalación de Ap</option>
-                  <option value='instalacionDeEnlaceSatelital'>
+                  <option value='Email'>Email</option>
+                  <option value='ERP'>ERP</option>
+                  <option value='Firewall'>Firewall</option>
+                  <option value='Impresora'>Impresora</option>
+                  <option value='Instalación de Ap'>Instalación de Ap</option>
+                  <option value='Instalacion de enlace satelital'>
                     Instalacion de enlace satelital
                   </option>
-                  <option value='instalacionDeRadioEnlace'>
+                  <option value=' Instalación de radio enlace'>
                     Instalación de radio enlace
                   </option>
-                  <option value='instalacionDeSolucionSolar'>
+                  <option value=' Instalación de solución solar'>
                     Instalación de solución solar
                   </option>
-                  <option value='instalacionDeUps'>Instalacion de ups</option>
-                  <option value='instalacionDeCableadoEstructural'>
+                  <option value='Instalacion de ups'>Instalacion de ups</option>
+                  <option value='Instalación de cableado estructural'>
                     Instalación de cableado estructural
                   </option>
-                  <option value='internet'>Internet</option>
-                  <option value='intranet'>Intranet</option>
-                  <option value='lan'>LAN</option>
-                  <option value='mantenimientoDeRadioEnlace'>
+                  <option value='Internet'>Internet</option>
+                  <option value='Intranet'>Intranet</option>
+                  <option value='LAN'>LAN</option>
+                  <option value='Mantenimiento de radio enlace'>
                     Mantenimiento de radio enlace
                   </option>
-                  <option value='mantenimientoDeUps'>
+                  <option value='Mantenimiento de ups'>
                     Mantenimiento de ups
                   </option>
-                  <option value='monitor'>Monitor</option>
-                  <option value='office'>Office</option>
-                  <option value='otro'>Otro</option>
-                  <option value='pc'>PC</option>
-                  <option value='perifericos'>Periféricos</option>
-                  <option value='portatil'>Portatil</option>
-                  <option value='recuperacionDeInformacion'>
+                  <option value='Monitor'>Monitor</option>
+                  <option value='Office'>Office</option>
+                  <option value='Otro'>Otro</option>
+                  <option value='PC'>PC</option>
+                  <option value='Periféricos'>Periféricos</option>
+                  <option value='Portatil'>Portatil</option>
+                  <option value='Recuperación de información'>
                     Recuperación de información
                   </option>
-                  <option value='restauracionDeBackup'>
+                  <option value='Restauración de backup'>
                     Restauración de backup
                   </option>
-                  <option value='revisionDeEnlaceSatelital'>
+                  <option value='Revisión de enlace satelital'>
                     Revisión de enlace satelital
                   </option>
-                  <option value='revisionDePuentosDeRed'>
+                  <option value='Revisión de enlace de red'>
                     Revisión de enlace de red
                   </option>
-                  <option value='servidor'>Servidor</option>
-                  <option value='sistemaOperativo'>Sistema Operativo</option>
-                  <option value='smartphone'>Smartphone</option>
-                  <option value='telefono'>Teléfono</option>
-                  <option value='videoconferencia'>Videoconferencia</option>
-                  <option value='vpn'>VPN</option>
-                  <option value='web'>Web</option>
-                  <option value='wifi'>WiFi</option>
+                  <option value='Servidor'>Servidor</option>
+                  <option value='Sistema Operativo'>Sistema Operativo</option>
+                  <option value='Smartphone'>Smartphone</option>
+                  <option value='Teléfono'>Teléfono</option>
+                  <option value='Videoconferencia'>Videoconferencia</option>
+                  <option value='VPN'>VPN</option>
+                  <option value='Web'>Web</option>
+                  <option value='WiFi'>WiFi</option>
                 </select>
-                </div>
               </div>
-              <div className='row d-flex justify-content-around mb-2 text-center mt-3'>
-                <div className='col-sm'>
-                  <label htmlFor='cliente'> Cliente (*)</label>
-                  <select
-                    name='cliente'
-                    className='form-select'
-                    id='cliente'
-                  >
-                    <option value='salazar'>Daniel Felipe Salazar</option>
-                  </select>
-                </div>
-                <div className='col-sm'>
-                  <label htmlFor='empresa'>Empresa(*)</label>
-                  <select
-                    name='empresa'
-                    className='form-select'
-                    id='empresa'
-                  >
-                    <option value='salazar'>It Tecnology </option>
-                  </select>
-                </div>
+              <div className='col-sm'>
+                <label htmlFor='cliente'> Cliente (*)</label>
+                <select
+                  name='cliente'
+                  className='form-select '
+                  id='cliente'
+                  onChange={onChange}
+                >
+                  <option value=''>Seleccione cliente</option>
+                  {optClientes}
+                </select>
               </div>
+            </div>
             <div className='d-flex justify-content-end p-2'>
-              <Boton
-                texto='Cancelar'
-                icono={faBan}
-                estilos='me-3'
-                colorBtn='primary'
-                colorTxt='white'
-              />
-              <Boton
-                texto='Guardar'
-                icono={faFloppyDisk}
-                estilos='me-3'
-                colorBtn='primary'
-                colorTxt='white'
-              />
+              <button
+                type='reset'
+                className='btn btn-primary text-white me-3'
+              >
+                <FontAwesomeIcon icon={faBan} />
+                <span className='ms-2'>Cancelar</span>
+              </button>
+              <button className='btn btn-primary text-white me-5'>
+                <FontAwesomeIcon icon={faFloppyDisk} />
+                <span className='ms-2'>Guardar</span>
+              </button>
             </div>
           </form>
         </div>

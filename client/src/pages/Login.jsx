@@ -1,7 +1,7 @@
 import useData from '../hooks/useData';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import axios from '../api/axios';
 const LOGIN_URL = '/auth';
@@ -41,6 +41,7 @@ const Login = () => {
       setAuth({nombreUsuario: user, contrasenha: pwd, accessToken})
       setUser('');
       setPwd('');
+      toast.info('Sesión iniciada', { theme: 'colored' });
       navigate(from, {replace: true})
     } catch (err) {
       if (!err?.response) {

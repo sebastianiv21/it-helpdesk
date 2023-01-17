@@ -5,6 +5,7 @@ import { DataProvider } from '../context/DataContext';
 import Navbar from './Navbar';
 import Layout from './Layout';
 import RequireAuth from './RequireAuth';
+import PersistLogin from './PersistLogin';
 
 //Pages
 import Inicio from '../pages/Inicio';
@@ -31,35 +32,38 @@ const Main = () => {
             element={<Layout />}
           >
             <Route
-              path='/'
-              element={<Inicio />}
-            />
-            <Route
               path='/login'
               element={<Login />}
             />
-            {/* <Route element={<RequireAuth />}> */}
-              <Route
-                path='/crear-ticket'
-                element={<CrearTicket />}
-              />
-              <Route
-                path='/listado-tickets'
-                element={<ListadoTickets />}
-              />
-              <Route
-                path='/registrar-cliente'
-                element={<RegistrarCliente />}
-              />
-              <Route
-                path='/listado-clientes'
-                element={<ListadoClientes />}
-              />
-              <Route
-                path='/generar-informe'
-                element={<GenerarInforme />}
-              />
-            {/* </Route> */}
+            <Route element={<PersistLogin />}>
+              <Route element={<RequireAuth />}>
+                <Route
+                  path='/'
+                  element={<Inicio />}
+                />
+                <Route
+                  path='/crear-ticket'
+                  element={<CrearTicket />}
+                />
+                <Route
+                  path='/listado-tickets'
+                  element={<ListadoTickets />}
+                />
+                <Route
+                  path='/registrar-cliente'
+                  element={<RegistrarCliente />}
+                />
+                <Route
+                  path='/listado-clientes'
+                  element={<ListadoClientes />}
+                />
+                <Route
+                  path='/generar-informe'
+                  element={<GenerarInforme />}
+                />
+              </Route>
+            </Route>
+            {/* Catch all */}
             <Route
               path='*'
               element={<NotFound />}
