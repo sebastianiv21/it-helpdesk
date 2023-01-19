@@ -30,7 +30,18 @@ $font-family-sans-serif: "Poppins", sans-serif;
 
 #tabla {
   overflow-y: scroll ;
-  font-size: 70%;
-  height: 167px;
-  
+  font-size: 90%;
+  height: 167px; 
+
+  }
+
+#tabla::-webkit-scrollbar {
+ width: 8px;
+
 }
+
+#tabla::-webkit-scrollbar-thumb {
+  background: #004643;
+  border-radius: 5px;
+}
+
