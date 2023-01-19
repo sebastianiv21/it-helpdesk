@@ -53,10 +53,10 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // @route PATCH /tickets
 // @access Private
 const updateTicket = asyncHandler(async (req, res) => {
-  const { id, estado, fechadecierre, acciones } = req.body
+  const { id, prioridad, estado, fechadecierre, acciones } = req.body
 
   // Confirm data
-  if (!id || !estado) {
+  if (!id || !estado || !prioridad) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
@@ -68,6 +68,7 @@ const updateTicket = asyncHandler(async (req, res) => {
   }
 
   ticket.estado = estado
+  ticket.prioridad = prioridad
   ticket.fechadecierre = fechadecierre
   ticket.acciones = acciones
 

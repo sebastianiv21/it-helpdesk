@@ -21,9 +21,14 @@ const FilaTicket = ({
   fechadecierre,
   acciones,
 }) => {
-
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [formData, setFormData] = useState({
+    prioridad,
+    estado,
+    acciones,
+    fechadecierre
+  });
 
   const toggle = () => setModal(!modal);
   const toggleEdit = () => setModalEdit(!modalEdit);
@@ -33,26 +38,24 @@ const FilaTicket = ({
 
   useEffect(() => {
     setErrMsg('');
-  
+
     if (errMsg) {
       toast.error(errMsg, { theme: 'colored' });
     }
-  
-  }, [errMsg, id]);
+  }, [errMsg, id, formData]);
 
   const handleDelete = async (e) => {
     console.log(id);
     const ticketId = { id };
 
     try {
-      const response = await axios.delete(
-        TICKETS_URL,
-        {
-          data: ticketId
-        }
-        );
-      toast.info(`Ticket ${id.slice(-6)} eliminado exitosamente`, { theme: 'colored' });
-      toggle()
+      const response = await axios.delete(TICKETS_URL, {
+        data: ticketId,
+      });
+      toast.info(`Ticket ${id.slice(-6)} eliminado exitosamente`, {
+        theme: 'colored',
+      });
+      toggle();
     } catch (err) {
       if (!err?.response) {
         setErrMsg('El servidor no responde');
@@ -62,7 +65,41 @@ const FilaTicket = ({
         setErrMsg('No se pudo eliminar el ticket');
       }
     }
-  }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    const ticketData = {
+      id,
+      prioridad,
+      estado,
+      acciones,
+    };
+
+    try {
+      const response = await axios.patch(TICKETS_URL, ticketData);
+      toast.info(`Ticket ${id.slice(-6)} actualizado exitosamente`, {
+        theme: 'colored',
+      });
+      toggleEdit();
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('La actualización del ticket falló');
+      }
+    }
+  };
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <>
@@ -144,8 +181,8 @@ const FilaTicket = ({
         <ModalFooter>
           <Button
             color='primary'
-              className='d-flex align-items-center m-2 gap-2'
-              onClick={toggleEdit}
+            className='d-flex align-items-center m-2 gap-2'
+            onClick={toggleEdit}
           >
             <FontAwesomeIcon icon={faBan} />
             Cancelar
@@ -153,7 +190,7 @@ const FilaTicket = ({
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'
-            onClick={toggleEdit}
+            onClick={handleUpdate}
           >
             <FontAwesomeIcon icon={faFloppyDisk} />
             Guardar

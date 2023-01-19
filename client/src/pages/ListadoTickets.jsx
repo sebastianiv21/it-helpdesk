@@ -9,7 +9,6 @@ import ListadoAccionData from '../shared/ListadoAccionData.js';
 import FilaAccion from '../components/FilaAccion.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import useData from '../hooks/useData.js';
-import ModuloEdicionTicket from '../components/ModuloEdicionTicket';
 
 const ListadoTickets = () => {
   const { getTickets } = useData();
@@ -58,7 +57,7 @@ const ListadoTickets = () => {
       setSearchResults(json);
       return json;
     });
-  }, [getTickets, tickets]);
+  }, [getTickets]);
 
   const listaAccion = accion.map((item) => (
     <FilaAccion
