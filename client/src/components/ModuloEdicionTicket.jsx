@@ -14,8 +14,8 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
             Modulo de edición
           </h4>
         </div>
-        <div className='row d-flex justify-content-around mb-2 text-center mt-2'>
-          <div className='col-5'>
+        <div className='d-flex justify-content-around mb-2 text-center mt-2 p-4'>
+          <div className='col-2'>
             <label htmlFor='prioridad'> Prioridad (*)</label>
             <select
               name='prioridad'
@@ -27,7 +27,7 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
               <option value='baja'>Baja</option>
             </select>
           </div>
-          <div className='col-5 pb-3'>
+          <div className='col-2'>
             <label htmlFor='estado'> Estado (*)</label>
             <select
               name='estado'
@@ -38,6 +38,18 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
               <option value='cerrado'>Cerrado</option>
             </select>
           </div>
+          <div className='col-2'>
+              <Label htmlFor='fechadecierre'
+                    >Fecha de cierre
+              </Label>
+              <Input
+              className='text-center'
+              id="fechadecierre"
+              name="fechadecierre"
+              placeholder="Fecha de Cierre"
+              type="date">
+              </Input>
+              </div>
         </div>
       </div>
       <div className='bg-secondary'>
@@ -103,27 +115,10 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
             </Button>
             </div>
           <div className='col-6'>
-                <div className='bg-secondary rounded-bottom  d-flex justify-content-around'>
-                  <FormGroup className='col-sm custom-file'>
-                    <Label
-                      for='exampleFile'
-                      className='bg-primary form-control text-white text-center mt-3'
-                    >
-                      Busqueda
-                    </Label>
-                    <input
-                      type='text'
-                      name='busqueda'
-                      id='busqueda'
-                      className='form-control m-0'
-                      placeholder='Ingrese fecha o encargado de la acción'
-                    />
-                  </FormGroup>
-                </div>
-              <div>
+              <div className='bg-secondary rounded-bottom d-flex justify-content-around mt-3'>
                 <table
                   border={1}
-                  className='table table-hover table-bordered'
+                  className='table table-hover table-bordered rounded rounded-2 overflow-hidden'
                   id='datatable'
                 >
                   <thead>
