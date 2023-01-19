@@ -59,10 +59,9 @@ const Inicio = () => {
               <div className='card-header bg-primary text-white'>
                 Tickets Prioritarios
               </div>
-              <div className='card-body'>
-                <Table
-                  responsive
-                  className='table table-sm table-striped text-center align-middle '
+              <div className='card-body' id='tabla'>
+                <Table responsive
+                  className='table table-sm table-striped text-center align-middle'
                 >
                   <thead className='text-primary bg-white text-center'>
                     <tr>
