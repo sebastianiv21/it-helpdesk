@@ -1,3 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { Button} from 'reactstrap';
 import { FormGroup, Label, Input } from 'reactstrap';
 
 const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
@@ -9,8 +14,8 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
             Modulo de edición
           </h4>
         </div>
-        <div className='row d-flex justify-content-around mb-2 text-center mt-2'>
-          <div className='col-5'>
+        <div className='d-flex justify-content-around mb-2 text-center mt-2 p-4'>
+          <div className='col-2'>
             <label htmlFor='prioridad'> Prioridad (*)</label>
             <select
               name='prioridad'
@@ -23,7 +28,7 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               <option value='Baja'>Baja</option>
             </select>
           </div>
-          <div className='col-5 pb-3'>
+          <div className='col-2'>
             <label htmlFor='estado'> Estado (*)</label>
             <select
               name='estado'
@@ -35,16 +40,38 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               <option value='Cerrado' selected={data.estado == 'Cerrado'} >Cerrado</option>
             </select>
           </div>
+          <div className='col-2'>
+              <Label htmlFor='fechadecierre'
+                    >Fecha de cierre
+              </Label>
+              <Input
+              className='text-center'
+              id="fechadecierre"
+              name="fechadecierre"
+              placeholder="Fecha de Cierre"
+              type="date">
+              </Input>
+              </div>
         </div>
       </div>
-      <div>
+      <div className='bg-secondary'>
         <div className='bg-primary text-white rounded-top'>
           <h4 className='m-0 ps-4 py-3'>Historial de acciones</h4>
         </div>
-        <div className='bg-secondary p-3 rounded-bottom text-primary'>
-          <form>
-            <div className='row'>
-              <div className='col-6'>
+        <div className='row d-flex p-3 rounded-bottom text-primary'>
+            <div className='col-6'>
+            <div >
+              <Label for='exampleFile'
+                    className='bg-primary form-control text-white text-center mt-3'>Fecha de la acción
+              </Label>
+              <Input
+              className='text-center'
+                id="exampleDate"
+                name="date"
+                placeholder="date placeholder"
+                type="datetime-local"/>
+              </div>
+              <div>
                 <FormGroup className='custom-file'>
                   <Label
                     for='exampleFile'
@@ -63,28 +90,7 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
                   </div>
                 </FormGroup>
               </div>
-              <div className='col-6'>
-                <div className='bg-secondary rounded-bottom  d-flex justify-content-around'>
-                  <FormGroup className='col-sm custom-file'>
-                    <Label
-                      for='exampleFile'
-                      className='bg-primary form-control text-white text-center mt-3'
-                    >
-                      Busqueda
-                    </Label>
-                    <input
-                      type='text'
-                      name='busqueda'
-                      id='busqueda'
-                      className='form-control m-0'
-                      placeholder='Ingrese fecha o encargado de la acción'
-                    />
-                  </FormGroup>
-                </div>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-6 mt-2'>
+              <div>
                 <FormGroup>
                   <Label
                     for='exampleText'
@@ -102,10 +108,19 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
                   />
                 </FormGroup>
               </div>
-              <div className='col-6 mt-2 '>
+              <Button
+              color='primary'
+              className='d-flex align-items-center m-2 gap-2 ms-auto'
+            >
+              <FontAwesomeIcon icon={faPlus} />
+              Agregar
+            </Button>
+            </div>
+          <div className='col-6'>
+              <div className='bg-secondary rounded-bottom d-flex justify-content-around mt-3'>
                 <table
                   border={1}
-                  className='table table-hover table-bordered'
+                  className='table table-hover table-bordered rounded rounded-2 overflow-hidden'
                   id='datatable'
                 >
                   <thead>
@@ -118,8 +133,7 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
                   <tbody className='text-primary bg-white'>{listaAccion}</tbody>
                 </table>
               </div>
-            </div>
-          </form>
+            </div>   
         </div>
       </div>
     </>

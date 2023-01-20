@@ -120,7 +120,6 @@ const FilaTicket = ({
               onClick={toggleEdit}
             >
               <FontAwesomeIcon icon={faPencil} />
-              Editar
             </Button>
             <Button
               color='primary'
@@ -128,7 +127,6 @@ const FilaTicket = ({
               onClick={toggle}
             >
               <FontAwesomeIcon icon={faTrash} />
-              Eliminar
             </Button>
           </div>
         </td>

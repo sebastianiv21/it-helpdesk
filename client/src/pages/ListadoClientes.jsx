@@ -72,6 +72,7 @@ const ListadoClientes = () => {
         telefono={item.telefono}
         compania={item.empresa}
         ubicacion={item.ubicacion}
+        accion={item.accion}
       />
     ));
   };
@@ -97,16 +98,6 @@ const ListadoClientes = () => {
               >
                 <FontAwesomeIcon icon={faUserPlus} />
               </button>
-              <Boton
-                icono={faTrashCan}
-                colorBtn='secondary'
-                colorTxt='primary'
-              />
-              <Boton
-                icono={faPenToSquare}
-                colorBtn='secondary'
-                colorTxt='primary'
-              />
               <h5 className='text-white m-0 mx-auto align-self-center'>
                 {searchResults.length} clientes
               </h5>
@@ -120,13 +111,13 @@ const ListadoClientes = () => {
             >
               <thead className='bg-primary text-white'>
                 <tr>
-                  <th></th>
                   <th>Email</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
                   <th>Teléfono</th>
                   <th>Empresa</th>
                   <th>Ubicación</th>
+                  <th>Acción</th>
                 </tr>
               </thead>
               <tbody className='bg-secondary text-primary'>
