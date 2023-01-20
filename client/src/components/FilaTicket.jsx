@@ -176,7 +176,7 @@ const FilaTicket = ({
           Editar Ticket <strong>{id.slice(-6)}</strong>
         </ModalHeader>
         <ModalBody>
-          <ModuloEdicionTicket />
+          <ModuloEdicionTicket onChange={onChange} data={formData} />
         </ModalBody>
         <ModalFooter>
           <Button

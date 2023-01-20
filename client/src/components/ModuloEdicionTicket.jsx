@@ -1,6 +1,6 @@
 import { FormGroup, Label, Input } from 'reactstrap';
 
-const ModuloEdicionTicket = ({ listaAccion }) => {
+const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
   return (
     <>
       <div className='bg-secondary'>
@@ -16,10 +16,11 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
               name='prioridad'
               className='form-select text-center mt-2'
               id='prioridad'
+              onChange={onChange}
             >
-              <option value='alta'>Alta</option>
-              <option value='media'>Media</option>
-              <option value='baja'>Baja</option>
+              <option value='Alta'>Alta</option>
+              <option value='Media'>Media</option>
+              <option value='Baja'>Baja</option>
             </select>
           </div>
           <div className='col-5 pb-3'>
@@ -28,9 +29,10 @@ const ModuloEdicionTicket = ({ listaAccion }) => {
               name='estado'
               className='form-select text-center mt-2'
               id='estado'
+              onChange={onChange}
             >
-              <option value='abierto'>Abierto</option>
-              <option value='cerrado'>Cerrado</option>
+              <option value='Abierto' selected={data.estado == 'Abierto'} >Abierto</option>
+              <option value='Cerrado' selected={data.estado == 'Cerrado'} >Cerrado</option>
             </select>
           </div>
         </div>
