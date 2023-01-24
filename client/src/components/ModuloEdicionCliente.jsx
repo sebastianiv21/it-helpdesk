@@ -2,7 +2,7 @@ import Boton from './Boton';
 import CampoFormulario from './CampoFormulario';
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
-const ModuloEdicionCliente = () => {
+const ModuloEdicionCliente = ({ onChange, data }) => {
   return (
     <div className='container m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
@@ -14,44 +14,40 @@ const ModuloEdicionCliente = () => {
             <CampoFormulario
               nombre='email'
               etiqueta='Email'
+              onChange={onChange}
+              value={data.email}
             />
             <CampoFormulario
-              nombre='nombres'
-              etiqueta='Nombres'
+              nombre='nombre'
+              etiqueta='Nombre'
+              onChange={onChange}
+              value={data.nombre}
             />
             <CampoFormulario
               nombre='apellidos'
               etiqueta='Apellidos'
+              onChange={onChange}
+              value={data.apellidos}
             />
           </div>
           <div className='d-flex justify-content-around mb-3'>
             <CampoFormulario
               nombre='tel'
               etiqueta='Teléfono'
+              onChange={onChange}
+              value={data.telefono}
             />
             <CampoFormulario
               nombre='empresa'
               etiqueta='Empresa'
+              onChange={onChange}
+              value={data.empresa}
             />
             <CampoFormulario
               nombre='ubicacion'
               etiqueta='Ubicación'
-            />
-          </div>
-          <div className='d-flex justify-content-end'>
-            <Boton
-              texto='Cancelar'
-              icono={faBan}
-              estilos='me-3'
-              colorBtn='primary'
-              colorTxt='white'
-            />
-            <Boton
-              texto='Guardar'
-              icono={faFloppyDisk}
-              estilos='me-5'
-              colorBtn='primary'
-              colorTxt='white'
+              onChange={onChange}
+              value={data.ubicacion}
             />
           </div>
         </form>

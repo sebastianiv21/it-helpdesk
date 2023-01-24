@@ -24,6 +24,7 @@ const FilaTicket = ({
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [formData, setFormData] = useState({
+    id,
     prioridad,
     estado,
     acciones,
@@ -70,15 +71,8 @@ const FilaTicket = ({
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const ticketData = {
-      id,
-      prioridad,
-      estado,
-      acciones,
-    };
-
     try {
-      const response = await axios.patch(TICKETS_URL, ticketData);
+      const response = await axios.patch(TICKETS_URL, formData);
       toast.info(`Ticket ${id.slice(-6)} actualizado exitosamente`, {
         theme: 'colored',
       });
@@ -184,7 +178,7 @@ const FilaTicket = ({
           >
             <FontAwesomeIcon icon={faBan} />
             Cancelar
-          </Button>{' '}
+          </Button>
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'

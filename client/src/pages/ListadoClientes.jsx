@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
 import {
-  faUserPlus,
-  faTrashCan,
-  faPenToSquare,
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
 import FilaCliente from '../components/FilaCliente';
-import Boton from '../components/Boton';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
 import { useNavigate } from 'react-router-dom';
-import ModuloEdicionCliente from '../components/ModuloEdicionCliente';
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
@@ -66,11 +62,12 @@ const ListadoClientes = () => {
     return data.map((item) => (
       <FilaCliente
         key={item._id}
+        id={item._id}
         email={item.email}
-        nombres={item.nombre}
+        nombre={item.nombre}
         apellidos={item.apellidos}
         telefono={item.telefono}
-        compania={item.empresa}
+        empresa={item.empresa}
         ubicacion={item.ubicacion}
         accion={item.accion}
       />
@@ -171,7 +168,6 @@ const ListadoClientes = () => {
           </div>
         </div>
       </div>
-      <ModuloEdicionCliente />
     </>
   );
 };

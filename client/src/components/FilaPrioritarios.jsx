@@ -5,7 +5,7 @@ const FilaPrioritarios = ({ id, categoria, empresa }) => {
     <tr>
       <th scope='row'>{id}</th>
       <td>{categoria}</td>
-      <td>{empresa.toUpperCase()}</td>
+      <td>{empresa?.toUpperCase()}</td>
     </tr>
   );
 };

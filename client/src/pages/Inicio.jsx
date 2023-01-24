@@ -31,7 +31,7 @@ const Inicio = () => {
       key={_id}
       id={_id.slice(-6)}
       categoria={categoria}
-      empresa={cliente.empresa}
+      empresa={cliente?.empresa}
     />;
   });
 

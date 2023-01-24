@@ -49,8 +49,9 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               id="fechadecierre"
               name="fechadecierre"
               placeholder="Fecha de Cierre"
-              type="date">
-              </Input>
+              onChange={onChange}
+              type="date" 
+              />
               </div>
         </div>
       </div>
