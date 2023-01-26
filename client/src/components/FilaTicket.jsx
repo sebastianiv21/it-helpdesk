@@ -53,13 +53,6 @@ const FilaTicket = ({
     }));
   };
 
-  const onAddAccion = () => {
-    setFormData((prevState) => ({
-      ...prevState,
-      
-    }));
-  };
-
   const toggle = () => setModal(!modal);
   const toggleEdit = () => setModalEdit(!modalEdit);
 
@@ -83,6 +76,12 @@ const FilaTicket = ({
   };
 
   const addAccionHandler = () => {
+    if(!formAccionData.fecha || !formAccionData.descripcion || !formAccionData.usuarioEncargado){
+      return toast.error(`Ingrese todos los campos del formulario`, {
+        theme: 'colored',
+      });
+    }
+
     setFormData(prevState=> ({
       ...prevState,
       acciones: [
