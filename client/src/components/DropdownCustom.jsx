@@ -16,9 +16,9 @@ const DropdownCustom = ({title, submenu}) => {
   return <Dropdown isOpen={dropdown} toggle={toggleDropdown} >
     <DropdownToggle className="nav-item text-white bg-primary border-primary" caret>{title}</DropdownToggle>
     <DropdownMenu>
-        {submenu.map((item, index)=>{
+        {submenu.map((item)=>{
           return (
-            <DropdownItem key={index}><Link to={item[1]} className="text-decoration-none">{item[0]}</Link></DropdownItem>)
+            <DropdownItem key={Math.random()}><Link to={item[1]} className="text-decoration-none">{item[0]}</Link></DropdownItem>)
         })}
     </DropdownMenu>
   </Dropdown>;

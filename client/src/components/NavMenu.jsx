@@ -36,9 +36,9 @@ const NavMenu = () => {
                 <span>Inicio</span>
               </Link>
             </li>
-            {NavMenuData.map((item, index) => (
+            {NavMenuData.map((item) => (
               <li
-                key={index}
+                key={Math.random()}
                 className='text-white'
               >
                 <DropdownCustom

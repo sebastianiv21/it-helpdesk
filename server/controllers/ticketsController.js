@@ -13,17 +13,6 @@ const getAllTickets = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'No se encontraron tickets' })
   }
 
-  // const ticketsWithClient = await Promise.all(
-  //   tickets.map(async (ticket) => {
-  //     // se usa exec porque se esta pasando un parametro de busqueda
-  //     const client = await Cliente.findById(ticket.cliente)
-  //       .select('-_id')
-  //       .lean()
-  //       .exec()
-  //     return { ...ticket, ...client }
-  //   })
-  //)
-  //res.json(ticketsWithClient)
   res.json(tickets)
 })
 

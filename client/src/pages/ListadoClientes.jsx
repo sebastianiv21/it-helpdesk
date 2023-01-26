@@ -61,10 +61,9 @@ const ListadoClientes = () => {
     });
   }, [getClientes]);
 
-
   const onDelete = async (clienteId) => {
     try {
-      const response = await axios.delete(CLIENTES_URL, {
+      await axios.delete(CLIENTES_URL, {
         data: { id: clienteId },
       });
       toast.info(`Cliente eliminado exitosamente`, {
@@ -89,7 +88,7 @@ const ListadoClientes = () => {
     const { id, ...rest } = formData;
 
     try {
-      const response = await axios.patch(CLIENTES_URL, formData);
+      await axios.patch(CLIENTES_URL, formData);
       toast.info(`Cliente actualizado exitosamente`, {
         theme: 'colored',
       });
@@ -100,7 +99,7 @@ const ListadoClientes = () => {
       setSearchResults((prevItems) => {
         prevItems[clientIndex] = {
           ...existingClient,
-          ...rest
+          ...rest,
         };
         const updatedItems = [...prevItems];
         return updatedItems;

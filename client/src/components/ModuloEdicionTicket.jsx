@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'reactstrap';
-import { FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup, Label, Input } from 'reactstrap';
 import FilaAccion from './FilaAccion';
 
 const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, addAccionHandler }) => {

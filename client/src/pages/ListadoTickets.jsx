@@ -62,7 +62,7 @@ const ListadoTickets = () => {
 
   const onDelete = async (ticketId) => {
     try {
-      const response = await axios.delete(TICKETS_URL, {
+      await axios.delete(TICKETS_URL, {
         data: { id: ticketId },
       });
       toast.info(`Ticket eliminado exitosamente`, {
@@ -87,7 +87,7 @@ const ListadoTickets = () => {
     const { id, ...rest } = formData;
 
     try {
-      const response = await axios.patch(TICKETS_URL, formData);
+      await axios.patch(TICKETS_URL, formData);
       toast.info(`Ticket actualizado exitosamente`, {
         theme: 'colored',
       });
@@ -161,7 +161,6 @@ const ListadoTickets = () => {
             </tr>
           </thead>
           <tbody className='bg-secondary text-primary'>
-            {/* {listaTickets(searchResults)} */}
             {listaTickets(currItems)}
           </tbody>
         </table>
@@ -173,7 +172,6 @@ const ListadoTickets = () => {
             <PaginationItem onClick={() => setCurrPage(1)}>
               <PaginationLink
                 first
-                //href='#'
                 className={`text-white bg-${
                   currPage === 1 ? 'dark' : 'primary'
                 }`}
@@ -182,7 +180,6 @@ const ListadoTickets = () => {
             </PaginationItem>
             <PaginationItem>
               <PaginationLink
-                //href='#'
                 previous
                 onClick={() => setCurrPage((curr) => curr - 1)}
                 className={`text-white bg-${
@@ -194,7 +191,6 @@ const ListadoTickets = () => {
             {renderPageNumbers}
             <PaginationItem>
               <PaginationLink
-                //href='#'
                 next
                 onClick={() => setCurrPage((curr) => curr + 1)}
                 className={`text-white bg-${
@@ -205,7 +201,6 @@ const ListadoTickets = () => {
             </PaginationItem>
             <PaginationItem onClick={() => setCurrPage(pages.length)}>
               <PaginationLink
-                //href='#'
                 last
                 className={`text-white bg-${
                   currPage === pages.length ? 'dark' : 'primary'
@@ -216,7 +211,6 @@ const ListadoTickets = () => {
           </Pagination>
         </div>
       </div>
-      {/* <ModuloEdicionTicket listaAccion={listaAccion} /> */}
     </div>
   );
 };

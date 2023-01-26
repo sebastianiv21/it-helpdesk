@@ -53,7 +53,7 @@ const CrearTicket = () => {
     };
 
     try {
-      const response = await axios.post(
+      await axios.post(
         TICKETS_URL,
         JSON.stringify(ticketData),
         {
@@ -90,10 +90,10 @@ const CrearTicket = () => {
     });
   }, [getClientes]);
 
-  const optClientes = clientes.map((cliente, index) => {
+  const optClientes = clientes.map((cliente) => {
     return (
       <option
-        key={index}
+        key={Math.random()}
         value={`${cliente._id}`}
       >{`${cliente.nombre} ${cliente.apellidos}`}</option>
     );

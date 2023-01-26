@@ -49,7 +49,7 @@ const [errMsg, setErrMsg] = useState('');
     };
 
     try {
-      const response = await axios.post(
+      await axios.post(
         CLIENTES_URL,
         JSON.stringify(clientData),
         {

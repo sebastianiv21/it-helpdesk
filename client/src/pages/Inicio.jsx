@@ -22,7 +22,7 @@ const Inicio = () => {
       );
       setPendientes(pendientes);
       setPrioritarios(prioritariosArr);
-      return pendientes, prioritariosArr;
+      return [pendientes, prioritariosArr];
     });
   }, [getTickets, countObjectsWithPropertyValue]);
 

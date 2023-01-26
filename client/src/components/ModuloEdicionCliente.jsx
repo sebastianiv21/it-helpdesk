@@ -1,6 +1,4 @@
-import Boton from './Boton';
 import CampoFormulario from './CampoFormulario';
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 
 const ModuloEdicionCliente = ({ onChange, data }) => {
   return (

@@ -15,10 +15,10 @@ const GenerarInforme = () => {
     });
   }, [getClientes, uniqueProperty]);
 
-  const optEmpresas = empresas.map((empresa, index) => {
+  const optEmpresas = empresas.map((empresa) => {
     return (
       <option
-        key={index}
+        key={Math.random()}
         value={`${empresa}`}
       >{`${empresa}`}</option>
     );
