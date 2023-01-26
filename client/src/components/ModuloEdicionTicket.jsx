@@ -22,6 +22,7 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               className='form-select text-center mt-2'
               id='prioridad'
               onChange={onChange}
+              value={data.prioridad}
             >
               <option value='Alta'>Alta</option>
               <option value='Media'>Media</option>
@@ -34,10 +35,12 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               name='estado'
               className='form-select text-center mt-2'
               id='estado'
+              value={data.estado}
               onChange={onChange}
             >
-              <option value='Abierto' selected={data.estado == 'Abierto'} >Abierto</option>
-              <option value='Cerrado' selected={data.estado == 'Cerrado'} >Cerrado</option>
+              <option value='Abierto' >Abierto</option>
+              {/* <option value='Abierto' selected={data.estado == 'Abierto'} >Abierto</option> */}
+              <option value='Cerrado' >Cerrado</option>
             </select>
           </div>
           <div className='col-2'>
@@ -50,6 +53,7 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
               name="fechadecierre"
               placeholder="Fecha de Cierre"
               onChange={onChange}
+              value={data?.fechadecierre}
               type="date" 
               />
               </div>

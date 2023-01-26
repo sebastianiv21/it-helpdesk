@@ -9,12 +9,16 @@ import ListadoAccionData from '../shared/ListadoAccionData.js';
 import FilaAccion from '../components/FilaAccion.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import useData from '../hooks/useData.js';
+import axios from '../api/axios';
+import { toast } from 'react-toastify';
 
 const ListadoTickets = () => {
   const { getTickets } = useData();
   const [accion, setAccion] = useState(ListadoAccionData);
   const [tickets, setTickets] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [errMsg, setErrMsg] = useState('');
+  const TICKETS_URL = '/tickets';
   // Pagination
   const [currPage, setCurrPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -59,6 +63,63 @@ const ListadoTickets = () => {
     });
   }, [getTickets]);
 
+  const onDelete = async (ticketId) => {
+    try {
+      const response = await axios.delete(TICKETS_URL, {
+        data: { id: ticketId },
+      });
+      toast.info(`Ticket eliminado exitosamente`, {
+        theme: 'colored',
+      });
+      setSearchResults((prevItems) => {
+        const updatedItems = prevItems.filter((item) => item._id !== ticketId);
+        return updatedItems;
+      });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg(`${err}`);
+        // setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('No se pudo eliminar el ticket');
+      }
+    }
+  };
+
+  const onUpdate = async (formData) => {
+    const { id, ...rest } = formData;
+
+    try {
+      const response = await axios.patch(TICKETS_URL, formData);
+      toast.info(`Ticket actualizado exitosamente`, {
+        theme: 'colored',
+      });
+      const ticketIndex = searchResults.findIndex(
+        (ticket) => ticket._id === formData.id
+      );
+      const existingTicket = searchResults[ticketIndex];
+      setSearchResults((prevItems) => {
+        prevItems[ticketIndex] = {
+          ...existingTicket,
+          ...rest
+        };
+        const updatedItems = [...prevItems];
+        return updatedItems;
+      });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg(`${err}`);
+        // setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+        // setErrMsg(`${err}`);
+      } else {
+        setErrMsg('La actualización del cliente falló');
+      }
+    }
+  };
+
   const listaAccion = accion.map((item) => (
     <FilaAccion
       fecha={item.fecha}
@@ -80,6 +141,10 @@ const ListadoTickets = () => {
         fechadecreacion={item.createdAt?.slice(0, 10)}
         fechadecierre={item.fechadecierre?.slice(0, 10) ?? 'En trámite'}
         acciones={item.acciones}
+        onDelete={onDelete}
+        onUpdate={onUpdate}
+        errMsg={errMsg}
+        setErrMsg={setErrMsg}
       />
     ));
   };

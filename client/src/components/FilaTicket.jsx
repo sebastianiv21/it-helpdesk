@@ -8,7 +8,6 @@ import {
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import ModuloEdicionTicket from './ModuloEdicionTicket';
-import axios from '../api/axios';
 import { toast } from 'react-toastify';
 
 const FilaTicket = ({
@@ -20,6 +19,10 @@ const FilaTicket = ({
   fechadecreacion,
   fechadecierre,
   acciones,
+  onDelete,
+  onUpdate,
+  errMsg,
+  setErrMsg,
 }) => {
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -34,58 +37,23 @@ const FilaTicket = ({
   const toggle = () => setModal(!modal);
   const toggleEdit = () => setModalEdit(!modalEdit);
 
-  const TICKETS_URL = '/tickets';
-  const [errMsg, setErrMsg] = useState('');
-
   useEffect(() => {
     setErrMsg('');
 
     if (errMsg) {
       toast.error(errMsg, { theme: 'colored' });
     }
-  }, [errMsg, id, formData]);
+  }, [errMsg, formData]);
 
-  const handleDelete = async (e) => {
-    console.log(id);
-    const ticketId = { id };
-
-    try {
-      const response = await axios.delete(TICKETS_URL, {
-        data: ticketId,
-      });
-      toast.info(`Ticket ${id.slice(-6)} eliminado exitosamente`, {
-        theme: 'colored',
-      });
-      toggle();
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('El servidor no responde');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
-      } else {
-        setErrMsg('No se pudo eliminar el ticket');
-      }
-    }
+  const deleteHandler = () => {
+    onDelete(id);
+    toggle();
   };
 
-  const handleUpdate = async (e) => {
+  const updateHandler = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.patch(TICKETS_URL, formData);
-      toast.info(`Ticket ${id.slice(-6)} actualizado exitosamente`, {
-        theme: 'colored',
-      });
-      toggleEdit();
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('El servidor no responde');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
-      } else {
-        setErrMsg('La actualización del ticket falló');
-      }
-    }
+    onUpdate(formData);
+    toggleEdit();
   };
 
   const onChange = (e) => {
@@ -150,7 +118,7 @@ const FilaTicket = ({
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'
-            onClick={handleDelete}
+            onClick={deleteHandler}
           >
             <FontAwesomeIcon icon={faTrash} />
             Eliminar
@@ -182,7 +150,7 @@ const FilaTicket = ({
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'
-            onClick={handleUpdate}
+            onClick={updateHandler}
           >
             <FontAwesomeIcon icon={faFloppyDisk} />
             Guardar

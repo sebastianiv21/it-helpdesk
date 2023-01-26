@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
-import {
-  faUserPlus
-} from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
 import FilaCliente from '../components/FilaCliente';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
 import { useNavigate } from 'react-router-dom';
+import axios from '../api/axios';
+import { toast } from 'react-toastify';
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
   const [clientes, setClientes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [errMsg, setErrMsg] = useState('');
+  const CLIENTES_URL = '/clientes';
+
   const navigate = useNavigate();
 
   // Pagination
@@ -58,6 +61,63 @@ const ListadoClientes = () => {
     });
   }, [getClientes]);
 
+
+  const onDelete = async (clienteId) => {
+    try {
+      const response = await axios.delete(CLIENTES_URL, {
+        data: { id: clienteId },
+      });
+      toast.info(`Cliente eliminado exitosamente`, {
+        theme: 'colored',
+      });
+      setSearchResults((prevItems) => {
+        const updatedItems = prevItems.filter((item) => item._id !== clienteId);
+        return updatedItems;
+      });
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+      } else {
+        setErrMsg('No se pudo eliminar el cliente');
+      }
+    }
+  };
+
+  const onUpdate = async (formData) => {
+    const { id, ...rest } = formData;
+
+    try {
+      const response = await axios.patch(CLIENTES_URL, formData);
+      toast.info(`Cliente actualizado exitosamente`, {
+        theme: 'colored',
+      });
+      const clientIndex = searchResults.findIndex(
+        (client) => client._id === formData.id
+      );
+      const existingClient = searchResults[clientIndex];
+      setSearchResults((prevItems) => {
+        prevItems[clientIndex] = {
+          ...existingClient,
+          ...rest
+        };
+        const updatedItems = [...prevItems];
+        return updatedItems;
+      });
+    } catch (err) {
+      if (!err?.response) {
+        // setErrMsg(`${err}`);
+        setErrMsg('El servidor no responde');
+      } else if (err.response?.status === 400) {
+        setErrMsg('Ingrese todos los campos del formulario');
+        // setErrMsg(`${err}`);
+      } else {
+        setErrMsg('La actualización del cliente falló');
+      }
+    }
+  };
+
   const listaCliente = (data) => {
     return data.map((item) => (
       <FilaCliente
@@ -69,7 +129,10 @@ const ListadoClientes = () => {
         telefono={item.telefono}
         empresa={item.empresa}
         ubicacion={item.ubicacion}
-        accion={item.accion}
+        onDelete={onDelete}
+        onUpdate={onUpdate}
+        errMsg={errMsg}
+        setErrMsg={setErrMsg}
       />
     ));
   };
@@ -104,7 +167,7 @@ const ListadoClientes = () => {
               hover
               responsive
               striped
-              className='text-center'
+              className='text-center align-middle'
             >
               <thead className='bg-primary text-white'>
                 <tr>

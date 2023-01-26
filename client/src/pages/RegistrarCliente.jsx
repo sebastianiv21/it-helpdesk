@@ -90,16 +90,19 @@ const [errMsg, setErrMsg] = useState('');
             <CampoFormulario
               nombre='email'
               etiqueta='Email'
+              value={email}
               onChange={onChange}
             />
             <CampoFormulario
               nombre='nombre'
               etiqueta='Nombres'
+              value={nombre}
               onChange={onChange}
             />
             <CampoFormulario
               nombre='apellidos'
               etiqueta='Apellidos'
+              value={apellidos}
               onChange={onChange}
             />
           </div>
@@ -107,16 +110,19 @@ const [errMsg, setErrMsg] = useState('');
             <CampoFormulario
               nombre='telefono'
               etiqueta='Teléfono'
+              value={telefono}
               onChange={onChange}
             />
             <CampoFormulario
               nombre='empresa'
               etiqueta='Empresa'
+              value={empresa}
               onChange={onChange}
             />
             <CampoFormulario
               nombre='ubicacion'
               etiqueta='Ubicación'
+              value={ubicacion}
               onChange={onChange}
             />
           </div>

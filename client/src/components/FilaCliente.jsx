@@ -7,9 +7,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
 import ModuloEdicionCliente from './ModuloEdicionCLiente';
+import { toast } from 'react-toastify';
 
 const FilaCliente = ({
   id,
@@ -19,10 +18,16 @@ const FilaCliente = ({
   telefono,
   empresa,
   ubicacion,
+  onDelete,
+  onUpdate,
+  errMsg,
+  setErrMsg,
 }) => {
-  const CLIENTES_URL = '/clientes';
   const [modal, setModal] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+
+  const toggle = () => setModal(!modal);
+  const toggleEdit = () => setModalEdit(!modalEdit);
   const [formData, setFormData] = useState({
     id,
     email,
@@ -32,7 +37,6 @@ const FilaCliente = ({
     empresa,
     ubicacion,
   });
-  const [errMsg, setErrMsg] = useState('');
 
   useEffect(() => {
     setErrMsg('');
@@ -40,52 +44,17 @@ const FilaCliente = ({
     if (errMsg) {
       toast.error(errMsg, { theme: 'colored' });
     }
-  }, [errMsg, id, formData]);
+  }, [errMsg]);
 
-  const toggle = () => setModal(!modal);
-  const toggleEdit = () => setModalEdit(!modalEdit);
-
-  const handleDelete = async (e) => {
-    console.log(id);
-    const clienteId = { id };
-
-    try {
-      const response = await axios.delete(CLIENTES_URL, {
-        data: clienteId,
-      });
-      toast.info(`Cliente ${nombre} ${apellidos} eliminado exitosamente`, {
-        theme: 'colored',
-      });
-      toggle();
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('El servidor no responde');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
-      } else {
-        setErrMsg('No se pudo eliminar el cliente');
-      }
-    }
+  const deleteHandler = () => {
+    onDelete(id);
+    toggle();
   };
 
-  const handleUpdate = async (e) => {
+  const updateHandler = (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.patch(CLIENTES_URL, formData);
-      toast.info(`Cliente ${nombre} ${apellidos} actualizado exitosamente`, {
-        theme: 'colored',
-      });
-      toggleEdit();
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('El servidor no responde');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
-      } else {
-        setErrMsg('La actualización del cliente falló');
-      }
-    }
+    onUpdate(formData);
+    toggleEdit();
   };
 
   const onChange = (e) => {
@@ -93,7 +62,6 @@ const FilaCliente = ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(formData);
   };
 
   return (
@@ -149,7 +117,7 @@ const FilaCliente = ({
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'
-            onClick={handleDelete}
+            onClick={deleteHandler}
           >
             <FontAwesomeIcon icon={faTrash} />
             Eliminar
@@ -184,7 +152,7 @@ const FilaCliente = ({
           <Button
             color='primary'
             className='d-flex align-items-center m-2 gap-2'
-            onClick={handleUpdate}
+            onClick={updateHandler}
           >
             <FontAwesomeIcon icon={faFloppyDisk} />
             Guardar
