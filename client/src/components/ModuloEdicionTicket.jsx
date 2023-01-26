@@ -7,8 +7,7 @@ import FilaAccion from './FilaAccion';
 const ModuloEdicionTicket = ({ onChange, data }) => {
   const listaAcciones = data.acciones.map((item) => (
     <FilaAccion
-      // fecha={item.fecha.toLocaleString('es-CO', { timeZone: 'UTC' })}
-      fecha={item.fecha.slice(0,10)}
+      fecha={item.fecha}
       key={Math.random()}
       usuarioEncargado={item.usuarioEncargado}
       descripcion={item.descripcion}
@@ -51,7 +50,7 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
               <option value='Cerrado'>Cerrado</option>
             </select>
           </div>
-          <div className='col-2'>
+          {data.estado === 'Cerrado' && <div className='col-2'>
             <Label htmlFor='fechadecierre'>Fecha de cierre</Label>
             <Input
               className='text-center'
@@ -62,7 +61,8 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
               value={data?.fechadecierre}
               type='date'
             />
-          </div>
+          </div>}
+          
         </div>
       </div>
       <div className='bg-secondary'>
@@ -73,15 +73,15 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
           <div className='col-6'>
             <div>
               <Label
-                for='exampleFile'
+                for='fecha'
                 className='bg-primary form-control text-white text-center mt-3'
               >
                 Fecha de la acción
               </Label>
               <Input
                 className='text-center'
-                id='exampleDate'
-                name='date'
+                id='fecha'
+                name='fecha'
                 placeholder='date placeholder'
                 type='datetime-local'
               />
@@ -89,7 +89,7 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
             <div>
               <FormGroup className='custom-file'>
                 <Label
-                  for='exampleFile'
+                  for='usuarioEncargado'
                   className='bg-primary form-control text-white text-center mt-3'
                 >
                   Encargado de la acción
@@ -97,8 +97,8 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
                 <div className='input-group'>
                   <input
                     type='text'
-                    name='valor'
-                    id='valor'
+                    name='usuarioEncargado'
+                    id='usuarioEncargado'
                     className='form-control m-0'
                     placeholder='Digite el nombre del responsable de la ejecución'
                   />
@@ -108,17 +108,15 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
             <div>
               <FormGroup>
                 <Label
-                  for='exampleText'
+                  for='description'
                   className='form-control bg-primary text-white text-center'
                 >
                   Descripción de la acción
                 </Label>
                 <Input
-                  id='exampleText'
-                  name='text'
-                  type='textarea'
-                  cols='60'
-                  rows='10'
+                  id='description'
+                  name='description'
+                  type='text'
                   placeholder='Ingrese la accion y/o procedimiento realizado'
                 />
               </FormGroup>
