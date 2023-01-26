@@ -27,12 +27,14 @@ const Inicio = () => {
   }, [getTickets, countObjectsWithPropertyValue]);
 
   const listaPrioritarios = prioritarios.map(({ _id, categoria, cliente }) => {
-    return <FilaPrioritarios
-      key={_id}
-      id={_id.slice(-6)}
-      categoria={categoria}
-      empresa={cliente?.empresa}
-    />;
+    return (
+      <FilaPrioritarios
+        key={_id}
+        id={_id.slice(-6)}
+        categoria={categoria}
+        empresa={cliente?.empresa}
+      />
+    );
   });
 
   return (
@@ -59,20 +61,32 @@ const Inicio = () => {
               <div className='card-header bg-primary text-white'>
                 Tickets Prioritarios
               </div>
-              <div className='card-body' id='tabla'>
-                <Table responsive
-                  className='table table-sm table-striped text-center align-middle'
+              {prioritarios.length ? (
+                <div
+                  className='card-body'
+                  id='tabla'
                 >
-                  <thead className='text-primary bg-white text-center'>
-                    <tr>
-                      <th>ID</th>
-                      <th>CATEGORIA</th>
-                      <th>EMPRESA</th>
-                    </tr>
-                  </thead>
-                  <tbody>{listaPrioritarios}</tbody>
-                </Table>
-              </div>
+                  <Table
+                    responsive
+                    className='table table-sm table-striped text-center align-middle'
+                  >
+                    <thead className='text-primary bg-white text-center'>
+                      <tr>
+                        <th>ID</th>
+                        <th>CATEGORIA</th>
+                        <th>EMPRESA</th>
+                      </tr>
+                    </thead>
+                    <tbody>{listaPrioritarios}</tbody>
+                  </Table>
+                </div>
+              ) : (
+                <div className='card-body'>
+                  <strong id='numeroP'>
+                    <span>{`${prioritarios.length}`}</span>
+                  </strong>
+                </div>
+              )}
             </div>
           </div>
         </div>
