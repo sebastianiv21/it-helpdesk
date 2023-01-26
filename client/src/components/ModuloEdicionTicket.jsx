@@ -4,11 +4,11 @@ import { Button } from 'reactstrap';
 import { FormGroup, Label, Input } from 'reactstrap';
 import FilaAccion from './FilaAccion';
 
-const ModuloEdicionTicket = ({ onChange, data }) => {
+const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, addAccionHandler }) => {
   const listaAcciones = data.acciones.map((item) => (
     <FilaAccion
       fecha={item.fecha}
-      key={Math.random()}
+      key={item?._id}
       usuarioEncargado={item.usuarioEncargado}
       descripcion={item.descripcion}
     />
@@ -50,19 +50,20 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
               <option value='Cerrado'>Cerrado</option>
             </select>
           </div>
-          {data.estado === 'Cerrado' && <div className='col-2'>
-            <Label htmlFor='fechadecierre'>Fecha de cierre</Label>
-            <Input
-              className='text-center'
-              id='fechadecierre'
-              name='fechadecierre'
-              placeholder='Fecha de Cierre'
-              onChange={onChange}
-              value={data?.fechadecierre}
-              type='date'
-            />
-          </div>}
-          
+          {data.estado === 'Cerrado' && (
+            <div className='col-2'>
+              <Label htmlFor='fechadecierre'>Fecha de cierre</Label>
+              <Input
+                className='text-center'
+                id='fechadecierre'
+                name='fechadecierre'
+                placeholder='Fecha de Cierre'
+                onChange={onChange}
+                value={data?.fechadecierre}
+                type='date'
+              />
+            </div>
+          )}
         </div>
       </div>
       <div className='bg-secondary'>
@@ -84,6 +85,8 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
                 name='fecha'
                 placeholder='date placeholder'
                 type='datetime-local'
+                value={formAccionData.fecha}
+                onChange={onChangeAccion}
               />
             </div>
             <div>
@@ -99,6 +102,8 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
                     type='text'
                     name='usuarioEncargado'
                     id='usuarioEncargado'
+                    value={formAccionData.usuarioEncargado}
+                    onChange={onChangeAccion}
                     className='form-control m-0'
                     placeholder='Digite el nombre del responsable de la ejecución'
                   />
@@ -108,15 +113,17 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
             <div>
               <FormGroup>
                 <Label
-                  for='description'
+                  for='descripcion'
                   className='form-control bg-primary text-white text-center'
                 >
                   Descripción de la acción
                 </Label>
                 <Input
-                  id='description'
-                  name='description'
+                  id='descripcion'
+                  name='descripcion'
                   type='text'
+                  value={formAccionData.descripcion}
+                  onChange={onChangeAccion}
                   placeholder='Ingrese la accion y/o procedimiento realizado'
                 />
               </FormGroup>
@@ -124,6 +131,7 @@ const ModuloEdicionTicket = ({ onChange, data }) => {
             <Button
               color='primary'
               className='d-flex align-items-center m-2 gap-2 ms-auto'
+              onClick={addAccionHandler}
             >
               <FontAwesomeIcon icon={faPlus} />
               Agregar

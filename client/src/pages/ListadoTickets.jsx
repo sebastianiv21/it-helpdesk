@@ -5,8 +5,6 @@ import {
   PaginationLink,
 } from 'reactstrap';
 import FilaTicket from '../components/FilaTicket';
-import ListadoAccionData from '../shared/ListadoAccionData.js';
-import FilaAccion from '../components/FilaAccion.jsx';
 import SearchBar from '../components/SearchBar.jsx';
 import useData from '../hooks/useData.js';
 import axios from '../api/axios';
@@ -14,7 +12,6 @@ import { toast } from 'react-toastify';
 
 const ListadoTickets = () => {
   const { getTickets } = useData();
-  const [accion, setAccion] = useState(ListadoAccionData);
   const [tickets, setTickets] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [errMsg, setErrMsg] = useState('');
@@ -77,8 +74,7 @@ const ListadoTickets = () => {
       });
     } catch (err) {
       if (!err?.response) {
-        setErrMsg(`${err}`);
-        // setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde');
       } else if (err.response?.status === 400) {
         setErrMsg('Ingrese todos los campos del formulario');
       } else {
@@ -109,13 +105,11 @@ const ListadoTickets = () => {
       });
     } catch (err) {
       if (!err?.response) {
-        setErrMsg(`${err}`);
-        // setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde');
       } else if (err.response?.status === 400) {
         setErrMsg('Ingrese todos los campos del formulario');
-        // setErrMsg(`${err}`);
       } else {
-        setErrMsg('La actualización del cliente falló');
+        setErrMsg('La actualización del ticket falló');
       }
     }
   };

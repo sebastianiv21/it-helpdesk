@@ -31,8 +31,34 @@ const FilaTicket = ({
     prioridad,
     estado,
     fechadecierre,
-    acciones
+    acciones,
   });
+  const [formAccionData, setFormAccionData] = useState({
+    fecha: '',
+    descripcion: '',
+    usuarioEncargado: '',
+  });
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onChangeAccion = (e) => {
+    setFormAccionData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onAddAccion = () => {
+    setFormData((prevState) => ({
+      ...prevState,
+      
+    }));
+  };
 
   const toggle = () => setModal(!modal);
   const toggleEdit = () => setModalEdit(!modalEdit);
@@ -56,11 +82,20 @@ const FilaTicket = ({
     toggleEdit();
   };
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
+  const addAccionHandler = () => {
+    setFormData(prevState=> ({
       ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+      acciones: [
+        ...prevState.acciones,
+        {...formAccionData}
+      ]
+    }))
+    onUpdate(formData);
+    setFormAccionData({
+      descripcion: '',
+      fecha: '',
+      usuarioEncargado: '',
+    });
   };
 
   return (
@@ -135,7 +170,13 @@ const FilaTicket = ({
           Editar Ticket <strong>{id.slice(-6)}</strong>
         </ModalHeader>
         <ModalBody>
-          <ModuloEdicionTicket onChange={onChange} data={formData} />
+          <ModuloEdicionTicket
+            onChange={onChange}
+            onChangeAccion={onChangeAccion}
+            data={formData}
+            formAccionData={formAccionData}
+            addAccionHandler={addAccionHandler}
+          />
         </ModalBody>
         <ModalFooter>
           <Button

@@ -107,11 +107,9 @@ const ListadoClientes = () => {
       });
     } catch (err) {
       if (!err?.response) {
-        // setErrMsg(`${err}`);
         setErrMsg('El servidor no responde');
       } else if (err.response?.status === 400) {
         setErrMsg('Ingrese todos los campos del formulario');
-        // setErrMsg(`${err}`);
       } else {
         setErrMsg('La actualización del cliente falló');
       }
