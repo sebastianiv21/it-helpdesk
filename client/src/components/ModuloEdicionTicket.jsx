@@ -2,8 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
 import { FormGroup, Label, Input } from 'reactstrap';
+import FilaAccion from './FilaAccion';
 
-const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
+const ModuloEdicionTicket = ({ onChange, data }) => {
+  const listaAcciones = data.acciones.map((item) => (
+    <FilaAccion
+      // fecha={item.fecha.toLocaleString('es-CO', { timeZone: 'UTC' })}
+      fecha={item.fecha.slice(0,10)}
+      key={Math.random()}
+      usuarioEncargado={item.usuarioEncargado}
+      descripcion={item.descripcion}
+    />
+  ));
+
   return (
     <>
       <div className='bg-secondary'>
@@ -130,11 +141,11 @@ const ModuloEdicionTicket = ({ listaAccion, onChange, data }) => {
                 <thead>
                   <tr className='text-white text-center bg-primary'>
                     <th>Fecha</th>
+                    <th>Descripción</th>
                     <th>Encargado</th>
-                    <th>Accion</th>
                   </tr>
                 </thead>
-                <tbody className='text-primary bg-white'>{listaAccion}</tbody>
+                <tbody className='text-primary bg-white'>{listaAcciones}</tbody>
               </table>
             </div>
           </div>

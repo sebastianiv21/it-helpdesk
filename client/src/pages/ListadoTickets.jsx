@@ -120,15 +120,6 @@ const ListadoTickets = () => {
     }
   };
 
-  const listaAccion = accion.map((item) => (
-    <FilaAccion
-      fecha={item.fecha}
-      key={item.id}
-      encargado={item.encargado}
-      accion={item.accion}
-    />
-  ));
-
   const listaTickets = (data) => {
     return data.map((item) => (
       <FilaTicket

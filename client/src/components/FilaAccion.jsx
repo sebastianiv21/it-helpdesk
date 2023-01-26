@@ -1,13 +1,13 @@
 const FilaAccion = ({
     fecha,
-    encargado,
-    accion,
+    usuarioEncargado,
+    descripcion,
   }) => {
     return (
       <tr>
             <td>{fecha}</td>
-            <td>{encargado}</td>
-            <td>{accion}</td>
+            <td>{descripcion}</td>
+            <td>{usuarioEncargado}</td>
       </tr>
     )
   }
