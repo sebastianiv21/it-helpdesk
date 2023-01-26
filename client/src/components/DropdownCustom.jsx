@@ -18,7 +18,7 @@ const DropdownCustom = ({title, submenu}) => {
     <DropdownMenu>
         {submenu.map((item)=>{
           return (
-            <DropdownItem key={Math.random()}><Link to={item[1]} className="text-decoration-none">{item[0]}</Link></DropdownItem>)
+            <DropdownItem key={item[0]}><Link to={item[1]} className="text-decoration-none">{item[0]}</Link></DropdownItem>)
         })}
     </DropdownMenu>
   </Dropdown>;

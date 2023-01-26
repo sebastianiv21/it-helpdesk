@@ -93,7 +93,7 @@ const CrearTicket = () => {
   const optClientes = clientes.map((cliente) => {
     return (
       <option
-        key={Math.random()}
+        key={cliente._id}
         value={`${cliente._id}`}
       >{`${cliente.nombre} ${cliente.apellidos}`}</option>
     );

@@ -18,7 +18,7 @@ const GenerarInforme = () => {
   const optEmpresas = empresas.map((empresa) => {
     return (
       <option
-        key={Math.random()}
+        key={empresa}
         value={`${empresa}`}
       >{`${empresa}`}</option>
     );

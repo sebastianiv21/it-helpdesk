@@ -38,7 +38,7 @@ const NavMenu = () => {
             </li>
             {NavMenuData.map((item) => (
               <li
-                key={Math.random()}
+                key={item.title}
                 className='text-white'
               >
                 <DropdownCustom
