@@ -16,13 +16,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
 
   return (
     <>
-      <div className='bg-secondary'>
-        <div className='bg-primary rounded-top p-2 d-flex gap-2'>
-          <h4 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
-            Modulo de edición
-          </h4>
-        </div>
-        <div className='d-flex justify-content-around mb-2 text-center mt-2 p-4'>
+      <div className='bg-secondary rounded'>
+        <div className='d-flex justify-content-around mb-2 text-center p-3'>
           <div className='col-2'>
             <label htmlFor='prioridad'> Prioridad (*)</label>
             <select
@@ -66,11 +61,11 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
           )}
         </div>
       </div>
-      <div className='bg-secondary'>
+      <div className='bg-secondary rounded'>
         <div className='bg-primary text-white rounded-top'>
-          <h4 className='m-0 ps-4 py-3'>Historial de acciones</h4>
+          <h4 className='m-0 ps-4 py-2'>Historial de acciones</h4>
         </div>
-        <div className='row d-flex p-3 rounded-bottom text-primary'>
+        <div className='row d-flex p-1 rounded-bottom text-primary'>
           <div className='col-6'>
             <div>
               <Label
