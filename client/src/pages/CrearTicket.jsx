@@ -61,7 +61,6 @@ const CrearTicket = () => {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       setFormData({
         titulo: '',
         cliente: '',
@@ -80,7 +79,6 @@ const CrearTicket = () => {
         setErrMsg('La creación del ticket falló');
       }
     }
-    console.log(ticketData);
   };
 
   //? fin formulario
@@ -120,6 +118,7 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  value={titulo}
                   onChange={onChange}
                 />
               </div>
@@ -129,6 +128,7 @@ const CrearTicket = () => {
                   name='estado'
                   className='form-select '
                   id='estado'
+                  value={estado}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione estado</option>
@@ -142,6 +142,7 @@ const CrearTicket = () => {
                   name='prioridad'
                   className='form-select'
                   id='prioridad'
+                  value={prioridad}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione prioridad</option>
@@ -158,6 +159,7 @@ const CrearTicket = () => {
                   name='categoria'
                   className='form-select'
                   id='categoria'
+                  value={categoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione categoría</option>
@@ -177,6 +179,7 @@ const CrearTicket = () => {
                   name='subcategoria'
                   className='form-select'
                   id='subcategoria'
+                  value={subcategoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione subcategoría</option>
@@ -254,6 +257,7 @@ const CrearTicket = () => {
                   name='cliente'
                   className='form-select '
                   id='cliente'
+                  value={cliente}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione cliente</option>

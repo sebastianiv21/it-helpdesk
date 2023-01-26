@@ -57,7 +57,6 @@ const [errMsg, setErrMsg] = useState('');
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       setFormData({
         email: '',
         nombre: '',
@@ -76,7 +75,6 @@ const [errMsg, setErrMsg] = useState('');
         setErrMsg('La creación de cliente falló');
       }
     }
-    console.log(clientData);
   };
 
   return (

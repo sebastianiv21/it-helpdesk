@@ -13,7 +13,6 @@ export const DataProvider = ({ children }) => {
   const getTickets = async () => {
     try {
       const response = await axiosPrivate.get('/tickets');
-      // console.log(response.data.reverse());
       return response.data.reverse();
     } catch (err) {
       console.error(err);
@@ -24,7 +23,6 @@ export const DataProvider = ({ children }) => {
   const getClientes = async () => {
     try {
       const response = await axiosPrivate.get('/clientes');
-      // console.log(response.data);
       return response.data.reverse();
     } catch (err) {
       console.error(err);

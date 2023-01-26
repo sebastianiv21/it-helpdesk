@@ -30,8 +30,8 @@ const FilaTicket = ({
     id,
     prioridad,
     estado,
-    acciones,
-    fechadecierre
+    fechadecierre,
+    acciones
   });
 
   const toggle = () => setModal(!modal);
@@ -78,7 +78,6 @@ const FilaTicket = ({
             <Button
               color='primary'
               className='d-flex align-items-center m-2 gap-2'
-              // onClick={() => console.log(id)}
               onClick={toggleEdit}
             >
               <FontAwesomeIcon icon={faPencil} />
