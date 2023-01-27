@@ -30,7 +30,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
           </div>
           <div className='d-flex justify-content-around mb-3'>
             <CampoFormulario
-              nombre='tel'
+              nombre='telefono'
               etiqueta='Teléfono'
               onChange={onChange}
               value={data.telefono}

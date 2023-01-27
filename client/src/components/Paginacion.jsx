@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
 const Paginacion = ({pages, handleClick, currPage, setCurrPage}) => {
