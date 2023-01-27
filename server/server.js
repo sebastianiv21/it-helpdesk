@@ -11,6 +11,7 @@ const connectDB = require('./config/dbConn')
 
 connectDB()
 
+app.disable("x-powered-by");
 // configura CORS
 app.use(cors(corsOptions))
 

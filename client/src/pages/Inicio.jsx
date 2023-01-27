@@ -15,7 +15,7 @@ const Inicio = () => {
         'estado',
         'Abierto'
       );
-      const [prioritariosArr, prioritarios] = countObjectsWithPropertyValue(
+      const [prioritariosArr] = countObjectsWithPropertyValue(
         pendientesArr,
         'prioridad',
         'Alta'

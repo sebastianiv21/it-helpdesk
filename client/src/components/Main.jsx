@@ -5,7 +5,6 @@ import { DataProvider } from '../context/DataContext';
 import Navbar from './Navbar';
 import Layout from './Layout';
 import RequireAuth from './RequireAuth';
-import PersistLogin from './PersistLogin';
 
 //Pages
 import Inicio from '../pages/Inicio';
@@ -35,7 +34,6 @@ const Main = () => {
               path='/login'
               element={<Login />}
             />
-            <Route element={<PersistLogin />}>
               <Route element={<RequireAuth />}>
                 <Route
                   path='/'
@@ -62,7 +60,6 @@ const Main = () => {
                   element={<GenerarInforme />}
                 />
               </Route>
-            </Route>
             {/* Catch all */}
             <Route
               path='*'

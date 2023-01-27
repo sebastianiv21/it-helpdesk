@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useMemo } from 'react';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -45,16 +45,16 @@ export const DataProvider = ({ children }) => {
     return [filteredArr, filteredArr.length];
   };
 
+  const values = useMemo(() => ({ auth,
+    setAuth,
+    getTickets,
+    getClientes,
+    uniqueProperty,
+    countObjectsWithPropertyValue }), [auth]);
+
   return (
     <DataContext.Provider
-      value={{
-        auth,
-        setAuth,
-        getTickets,
-        getClientes,
-        uniqueProperty,
-        countObjectsWithPropertyValue,
-      }}
+      value={values}
     >
       {children}
     </DataContext.Provider>

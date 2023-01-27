@@ -5,14 +5,14 @@ const useLogout = () => {
   const { setAuth } = useData();
 
   const logout = async () => {
-    setAuth({});
     try {
-      await axios('/logout', {
+      await axios.post('/auth/logout', {
         withCredentials: true,
       });
     } catch (err) {
       console.error(err);
     }
+    setAuth({});
   };
 
   return logout;
