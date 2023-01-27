@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import FilaCliente from '../components/FilaCliente';
 import useData from '../hooks/useData';
 import SearchBarClientes from '../components/SearchBarClientes';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
+import Paginacion from '../components/Paginacion';
 
 const ListadoClientes = () => {
   const { getClientes } = useData();
@@ -34,24 +35,6 @@ const ListadoClientes = () => {
   const indexOfLastItem = currPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
-
-  const renderPageNumbers = pages.map((number) => {
-    return (
-      <PaginationItem
-        key={number}
-        id={number}
-        onClick={() => handleClick(number)}
-      >
-        <PaginationLink
-          className={`bg-${
-            currPage === number ? 'secondary' : 'primary'
-          } text-${currPage === number ? 'primary' : 'white'}`}
-        >
-          {number}
-        </PaginationLink>
-      </PaginationItem>
-    );
-  });
 
   useEffect(() => {
     getClientes().then((json) => {
@@ -182,50 +165,12 @@ const ListadoClientes = () => {
               </tbody>
             </Table>
           </div>
-          <div className='mt-2 d-flex justify-content-center'>
-            {/* <!--Botones--> */}
-            <Pagination>
-              <PaginationItem onClick={() => setCurrPage(1)}>
-                <PaginationLink
-                  first
-                  className={`text-white bg-${
-                    currPage === 1 ? 'dark' : 'primary'
-                  }`}
-                  disabled={currPage === 1}
-                />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink
-                  previous
-                  onClick={() => setCurrPage((curr) => curr - 1)}
-                  className={`text-white bg-${
-                    currPage === 1 ? 'dark' : 'primary'
-                  }`}
-                  disabled={currPage === 1}
-                />
-              </PaginationItem>
-              {renderPageNumbers}
-              <PaginationItem>
-                <PaginationLink
-                  next
-                  onClick={() => setCurrPage((curr) => curr + 1)}
-                  className={`text-white bg-${
-                    currPage === pages.length ? 'dark' : 'primary'
-                  }`}
-                  disabled={currPage === pages.length}
-                />
-              </PaginationItem>
-              <PaginationItem onClick={() => setCurrPage(pages.length)}>
-                <PaginationLink
-                  last
-                  className={`text-white bg-${
-                    currPage === pages.length ? 'dark' : 'primary'
-                  }`}
-                  disabled={currPage === pages.length}
-                />
-              </PaginationItem>
-            </Pagination>
-          </div>
+          <Paginacion
+            pages={pages}
+            handleClick={handleClick}
+            currPage={currPage}
+            setCurrPage={setCurrPage}
+          />
         </div>
       </div>
     </>

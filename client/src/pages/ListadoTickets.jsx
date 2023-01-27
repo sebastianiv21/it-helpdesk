@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import {
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-} from 'reactstrap';
 import FilaTicket from '../components/FilaTicket';
 import SearchBar from '../components/SearchBar.jsx';
 import useData from '../hooks/useData.js';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
+import Paginacion from '../components/Paginacion';
 
 const ListadoTickets = () => {
   const { getTickets } = useData();
@@ -32,25 +28,6 @@ const ListadoTickets = () => {
   const indexOfLastItem = currPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
-
-  const renderPageNumbers = pages.map((number) => {
-    return (
-      <PaginationItem
-        key={number}
-        id={number}
-        onClick={() => handleClick(number)}
-      >
-        <PaginationLink
-          //href='!#'
-          className={`bg-${
-            currPage === number ? 'secondary' : 'primary'
-          } text-${currPage === number ? 'primary' : 'white'}`}
-        >
-          {number}
-        </PaginationLink>
-      </PaginationItem>
-    );
-  });
 
   useEffect(() => {
     getTickets().then((json) => {
@@ -98,7 +75,7 @@ const ListadoTickets = () => {
       setSearchResults((prevItems) => {
         prevItems[ticketIndex] = {
           ...existingTicket,
-          ...rest
+          ...rest,
         };
         const updatedItems = [...prevItems];
         return updatedItems;
@@ -146,8 +123,7 @@ const ListadoTickets = () => {
             <h5 className='text-white m-0'> {searchResults.length} tickets</h5>
           </div>
         </div>
-        <table
-          className='table table-hover table-bordered text-center align-middle'>
+        <table className='table table-hover table-bordered text-center align-middle'>
           <thead className='text-white bg-primary text-center'>
             <tr>
               <th>ID</th>
@@ -166,50 +142,12 @@ const ListadoTickets = () => {
         </table>
       </div>
       <div className='row mb-4'>
-        <div className='col-sm d-flex justify-content-center'>
-          {/* <!--Botones--> */}
-          <Pagination>
-            <PaginationItem onClick={() => setCurrPage(1)}>
-              <PaginationLink
-                first
-                className={`text-white bg-${
-                  currPage === 1 ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === 1}
-              />
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink
-                previous
-                onClick={() => setCurrPage((curr) => curr - 1)}
-                className={`text-white bg-${
-                  currPage === 1 ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === 1}
-              />
-            </PaginationItem>
-            {renderPageNumbers}
-            <PaginationItem>
-              <PaginationLink
-                next
-                onClick={() => setCurrPage((curr) => curr + 1)}
-                className={`text-white bg-${
-                  currPage === pages.length ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === pages.length}
-              />
-            </PaginationItem>
-            <PaginationItem onClick={() => setCurrPage(pages.length)}>
-              <PaginationLink
-                last
-                className={`text-white bg-${
-                  currPage === pages.length ? 'dark' : 'primary'
-                }`}
-                disabled={currPage === pages.length}
-              />
-            </PaginationItem>
-          </Pagination>
-        </div>
+        <Paginacion
+          pages={pages}
+          handleClick={handleClick}
+          currPage={currPage}
+          setCurrPage={setCurrPage}
+        />
       </div>
     </div>
   );
