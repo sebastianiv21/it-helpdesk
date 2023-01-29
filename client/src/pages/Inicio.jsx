@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
-import { Table } from 'reactstrap';
+import { Table, Card, CardBody, CardTitle, Row, Col } from 'reactstrap';
 import FilaPrioritarios from '../components/FilaPrioritarios';
+import GraficoTorta from '../components/GraficoTorta';
 
 const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData();
@@ -90,6 +91,18 @@ const Inicio = () => {
             </div>
           </div>
         </div>
+        <Row>
+          <Col>
+                <Card>
+                  <CardBody>
+                    <CardTitle>
+                      Tickets Mensuales
+                    </CardTitle>
+                  </CardBody>
+                  <GraficoTorta />
+                </Card>
+          </Col>
+        </Row>
       </div>
     </div>
   );

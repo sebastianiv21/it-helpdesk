@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Graficos = () => {
+const GraficoBarras = () => {
   return (
     <div>Graficos</div>
   )
 }
 
-export default Graficos
+export default GraficoBarras
