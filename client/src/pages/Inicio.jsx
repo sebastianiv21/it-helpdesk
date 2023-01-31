@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
-import { Table, Card, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Table } from 'reactstrap';
 import FilaPrioritarios from '../components/FilaPrioritarios';
 import GraficoTorta from '../components/GraficoTorta';
+import GraficoBarras from '../components/GraficoBarras';
 
 const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData();
@@ -44,7 +45,7 @@ const Inicio = () => {
       id='inicio'
     >
       <div className='container mt-5'>
-        <div className='row justify-content-center'>
+        <div className='row justify-content-center mb-5'>
           <div className='col-sm-5 me-5'>
             <div className='card text-center'>
               <div className='card-header bg-primary text-white'>
@@ -91,18 +92,30 @@ const Inicio = () => {
             </div>
           </div>
         </div>
-        <Row>
-          <Col>
-                <Card>
-                  <CardBody>
-                    <CardTitle>
-                      Tickets Mensuales
-                    </CardTitle>
-                  </CardBody>
+        <div className='row justify-content-center mb-5'>
+          <div className='col-sm-5 me-5'>
+            <div className='card text-center'>
+              <div className='card-header bg-primary text-white'>
+                Tickets Semanales
+              </div>
+              <div className='card-body mx-auto'>
+                <GraficoBarras />
+              </div>
+            </div>
+          </div>
+          <div className='col-sm-5 ms-5'>
+            <div className='card text-center'>
+              <div className='card-header bg-primary text-white'>
+                Tickets Mensuales por Empresa
+              </div>
+                <div
+                  className='card-body mx-auto'
+                >
                   <GraficoTorta />
-                </Card>
-          </Col>
-        </Row>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
