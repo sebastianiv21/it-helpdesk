@@ -43,7 +43,13 @@ const GraficoTorta = ({ data }) => {
     ],
   };
 
-  const pieOptions = {};
+  const pieOptions = {
+    plugins: {
+      legend: {
+        position: 'top'
+      }
+    }
+  };
 
   return (
     <Pie
