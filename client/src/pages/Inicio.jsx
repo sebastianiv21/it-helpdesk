@@ -96,6 +96,9 @@ const Inicio = () => {
         </div>
         <div className='row justify-content-center mb-5'>
           <div className='col-sm-5 me-5'>
+            <br></br>
+            <br></br>
+            <br></br>
             <div className='card text-center'>
               <div className='card-header bg-primary text-white'>
                 Tickets Semanales
@@ -106,12 +109,16 @@ const Inicio = () => {
             </div>
           </div>
           <div className='col-sm-5 ms-5'>
+            <br></br>
+            <br></br>
+            <br></br>
             <div className='card text-center'>
               <div className='card-header bg-primary text-white'>
                 Tickets Mensuales por Empresa
               </div>
                 <div
                   className='card-body mx-auto'
+                  id='Torta'
                 >
                   <GraficoTorta data={tickets} />
                 </div>
