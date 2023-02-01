@@ -11,9 +11,7 @@ const GraficoBarras = () => {
       {
         label: '369',
         data: [3,6,9],
-        backgroundColor: 'aqua',
-        borderColor: 'black',
-        borderWidth: 1
+        backgroundColor: '#A155B9',
       }
     ]
   }

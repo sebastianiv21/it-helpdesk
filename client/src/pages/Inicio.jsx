@@ -9,6 +9,7 @@ const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData();
   const [pendientes, setPendientes] = useState(0);
   const [prioritarios, setPrioritarios] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     getTickets().then((json) => {
@@ -22,9 +23,10 @@ const Inicio = () => {
         'prioridad',
         'Alta'
       );
+      setTickets(json);
       setPendientes(pendientes);
       setPrioritarios(prioritariosArr);
-      return [pendientes, prioritariosArr];
+      return [pendientes, prioritariosArr, json];
     });
   }, [getTickets, countObjectsWithPropertyValue]);
 
@@ -111,7 +113,7 @@ const Inicio = () => {
                 <div
                   className='card-body mx-auto'
                 >
-                  <GraficoTorta />
+                  <GraficoTorta data={tickets} />
                 </div>
             </div>
           </div>
