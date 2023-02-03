@@ -33,21 +33,13 @@ $font-family-sans-serif: "Poppins", sans-serif;
 }
 
 #tabla {
-  overflow-y: scroll ;
+  overflow-y: scroll;
+  scrollbar-color: #004643 #c2e7c9;
+  scrollbar-width: thin;
   font-size: 90%;
-  height: 167px; 
+  height: 167px;
 
   }
-
-#tabla::-webkit-scrollbar {
- width: 8px;
-
-}
-
-#tabla::-webkit-scrollbar-thumb {
-  background: #004643;
-  border-radius: 5px;
-}
 
 #Torta {
   height: 300px;
