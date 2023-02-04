@@ -81,6 +81,17 @@ const CrearTicket = () => {
     }
   };
 
+  const onReset = () => {
+    setFormData({
+      titulo: '',
+      cliente: '',
+      estado: '',
+      prioridad: '',
+      categoria: '',
+      subcategoria: '',
+    });
+  }
+
   //? fin formulario
 
   useEffect(() => {
@@ -269,6 +280,7 @@ const CrearTicket = () => {
               <button
                 type='reset'
                 className='btn btn-primary text-white me-3'
+                onClick={onReset}
               >
                 <FontAwesomeIcon icon={faBan} />
                 <span className='ms-2'>Cancelar</span>

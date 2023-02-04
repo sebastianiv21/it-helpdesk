@@ -36,6 +36,17 @@ const [errMsg, setErrMsg] = useState('');
     }));
   };
 
+  const onReset = () => {
+    setFormData({
+      email: '',
+      nombre: '',
+      apellidos: '',
+      telefono: '',
+      empresa: '',
+      ubicacion: '',
+    })
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -125,7 +136,7 @@ const [errMsg, setErrMsg] = useState('');
             />
           </div>
           <div className='d-flex justify-content-end'>
-            <button type='reset' className='btn btn-primary text-white me-3'>
+            <button type='reset' className='btn btn-primary text-white me-3' onClick={onReset}>
               <FontAwesomeIcon icon={faBan} />
               <span className='ms-2'>Cancelar</span>
             </button>
