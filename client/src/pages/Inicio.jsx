@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
 import { Table } from 'reactstrap';
 import FilaPrioritarios from '../components/FilaPrioritarios';
-import GraficoTorta from '../components/GraficoTorta';
+import GraficoLinea from '../components/GraficoLinea';
 import GraficoBarras from '../components/GraficoBarras';
 
 const Inicio = () => {
@@ -112,9 +112,9 @@ const Inicio = () => {
               </div>
                 <div
                   className='card-body mx-auto'
-                  id='Torta'
+                  id='Linea'
                 >
-                  <GraficoTorta data={tickets} />
+                  {/* <GraficoLinea data={tickets} /> */}
                 </div>
             </div>
           </div>

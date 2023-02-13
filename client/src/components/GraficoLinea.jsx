@@ -1,10 +1,10 @@
-import { Chart as CartJS, ArcElement, Title, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Chart as CartJS, LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import useData from '../hooks/useData';
 
-CartJS.register(ArcElement, Title, Tooltip, Legend);
+CartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
 
-const GraficoTorta = ({ data }) => {
+const GraficoLinea = ({ data }) => {
   const { uniqueProperty, countObjectsWithPropertyValue } = useData();
   const actualYearAndMonth = new Date().toISOString().slice(0, 7);
 
@@ -33,17 +33,18 @@ const GraficoTorta = ({ data }) => {
   const empresas = uniqueProperty(clientesPorTicket, 'empresa');
   const cantidad = getCantidadPorEmpresa(empresas, clientesPorTicket);
 
-  const pieData = {
+  const lineData = {
     labels: empresas,
     datasets: [
       {
+        labels: 'Cantidad',
         data: cantidad,
         backgroundColor: ['#A155B9', '#165BAA', '#F765A3', '#16BFD6'],
       },
     ],
   };
 
-  const pieOptions = {
+  const lineOptions = {
     plugins: {
       legend: {
         position: 'top'
@@ -52,11 +53,11 @@ const GraficoTorta = ({ data }) => {
   };
 
   return (
-    <Pie
-      data={pieData}
-      options={pieOptions}
+    <Line
+      data={lineData}
+      options={lineOptions}
     />
   );
 };
 
-export default GraficoTorta;
+export default GraficoLinea;
