@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import ModuloEdicionCliente from './ModuloEdicionCLiente';
+import ModuloEdicionCliente from './ModuloEdicionCliente';
 import { toast } from 'react-toastify';
 
 const FilaCliente = ({
