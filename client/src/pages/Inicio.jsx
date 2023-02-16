@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import useData from '../hooks/useData';
-import { Table, Card, CardBody, CardTitle, Row, Col } from 'reactstrap';
+import { Table } from 'reactstrap';
 import FilaPrioritarios from '../components/FilaPrioritarios';
-import GraficoTorta from '../components/GraficoTorta';
+import GraficoLinea from '../components/GraficoLinea';
+import GraficoBarras from '../components/GraficoBarras';
 
 const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData();
   const [pendientes, setPendientes] = useState(0);
   const [prioritarios, setPrioritarios] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     getTickets().then((json) => {
@@ -21,9 +23,10 @@ const Inicio = () => {
         'prioridad',
         'Alta'
       );
+      setTickets(json);
       setPendientes(pendientes);
       setPrioritarios(prioritariosArr);
-      return [pendientes, prioritariosArr];
+      return [pendientes, prioritariosArr, json];
     });
   }, [getTickets, countObjectsWithPropertyValue]);
 
@@ -44,7 +47,7 @@ const Inicio = () => {
       id='inicio'
     >
       <div className='container mt-5'>
-        <div className='row justify-content-center'>
+        <div className='row justify-content-center mb-5'>
           <div className='col-sm-5 me-5'>
             <div className='card text-center'>
               <div className='card-header bg-primary text-white'>
@@ -91,18 +94,31 @@ const Inicio = () => {
             </div>
           </div>
         </div>
-        <Row>
-          <Col>
-                <Card>
-                  <CardBody>
-                    <CardTitle>
-                      Tickets Mensuales
-                    </CardTitle>
-                  </CardBody>
-                  <GraficoTorta />
-                </Card>
-          </Col>
-        </Row>
+        <div className='row justify-content-center mb-5'>
+          <div className='col-sm-5 me-5'>
+            <div className='card text-center'>
+              <div className='card-header bg-primary text-white'>
+                Tickets Semanales
+              </div>
+              <div className='card-body my-auto' id='Barras'>
+                <GraficoBarras />
+              </div>
+            </div>
+          </div>
+          <div className='col-sm-5 ms-5'>
+            <div className='card text-center'>
+              <div className='card-header bg-primary text-white'>
+                Tickets Mensuales por Empresa
+              </div>
+                <div
+                  className='card-body mx-auto'
+                  id='Linea'
+                >
+                  {/* <GraficoLinea data={tickets} /> */}
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

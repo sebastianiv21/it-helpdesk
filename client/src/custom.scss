@@ -11,7 +11,7 @@ $font-family-sans-serif: "Poppins", sans-serif;
 
 //////// CUSTOM CSS ////////
 #inicio {
-  background-image: url("/images/Background3.svg");
+  background-image: url("/images/Background5.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
@@ -33,19 +33,18 @@ $font-family-sans-serif: "Poppins", sans-serif;
 }
 
 #tabla {
-  overflow-y: scroll ;
+  overflow-y: scroll;
+  scrollbar-color: #004643 white;
+  scrollbar-width: thin;
   font-size: 90%;
-  height: 167px; 
+  height: 167px;
 
   }
 
-#tabla::-webkit-scrollbar {
- width: 8px;
-
+#Linea {
+  height: 300px;
 }
 
-#tabla::-webkit-scrollbar-thumb {
-  background: #004643;
-  border-radius: 5px;
+#Barras{
+  height: 300px;
 }
-

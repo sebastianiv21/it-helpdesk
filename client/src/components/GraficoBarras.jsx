@@ -1,9 +1,32 @@
-import React from 'react'
+import React from 'react';
+import {
+  Chart as CartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
 const GraficoBarras = () => {
-  return (
-    <div>Graficos</div>
-  )
-}
+  const data = {
+    labels: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+    datasets: [
+      {
+        label: 'Cantidad',
+        data: [3, 6, 9, 7, 8, 4],
+        backgroundColor: '#A155B9',
+      },
+    ],
+  };
 
-export default GraficoBarras
+  const options = {};
+
+  return <Bar data={data} options={options} />;
+};
+
+export default GraficoBarras;
