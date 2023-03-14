@@ -1,13 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
-import CampoFormulario from '../components/CampoFormulario';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
+import CampoFormulario from '../components/CampoFormulario'
+import axios from '../api/axios'
+import { toast } from 'react-toastify'
 
 const RegistrarCliente = () => {
-const CLIENTES_URL = '/clientes';
-const [errMsg, setErrMsg] = useState('');
+  const CLIENTES_URL = '/clientes'
+  const [errMsg, setErrMsg] = useState('')
 
   const [formData, setFormData] = useState({
     email: '',
@@ -16,25 +16,24 @@ const [errMsg, setErrMsg] = useState('');
     telefono: '',
     empresa: '',
     ubicacion: '',
-  });
+  })
 
   useEffect(() => {
-    setErrMsg('');
-  
-    if (errMsg) {
-      toast.error(errMsg, { theme: 'colored' });
-    }
-  
-  }, [errMsg, formData]);
+    setErrMsg('')
 
-  const { email, nombre, apellidos, telefono, empresa, ubicacion } = formData;
+    if (errMsg) {
+      toast.error(errMsg, { theme: 'colored' })
+    }
+  }, [errMsg, formData])
+
+  const { email, nombre, apellidos, telefono, empresa, ubicacion } = formData
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const onReset = () => {
     setFormData({
@@ -48,26 +47,22 @@ const [errMsg, setErrMsg] = useState('');
   }
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const clientData = {
       email,
       nombre,
       apellidos,
       telefono,
-      empresa,
-      ubicacion,
-    };
+      empresa: empresa.toLowerCase(),
+      ubicacion: ubicacion.toLowerCase(),
+    }
 
     try {
-      await axios.post(
-        CLIENTES_URL,
-        JSON.stringify(clientData),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        }
-      );
+      await axios.post(CLIENTES_URL, JSON.stringify(clientData), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      })
       setFormData({
         email: '',
         nombre: '',
@@ -76,17 +71,17 @@ const [errMsg, setErrMsg] = useState('');
         empresa: '',
         ubicacion: '',
       })
-      toast.info('Cliente creado exitosamente', { theme: 'colored' });
+      toast.info('Cliente creado exitosamente', { theme: 'colored' })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('La creación de cliente falló');
+        setErrMsg('La creación de cliente falló')
       }
     }
-  };
+  }
 
   return (
     <div className='container m-4 mx-auto'>
@@ -136,7 +131,11 @@ const [errMsg, setErrMsg] = useState('');
             />
           </div>
           <div className='d-flex justify-content-end'>
-            <button type='reset' className='btn btn-primary text-white me-3' onClick={onReset}>
+            <button
+              type='reset'
+              className='btn btn-primary text-white me-3'
+              onClick={onReset}
+            >
               <FontAwesomeIcon icon={faBan} />
               <span className='ms-2'>Cancelar</span>
             </button>
@@ -148,7 +147,7 @@ const [errMsg, setErrMsg] = useState('');
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RegistrarCliente;
+export default RegistrarCliente
