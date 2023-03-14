@@ -5,13 +5,13 @@ $dark: #495057;
 
 // TIPOGRAFIA
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700;900&display=swap');
-$font-family-sans-serif: "Poppins", sans-serif;
+$font-family-sans-serif: 'Poppins', sans-serif;
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 // CUSTOM CSS
 #inicio {
-  background-image: url("/images/Background5.svg");
+  background-image: url('/images/Background5.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
@@ -38,13 +38,16 @@ $font-family-sans-serif: "Poppins", sans-serif;
   scrollbar-width: thin;
   font-size: 90%;
   height: 167px;
-
-  }
+}
 
 #Linea {
   height: 300px;
 }
 
-#Barras{
+#Barras {
   height: 300px;
+}
+
+.pendientes {
+  cursor: pointer;
 }

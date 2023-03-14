@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
-import useData from '../hooks/useData';
-import { Table } from 'reactstrap';
-import FilaPrioritarios from '../components/FilaPrioritarios';
-import GraficoLinea from '../components/GraficoLinea';
-import GraficoBarras from '../components/GraficoBarras';
+import { useState, useEffect } from 'react'
+import useData from '../hooks/useData'
+import { Table } from 'reactstrap'
+import FilaPrioritarios from '../components/FilaPrioritarios'
+import GraficoLinea from '../components/GraficoLinea'
+import GraficoBarras from '../components/GraficoBarras'
+import { useNavigate } from 'react-router-dom'
 
 const Inicio = () => {
-  const { getTickets, countObjectsWithPropertyValue } = useData();
-  const [pendientes, setPendientes] = useState(0);
-  const [prioritarios, setPrioritarios] = useState([]);
-  const [tickets, setTickets] = useState([]);
+  const { getTickets, countObjectsWithPropertyValue } = useData()
+  const [pendientes, setPendientes] = useState(0)
+  const [prioritarios, setPrioritarios] = useState([])
+  const [tickets, setTickets] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     getTickets().then((json) => {
@@ -17,18 +19,18 @@ const Inicio = () => {
         json,
         'estado',
         'Abierto'
-      );
+      )
       const [prioritariosArr] = countObjectsWithPropertyValue(
         pendientesArr,
         'prioridad',
         'Alta'
-      );
-      setTickets(json);
-      setPendientes(pendientes);
-      setPrioritarios(prioritariosArr);
-      return [pendientes, prioritariosArr, json];
-    });
-  }, [getTickets, countObjectsWithPropertyValue]);
+      )
+      setTickets(json)
+      setPendientes(pendientes)
+      setPrioritarios(prioritariosArr)
+      return [pendientes, prioritariosArr, json]
+    })
+  }, [getTickets, countObjectsWithPropertyValue])
 
   const listaPrioritarios = prioritarios.map(({ _id, categoria, cliente }) => {
     return (
@@ -38,18 +40,22 @@ const Inicio = () => {
         categoria={categoria}
         empresa={cliente?.empresa}
       />
-    );
-  });
+    )
+  })
+
+  const handlePendientes = () => {
+    navigate('listado-tickets')
+  }
 
   return (
-    <div
-      className='container-fluid vh-100 d-flex flex-column p-0 '
-      id='inicio'
-    >
+    <div className='container-fluid vh-100 d-flex flex-column p-0 ' id='inicio'>
       <div className='container mt-5'>
         <div className='row justify-content-center mb-5'>
           <div className='col-sm-5 me-5'>
-            <div className='card text-center'>
+            <div
+              className='card text-center pendientes'
+              onClick={handlePendientes}
+            >
               <div className='card-header bg-primary text-white'>
                 Tickets pendientes
               </div>
@@ -66,10 +72,7 @@ const Inicio = () => {
                 Tickets Prioritarios
               </div>
               {prioritarios.length ? (
-                <div
-                  className='card-body'
-                  id='tabla'
-                >
+                <div className='card-body' id='tabla'>
                   <Table
                     responsive
                     className='table table-sm table-striped text-center align-middle'
@@ -110,18 +113,15 @@ const Inicio = () => {
               <div className='card-header bg-primary text-white'>
                 Tickets Mensuales por Empresa
               </div>
-                <div
-                  className='card-body mx-auto'
-                  id='Linea'
-                >
-                  {/* <GraficoLinea data={tickets} /> */}
-                </div>
+              <div className='card-body mx-auto' id='Linea'>
+                {/* <GraficoLinea data={tickets} /> */}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Inicio;
+export default Inicio
