@@ -1,21 +1,22 @@
-import axios from '../api/axios';
-import useData from './useData';
+import axios from '../api/axios'
+import useData from './useData'
 
 const useLogout = () => {
-  const { setAuth } = useData();
+  const { setAuth } = useData()
 
   const logout = async () => {
     try {
       await axios.post('/auth/logout', {
         withCredentials: true,
-      });
+      })
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-    setAuth({});
-  };
+    setAuth({ nombreUsuario: '', contrasenha: '', accessToken: '' })
+    window.sessionStorage.clear()
+  }
 
-  return logout;
-};
+  return logout
+}
 
-export default useLogout;
+export default useLogout
