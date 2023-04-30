@@ -174,14 +174,13 @@ const CrearTicket = () => {
                   onChange={onChange}
                 >
                   <option value=''>Seleccione categoría</option>
-                  <option value='Actualización'>Actualización</option>
-                  <option value='Cambio'>Cambio</option>
-                  <option value='Configuración'>Configuración</option>
-                  <option value='Hadware'>Hadware</option>
-                  <option value='Software'>Software</option>
-                  <option value='Instalación'>Instalación</option>
-                  <option value='Otro'>Otro</option>
-                  <option value='Redes'>Redes</option>
+                  <option value='hadware'>Hadware</option>
+                  <option value='software'>Software</option>
+                  <option value='infraestructura'>Infraestructura</option>
+                  <option value='servidores'>Servidores</option>
+                  <option value='ciberseguridad'>Ciberseguridad</option>
+                  <option value='seguridadelectronica'>Seguridad Electrónica</option>
+                  <option value='telecomunicaciones'>Telecomunicaciones</option>
                 </select>
               </div>
               <div className='col-sm'>
