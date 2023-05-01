@@ -11,7 +11,7 @@ const RegistrarCliente = () => {
 
   const [formData, setFormData] = useState({
     empresa: '',
-    nombres: '',
+    nombre: '',
     apellidos: '',
     ubicacion: '',
     telefono: '',
@@ -26,7 +26,7 @@ const RegistrarCliente = () => {
     }
   }, [errMsg, formData])
 
-  const { empresa, nombres, apellidos, ubicacion, telefono, email } = formData
+  const { empresa, nombre, apellidos, ubicacion, telefono, email } = formData
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -38,7 +38,7 @@ const RegistrarCliente = () => {
   const onReset = () => {
     setFormData({
     empresa: '',
-    nombres: '',
+    nombre: '',
     apellidos: '',
     ubicacion: '',
     telefono: '',
@@ -51,7 +51,7 @@ const RegistrarCliente = () => {
 
     const clientData = {
       empresa: empresa.toLowerCase(),
-      nombres,
+      nombre,
       apellidos,
       ubicacion: ubicacion.toLowerCase(),
       telefono,
@@ -65,7 +65,7 @@ const RegistrarCliente = () => {
       })
       setFormData({
         empresa: '',
-        nombres: '',
+        nombre: '',
         apellidos: '',
         ubicacion: '',
         telefono: '',
@@ -98,9 +98,9 @@ const RegistrarCliente = () => {
               onChange={onChange}
             />
             <CampoFormulario
-              nombre='nombres'
+              nombre='nombre'
               etiqueta='Nombres'
-              value={nombres}
+              value={nombre}
               onChange={onChange}
             />
             <CampoFormulario
