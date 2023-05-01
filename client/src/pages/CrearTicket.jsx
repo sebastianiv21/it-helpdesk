@@ -5,6 +5,38 @@ import useData from '../hooks/useData.js';
 import axios from '../api/axios.js';
 import { toast } from 'react-toastify';
 
+const listadoCategorias = [
+  {
+    nombreCategoria: 'HARDWARE',
+    subcategorias: [ { nombre: 'Escáner' }, { nombre: 'Impresora' }, { nombre: 'Monitor' }, { nombre: 'PC' }, { nombre: 'Portátil' }, { nombre: 'Servidor' }, { nombre: 'Smartphone' }, { nombre: 'UPS'}]
+  },
+{
+    nombreCategoria: 'SOFTWARE',
+    subcategorias: [ { nombre: 'Configuración periférico' }, { nombre: 'Copia de información' }, { nombre: 'Correo electrónico' }, { nombre: 'Office' }, { nombre: 'Sistema Operativo'}]
+  },
+  {
+    nombreCategoria: 'INFRAESTRUCTURA',
+    subcategorias: [ { nombre: 'Cableado estructurado' }, { nombre: 'Caseta nodo' }, { nombre: 'Sistema eléctrico' }, { nombre: 'Solución solar' }, { nombre: 'Torre de comunicaciones'}]
+  },
+{
+    nombreCategoria: 'SERVIDORES',
+    subcategorias: [ { nombre: 'Backup' }, { nombre: 'Configuración' }, { nombre: 'Cuentas de usuario' }, { nombre: 'Políticas- Reglas'}]
+  },
+  {
+    nombreCategoria: 'CIBERSEGURIDAD',
+    subcategorias: [ { nombre: 'Antivirus' }, { nombre: 'Firewall' }, { nombre: 'VPN'}]
+  },
+  {
+    nombreCategoria: 'SEGURIDAD ELECTRÓNICA',
+    subcategorias: [ { nombre: 'Biométrico' }, { nombre: 'Cámara' }, { nombre: 'Sensor'}]
+  },
+  {
+    nombreCategoria: 'TELECOMUNICACIONES',
+    subcategorias: [ { nombre: 'Enlace satelital' }, { nombre: 'Radio enlace terrestre'}]
+  }
+  
+]
+
 const CrearTicket = () => {
   const { getClientes } = useData();
   const [clientes, setClientes] = useState([]);
