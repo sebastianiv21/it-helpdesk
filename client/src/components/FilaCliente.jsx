@@ -67,12 +67,12 @@ const FilaCliente = ({
   return (
     <>
       <tr>
-        <td>{email}</td>
+        <td>{empresa}</td>
         <td>{nombre}</td>
         <td>{apellidos}</td>
-        <td>{telefono}</td>
-        <td>{empresa}</td>
         <td>{ubicacion}</td>
+        <td>{telefono}</td>
+        <td>{email}</td>
         <td>
           <div className='d-flex justify-content-evenly'>
             <Button

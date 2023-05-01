@@ -151,12 +151,12 @@ const ListadoClientes = () => {
             >
               <thead className='bg-primary text-white'>
                 <tr>
-                  <th>Email</th>
+                  <th>Empresa</th>
                   <th>Nombres</th>
                   <th>Apellidos</th>
-                  <th>Teléfono</th>
-                  <th>Empresa</th>
-                  <th>Ubicación</th>
+                  <th>Ubicacion</th>
+                  <th>Telefono</th>
+                  <th>Email</th>
                   <th>Acción</th>
                 </tr>
               </thead>
