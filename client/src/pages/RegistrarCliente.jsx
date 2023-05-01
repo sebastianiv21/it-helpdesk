@@ -10,12 +10,12 @@ const RegistrarCliente = () => {
   const [errMsg, setErrMsg] = useState('')
 
   const [formData, setFormData] = useState({
-    email: '',
+    empresa: '',
     nombre: '',
     apellidos: '',
-    telefono: '',
-    empresa: '',
     ubicacion: '',
+    telefono: '',
+    email: '',
   })
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const RegistrarCliente = () => {
     }
   }, [errMsg, formData])
 
-  const { email, nombre, apellidos, telefono, empresa, ubicacion } = formData
+  const { empresa, nombre, apellidos, ubicacion, telefono, email } = formData
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -37,12 +37,12 @@ const RegistrarCliente = () => {
 
   const onReset = () => {
     setFormData({
-      email: '',
-      nombre: '',
-      apellidos: '',
-      telefono: '',
-      empresa: '',
-      ubicacion: '',
+    empresa: '',
+    nombre: '',
+    apellidos: '',
+    ubicacion: '',
+    telefono: '',
+    email: '',
     })
   }
 
@@ -50,12 +50,12 @@ const RegistrarCliente = () => {
     e.preventDefault()
 
     const clientData = {
-      email,
+      empresa: empresa.toLowerCase(),
       nombre,
       apellidos,
-      telefono,
-      empresa: empresa.toLowerCase(),
       ubicacion: ubicacion.toLowerCase(),
+      telefono,
+      email,
     }
 
     try {
@@ -64,12 +64,12 @@ const RegistrarCliente = () => {
         withCredentials: true,
       })
       setFormData({
-        email: '',
+        empresa: '',
         nombre: '',
         apellidos: '',
-        telefono: '',
-        empresa: '',
         ubicacion: '',
+        telefono: '',
+        email: '',
       })
       toast.info('Cliente creado exitosamente', { theme: 'colored' })
     } catch (err) {
@@ -91,10 +91,10 @@ const RegistrarCliente = () => {
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
         <form onSubmit={onSubmit}>
           <div className='d-flex justify-content-around mb-3'>
-            <CampoFormulario
-              nombre='email'
-              etiqueta='Email'
-              value={email}
+          <CampoFormulario
+              nombre='empresa'
+              etiqueta='Empresa'
+              value={empresa}
               onChange={onChange}
             />
             <CampoFormulario
@@ -111,22 +111,22 @@ const RegistrarCliente = () => {
             />
           </div>
           <div className='d-flex justify-content-around mb-3'>
+          <CampoFormulario
+              nombre='ubicacion'
+              etiqueta='Ubicación'
+              value={ubicacion}
+              onChange={onChange}
+            />
             <CampoFormulario
               nombre='telefono'
               etiqueta='Teléfono'
               value={telefono}
               onChange={onChange}
             />
-            <CampoFormulario
-              nombre='empresa'
-              etiqueta='Empresa'
-              value={empresa}
-              onChange={onChange}
-            />
-            <CampoFormulario
-              nombre='ubicacion'
-              etiqueta='Ubicación'
-              value={ubicacion}
+             <CampoFormulario
+              nombre='email'
+              etiqueta='Email'
+              value={email}
               onChange={onChange}
             />
           </div>
