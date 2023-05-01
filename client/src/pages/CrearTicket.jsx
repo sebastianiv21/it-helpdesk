@@ -302,7 +302,16 @@ const CrearTicket = () => {
                   onChange={onChange}
                 />
               </div>
-              <div className='col-4 my-3'>
+              <div className='col-4'>
+              <label htmlFor='agente'> Agente de Servicio (*) </label>
+              <select
+                  name='agente'
+                  className='form-select '
+                  id='agente'>
+                  <option value=''>Seleccione Agente de Servicio</option>
+                </select> 
+              </div>
+              <div className='col-2 my-4'>
                 <label hmlfor='isp'>ISP</label>
                 <input 
               className='form-check-input mx-3'
@@ -312,7 +321,7 @@ const CrearTicket = () => {
                   value=''
                   />
               </div>  
-                </div>
+              </div>
             <div className='d-flex justify-content-end p-2'>
               <button
                 type='reset'
