@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect} from 'react';
+import { faBan, faFloppyDisk, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useData from '../hooks/useData.js';
 import axios from '../api/axios.js';
 import { toast } from 'react-toastify';
+import { InputGroup} from 'reactstrap';
 
 const CrearTicket = () => {
   const { getClientes } = useData();
@@ -20,6 +21,7 @@ const CrearTicket = () => {
     prioridad: '',
     categoria: '',
     subcategoria: '',
+    descripcion: '',
   });
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const CrearTicket = () => {
     }
   }, [errMsg, formData]);
 
-  const { titulo, cliente, estado, prioridad, categoria, subcategoria } =
+  const { titulo, cliente, estado, prioridad, categoria, subcategoria, descripcion } =
     formData;
 
   const onChange = (e) => {
@@ -50,6 +52,7 @@ const CrearTicket = () => {
       prioridad,
       categoria,
       subcategoria,
+      descripcion,
     };
 
     try {
@@ -68,6 +71,7 @@ const CrearTicket = () => {
         prioridad: '',
         categoria: '',
         subcategoria: '',
+        descripcion: '',
       });
       toast.info('Ticket creado exitosamente', { theme: 'colored' });
     } catch (err) {
@@ -89,6 +93,7 @@ const CrearTicket = () => {
       prioridad: '',
       categoria: '',
       subcategoria: '',
+      descripcion: '',
     });
   }
 
@@ -122,7 +127,28 @@ const CrearTicket = () => {
           <form onSubmit={onSubmit}>
             <div className='row d-flex justify-content-around mb-3 text-center'>
               <div className='col-sm'>
-                <label hmlfor='titulo'> Titulo (*)</label>
+                <label htmlFor='cliente'> Cliente (*) </label>
+                <InputGroup>
+                <button
+                className='btn btn-primary text-secodnary'
+                onClick={() => navigate('/registrar-cliente')}
+              >
+                <FontAwesomeIcon icon={faUserPlus} />
+              </button>
+                <select
+                  name='cliente'
+                  className='form-select '
+                  id='cliente'
+                  value={cliente}
+                  onChange={onChange}
+                >
+                  <option value=''>Seleccione cliente</option>
+                  {optClientes}
+                </select> 
+                </InputGroup>
+              </div>
+              <div className='col-sm'>
+              <label hmlfor='titulo'> Titulo del Servicio (*)</label>
                 <input
                   type='text'
                   className='form-control'
@@ -132,20 +158,6 @@ const CrearTicket = () => {
                   value={titulo}
                   onChange={onChange}
                 />
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='estado'> Estado (*)</label>
-                <select
-                  name='estado'
-                  className='form-select '
-                  id='estado'
-                  value={estado}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione estado</option>
-                  <option value='Abierto'>Abierto</option>
-                  <option value='Cerrado'>Cerrado</option>
-                </select>
               </div>
               <div className='col-sm'>
                 <label htmlFor='prioridad'> Prioridad (*)</label>
@@ -263,19 +275,44 @@ const CrearTicket = () => {
                 </select>
               </div>
               <div className='col-sm'>
-                <label htmlFor='cliente'> Cliente (*)</label>
+              <label htmlFor='estado'> Estado (*)</label>
                 <select
-                  name='cliente'
+                  name='estado'
                   className='form-select '
-                  id='cliente'
-                  value={cliente}
+                  id='estado'
+                  value={estado}
                   onChange={onChange}
                 >
-                  <option value=''>Seleccione cliente</option>
-                  {optClientes}
+                  <option value=''>Seleccione estado</option>
+                  <option value='Abierto'>Abierto</option>
+                  <option value='Cerrado'>Cerrado</option>
                 </select>
               </div>
             </div>
+            <div className='row text-center mt-4'>
+            <div className='col-4'>
+              <label hmlfor='descripcion'> Descripción del Servicio (*)</label>
+                <input
+                  type='text'
+                  className='form-control'
+                  name='descripcion'
+                  id='descripcion'
+                  placeholder='Digite una breve descripción'
+                  value={descripcion}
+                  onChange={onChange}
+                />
+              </div>
+              <div className='col-4 my-3'>
+                <label hmlfor='isp'>ISP</label>
+                <input 
+              className='form-check-input mx-3'
+                  type='checkbox'
+                  name='checkbox1'
+                  id='checkbox1'  
+                  value=''
+                  />
+              </div>  
+                </div>
             <div className='d-flex justify-content-end p-2'>
               <button
                 type='reset'
