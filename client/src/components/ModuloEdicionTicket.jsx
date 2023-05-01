@@ -89,7 +89,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   for='usuarioEncargado'
                   className='bg-primary form-control text-white text-center mt-3'
                 >
-                  Encargado de la acción
+                  Agente de Servicio
                 </Label>
                 <div className='input-group'>
                   <input
@@ -110,7 +110,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   for='descripcion'
                   className='form-control bg-primary text-white text-center'
                 >
-                  Descripción de la acción
+                  Descripción de la acción del Agente
                 </Label>
                 <Input
                   id='descripcion'
