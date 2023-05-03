@@ -12,6 +12,8 @@ import { toast } from 'react-toastify';
 
 const FilaTicket = ({
   id,
+  empresa,
+  cliente,
   titulo,
   prioridad,
   estado,
@@ -28,6 +30,8 @@ const FilaTicket = ({
   const [modalEdit, setModalEdit] = useState(false);
   const [formData, setFormData] = useState({
     id,
+    empresa,
+    cliente,
     prioridad,
     estado,
     fechadecierre,
@@ -101,6 +105,8 @@ const FilaTicket = ({
     <>
       <tr>
         <td>{id.slice(-6)}</td>
+        <td>{}</td>
+        <td>{}</td>
         <td>{titulo}</td>
         <td>{prioridad}</td>
         <td>{estado}</td>
