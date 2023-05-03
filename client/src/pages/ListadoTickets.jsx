@@ -96,6 +96,8 @@ const ListadoTickets = () => {
       <FilaTicket
         key={item._id}
         id={item._id}
+        empresa={item.empresa}
+        cliente={item.cliente}
         titulo={item.titulo}
         prioridad={item.prioridad}
         estado={item.estado}
@@ -127,6 +129,8 @@ const ListadoTickets = () => {
           <thead className='text-white bg-primary text-center'>
             <tr>
               <th>ID</th>
+              <th>Empresa</th>
+              <th>Cliente</th>
               <th>Titulo</th>
               <th>Prioridad</th>
               <th>Estado</th>
