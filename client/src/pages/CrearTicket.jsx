@@ -49,7 +49,6 @@ const CrearTicket = () => {
   const [formData, setFormData] = useState({
     titulo: '',
     cliente: '',
-    estado: '',
     prioridad: '',
     categoria: '',
     subcategoria: '',
@@ -64,7 +63,7 @@ const CrearTicket = () => {
     }
   }, [errMsg, formData]);
 
-  const { titulo, cliente, estado, prioridad, categoria, subcategoria, descripcion } =
+  const { titulo, cliente, prioridad, categoria, subcategoria, descripcion } =
     formData;
 
   const onChange = (e) => {
@@ -80,7 +79,6 @@ const CrearTicket = () => {
     const ticketData = {
       titulo,
       cliente,
-      estado,
       prioridad,
       categoria,
       subcategoria,
@@ -99,7 +97,6 @@ const CrearTicket = () => {
       setFormData({
         titulo: '',
         cliente: '',
-        estado: '',
         prioridad: '',
         categoria: '',
         subcategoria: '',
@@ -121,7 +118,6 @@ const CrearTicket = () => {
     setFormData({
       titulo: '',
       cliente: '',
-      estado: '',
       prioridad: '',
       categoria: '',
       subcategoria: '',
@@ -306,23 +302,7 @@ const CrearTicket = () => {
                   <option value='WiFi'>WiFi</option>
                 </select>
               </div>
-              <div className='col-sm'>
-              <label htmlFor='estado'> Estado (*)</label>
-                <select
-                  name='estado'
-                  className='form-select '
-                  id='estado'
-                  value={estado}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione estado</option>
-                  <option value='Abierto'>Abierto</option>
-                  <option value='Cerrado'>Cerrado</option>
-                </select>
-              </div>
-            </div>
-            <div className='row text-center mt-4'>
-            <div className='col-4'>
+              <div className='col-4'>
               <label hmlfor='descripcion'> Descripción del Servicio (*)</label>
                 <input
                   type='text'
@@ -334,6 +314,8 @@ const CrearTicket = () => {
                   onChange={onChange}
                 />
               </div>
+            </div>
+            <div className='row text-center mt-4'>
               <div className='col-4'>
               <label htmlFor='agente'> Agente de Servicio (*) </label>
               <select
