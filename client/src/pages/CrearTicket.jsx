@@ -148,7 +148,7 @@ const CrearTicket = () => {
       <div>
         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
-            <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
+            <h4 className='ps-1 py-0 me-auto mb-auto'>Creación del Ticket</h4>
           </div>
         </div>
         <div className='bg-secondary p-2 rounded-bottom text-primary'>
@@ -205,7 +205,7 @@ const CrearTicket = () => {
             </div>
             <div className='row d-flex justify-content-around mb-2 text-center'>
               <div className='col-sm'>
-                <label htmlFor='categoria'> Categoria (*)</label>
+                <label htmlFor='categoria'> Categoría (*)</label>
                 <select
                   name='categoria'
                   className='form-select'
@@ -225,7 +225,7 @@ const CrearTicket = () => {
                 </select>
               </div>
               <div className='col-sm'>
-                <label htmlFor='subcategoria'> SubCategoria (*)</label>
+                <label htmlFor='subcategoria'> SubCategoría (*)</label>
                 <select
                   name='subcategoria'
                   className='form-select'
@@ -242,7 +242,7 @@ const CrearTicket = () => {
                     Certificación de cableado
                   </option>
                   <option value='Contraseña'>Contraseña</option>
-                  <option value='Creacion de Backup'>Creacion de Backup</option>
+                  <option value='Creacion de Backup'>Creación de Backup</option>
                   <option value='CRM'>CRM</option>
                   <option value='Desinstalación de radio enlace'>
                     Desinstalación de radio enlace
@@ -253,7 +253,7 @@ const CrearTicket = () => {
                   <option value='Impresora'>Impresora</option>
                   <option value='Instalación de Ap'>Instalación de Ap</option>
                   <option value='Instalacion de enlace satelital'>
-                    Instalacion de enlace satelital
+                    Instalación de enlace satelital
                   </option>
                   <option value=' Instalación de radio enlace'>
                     Instalación de radio enlace
@@ -261,7 +261,7 @@ const CrearTicket = () => {
                   <option value=' Instalación de solución solar'>
                     Instalación de solución solar
                   </option>
-                  <option value='Instalacion de ups'>Instalacion de ups</option>
+                  <option value='Instalacion de ups'>Instalación de ups</option>
                   <option value='Instalación de cableado estructural'>
                     Instalación de cableado estructural
                   </option>
@@ -279,7 +279,7 @@ const CrearTicket = () => {
                   <option value='Otro'>Otro</option>
                   <option value='PC'>PC</option>
                   <option value='Periféricos'>Periféricos</option>
-                  <option value='Portatil'>Portatil</option>
+                  <option value='Portatil'>Portátil</option>
                   <option value='Recuperación de información'>
                     Recuperación de información
                   </option>

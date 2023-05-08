@@ -45,7 +45,7 @@ const SearchBar = ({ items, setSearchResults }) => {
           id='busqueda'
           onChange={handleSearchChange}
           className='form-control m-2'
-          placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoria, fecha de creación o fecha de cierre'
+          placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoría, fecha de creación o fecha de cierre'
         />
         <button
           type='reset'
