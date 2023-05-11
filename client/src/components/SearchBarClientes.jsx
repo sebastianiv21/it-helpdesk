@@ -45,6 +45,8 @@ const SearchBarClientes = ({ items, setSearchResults }) => {
           onChange={handleSearchChange}
           className='form-control m-2'
           placeholder='Ingrese email, nombres, apellidos, teléfono, empresa o ubicación'
+          minlength="2"
+          maxlength="250" 
         />
         <button
           type='reset'

@@ -306,12 +306,14 @@ const CrearTicket = () => {
               <label hmlfor='descripcion'> Descripción del Servicio (*)</label>
                 <input
                   type='text'
-                  className='form-control'
+                  className='form-control maxLength={250}'
                   name='descripcion'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
                   value={descripcion}
                   onChange={onChange}
+                  minlength="2"
+                  maxlength="250" 
                 />
               </div>
             </div>

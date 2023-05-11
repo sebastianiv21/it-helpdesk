@@ -12,6 +12,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             <CampoFormulario
               nombre='email'
               etiqueta='Email'
+              maxlength="3" 
               onChange={onChange}
               value={data.email}
             />

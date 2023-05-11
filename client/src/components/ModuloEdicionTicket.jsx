@@ -100,6 +100,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                     onChange={onChangeAccion}
                     className='form-control m-0'
                     placeholder='Digite el nombre del responsable de la ejecución'
+                    minlength="2"
+                    maxlength="250"
                   />
                 </div>
               </FormGroup>
@@ -118,7 +120,9 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   type='text'
                   value={formAccionData.descripcion}
                   onChange={onChangeAccion}
-                  placeholder='Ingrese la accion y/o procedimiento realizado'
+                  placeholder='Ingrese la acción y/o procedimiento realizado'
+                  minlength="2"
+                  maxlength="250" 
                 />
               </FormGroup>
             </div>
