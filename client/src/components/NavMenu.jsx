@@ -1,27 +1,27 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faRightFromBracket,
-  faRightToBracket,
-} from '@fortawesome/free-solid-svg-icons';
-import NavMenuData from '../shared/NavMenuData';
-import useData from '../hooks/useData';
-import useLogout from '../hooks/useLogout';
+  faRightToBracket
+} from '@fortawesome/free-solid-svg-icons'
+import NavMenuData from '../shared/NavMenuData'
+import { useData } from '@hooks'
+import useLogout from '../hooks/useLogout'
 
 // Components
-import DropdownCustom from './DropdownCustom';
-import { toast } from 'react-toastify';
+import DropdownCustom from './DropdownCustom'
+import { toast } from 'react-toastify'
 
 const NavMenu = () => {
-  const { auth } = useData();
-  const navigate = useNavigate();
-  const logout = useLogout();
+  const { auth } = useData()
+  const navigate = useNavigate()
+  const logout = useLogout()
 
   const signOut = async () => {
-    await logout();
-    toast.info('Sesión finalizada', { theme: 'colored' });
-    navigate('/login');
-  };
+    await logout()
+    toast.info('Sesión finalizada', { theme: 'colored' })
+    navigate('/login')
+  }
 
   return (
     <>
@@ -37,14 +37,8 @@ const NavMenu = () => {
               </Link>
             </li>
             {NavMenuData.map((item) => (
-              <li
-                key={item.title}
-                className='text-white'
-              >
-                <DropdownCustom
-                  title={item.title}
-                  submenu={item.submenu}
-                />
+              <li key={item.title} className='text-white'>
+                <DropdownCustom title={item.title} submenu={item.submenu} />
               </li>
             ))}
           </ul>
@@ -68,7 +62,7 @@ const NavMenu = () => {
         </div>
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default NavMenu;
+export default NavMenu

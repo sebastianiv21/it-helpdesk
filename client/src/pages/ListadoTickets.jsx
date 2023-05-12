@@ -1,95 +1,95 @@
-import { useState, useEffect } from 'react';
-import FilaTicket from '../components/FilaTicket';
-import SearchBar from '../components/SearchBar.jsx';
-import useData from '../hooks/useData.js';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
-import Paginacion from '../components/Paginacion';
+import { useState, useEffect } from 'react'
+import FilaTicket from '../components/FilaTicket'
+import SearchBar from '../components/SearchBar.jsx'
+import { useData } from '@hooks'
+import axios from '../api/axios'
+import { toast } from 'react-toastify'
+import Paginacion from '../components/Paginacion'
 
 const ListadoTickets = () => {
-  const { getTickets } = useData();
-  const [tickets, setTickets] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [errMsg, setErrMsg] = useState('');
-  const TICKETS_URL = '/tickets';
+  const { getTickets } = useData()
+  const [tickets, setTickets] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+  const [errMsg, setErrMsg] = useState('')
+  const TICKETS_URL = '/tickets'
   // Pagination
-  const [currPage, setCurrPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+  const [currPage, setCurrPage] = useState(1)
+  const [itemsPerPage] = useState(10)
 
   const handleClick = (pageNumber) => {
-    setCurrPage(pageNumber);
-  };
-
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(searchResults.length / itemsPerPage); i++) {
-    pages.push(i);
+    setCurrPage(pageNumber)
   }
 
-  const indexOfLastItem = currPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+  const pages = []
+  for (let i = 1; i <= Math.ceil(searchResults.length / itemsPerPage); i++) {
+    pages.push(i)
+  }
+
+  const indexOfLastItem = currPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem)
 
   useEffect(() => {
     getTickets().then((json) => {
-      setTickets(json);
-      setSearchResults(json);
-      return json;
-    });
-  }, [getTickets]);
+      setTickets(json)
+      setSearchResults(json)
+      return json
+    })
+  }, [getTickets])
 
   const onDelete = async (ticketId) => {
     try {
       await axios.delete(TICKETS_URL, {
-        data: { id: ticketId },
-      });
+        data: { id: ticketId }
+      })
       toast.info(`Ticket eliminado exitosamente`, {
-        theme: 'colored',
-      });
+        theme: 'colored'
+      })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== ticketId);
-        return updatedItems;
-      });
+        const updatedItems = prevItems.filter((item) => item._id !== ticketId)
+        return updatedItems
+      })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('No se pudo eliminar el ticket');
+        setErrMsg('No se pudo eliminar el ticket')
       }
     }
-  };
+  }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData;
+    const { id, ...rest } = formData
 
     try {
-      await axios.patch(TICKETS_URL, formData);
+      await axios.patch(TICKETS_URL, formData)
       toast.info(`Ticket actualizado exitosamente`, {
-        theme: 'colored',
-      });
+        theme: 'colored'
+      })
       const ticketIndex = searchResults.findIndex(
         (ticket) => ticket._id === formData.id
-      );
-      const existingTicket = searchResults[ticketIndex];
+      )
+      const existingTicket = searchResults[ticketIndex]
       setSearchResults((prevItems) => {
         prevItems[ticketIndex] = {
           ...existingTicket,
-          ...rest,
-        };
-        const updatedItems = [...prevItems];
-        return updatedItems;
-      });
+          ...rest
+        }
+        const updatedItems = [...prevItems]
+        return updatedItems
+      })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('La actualización del ticket falló');
+        setErrMsg('La actualización del ticket falló')
       }
     }
-  };
+  }
 
   const listaTickets = (data) => {
     return data.map((item) => (
@@ -110,14 +110,11 @@ const ListadoTickets = () => {
         errMsg={errMsg}
         setErrMsg={setErrMsg}
       />
-    ));
-  };
+    ))
+  }
   return (
     <div className='container d-flex flex-column gap-3 mt-3 p-0'>
-      <SearchBar
-        items={tickets}
-        setSearchResults={setSearchResults}
-      />
+      <SearchBar items={tickets} setSearchResults={setSearchResults} />
       <div>
         {/* <!-- Ver como agregar boton de envio--> */}
         <div className='p-2 mx-auto bg-primary rounded-top'>
@@ -154,6 +151,6 @@ const ListadoTickets = () => {
         />
       </div>
     </div>
-  );
-};
-export default ListadoTickets;
+  )
+}
+export default ListadoTickets
