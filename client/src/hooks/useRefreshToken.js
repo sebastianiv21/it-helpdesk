@@ -1,19 +1,19 @@
-import axios from '../api/axios';
-import useData from './useData';
+import axios from '../api/axios'
+import { useData } from '@hooks'
 
 const useRefreshToken = () => {
-  const { setAuth } = useData();
+  const { setAuth } = useData()
 
   const refresh = async () => {
     const response = await axios.get('/auth/refresh', {
-      withCredentials: true,
-    });
+      withCredentials: true
+    })
     setAuth((prev) => {
-      return { ...prev, accessToken: response.data.accessToken };
-    });
-    return response.data.accessToken;
-  };
-  return refresh;
-};
+      return { ...prev, accessToken: response.data.accessToken }
+    })
+    return response.data.accessToken
+  }
+  return refresh
+}
 
-export default useRefreshToken;
+export default useRefreshToken

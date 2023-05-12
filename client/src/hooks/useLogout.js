@@ -1,5 +1,5 @@
 import axios from '../api/axios'
-import useData from './useData'
+import { useData } from '@hooks'
 
 const useLogout = () => {
   const { setAuth } = useData()
@@ -7,7 +7,7 @@ const useLogout = () => {
   const logout = async () => {
     try {
       await axios.post('/auth/logout', {
-        withCredentials: true,
+        withCredentials: true
       })
     } catch (err) {
       console.error(err)
