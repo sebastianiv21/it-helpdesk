@@ -92,7 +92,6 @@ const CrearTicket = () => {
   const [clientes, setClientes] = useState([])
   const {
     formData,
-    setFormData,
     titulo,
     cliente,
     prioridad,
@@ -131,14 +130,7 @@ const CrearTicket = () => {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
-      setFormData({
-        titulo: '',
-        cliente: '',
-        prioridad: '',
-        categoria: '',
-        subcategoria: '',
-        descripcion: ''
-      })
+      onReset()
       toast.info('Ticket creado exitosamente', { theme: 'colored' })
     } catch (err) {
       if (!err?.response) {
@@ -222,7 +214,7 @@ const CrearTicket = () => {
                 </InputGroup>
               </div>
               <div className='col-sm'>
-                <label hmlfor='titulo'> Titulo del Servicio (*)</label>
+                <label hmlfor='titulo'>Titulo del Servicio (*)</label>
                 <input
                   type='text'
                   className='form-control'
@@ -234,7 +226,7 @@ const CrearTicket = () => {
                 />
               </div>
               <div className='col-sm'>
-                <label htmlFor='prioridad'> Prioridad (*)</label>
+                <label htmlFor='prioridad'>Prioridad (*)</label>
                 <select
                   name='prioridad'
                   className='form-select'
@@ -251,7 +243,7 @@ const CrearTicket = () => {
             </div>
             <div className='row d-flex justify-content-around mb-2 text-center'>
               <div className='col-sm'>
-                <label htmlFor='categoria'> Categoria (*)</label>
+                <label htmlFor='categoria'>Categoria (*)</label>
                 <select
                   name='categoria'
                   className='form-select'
@@ -264,7 +256,7 @@ const CrearTicket = () => {
                 </select>
               </div>
               <div className='col-sm'>
-                <label htmlFor='subcategoria'> SubCategoria (*)</label>
+                <label htmlFor='subcategoria'>SubCategoria (*)</label>
                 <select
                   name='subcategoria'
                   className='form-select'
@@ -291,7 +283,7 @@ const CrearTicket = () => {
             </div>
             <div className='row text-center mt-4'>
               <div className='col-4'>
-                <label htmlFor='agente'> Agente de Servicio (*) </label>
+                <label htmlFor='agente'>Agente de Servicio (*) </label>
                 <select name='agente' className='form-select ' id='agente'>
                   <option value=''>Seleccione Agente de Servicio</option>
                 </select>
