@@ -84,23 +84,24 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               />
             </div>
             <div>
-              <FormGroup className='custom-file'>
+              <FormGroup>
                 <Label
                   for='usuarioEncargado'
                   className='bg-primary form-control text-white text-center mt-3'
                 >
                   Agente de Servicio
                 </Label>
-                <div className='input-group'>
-                  <input
-                    type='text'
-                    name='usuarioEncargado'
-                    id='usuarioEncargado'
-                    value={formAccionData.usuarioEncargado}
-                    onChange={onChangeAccion}
-                    className='form-control m-0'
-                    placeholder='Digite el nombre del responsable de la ejecución'
-                  />
+                <div>
+                <input
+                  type='text'
+                  className='form-control'
+                  name='usuarioEncargado'
+                  required='' pattern='[A-Z]+'
+                  id='usuarioEncargado'
+                  placeholder='Digite en mayuscula sostenida'
+                  value={formAccionData.usuarioEncargado}
+                  onChange={onChangeAccion}
+                />
                 </div>
               </FormGroup>
             </div>
@@ -116,6 +117,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   id='descripcion'
                   name='descripcion'
                   type='text'
+                  title="El nombre del agente solo debe contener letras mayusculas."
+                  required='' pattern='[A-Z]+'
                   value={formAccionData.descripcion}
                   onChange={onChangeAccion}
                   placeholder='Ingrese la accion y/o procedimiento realizado'

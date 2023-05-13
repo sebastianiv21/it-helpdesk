@@ -208,7 +208,7 @@ const CrearTicket = () => {
                     value={cliente}
                     onChange={onChange}
                   >
-                    <option value=''>Seleccione cliente</option>
+                    <option value=''>Seleccione el cliente</option>
                     {optClientes}
                   </select>
                 </InputGroup>
@@ -221,6 +221,8 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  required='' pattern='[A-Z]+'
+                  title="El titulo solo debe contener letras mayusculas."
                   value={titulo}
                   onChange={onChange}
                 />
@@ -234,7 +236,7 @@ const CrearTicket = () => {
                   value={prioridad}
                   onChange={onChange}
                 >
-                  <option value=''>Seleccione prioridad</option>
+                  <option value=''>Seleccione la prioridad</option>
                   <option value='Alta'>Alta</option>
                   <option value='Media'>Media</option>
                   <option value='Baja'>Baja</option>
@@ -274,6 +276,7 @@ const CrearTicket = () => {
                   type='text'
                   className='form-control'
                   name='descripcion'
+                  required='' pattern='[a-zA-Z]+'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
                   value={descripcion}
@@ -284,9 +287,15 @@ const CrearTicket = () => {
             <div className='row text-center mt-4'>
               <div className='col-4'>
                 <label htmlFor='agente'>Agente de Servicio (*) </label>
-                <select name='agente' className='form-select ' id='agente'>
-                  <option value=''>Seleccione Agente de Servicio</option>
-                </select>
+                <input
+                  type='text'
+                  className='form-control'
+                  name='agente'
+                  required='' pattern='[A-Z]+'
+                  id='agente'
+                  placeholder='Digite el nombre del agente'
+                  title="El nombre del agente solo debe contener letras mayusculas."
+                />
               </div>
               <div className='col-2 my-4'>
                 <label hmlfor='isp'>ISP</label>
