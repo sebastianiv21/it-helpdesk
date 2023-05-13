@@ -221,6 +221,8 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  minlength="1" 
+                  maxlength="50" 
                   value={titulo}
                   onChange={onChange}
                 />
@@ -276,6 +278,7 @@ const CrearTicket = () => {
                   name='descripcion'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
+                  minlength="1" maxlength="250" 
                   value={descripcion}
                   onChange={onChange}
                 />
