@@ -1,31 +1,30 @@
-import useData from '../hooks/useData';
-import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useData } from '@hooks'
+import { toast } from 'react-toastify'
+import { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-import axios from '../api/axios';
-const LOGIN_URL = '/auth';
+import axios from '../api/axios'
+const LOGIN_URL = '/auth'
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from?.pathname || '/'
-  const { setAuth } = useData();
+  const { setAuth } = useData()
   const [user, setUser] = useState('')
-  const [pwd, setPwd] = useState('');
-  const [errMsg, setErrMsg] = useState('');
+  const [pwd, setPwd] = useState('')
+  const [errMsg, setErrMsg] = useState('')
 
   useEffect(() => {
-    setErrMsg('');
+    setErrMsg('')
 
     if (errMsg) {
-      toast.error(errMsg, { theme: 'colored' });
+      toast.error(errMsg, { theme: 'colored' })
     }
-
-  }, [errMsg, user, pwd]);
+  }, [errMsg, user, pwd])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       const response = await axios.post(
@@ -33,27 +32,27 @@ const Login = () => {
         JSON.stringify({ nombreUsuario: user, contrasenha: pwd }),
         {
           headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
+          withCredentials: true
         }
-      );
-      const accessToken = response?.data?.accessToken;
-      setAuth({nombreUsuario: user, contrasenha: pwd, accessToken})
-      setUser('');
-      setPwd('');
-      toast.info('Sesión iniciada', { theme: 'colored' });
-      navigate(from, {replace: true})
+      )
+      const accessToken = response?.data?.accessToken
+      setAuth({ nombreUsuario: user, contrasenha: pwd, accessToken })
+      setUser('')
+      setPwd('')
+      toast.info('Sesión iniciada', { theme: 'colored' })
+      navigate(from, { replace: true })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else if (err.response?.status === 401) {
-        setErrMsg('Usuario o contraseña incorrectos');
+        setErrMsg('Usuario o contraseña incorrectos')
       } else {
-        setErrMsg('El inicio de sesión falló');
+        setErrMsg('El inicio de sesión falló')
       }
     }
-  };
+  }
 
   return (
     <div className='container mt-5 mx-auto d-flex'>
@@ -62,7 +61,7 @@ const Login = () => {
         style={{
           backgroundImage: "url('images/Engranajes.svg')",
           backgroundRepeat: 'no-repeat',
-          backgroundSize: 'contain',
+          backgroundSize: 'contain'
         }}
       >
         <form onSubmit={handleSubmit}>
@@ -114,7 +113,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

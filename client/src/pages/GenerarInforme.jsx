@@ -1,28 +1,23 @@
-import {faFileExcel,faFilePdf} from '@fortawesome/free-solid-svg-icons'
+import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import Boton from '../components/Boton'
-import { useState, useEffect } from 'react';
-import useData from '../hooks/useData';
+import { useState, useEffect } from 'react'
+import { useData } from '@hooks'
 
 const GenerarInforme = () => {
-  const { getClientes, uniqueProperty } = useData();
-  const [empresas, setEmpresas] = useState([]);
+  const { getClientes, uniqueProperty } = useData()
+  const [empresas, setEmpresas] = useState([])
 
   useEffect(() => {
     getClientes().then((json) => {
       const empresas = uniqueProperty(json, 'empresa')
-      setEmpresas(empresas);
-      return empresas;
-    });
-  }, [getClientes, uniqueProperty]);
+      setEmpresas(empresas)
+      return empresas
+    })
+  }, [getClientes, uniqueProperty])
 
   const optEmpresas = empresas.map((empresa) => {
-    return (
-      <option
-        key={empresa}
-        value={`${empresa}`}
-      >{`${empresa}`}</option>
-    );
-  });
+    return <option key={empresa} value={`${empresa}`}>{`${empresa}`}</option>
+  })
 
   return (
     <div className='container m-4 mx-auto'>
@@ -34,11 +29,36 @@ const GenerarInforme = () => {
           {/* <!--Este es el formulario de la generacion de informes--> */}
           <div className='row d-flex mx-5'>
           <div className='d-flex flex-column'>
+            <label htmlFor='empresa' className='form-label'>
+              Empresa
+            </label>
+            <select name='empresa' id='empresa' className='form-select'>
+              <option value=''>Seleccione empresa</option>
+              {optEmpresas}
+            </select>
+          </div>
+          <div className='d-flex flex-column'>
             <label
               htmlFor='empresa'
               className='form-label'
             >
-              Empresa
+              Cliente
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          <div className='d-flex flex-column'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Ubicacion
             </label>
             <select
               name='empresa'
@@ -101,9 +121,24 @@ const GenerarInforme = () => {
           <div className='row mx-5'>
           <div className='d-flex flex-column'>
             <label
-              htmlFor='fechaInicio'
+              htmlFor='empresa'
               className='form-label'
             >
+              Categoria
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          </div>
+          <div className='row mx-5'>
+          <div className='d-flex flex-column'>
+            <label htmlFor='fechaInicio' className='form-label'>
               Fecha Inicio
             </label>
             <input
@@ -114,10 +149,7 @@ const GenerarInforme = () => {
             />
           </div>
           <div className='d-flex flex-column'>
-            <label
-              htmlFor='fechaFinal'
-              className='form-label'
-            >
+            <label htmlFor='fechaFinal' className='form-label'>
               Fecha Final
             </label>
             <input
