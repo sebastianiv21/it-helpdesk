@@ -32,6 +32,7 @@ const GenerarInforme = () => {
       <div className='bg-secondary p-3 rounded-bottom'>
         <form className='d-flex justify-content-around'>
           {/* <!--Este es el formulario de la generacion de informes--> */}
+          <div className='row d-flex mx-5'>
           <div className='d-flex flex-column'>
             <label
               htmlFor='empresa'
@@ -48,6 +49,56 @@ const GenerarInforme = () => {
                   {optEmpresas}
             </select>
           </div>
+          <div className='d-flex flex-column'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Cliente
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          <div className='d-flex flex-column'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Ubicacion
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          <div className='d-flex flex-column'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Categoria
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          </div>
+          <div className='row mx-5'>
           <div className='d-flex flex-column'>
             <label
               htmlFor='fechaInicio'
@@ -76,20 +127,57 @@ const GenerarInforme = () => {
               className='form-control'
             />
           </div>
-          <Boton
+          <div className='d-flex flex-column col-sm'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Prioridad
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          <div className='d-flex flex-column'>
+            <label
+              htmlFor='empresa'
+              className='form-label'
+            >
+              Agente
+            </label>
+            <select
+              name='empresa'
+              id='empresa'
+              className='form-select'
+            >
+              <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+            </select>
+          </div>
+          </div>
+          < div className='row my-5 mx-4'>
+            <Boton
             texto='Generar Excel'
             icono={faFileExcel}
             estilos='m-0 my-3'
             colorBtn='primary'
             colorTxt='white'
-          />
-           <Boton
+          /> 
+          </div>
+          <div className='row my-5 mx-4'>
+          <Boton
             texto='Generar PDF'
             icono={faFilePdf}
             estilos='m-0 my-3'
             colorBtn='primary'
             colorTxt='white'
           />
+          </div>
         </form>
       </div>
       <div>{/* En este div se encuentra el informe generado */}</div>
