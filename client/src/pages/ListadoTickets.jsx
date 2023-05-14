@@ -1,10 +1,23 @@
 import { useState, useEffect } from 'react'
-import FilaTicket from '../components/FilaTicket'
-import SearchBar from '../components/SearchBar.jsx'
+import FilaTicket from '@components/FilaTicket'
+import SearchBar from '@components/SearchBar.jsx'
 import { useData } from '@hooks'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
-import Paginacion from '../components/Paginacion'
+import Paginacion from '@components/Paginacion'
+
+const ENCABEZADOS = [
+  'ID',
+  'Empresa',
+  'Cliente',
+  'Título',
+  'Prioridad',
+  'Estado',
+  'Categoría',
+  'Fecha de Creación',
+  'Fecha de Cierre',
+  'Acción'
+]
 
 const ListadoTickets = () => {
   const { getTickets } = useData()
@@ -116,7 +129,6 @@ const ListadoTickets = () => {
     <div className='container d-flex flex-column gap-3 mt-3 p-0'>
       <SearchBar items={tickets} setSearchResults={setSearchResults} />
       <div>
-        {/* <!-- Ver como agregar boton de envio--> */}
         <div className='p-2 mx-auto bg-primary rounded-top'>
           <div className='d-flex bg-primary justify-content-center align-items-center'>
             <h5 className='text-white m-0'> {searchResults.length} tickets</h5>
@@ -125,16 +137,9 @@ const ListadoTickets = () => {
         <table className='table table-hover table-bordered text-center align-middle'>
           <thead className='text-white bg-primary text-center'>
             <tr>
-              <th>ID</th>
-              <th>Empresa</th>
-              <th>Cliente</th>
-              <th>Titulo</th>
-              <th>Prioridad</th>
-              <th>Estado</th>
-              <th>Categoria</th>
-              <th>Fecha de Creacion</th>
-              <th>Fecha de Cierre</th>
-              <th>Accion</th>
+              {ENCABEZADOS.map((encabezado) => (
+                <th key={encabezado}>{encabezado}</th>
+              ))}
             </tr>
           </thead>
           <tbody className='bg-secondary text-primary'>

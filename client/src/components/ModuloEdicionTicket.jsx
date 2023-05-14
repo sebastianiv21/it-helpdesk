@@ -39,7 +39,7 @@ const ModuloEdicionTicket = ({
             </select>
           </div>
           <div className='col-2'>
-            <label htmlFor='estado'> Estado (*)</label>
+            <label htmlFor='estado'>Estado (*)</label>
             <select
               name='estado'
               className='form-select text-center mt-2'
