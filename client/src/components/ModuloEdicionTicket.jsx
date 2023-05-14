@@ -1,9 +1,16 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
-import FilaAccion from './FilaAccion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { Button, FormGroup, Label, Input } from 'reactstrap'
+import FilaAccion from './FilaAccion'
+import { useDate } from '@hooks'
 
-const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, addAccionHandler }) => {
+const ModuloEdicionTicket = ({
+  onChange,
+  onChangeAccion,
+  data,
+  formAccionData,
+  addAccionHandler
+}) => {
   const listaAcciones = data.acciones.map((item) => (
     <FilaAccion
       fecha={item.fecha}
@@ -11,7 +18,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
       usuarioEncargado={item.usuarioEncargado}
       descripcion={item.descripcion}
     />
-  ));
+  ))
 
   return (
     <>
@@ -152,7 +159,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ModuloEdicionTicket;
+export default ModuloEdicionTicket
