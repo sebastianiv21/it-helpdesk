@@ -99,6 +99,7 @@ const RegistrarCliente = () => {
             id='empresa'
             value={empresa}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -108,6 +109,7 @@ const RegistrarCliente = () => {
             id='nombre'
             value={nombre}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -117,6 +119,7 @@ const RegistrarCliente = () => {
             id='apellidos'
             value={apellidos}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
           </div>
@@ -140,6 +143,7 @@ const RegistrarCliente = () => {
             <Input type='text'
             name='vereda'
             id='vereda'
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
           </div>
@@ -151,6 +155,7 @@ const RegistrarCliente = () => {
             id='telefono'
             value={telefono}
             onChange={onChange}
+            minlength="1" maxlength="15" 
             > </Input>
           </FormGroup>
           <FormGroup>
@@ -160,6 +165,7 @@ const RegistrarCliente = () => {
             id='email'
             value={email}
             onChange={onChange}
+            minlength="1" maxlength="50"
             > </Input>
           </FormGroup>
           </div>

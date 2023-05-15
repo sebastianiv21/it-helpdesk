@@ -16,6 +16,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='empresa'
             value={data.empresa}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -25,6 +26,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='nombre'
             value={data.nombre}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -34,6 +36,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='apellidos'
             value={data.apellidos}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
             </FormGroup>           
           </div>
@@ -55,6 +58,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             <FormGroup>
             <Label for='vereda'> Vereda (*) </Label>
             <Input type='text'
+             minlength="1" maxlength="50" 
             name='vereda'
             id='vereda'> </Input>
             </FormGroup>
@@ -68,6 +72,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='telefono'
             value={data.telefono}
             onChange={onChange}
+            minlength="1" maxlength="15" 
             > </Input>
           </FormGroup>
           <FormGroup>
@@ -77,6 +82,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='email'
             value={data.email}
             onChange={onChange}
+            minlength="1" maxlength="50" 
             > </Input>
           </FormGroup>
           </div>
