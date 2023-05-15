@@ -23,7 +23,7 @@ const GenerarInforme = () => {
   return (
     <div className='container m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
-        <h5 className='m-0 ps-4 py-3'>Generacion de informes</h5>
+        <h5 className='m-0 ps-4 py-3'>Generación de informes</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom'>
         <form>

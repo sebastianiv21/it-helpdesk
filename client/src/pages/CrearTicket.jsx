@@ -169,7 +169,7 @@ const CrearTicket = () => {
       <div>
         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
-            <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
+            <h4 className='ps-1 py-0 me-auto mb-auto'>Creación del Ticket</h4>
           </div>
         </div>
         <div className='bg-secondary p-2 rounded-bottom text-primary'>
@@ -205,6 +205,8 @@ const CrearTicket = () => {
                   name='titulo'
                   id='titulo'
                   placeholder='Ingrese el nombre del ticket'
+                  minlength="1" 
+                  maxlength="50" 
                   value={formData.titulo}
                   onChange={onChange}
                 />
@@ -227,7 +229,7 @@ const CrearTicket = () => {
             </div>
             <div className='row d-flex justify-content-around mb-2 text-center'>
               <div className='col-sm'>
-                <label htmlFor='categoria'>Categoria (*)</label>
+                <label htmlFor='categoria'>Categoría (*)</label>
                 <select
                   name='categoria'
                   className='form-select'
@@ -240,7 +242,7 @@ const CrearTicket = () => {
                 </select>
               </div>
               <div className='col-sm'>
-                <label htmlFor='subcategoria'>SubCategoria (*)</label>
+                <label htmlFor='subcategoria'>SubCategoría (*)</label>
                 <select
                   name='subcategoria'
                   className='form-select'
@@ -260,6 +262,7 @@ const CrearTicket = () => {
                   name='descripcion'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
+                  minlength="1" maxlength="250" 
                   value={formData.descripcion}
                   onChange={onChange}
                 />

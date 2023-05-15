@@ -131,10 +131,10 @@ const ListadoTickets = () => {
               <th>Titulo</th>
               <th>Prioridad</th>
               <th>Estado</th>
-              <th>Categoria</th>
-              <th>Fecha de Creacion</th>
+              <th>Categoría</th>
+              <th>Fecha de Creación</th>
               <th>Fecha de Cierre</th>
-              <th>Accion</th>
+              <th>Acción</th>
             </tr>
           </thead>
           <tbody className='bg-secondary text-primary'>
