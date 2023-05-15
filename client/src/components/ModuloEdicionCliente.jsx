@@ -71,7 +71,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             > </Input>
           </FormGroup>
           <FormGroup>
-            <Label for='emailo'> Email (*) </Label>
+            <Label for='email'> Email (*) </Label>
             <Input type='text'
             name='email'
             id='email'
