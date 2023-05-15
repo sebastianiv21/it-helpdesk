@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useData, useForm } from '@hooks'
+import { useNavigate } from 'react-router-dom'
 import axios from '../api/axios.js'
 import { toast } from 'react-toastify'
 import { InputGroup } from 'reactstrap'
@@ -90,17 +91,8 @@ const initialState = {
 const CrearTicket = () => {
   const { getClientes } = useData()
   const [clientes, setClientes] = useState([])
-  const {
-    formData,
-    titulo,
-    cliente,
-    prioridad,
-    categoria,
-    subcategoria,
-    descripcion,
-    onChange,
-    onReset
-  } = useForm(initialState)
+  const { formData, onChange, onReset } = useForm(initialState)
+  const navigate = useNavigate()
 
   const TICKETS_URL = '/tickets'
   const [errMsg, setErrMsg] = useState('')
@@ -116,17 +108,8 @@ const CrearTicket = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    const ticketData = {
-      titulo,
-      cliente,
-      prioridad,
-      categoria,
-      subcategoria,
-      descripcion
-    }
-
     try {
-      await axios.post(TICKETS_URL, JSON.stringify(ticketData), {
+      await axios.post(TICKETS_URL, JSON.stringify(formData), {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
@@ -196,7 +179,8 @@ const CrearTicket = () => {
                 <label htmlFor='cliente'> Cliente (*) </label>
                 <InputGroup>
                   <button
-                    className='btn btn-primary text-secodnary'
+                    type='button'
+                    className='btn btn-primary'
                     onClick={() => navigate('/registrar-cliente')}
                   >
                     <FontAwesomeIcon icon={faUserPlus} />
@@ -205,7 +189,7 @@ const CrearTicket = () => {
                     name='cliente'
                     className='form-select '
                     id='cliente'
-                    value={cliente}
+                    value={formData.cliente}
                     onChange={onChange}
                   >
                     <option value=''>Seleccione cliente</option>
@@ -223,7 +207,7 @@ const CrearTicket = () => {
                   placeholder='Ingrese el nombre del ticket'
                   minlength="1" 
                   maxlength="50" 
-                  value={titulo}
+                  value={formData.titulo}
                   onChange={onChange}
                 />
               </div>
@@ -233,7 +217,7 @@ const CrearTicket = () => {
                   name='prioridad'
                   className='form-select'
                   id='prioridad'
-                  value={prioridad}
+                  value={formData.prioridad}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione prioridad</option>
@@ -250,7 +234,7 @@ const CrearTicket = () => {
                   name='categoria'
                   className='form-select'
                   id='categoria'
-                  value={categoria}
+                  value={formData.categoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione categoría</option>
@@ -263,7 +247,7 @@ const CrearTicket = () => {
                   name='subcategoria'
                   className='form-select'
                   id='subcategoria'
-                  value={subcategoria}
+                  value={formData.subcategoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione subcategoría</option>
@@ -279,7 +263,7 @@ const CrearTicket = () => {
                   id='descripcion'
                   placeholder='Digite una breve descripción'
                   minlength="1" maxlength="250" 
-                  value={descripcion}
+                  value={formData.descripcion}
                   onChange={onChange}
                 />
               </div>
@@ -311,7 +295,7 @@ const CrearTicket = () => {
                 <FontAwesomeIcon icon={faBan} />
                 <span className='ms-2'>Cancelar</span>
               </button>
-              <button className='btn btn-primary text-white me-5'>
+              <button type='submit' className='btn btn-primary text-white me-5'>
                 <FontAwesomeIcon icon={faFloppyDisk} />
                 <span className='ms-2'>Guardar</span>
               </button>

@@ -1,6 +1,7 @@
 import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons'
-import Boton from '../components/Boton'
 import { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormGroup, Input, Label, Button } from 'reactstrap'
 import { useData } from '@hooks'
 
 const GenerarInforme = () => {
@@ -25,53 +26,79 @@ const GenerarInforme = () => {
         <h5 className='m-0 ps-4 py-3'>Generación de informes</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom'>
-        <form className='d-flex justify-content-around'>
+        <form>
           {/* <!--Este es el formulario de la generacion de informes--> */}
-          <div className='d-flex flex-column'>
-            <label htmlFor='empresa' className='form-label'>
-              Empresa
-            </label>
-            <select name='empresa' id='empresa' className='form-select'>
-              <option value=''>Seleccione empresa</option>
-              {optEmpresas}
-            </select>
-          </div>
-          <div className='d-flex flex-column'>
-            <label htmlFor='fechaInicio' className='form-label'>
-              Fecha Inicio
-            </label>
-            <input
+
+            <div className='row d-flex justify-content-around mb-3 text-center'>
+            <div className='col-sm'>
+              <FormGroup>
+                <Label for='fechaInicio' >Fecha Inicio</Label>
+                <Input
               type='date'
               name='fechaInicio'
               id='fechaInicio'
-              className='form-control'
             />
-          </div>
-          <div className='d-flex flex-column'>
-            <label htmlFor='fechaFinal' className='form-label'>
-              Fecha Final
-            </label>
-            <input
+              </FormGroup>
+              </div>
+              <div className='col-sm'>
+              <FormGroup>
+                <Label for='fechaFinal' >Fecha Final</Label>
+                <Input
               type='date'
               name='fechaFinal'
               id='fechaFinal'
-              className='form-control'
             />
-          </div>
-          <Boton
-            texto='Generar Excel'
-            icono={faFileExcel}
-            estilos='m-0 my-3'
-            colorBtn='primary'
-            colorTxt='white'
-          />
-          <Boton
-            texto='Generar PDF'
-            icono={faFilePdf}
-            estilos='m-0 my-3'
-            colorBtn='primary'
-            colorTxt='white'
-          />
+              </FormGroup>
+              </div>
+              <div className='col-sm'>
+              <FormGroup>
+                <Label for='empresa' >Empresa</Label>
+                <Input
+              type='select'
+              name='empresa'
+              id='empresa'>
+                <option value=''>Seleccione empresa</option>
+                  {optEmpresas}
+              </Input>
+              </FormGroup>
+              </div>
+              </div>
+            <div className='row d-flex justify-content-around mb-3 text-center'>
+            <div className='col-sm'>
+              <FormGroup>
+                <Label for='cliente' >Cliente</Label>
+                <Input
+              type='select'
+              name='cliente'
+              id='cliente'>
+                <option value=''>Seleccione cliente</option>
+                  {optEmpresas}
+              </Input>
+              </FormGroup>
+              </div>
+              <div className='col-sm'>
+              <FormGroup>
+                <Label for='categoria' >Categoría</Label>
+                <Input
+              type='select'
+              name='categoria'
+              id='categoria'>
+                <option value=''>Seleccione categoría</option>
+                  {optEmpresas}
+              </Input>
+              </FormGroup>
+              </div>
+              </div>
+            <div className='d-flex justify-content-end gap-2'>
+                <Button color='primary' className='d-flex gap-2 align-items-center'>
+                <FontAwesomeIcon icon={faFileExcel} />
+                Generar Excel
+                </Button>
+                <Button color='primary' className='d-flex gap-2 align-items-center'>
+                <FontAwesomeIcon icon={faFilePdf} />
+                Generar PDF
+                </Button>
+            </div> 
         </form>
       </div>
       <div>{/* En este div se encuentra el informe generado */}</div>
