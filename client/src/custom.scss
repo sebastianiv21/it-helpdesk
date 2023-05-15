@@ -31,7 +31,7 @@ $font-family-sans-serif: "Poppins", sans-serif;
 #numeroP {
   font-size: 90px;
 }
-
+//FIREFOX
 #tabla {
   overflow-y: scroll;
   scrollbar-color: #004643 white;
@@ -40,6 +40,18 @@ $font-family-sans-serif: "Poppins", sans-serif;
   height: 167px;
 
   }
+
+  //CHROME HPTA IBARRA NO LO BORRE 
+  ::-webkit-scrollbar{
+    width: 9px;
+    height: auto;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: #004643;
+    border-radius: 5px;
+  }
+
+
 
 #Linea {
   height: 300px;
