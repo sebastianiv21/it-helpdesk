@@ -101,6 +101,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   placeholder='Digite en mayuscula sostenida'
                   value={formAccionData.usuarioEncargado}
                   onChange={onChangeAccion}
+                    minlength="1"
+                    maxlength="50"
                 />
                 </div>
               </FormGroup>
@@ -119,6 +121,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   type='text'
                   title="El nombre del agente solo debe contener letras mayusculas."
                   required='' pattern='[A-Z]+'
+                  minlength="1"
+                  maxlength="250"
                   value={formAccionData.descripcion}
                   onChange={onChangeAccion}
                   placeholder='Ingrese la accion y/o procedimiento realizado'

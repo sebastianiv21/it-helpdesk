@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useData, useForm } from '@hooks'
+import { useNavigate } from 'react-router-dom'
 import axios from '../api/axios.js'
 import { toast } from 'react-toastify'
 import { InputGroup } from 'reactstrap'
@@ -90,17 +91,8 @@ const initialState = {
 const CrearTicket = () => {
   const { getClientes } = useData()
   const [clientes, setClientes] = useState([])
-  const {
-    formData,
-    titulo,
-    cliente,
-    prioridad,
-    categoria,
-    subcategoria,
-    descripcion,
-    onChange,
-    onReset
-  } = useForm(initialState)
+  const { formData, onChange, onReset } = useForm(initialState)
+  const navigate = useNavigate()
 
   const TICKETS_URL = '/tickets'
   const [errMsg, setErrMsg] = useState('')
@@ -116,17 +108,8 @@ const CrearTicket = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    const ticketData = {
-      titulo,
-      cliente,
-      prioridad,
-      categoria,
-      subcategoria,
-      descripcion
-    }
-
     try {
-      await axios.post(TICKETS_URL, JSON.stringify(ticketData), {
+      await axios.post(TICKETS_URL, JSON.stringify(formData), {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
@@ -186,7 +169,7 @@ const CrearTicket = () => {
       <div>
         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
-            <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
+            <h4 className='ps-1 py-0 me-auto mb-auto'>Creación del Ticket</h4>
           </div>
         </div>
         <div className='bg-secondary p-2 rounded-bottom text-primary'>
@@ -196,7 +179,8 @@ const CrearTicket = () => {
                 <label htmlFor='cliente'> Cliente (*) </label>
                 <InputGroup>
                   <button
-                    className='btn btn-primary text-secodnary'
+                    type='button'
+                    className='btn btn-primary'
                     onClick={() => navigate('/registrar-cliente')}
                   >
                     <FontAwesomeIcon icon={faUserPlus} />
@@ -205,7 +189,7 @@ const CrearTicket = () => {
                     name='cliente'
                     className='form-select '
                     id='cliente'
-                    value={cliente}
+                    value={formData.cliente}
                     onChange={onChange}
                   >
                     <option value=''>Seleccione el cliente</option>
@@ -223,7 +207,9 @@ const CrearTicket = () => {
                   placeholder='Ingrese el nombre del ticket'
                   required='' pattern='[A-Z]+'
                   title="El titulo solo debe contener letras mayusculas."
-                  value={titulo}
+                  minlength="1" 
+                  maxlength="50" 
+                  value={formData.titulo}
                   onChange={onChange}
                 />
               </div>
@@ -233,7 +219,7 @@ const CrearTicket = () => {
                   name='prioridad'
                   className='form-select'
                   id='prioridad'
-                  value={prioridad}
+                  value={formData.prioridad}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione la prioridad</option>
@@ -245,12 +231,12 @@ const CrearTicket = () => {
             </div>
             <div className='row d-flex justify-content-around mb-2 text-center'>
               <div className='col-sm'>
-                <label htmlFor='categoria'>Categoria (*)</label>
+                <label htmlFor='categoria'>Categoría (*)</label>
                 <select
                   name='categoria'
                   className='form-select'
                   id='categoria'
-                  value={categoria}
+                  value={formData.categoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione categoría</option>
@@ -258,12 +244,12 @@ const CrearTicket = () => {
                 </select>
               </div>
               <div className='col-sm'>
-                <label htmlFor='subcategoria'>SubCategoria (*)</label>
+                <label htmlFor='subcategoria'>SubCategoría (*)</label>
                 <select
                   name='subcategoria'
                   className='form-select'
                   id='subcategoria'
-                  value={subcategoria}
+                  value={formData.subcategoria}
                   onChange={onChange}
                 >
                   <option value=''>Seleccione subcategoría</option>
@@ -279,7 +265,8 @@ const CrearTicket = () => {
                   required='' pattern='[a-zA-Z]+'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
-                  value={descripcion}
+                  minlength="1" maxlength="250" 
+                  value={formData.descripcion}
                   onChange={onChange}
                 />
               </div>
@@ -317,7 +304,7 @@ const CrearTicket = () => {
                 <FontAwesomeIcon icon={faBan} />
                 <span className='ms-2'>Cancelar</span>
               </button>
-              <button className='btn btn-primary text-white me-5'>
+              <button type='submit' className='btn btn-primary text-white me-5'>
                 <FontAwesomeIcon icon={faFloppyDisk} />
                 <span className='ms-2'>Guardar</span>
               </button>
