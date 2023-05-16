@@ -17,6 +17,8 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             value={data.empresa}
             onChange={onChange}
             minlength="1" maxlength="50" 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -27,6 +29,8 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             value={data.nombre}
             onChange={onChange}
             minlength="1" maxlength="50" 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -37,6 +41,8 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             value={data.apellidos}
             onChange={onChange}
             minlength="1" maxlength="50" 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>           
           </div>
@@ -60,7 +66,10 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             <Input type='text'
              minlength="1" maxlength="50" 
             name='vereda'
-            id='vereda'> </Input>
+            id='vereda' 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras."> 
+            </Input>
             </FormGroup>
           </div>
           <div className='d-flex justify-content-around mb-3'>
@@ -72,7 +81,9 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='telefono'
             value={data.telefono}
             onChange={onChange}
-            minlength="1" maxlength="15" 
+            minlength="1" maxlength="15"
+            required='' pattern='[0-9]+'
+            title="El titulo solo debe contener numeros."
             > </Input>
           </FormGroup>
           <FormGroup>

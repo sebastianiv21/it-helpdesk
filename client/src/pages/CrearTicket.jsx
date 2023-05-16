@@ -262,7 +262,6 @@ const CrearTicket = () => {
                   type='text'
                   className='form-control'
                   name='descripcion'
-                  required='' pattern='[a-zA-Z]+'
                   id='descripcion'
                   placeholder='Digite una breve descripción'
                   minlength="1" maxlength="250" 
