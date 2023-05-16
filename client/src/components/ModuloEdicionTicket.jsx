@@ -24,8 +24,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               className='form-select text-center mt-2'
               id='prioridad'
               onChange={onChange}
-              value={data.prioridad}
-            >
+              value={data.prioridad}>
               <option value='Alta'>Alta</option>
               <option value='Media'>Media</option>
               <option value='Baja'>Baja</option>
@@ -38,8 +37,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               className='form-select text-center mt-2'
               id='estado'
               value={data.estado}
-              onChange={onChange}
-            >
+              onChange={onChange}>
               <option value='Abierto'>Abierto</option>
               <option value='Cerrado'>Cerrado</option>
             </select>
@@ -66,7 +64,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
         </div>
         <div className='row d-flex p-1 rounded-bottom text-primary'>
           <div className='col-6'>
-            <div>
+            <FormGroup>
               <Label
                 for='fecha'
                 className='bg-primary form-control text-white text-center mt-3'
@@ -82,31 +80,27 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                 value={formAccionData.fecha}
                 onChange={onChangeAccion}
               />
-            </div>
-            <div>
-              <FormGroup className='custom-file'>
+            </FormGroup>
+              <FormGroup>
                 <Label
                   for='usuarioEncargado'
                   className='bg-primary form-control text-white text-center mt-3'
                 >
                   Agente de Servicio
                 </Label>
-                <div className='input-group'>
-                  <input
-                    type='text'
-                    name='usuarioEncargado'
-                    id='usuarioEncargado'
-                    value={formAccionData.usuarioEncargado}
-                    onChange={onChangeAccion}
-                    className='form-control m-0'
-                    placeholder='Digite el nombre del responsable de la ejecución'
-                    minlength="1"
-                    maxlength="50"
-                  />
-                </div>
+                <Input
+                  type='text'
+                  name='usuarioEncargado'
+                  required='' pattern='[A-Z]+'
+                  title="El titulo solo debe contener letras mayusculas."
+                  id='usuarioEncargado'
+                  placeholder='Digite en mayuscula sostenida'
+                  value={formAccionData.usuarioEncargado}
+                  onChange={onChangeAccion}
+                  minlength="1"
+                  maxlength="50"
+                />
               </FormGroup>
-            </div>
-            <div>
               <FormGroup>
                 <Label
                   for='descripcion'
@@ -125,7 +119,6 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   placeholder='Ingrese la accion y/o procedimiento realizado'
                 />
               </FormGroup>
-            </div>
             <Button
               color='primary'
               className='d-flex align-items-center m-2 gap-2 ms-auto'

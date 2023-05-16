@@ -99,7 +99,9 @@ const RegistrarCliente = () => {
             id='empresa'
             value={empresa}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -110,6 +112,8 @@ const RegistrarCliente = () => {
             value={nombre}
             onChange={onChange}
             minlength="1" maxlength="50" 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -119,7 +123,9 @@ const RegistrarCliente = () => {
             id='apellidos'
             value={apellidos}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
           </div>
@@ -143,7 +149,9 @@ const RegistrarCliente = () => {
             <Input type='text'
             name='vereda'
             id='vereda'
-            minlength="1" maxlength="50" 
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
           </div>
@@ -156,10 +164,12 @@ const RegistrarCliente = () => {
             value={telefono}
             onChange={onChange}
             minlength="1" maxlength="15" 
+            required='' pattern='[0-9]+'
+            title="El titulo solo debe contener numeros."
             > </Input>
           </FormGroup>
           <FormGroup>
-            <Label for='emailo'> Email (*) </Label>
+            <Label for='email'> Email (*) </Label>
             <Input type='text'
             name='email'
             id='email'
