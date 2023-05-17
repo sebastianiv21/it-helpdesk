@@ -1,9 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import CampoFormulario from '../components/CampoFormulario'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
+import {Input, Label, FormGroup} from 'reactstrap'
 
 const RegistrarCliente = () => {
   const CLIENTES_URL = '/clientes'
@@ -91,44 +92,92 @@ const RegistrarCliente = () => {
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
         <form onSubmit={onSubmit}>
           <div className='d-flex justify-content-around mb-3'>
-          <CampoFormulario
-              nombre='empresa'
-              etiqueta='Empresa'
-              value={empresa}
-              onChange={onChange}
-            />
-            <CampoFormulario
-              nombre='nombre'
-              etiqueta='Nombres'
-              value={nombre}
-              onChange={onChange}
-            />
-            <CampoFormulario
-              nombre='apellidos'
-              etiqueta='Apellidos'
-              value={apellidos}
-              onChange={onChange}
-            />
+          <FormGroup>
+            <Label for='empresa'> Empresa (*) </Label>
+            <Input type='text'
+            name='empresa'
+            id='empresa'
+            value={empresa}
+            onChange={onChange}
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
+            > </Input>
+            </FormGroup>
+            <FormGroup>
+            <Label for='nombre'> Nombres (*) </Label>
+            <Input type='text'
+            name='nombre'
+            id='nombre'
+            value={nombre}
+            onChange={onChange}
+            minlength="1" maxlength="50" 
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
+            > </Input>
+            </FormGroup>
+            <FormGroup>
+            <Label for='apellidos'> Apellidos (*) </Label>
+            <Input type='text'
+            name='apellidos'
+            id='apellidos'
+            value={apellidos}
+            onChange={onChange}
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
+            > </Input>
+            </FormGroup>
           </div>
           <div className='d-flex justify-content-around mb-3'>
-          <CampoFormulario
-              nombre='ubicacion'
-              etiqueta='Ubicación'
-              value={ubicacion}
-              onChange={onChange}
-            />
-            <CampoFormulario
-              nombre='telefono'
-              etiqueta='Teléfono'
-              value={telefono}
-              onChange={onChange}
-            />
-             <CampoFormulario
-              nombre='email'
-              etiqueta='Email'
-              value={email}
-              onChange={onChange}
-            />
+            <FormGroup>
+            <Label for='departamento'> Departamento (*) </Label>
+            <Input type='select'
+            name='departamento'
+            id='departamento'
+            > <option value="">Seleccione</option> </Input>
+            </FormGroup>
+            <FormGroup>
+            <Label for='municipio'> Municipio (*) </Label>
+            <Input type='select'
+            name='municipio'
+            id='municipio'
+            > <option value="">Seleccione</option> </Input>
+            </FormGroup >
+            <FormGroup>
+            <Label for='vereda'> Vereda (*) </Label>
+            <Input type='text'
+            name='vereda'
+            id='vereda'
+            minlength="1" maxlength="50"
+            required='' pattern='[A-Z]+'
+            title="El titulo solo debe contener letras mayusculas."
+            > </Input>
+            </FormGroup>
+          </div>
+          <div className='d-flex justify-content-around mb-3'>
+          <FormGroup>
+            <Label for='telefono'> Teléfono (*) </Label>
+            <Input type='text'
+            name='telefono'
+            id='telefono'
+            value={telefono}
+            onChange={onChange}
+            minlength="1" maxlength="15" 
+            required='' pattern='[0-9]+'
+            title="El titulo solo debe contener numeros."
+            > </Input>
+          </FormGroup>
+          <FormGroup>
+            <Label for='email'> Email (*) </Label>
+            <Input type='text'
+            name='email'
+            id='email'
+            value={email}
+            onChange={onChange}
+            minlength="1" maxlength="50"
+            > </Input>
+          </FormGroup>
           </div>
           <div className='d-flex justify-content-end'>
             <button
