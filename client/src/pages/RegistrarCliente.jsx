@@ -101,7 +101,7 @@ const RegistrarCliente = () => {
             onChange={onChange}
             minlength="1" maxlength="50"
             required='' pattern='[A-Z]+'
-            title="El titulo solo debe contener letras mayusculas."
+            title="El ttulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -113,7 +113,7 @@ const RegistrarCliente = () => {
             onChange={onChange}
             minlength="1" maxlength="50" 
             required='' pattern='[A-Z]+'
-            title="El titulo solo debe contener letras mayusculas."
+            title="El título solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
             <FormGroup>
@@ -125,7 +125,7 @@ const RegistrarCliente = () => {
             onChange={onChange}
             minlength="1" maxlength="50"
             required='' pattern='[A-Z]+'
-            title="El titulo solo debe contener letras mayusculas."
+            title="El título solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
           </div>
@@ -151,7 +151,7 @@ const RegistrarCliente = () => {
             id='vereda'
             minlength="1" maxlength="50"
             required='' pattern='[A-Z]+'
-            title="El titulo solo debe contener letras mayusculas."
+            title="El título solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
           </div>
@@ -165,7 +165,7 @@ const RegistrarCliente = () => {
             onChange={onChange}
             minlength="1" maxlength="15" 
             required='' pattern='[0-9]+'
-            title="El titulo solo debe contener numeros."
+            title="El título solo debe contener numeros."
             > </Input>
           </FormGroup>
           <FormGroup>
