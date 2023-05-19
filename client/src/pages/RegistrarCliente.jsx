@@ -101,7 +101,7 @@ const RegistrarCliente = () => {
             onChange={onChange}
             minlength="1" maxlength="50"
             required='' pattern='[A-Z]+'
-            title="El ttulo solo debe contener letras mayusculas."
+            title="El titulo solo debe contener letras mayusculas."
             > </Input>
             </FormGroup>
             <FormGroup>
