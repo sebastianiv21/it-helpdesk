@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormGroup, Input, Label, Button } from 'reactstrap'
 import { useData } from '@hooks'
+import { PDFDownloadLink, PDFViewer} from "@react-pdf/renderer";
+import DocuPDF from "@components/DocuPDF";
 
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
@@ -94,10 +96,9 @@ const GenerarInforme = () => {
                 <FontAwesomeIcon icon={faFileExcel} />
                 Generar Excel
                 </Button>
-                <Button color='primary' className='d-flex gap-2 align-items-center'>
-                <FontAwesomeIcon icon={faFilePdf} />
-                Generar PDF
-                </Button>
+                <PDFDownloadLink document={<DocuPDF />} fileName="informe.pdf">
+                <Button color="primary" type="button" className='d-flex gap-2 align-items-center'><FontAwesomeIcon icon={faFilePdf}  />Generar PDF </Button>
+                </PDFDownloadLink>
             </div> 
         </form>
       </div>
