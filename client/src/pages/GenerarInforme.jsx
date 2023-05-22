@@ -1,14 +1,18 @@
-import { faFileExcel, faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faFileExcel, faFilePdf, faY } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormGroup, Input, Label, Button } from 'reactstrap'
-import { useData } from '@hooks'
-import { PDFDownloadLink, PDFViewer} from "@react-pdf/renderer";
+import { useData, useDate } from '@hooks'
+import { PDFDownloadLink} from "@react-pdf/renderer";
 import DocuPDF from "@components/DocuPDF";
-
+import { format } from 'date-fns'
+import { PDFViewer } from '@react-pdf/renderer'
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
   const [empresas, setEmpresas] = useState([])
+  const [verPdf, setVerPdf] = useState(false)
+  const {parseDate}= useDate()
+const nombreArchivo = `Informe-${format(new Date(),'dd-MM-yyyy')}.pdf`
 
   useEffect(() => {
     getClientes().then((json) => {
@@ -92,17 +96,23 @@ const GenerarInforme = () => {
               </div>
               </div>
             <div className='d-flex justify-content-end gap-2'>
-                <Button color='primary' className='d-flex gap-2 align-items-center'>
-                <FontAwesomeIcon icon={faFileExcel} />
-                Generar Excel
+                <Button type='button' onClick={() =>setVerPdf(!verPdf)} color='primary' className='d-flex gap-2 align-items-center'>
+                <FontAwesomeIcon icon={faEye} />
+                {verPdf ? 'Ocultar pdf' : 'Ver pdf'}
                 </Button>
-                <PDFDownloadLink document={<DocuPDF />} fileName="informe.pdf">
+                <PDFDownloadLink document={<DocuPDF />} fileName={nombreArchivo}>
                 <Button color="primary" type="button" className='d-flex gap-2 align-items-center'><FontAwesomeIcon icon={faFilePdf}  />Generar PDF </Button>
                 </PDFDownloadLink>
             </div> 
         </form>
       </div>
-      <div>{/* En este div se encuentra el informe generado */}</div>
+      <div className='mt-3'>
+      {verPdf ? (
+            <PDFViewer style={{ width: "100%", height: "90vh" }}>
+              <DocuPDF/>
+            </PDFViewer>
+          ) : null}
+      </div>
     </div>
   )
 }
