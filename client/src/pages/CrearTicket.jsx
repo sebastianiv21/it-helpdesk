@@ -9,7 +9,16 @@ import { useData, useForm } from '@hooks'
 import { useNavigate } from 'react-router-dom'
 import axios from '../api/axios.js'
 import { toast } from 'react-toastify'
-import { InputGroup } from 'reactstrap'
+import {
+  Form,
+  Row,
+  Col,
+  FormGroup,
+  Input,
+  InputGroup,
+  Label,
+  Button
+} from 'reactstrap'
 
 const listadoCategorias = [
   {
@@ -79,6 +88,12 @@ const listadoCategorias = [
   }
 ]
 
+const listadoPrioridades = [
+  { id: 1, nombre: 'Alta' },
+  { id: 2, nombre: 'Media' },
+  { id: 3, nombre: 'Baja' }
+]
+
 const initialState = {
   titulo: '',
   cliente: '',
@@ -89,7 +104,7 @@ const initialState = {
 }
 
 const CrearTicket = () => {
-  const { getClientes } = useData()
+  const { getClientes, agentes } = useData()
   const [clientes, setClientes] = useState([])
   const { formData, onChange, onReset } = useForm(initialState)
   const navigate = useNavigate()
@@ -142,6 +157,12 @@ const CrearTicket = () => {
     )
   })
 
+  const prioridades = listadoPrioridades.map((prioridad) => (
+    <option key={prioridad.id} value={prioridad.nombre}>
+      {prioridad.nombre}
+    </option>
+  ))
+
   const categorias = listadoCategorias.map((categoria) => {
     return (
       <option key={categoria.nombreCategoria} value={categoria.nombreCategoria}>
@@ -164,6 +185,12 @@ const CrearTicket = () => {
     }
   })
 
+  const listaAgentes = agentes.map((agente) => (
+    <option key={agente.id} value={agente.nombre}>
+      {agente.nombre}
+    </option>
+  ))
+
   return (
     <div className='container d-flex flex-column gap-3 mt-3'>
       <div>
@@ -172,143 +199,156 @@ const CrearTicket = () => {
             <h4 className='ps-1 py-0 me-auto mb-auto'>Creación del Ticket</h4>
           </div>
         </div>
-        <div className='bg-secondary p-2 rounded-bottom text-primary'>
-          <form onSubmit={onSubmit}>
-            <div className='row d-flex justify-content-around mb-3 text-center'>
-              <div className='col-sm'>
-                <label htmlFor='cliente'> Cliente (*) </label>
-                <InputGroup>
-                  <button
-                    type='button'
-                    className='btn btn-primary'
-                    onClick={() => navigate('/registrar-cliente')}
-                  >
-                    <FontAwesomeIcon icon={faUserPlus} />
-                  </button>
-                  <select
-                    name='cliente'
-                    className='form-select '
-                    id='cliente'
-                    value={formData.cliente}
+        <div className='bg-secondary p-3 rounded-bottom text-primary'>
+          <Form onSubmit={onSubmit}>
+            <Row>
+              <Col sm>
+                <FormGroup>
+                  <Label for='cliente'>Cliente (*)</Label>
+                  <InputGroup>
+                    <Button
+                      type='button'
+                      color='primary'
+                      onClick={() => navigate('/registrar-cliente')}
+                    >
+                      <FontAwesomeIcon icon={faUserPlus} />
+                    </Button>
+                    <Input
+                      name='cliente'
+                      id='cliente'
+                      type='select'
+                      value={formData.cliente}
+                      onChange={onChange}
+                      required
+                    >
+                      <option value=''>Seleccione el cliente</option>
+                      {optClientes}
+                    </Input>
+                  </InputGroup>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='titulo'>Titulo del Servicio (*)</Label>
+                  <Input
+                    type='text'
+                    name='titulo'
+                    id='titulo'
+                    placeholder='Ingrese el nombre del ticket'
+                    pattern='[A-Z]+'
+                    title='El título sólo debe contener letras mayúsculas.'
+                    minLength={1}
+                    maxLength={50}
+                    value={formData.titulo}
                     onChange={onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='prioridad'>Prioridad (*)</Label>
+                  <Input
+                    type='select'
+                    name='prioridad'
+                    id='prioridad'
+                    value={formData.prioridad}
+                    onChange={onChange}
+                    required
                   >
-                    <option value=''>Seleccione el cliente</option>
-                    {optClientes}
-                  </select>
-                </InputGroup>
-              </div>
-              <div className='col-sm'>
-                <label hmlfor='titulo'>Titulo del Servicio (*)</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='titulo'
-                  id='titulo'
-                  placeholder='Ingrese el nombre del ticket'
-                  required='' pattern='[A-Z]+'
-                  title="El titulo solo debe contener letras mayusculas."
-                  minlength="1" 
-                  maxlength="50" 
-                  value={formData.titulo}
-                  onChange={onChange}
-                />
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='prioridad'>Prioridad (*)</label>
-                <select
-                  name='prioridad'
-                  className='form-select'
-                  id='prioridad'
-                  value={formData.prioridad}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione la prioridad</option>
-                  <option value='Alta'>Alta</option>
-                  <option value='Media'>Media</option>
-                  <option value='Baja'>Baja</option>
-                </select>
-              </div>
-            </div>
-            <div className='row d-flex justify-content-around mb-2 text-center'>
-              <div className='col-sm'>
-                <label htmlFor='categoria'>Categoría (*)</label>
-                <select
-                  name='categoria'
-                  className='form-select'
-                  id='categoria'
-                  value={formData.categoria}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione categoría</option>
-                  {categorias}
-                </select>
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='subcategoria'>SubCategoría (*)</label>
-                <select
-                  name='subcategoria'
-                  className='form-select'
-                  id='subcategoria'
-                  value={formData.subcategoria}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione subcategoría</option>
-                  {subcategorias}
-                </select>
-              </div>
-              <div className='col-4'>
-                <label hmlfor='descripcion'>Descripción del Servicio (*)</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='descripcion'
-                  id='descripcion'
-                  placeholder='Digite una breve descripción'
-                  minlength="1" maxlength="250" 
-                  value={formData.descripcion}
-                  onChange={onChange}
-                />
-              </div>
-            </div>
-            <div className='row text-center mt-4'>
-              <div className='col-4'>
-                <label htmlFor='agente'>Agente de Servicio (*) </label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='agente'
-                  required='' pattern='[A-Z]+'
-                  id='agente'
-                  placeholder='Digite el nombre del agente'
-                  title="El nombre del agente solo debe contener letras mayusculas."
-                />
-              </div>
-              <div className='col-2 my-4'>
-                <label hmlfor='isp'>ISP</label>
-                <input
-                  className='form-check-input mx-3'
-                  type='checkbox'
-                  name='checkbox1'
-                  id='checkbox1'
-                  value=''
-                />
-              </div>
-            </div>
-            <div className='d-flex justify-content-end p-2'>
-              <button
-                type='reset'
-                className='btn btn-primary text-white me-3'
-                onClick={onReset}
-              >
-                <FontAwesomeIcon icon={faBan} />
-                <span className='ms-2'>Cancelar</span>
-              </button>
-              <button type='submit' className='btn btn-primary text-white me-5'>
-                <FontAwesomeIcon icon={faFloppyDisk} />
-                <span className='ms-2'>Guardar</span>
-              </button>
-            </div>
-          </form>
+                    <option value=''>Seleccione la prioridad</option>
+                    {prioridades}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm>
+                <FormGroup>
+                  <Label for='categoria'>Categoría (*)</Label>
+                  <Input
+                    type='select'
+                    name='categoria'
+                    id='categoria'
+                    value={formData.categoria}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione categoría</option>
+                    {categorias}
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='subcategoria'>SubCategoría (*)</Label>
+                  <Input
+                    type='select'
+                    name='subcategoria'
+                    id='subcategoria'
+                    value={formData.subcategoria}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione subcategoría</option>
+                    {subcategorias}
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='agente'>Agente de Servicio (*) </Label>
+                  <Input
+                    type='select'
+                    name='agente'
+                    id='agente'
+                    value={formData.agente}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione el agente</option>
+                    {listaAgentes}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={8}>
+                <FormGroup>
+                  <Label for='descripcion'>Descripción del Servicio (*)</Label>
+                  <Input
+                    type='textarea'
+                    name='descripcion'
+                    id='descripcion'
+                    placeholder='Digite una breve descripción'
+                    minLength={1}
+                    maxLength={250}
+                    value={formData.descripcion}
+                    onChange={onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm={4}>
+                <FormGroup check>
+                  <Input type='checkbox' />
+                  <Label check>ISP</Label>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-end gap-2'>
+                <Button type='reset' color='primary' onClick={onReset}>
+                  <FontAwesomeIcon icon={faBan} />
+                  <span className='ms-2'>Cancelar</span>
+                </Button>
+                <Button type='submit' color='primary'>
+                  <FontAwesomeIcon icon={faFloppyDisk} />
+                  <span className='ms-2'>Guardar</span>
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </div>
       </div>
     </div>
