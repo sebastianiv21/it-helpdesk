@@ -1,14 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPencil,
   faTrash,
   faBan,
-  faFloppyDisk,
-} from '@fortawesome/free-solid-svg-icons';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { useState, useEffect } from 'react';
-import ModuloEdicionTicket from './ModuloEdicionTicket';
-import { toast } from 'react-toastify';
+  faFloppyDisk
+} from '@fortawesome/free-solid-svg-icons'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { useState, useEffect } from 'react'
+import ModuloEdicionTicket from './ModuloEdicionTicket'
+import { toast } from 'react-toastify'
 
 const FilaTicket = ({
   id,
@@ -24,10 +24,10 @@ const FilaTicket = ({
   onDelete,
   onUpdate,
   errMsg,
-  setErrMsg,
+  setErrMsg
 }) => {
-  const [modal, setModal] = useState(false);
-  const [modalEdit, setModalEdit] = useState(false);
+  const [modal, setModal] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
   const [formData, setFormData] = useState({
     id,
     empresa,
@@ -35,78 +35,79 @@ const FilaTicket = ({
     prioridad,
     estado,
     fechadecierre,
-    acciones,
-  });
+    acciones
+  })
   const [formAccionData, setFormAccionData] = useState({
     fecha: '',
     descripcion: '',
-    usuarioEncargado: '',
-  });
+    usuarioEncargado: ''
+  })
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+      [e.target.name]: e.target.value
+    }))
+  }
 
   const onChangeAccion = (e) => {
     setFormAccionData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+      [e.target.name]: e.target.value
+    }))
+  }
 
-  const toggle = () => setModal(!modal);
-  const toggleEdit = () => setModalEdit(!modalEdit);
+  const toggle = () => setModal(!modal)
+  const toggleEdit = () => setModalEdit(!modalEdit)
 
   useEffect(() => {
-    setErrMsg('');
+    setErrMsg('')
 
     if (errMsg) {
-      toast.error(errMsg, { theme: 'colored' });
+      toast.error(errMsg, { theme: 'colored' })
     }
-  }, [errMsg, formData]);
+  }, [errMsg, formData])
 
   const deleteHandler = () => {
-    onDelete(id);
-    toggle();
-  };
+    onDelete(id)
+    toggle()
+  }
 
   const updateHandler = (e) => {
-    e.preventDefault();
-    onUpdate(formData);
-    toggleEdit();
-  };
+    e.preventDefault()
+    onUpdate(formData)
+    toggleEdit()
+  }
 
   const addAccionHandler = () => {
-    if(!formAccionData.fecha || !formAccionData.descripcion || !formAccionData.usuarioEncargado){
+    if (
+      !formAccionData.fecha ||
+      !formAccionData.descripcion ||
+      !formAccionData.usuarioEncargado
+    ) {
       return toast.error(`Ingrese todos los campos del formulario`, {
-        theme: 'colored',
-      });
+        theme: 'colored'
+      })
     }
 
-    setFormData(prevState=> ({
+    setFormData((prevState) => ({
       ...prevState,
-      acciones: [
-        ...prevState.acciones,
-        {...formAccionData}
-      ]
+      acciones: [...prevState.acciones, { ...formAccionData }]
     }))
-    onUpdate(formData);
+    onUpdate(formData)
     setFormAccionData({
       descripcion: '',
       fecha: '',
-      usuarioEncargado: '',
-    });
-  };
+      usuarioEncargado: ''
+    })
+  }
 
   return (
     <>
       <tr>
         <td>{id.slice(-6)}</td>
-        <td>{}</td>
-        <td>{}</td>
+        <td>{empresa}</td>
+        <td>{cliente}</td>
         <td>{titulo}</td>
         <td>{prioridad}</td>
         <td>{estado}</td>
@@ -133,11 +134,7 @@ const FilaTicket = ({
         </td>
       </tr>
       {/* modal de eliminacion */}
-      <Modal
-        isOpen={modal}
-        toggle={toggle}
-        centered
-      >
+      <Modal isOpen={modal} toggle={toggle} centered>
         <ModalHeader toggle={toggle}>
           Eliminar Ticket <strong>{id.slice(-6)}</strong>
         </ModalHeader>
@@ -165,12 +162,7 @@ const FilaTicket = ({
         </ModalFooter>
       </Modal>
       {/* modal de edicion */}
-      <Modal
-        isOpen={modalEdit}
-        toggle={toggleEdit}
-        centered
-        fullscreen
-      >
+      <Modal isOpen={modalEdit} toggle={toggleEdit} centered fullscreen>
         <ModalHeader toggle={toggleEdit}>
           Editar Ticket <strong>{id.slice(-6)}</strong>
         </ModalHeader>
@@ -203,7 +195,7 @@ const FilaTicket = ({
         </ModalFooter>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default FilaTicket;
+export default FilaTicket

@@ -37,6 +37,10 @@ const ListadoTickets = () => {
     })
   }, [getTickets])
 
+  useEffect(() => {
+    console.log('currItems', currItems)
+  }, [currItems])
+
   const onDelete = async (ticketId) => {
     try {
       await axios.delete(TICKETS_URL, {
@@ -96,8 +100,8 @@ const ListadoTickets = () => {
       <FilaTicket
         key={item._id}
         id={item._id}
-        empresa={item.empresa}
-        cliente={item.cliente}
+        empresa={item?.cliente?.empresa}
+        cliente={`${item?.cliente?.nombre} ${item?.cliente?.apellidos}`}
         titulo={item.titulo}
         prioridad={item.prioridad}
         estado={item.estado}
