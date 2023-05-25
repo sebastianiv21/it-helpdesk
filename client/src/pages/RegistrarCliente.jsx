@@ -1,10 +1,10 @@
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import CampoFormulario from '../components/CampoFormulario'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
-import {Input, Label, FormGroup} from 'reactstrap'
+import { Form, Row, Col, FormGroup, Input, Label, Button } from 'reactstrap'
 
 const RegistrarCliente = () => {
   const CLIENTES_URL = '/clientes'
@@ -16,7 +16,7 @@ const RegistrarCliente = () => {
     apellidos: '',
     ubicacion: '',
     telefono: '',
-    email: '',
+    email: ''
   })
 
   useEffect(() => {
@@ -32,18 +32,18 @@ const RegistrarCliente = () => {
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }))
   }
 
   const onReset = () => {
     setFormData({
-    empresa: '',
-    nombre: '',
-    apellidos: '',
-    ubicacion: '',
-    telefono: '',
-    email: '',
+      empresa: '',
+      nombre: '',
+      apellidos: '',
+      ubicacion: '',
+      telefono: '',
+      email: ''
     })
   }
 
@@ -56,13 +56,13 @@ const RegistrarCliente = () => {
       apellidos,
       ubicacion: ubicacion.toLowerCase(),
       telefono,
-      email,
+      email
     }
 
     try {
       await axios.post(CLIENTES_URL, JSON.stringify(clientData), {
         headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
+        withCredentials: true
       })
       setFormData({
         empresa: '',
@@ -70,7 +70,7 @@ const RegistrarCliente = () => {
         apellidos: '',
         ubicacion: '',
         telefono: '',
-        email: '',
+        email: ''
       })
       toast.info('Cliente creado exitosamente', { theme: 'colored' })
     } catch (err) {
@@ -90,110 +90,131 @@ const RegistrarCliente = () => {
         <h5 className='m-0 ps-4 py-3'>Registrar Cliente</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
-        <form onSubmit={onSubmit}>
-          <div className='d-flex justify-content-around mb-3'>
-          <FormGroup>
-            <Label for='empresa'> Empresa (*) </Label>
-            <Input type='text'
-            name='empresa'
-            id='empresa'
-            value={empresa}
-            onChange={onChange}
-            minlength="1" maxlength="50"
-            required='' pattern='[A-Z]+'
-            title="El titulo solo debe contener letras mayusculas."
-            > </Input>
-            </FormGroup>
-            <FormGroup>
-            <Label for='nombre'> Nombres (*) </Label>
-            <Input type='text'
-            name='nombre'
-            id='nombre'
-            value={nombre}
-            onChange={onChange}
-            minlength="1" maxlength="50" 
-            required='' pattern='[A-Z]+'
-            title="El título solo debe contener letras mayusculas."
-            > </Input>
-            </FormGroup>
-            <FormGroup>
-            <Label for='apellidos'> Apellidos (*) </Label>
-            <Input type='text'
-            name='apellidos'
-            id='apellidos'
-            value={apellidos}
-            onChange={onChange}
-            minlength="1" maxlength="50"
-            required='' pattern='[A-Z]+'
-            title="El título solo debe contener letras mayusculas."
-            > </Input>
-            </FormGroup>
-          </div>
-          <div className='d-flex justify-content-around mb-3'>
-            <FormGroup>
-            <Label for='departamento'> Departamento (*) </Label>
-            <Input type='select'
-            name='departamento'
-            id='departamento'
-            > <option value="">Seleccione</option> </Input>
-            </FormGroup>
-            <FormGroup>
-            <Label for='municipio'> Municipio (*) </Label>
-            <Input type='select'
-            name='municipio'
-            id='municipio'
-            > <option value="">Seleccione</option> </Input>
-            </FormGroup >
-            <FormGroup>
-            <Label for='vereda'> Vereda (*) </Label>
-            <Input type='text'
-            name='vereda'
-            id='vereda'
-            minlength="1" maxlength="50"
-            required='' pattern='[A-Z]+'
-            title="El título solo debe contener letras mayusculas."
-            > </Input>
-            </FormGroup>
-          </div>
-          <div className='d-flex justify-content-around mb-3'>
-          <FormGroup>
-            <Label for='telefono'> Teléfono (*) </Label>
-            <Input type='text'
-            name='telefono'
-            id='telefono'
-            value={telefono}
-            onChange={onChange}
-            minlength="1" maxlength="15" 
-            required='' pattern='[0-9]+'
-            title="El título solo debe contener numeros."
-            > </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for='email'> Email (*) </Label>
-            <Input type='text'
-            name='email'
-            id='email'
-            value={email}
-            onChange={onChange}
-            minlength="1" maxlength="50"
-            > </Input>
-          </FormGroup>
-          </div>
-          <div className='d-flex justify-content-end'>
-            <button
-              type='reset'
-              className='btn btn-primary text-white me-3'
-              onClick={onReset}
-            >
-              <FontAwesomeIcon icon={faBan} />
-              <span className='ms-2'>Cancelar</span>
-            </button>
-            <button className='btn btn-primary text-white me-5'>
-              <FontAwesomeIcon icon={faFloppyDisk} />
-              <span className='ms-2'>Guardar</span>
-            </button>
-          </div>
-        </form>
+        <Form onSubmit={onSubmit}>
+          <Row>
+            <Col sm>
+              <FormGroup>
+                <Label for='empresa'>Empresa (*)</Label>
+                <Input
+                  type='text'
+                  name='empresa'
+                  id='empresa'
+                  value={empresa}
+                  onChange={onChange}
+                  minlength={1}
+                  maxlength={50}
+                  required
+                />
+              </FormGroup>
+            </Col>
+            <Col sm>
+              <FormGroup>
+                <Label for='nombre'>Nombres (*)</Label>
+                <Input
+                  type='text'
+                  name='nombre'
+                  id='nombre'
+                  value={nombre}
+                  onChange={onChange}
+                  minlength={1}
+                  maxlength={50}
+                  required
+                />
+              </FormGroup>
+            </Col>
+            <Col sm>
+              <FormGroup>
+                <Label for='apellidos'>Apellidos (*)</Label>
+                <Input
+                  type='text'
+                  name='apellidos'
+                  id='apellidos'
+                  value={apellidos}
+                  onChange={onChange}
+                  minlength={1}
+                  maxlength={50}
+                  required
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm>
+              <FormGroup>
+                <Label for='departamento'> Departamento (*) </Label>
+                <Input type='select' name='departamento' id='departamento'>
+                  <option value=''>Seleccione una opción</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col sm>
+              <FormGroup>
+                <Label for='municipio'> Municipio (*) </Label>
+                <Input type='select' name='municipio' id='municipio'>
+                  <option value=''>Seleccione una opción</option>
+                </Input>
+              </FormGroup>
+            </Col>
+            <Col sm>
+              <FormGroup>
+                <Label for='vereda'> Vereda (*) </Label>
+                <Input
+                  type='text'
+                  name='vereda'
+                  id='vereda'
+                  minlength={1}
+                  maxlength={50}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className='d-flex me-auto'>
+            <Col sm>
+              <FormGroup>
+                <Label for='telefono'>Teléfono (*)</Label>
+                <Input
+                  type='text'
+                  name='telefono'
+                  id='telefono'
+                  value={telefono}
+                  onChange={onChange}
+                  minlength={1}
+                  maxlength={15}
+                  required
+                  pattern='[0-9]+'
+                  title='El teléfono solo debe contener números.'
+                />
+              </FormGroup>
+            </Col>
+            <Col sm>
+              <FormGroup>
+                <Label for='email'>Email (*)</Label>
+                <Input
+                  type='email'
+                  name='email'
+                  id='email'
+                  value={email}
+                  onChange={onChange}
+                  minlength={1}
+                  maxlength={50}
+                  required
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col className='d-flex justify-content-end gap-2'>
+              <Button type='reset' color='primary' onClick={onReset}>
+                <FontAwesomeIcon icon={faBan} />
+                <span className='ms-2'>Cancelar</span>
+              </Button>
+              <Button type='submit' color='primary'>
+                <FontAwesomeIcon icon={faFloppyDisk} />
+                <span className='ms-2'>Guardar</span>
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </div>
     </div>
   )
