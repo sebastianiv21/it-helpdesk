@@ -1,5 +1,6 @@
 import{Page,Document, View, Text,StyleSheet,Image,Font } from "@react-pdf/renderer";
 import {Table,TableHeader,TableCell,DataTableCell,TableBody} from '@david.kucsai/react-pdf-table'
+import GraficoBarras from "./GraficoBarras";
 const DocuPDF = ({ poema }) => {
   const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
   const COL_ANCHO_1 = 10;
@@ -273,9 +274,7 @@ page: {
 <View style={styles.descripcion}  >
 <Text style={{textAlign:'center', fontSize: '20px', fontWeight: 'bold',color:'#004643',}}>Grafica </Text>
 </View>
-</View>
-
-    
+</View> 
         </Page>
     </Document>
   );

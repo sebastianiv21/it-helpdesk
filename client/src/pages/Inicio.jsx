@@ -45,20 +45,32 @@ const Inicio = () => {
     <div className='container-fluid vh-100 d-flex flex-column p-0 ' id='inicio'>
       <div className='container mt-5'>
         <div className='row justify-content-center mb-5'>
-          <div className='col-sm-5 me-5'>
-            <div className='card text-center'>
+          <div className='col-sm-5 me-2'>
+            <div className='card text-center' style={{ width: '25rem',height: '353px'}}>
               <div className='card-header bg-primary text-white'>
                 Tickets pendientes
               </div>
-              <div className='card-body'>
-                <strong id='numero'>
+              <div className='card-body mt-4 text-primary'>
+                <strong id='numero' style={{fontSize:'7rem'}}>
                   <span id='daily_revenue'>{`${pendientes}`}</span>
                 </strong>
               </div>
             </div>
           </div>
-          <div className='col-sm-5 ms-5'>
+                    <div className='col-sm-5 me-2'>
             <div className='card text-center'>
+              <div className='card-header bg-primary text-white'>
+                Tickets Semanales
+              </div>
+              <div className='card-body my-auto' id='Barras'>
+                <GraficoBarras />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='row justify-content-center mb-5'>
+          <div className='col-sm-10 mt-4'>
+            <div className='card text-center '  style={{ height: '400px'}} >
               <div className='card-header bg-primary text-white'>
                 Tickets Prioritarios
               </div>
@@ -85,28 +97,6 @@ const Inicio = () => {
                   </strong>
                 </div>
               )}
-            </div>
-          </div>
-        </div>
-        <div className='row justify-content-center mb-5'>
-          <div className='col-sm-5 me-5'>
-            <div className='card text-center'>
-              <div className='card-header bg-primary text-white'>
-                Tickets Semanales
-              </div>
-              <div className='card-body my-auto' id='Barras'>
-                <GraficoBarras />
-              </div>
-            </div>
-          </div>
-          <div className='col-sm-5 ms-5'>
-            <div className='card text-center'>
-              <div className='card-header bg-primary text-white'>
-                Tickets Mensuales por Empresa
-              </div>
-              <div className='card-body mx-auto' id='Linea'>
-                {/* <GraficoLinea data={tickets} /> */}
-              </div>
             </div>
           </div>
         </div>
