@@ -7,6 +7,7 @@ import {
   Image,
   Font
 } from '@react-pdf/renderer'
+import GraficoBarras from "./GraficoBarras";
 const DocuPDF = ({ poema }) => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   const COL_ANCHO_1 = 10

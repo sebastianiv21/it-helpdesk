@@ -19,7 +19,7 @@ const GraficoBarras = () => {
       {
         label: 'Cantidad',
         data: [3, 6, 9, 7, 8, 4],
-        backgroundColor: '#A155B9',
+        backgroundColor: '#c2e7c9',
       },
     ],
   };
