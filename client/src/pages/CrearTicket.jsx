@@ -229,7 +229,7 @@ const CrearTicket = () => {
               </Col>
               <Col sm>
                 <FormGroup>
-                  <Label for='titulo'>Titulo del Servicio (*)</Label>
+                  <Label for='titulo'>Título del Servicio (*)</Label>
                   <Input
                     type='text'
                     name='titulo'
