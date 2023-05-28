@@ -94,6 +94,10 @@ const updateTicket = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'ID inválido' })
   }
 
+  if (!ticketInfo.estado || !ticketInfo.prioridad) {
+    return res.status(400).json({ message: 'Ingrese los campos requeridos' })
+  }
+
   // Actualizar el documento en la base de datos
   const updatedTicket = await Ticket.findOneAndUpdate(
     { _id: id },
