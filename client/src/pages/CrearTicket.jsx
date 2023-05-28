@@ -237,8 +237,6 @@ const CrearTicket = () => {
                     name='titulo'
                     id='titulo'
                     placeholder='Ingrese el nombre del ticket'
-                    // pattern='[A-Z]+'
-                    title='El título sólo debe contener letras mayúsculas.'
                     minLength={1}
                     maxLength={50}
                     value={formData.titulo}

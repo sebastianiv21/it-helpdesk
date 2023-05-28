@@ -68,7 +68,7 @@ const updateCliente = asyncHandler(async (req, res) => {
     empresa,
     departamento,
     municipio,
-    vereda
+    direccion
   } = req.body
 
   // Verificar si el ID proporcionado es válido
@@ -102,7 +102,7 @@ const updateCliente = asyncHandler(async (req, res) => {
       empresa,
       departamento,
       municipio,
-      vereda
+      direccion
     },
     { new: true }
   )

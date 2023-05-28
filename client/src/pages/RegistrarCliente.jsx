@@ -1,23 +1,27 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
-import CampoFormulario from '../components/CampoFormulario'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
+import { useForm } from '@hooks'
 import { Form, Row, Col, FormGroup, Input, Label, Button } from 'reactstrap'
+
+const initialState = {
+  empresa: '',
+  nombre: '',
+  apellidos: '',
+  departamento: '',
+  municipio: '',
+  direccion: '',
+  telefono: '',
+  email: ''
+}
 
 const RegistrarCliente = () => {
   const CLIENTES_URL = '/clientes'
   const [errMsg, setErrMsg] = useState('')
 
-  const [formData, setFormData] = useState({
-    empresa: '',
-    nombre: '',
-    apellidos: '',
-    ubicacion: '',
-    telefono: '',
-    email: ''
-  })
+  const { formData, onChange, onReset } = useForm(initialState)
 
   useEffect(() => {
     setErrMsg('')
@@ -27,36 +31,12 @@ const RegistrarCliente = () => {
     }
   }, [errMsg, formData])
 
-  const { empresa, nombre, apellidos, ubicacion, telefono, email } = formData
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }))
-  }
-
-  const onReset = () => {
-    setFormData({
-      empresa: '',
-      nombre: '',
-      apellidos: '',
-      ubicacion: '',
-      telefono: '',
-      email: ''
-    })
-  }
-
   const onSubmit = async (e) => {
     e.preventDefault()
 
     const clientData = {
-      empresa: empresa.toLowerCase(),
-      nombre,
-      apellidos,
-      ubicacion: ubicacion.toLowerCase(),
-      telefono,
-      email
+      ...formData,
+      empresa: formData.empresa.toLowerCase()
     }
 
     try {
@@ -64,14 +44,7 @@ const RegistrarCliente = () => {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
-      setFormData({
-        empresa: '',
-        nombre: '',
-        apellidos: '',
-        ubicacion: '',
-        telefono: '',
-        email: ''
-      })
+      onReset()
       toast.info('Cliente creado exitosamente', { theme: 'colored' })
     } catch (err) {
       if (!err?.response) {
@@ -99,10 +72,10 @@ const RegistrarCliente = () => {
                   type='text'
                   name='empresa'
                   id='empresa'
-                  value={empresa}
+                  value={formData.empresa}
                   onChange={onChange}
-                  minlength={1}
-                  maxlength={50}
+                  minLength={1}
+                  maxLength={50}
                   required
                 />
               </FormGroup>
@@ -114,10 +87,10 @@ const RegistrarCliente = () => {
                   type='text'
                   name='nombre'
                   id='nombre'
-                  value={nombre}
+                  value={formData.nombre}
                   onChange={onChange}
-                  minlength={1}
-                  maxlength={50}
+                  minLength={1}
+                  maxLength={50}
                   required
                 />
               </FormGroup>
@@ -129,10 +102,10 @@ const RegistrarCliente = () => {
                   type='text'
                   name='apellidos'
                   id='apellidos'
-                  value={apellidos}
+                  value={formData.apellidos}
                   onChange={onChange}
-                  minlength={1}
-                  maxlength={50}
+                  minLength={1}
+                  maxLength={50}
                   required
                 />
               </FormGroup>
@@ -142,7 +115,13 @@ const RegistrarCliente = () => {
             <Col sm>
               <FormGroup>
                 <Label for='departamento'> Departamento (*) </Label>
-                <Input type='select' name='departamento' id='departamento'>
+                <Input
+                  type='select'
+                  name='departamento'
+                  id='departamento'
+                  onChange={onChange}
+                  value={formData.departamento}
+                >
                   <option value=''>Seleccione una opción</option>
                 </Input>
               </FormGroup>
@@ -150,25 +129,33 @@ const RegistrarCliente = () => {
             <Col sm>
               <FormGroup>
                 <Label for='municipio'> Municipio (*) </Label>
-                <Input type='select' name='municipio' id='municipio'>
+                <Input
+                  type='select'
+                  name='municipio'
+                  id='municipio'
+                  onChange={onChange}
+                  value={formData.municipio}
+                >
                   <option value=''>Seleccione una opción</option>
                 </Input>
               </FormGroup>
             </Col>
             <Col sm>
               <FormGroup>
-                <Label for='vereda'> Vereda (*) </Label>
+                <Label for='direccion'> Dirección (*) </Label>
                 <Input
                   type='text'
-                  name='vereda'
-                  id='vereda'
-                  minlength={1}
-                  maxlength={50}
+                  name='direccion'
+                  id='direccion'
+                  onChange={onChange}
+                  value={formData.direccion}
+                  minLength={1}
+                  maxLength={50}
                 />
               </FormGroup>
             </Col>
           </Row>
-          <Row className='d-flex me-auto'>
+          <Row>
             <Col sm>
               <FormGroup>
                 <Label for='telefono'>Teléfono (*)</Label>
@@ -176,10 +163,10 @@ const RegistrarCliente = () => {
                   type='text'
                   name='telefono'
                   id='telefono'
-                  value={telefono}
                   onChange={onChange}
-                  minlength={1}
-                  maxlength={15}
+                  value={formData.telefono}
+                  minLength={1}
+                  maxLength={15}
                   required
                   pattern='[0-9]+'
                   title='El teléfono solo debe contener números.'
@@ -193,10 +180,10 @@ const RegistrarCliente = () => {
                   type='email'
                   name='email'
                   id='email'
-                  value={email}
                   onChange={onChange}
-                  minlength={1}
-                  maxlength={50}
+                  value={formData.email}
+                  minLength={1}
+                  maxLength={50}
                   required
                 />
               </FormGroup>

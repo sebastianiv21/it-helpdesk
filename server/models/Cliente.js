@@ -29,7 +29,7 @@ const clienteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  vereda: String
+  direccion: String
 })
 
 module.exports = mongoose.model('Cliente', clienteSchema)
