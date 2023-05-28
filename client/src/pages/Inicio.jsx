@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useData } from '@hooks'
 import { Table } from 'reactstrap'
 import FilaPrioritarios from '../components/FilaPrioritarios'
-import GraficoLinea from '../components/GraficoLinea'
 import GraficoBarras from '../components/GraficoBarras'
 
 const Inicio = () => {
@@ -46,18 +45,21 @@ const Inicio = () => {
       <div className='container mt-5'>
         <div className='row justify-content-center mb-5'>
           <div className='col-sm-5 me-2'>
-            <div className='card text-center' style={{ width: '25rem',height: '353px'}}>
+            <div
+              className='card text-center'
+              style={{ width: '25rem', height: '353px' }}
+            >
               <div className='card-header bg-primary text-white'>
                 Tickets pendientes
               </div>
               <div className='card-body mt-4 text-primary'>
-                <strong id='numero' style={{fontSize:'7rem'}}>
+                <strong id='numero' style={{ fontSize: '7rem' }}>
                   <span id='daily_revenue'>{`${pendientes}`}</span>
                 </strong>
               </div>
             </div>
           </div>
-                    <div className='col-sm-5 me-2'>
+          <div className='col-sm-5 me-2'>
             <div className='card text-center'>
               <div className='card-header bg-primary text-white'>
                 Tickets Semanales
@@ -70,7 +72,7 @@ const Inicio = () => {
         </div>
         <div className='row justify-content-center mb-5'>
           <div className='col-sm-10 mt-4'>
-            <div className='card text-center '  style={{ height: '400px'}} >
+            <div className='card text-center ' style={{ height: '400px' }}>
               <div className='card-header bg-primary text-white'>
                 Tickets Prioritarios
               </div>

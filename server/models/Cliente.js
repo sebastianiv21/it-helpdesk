@@ -3,29 +3,33 @@ const mongoose = require('mongoose')
 const clienteSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true,
+    required: true
   },
   nombre: {
     type: String,
-    required: true,
+    required: true
   },
   apellidos: {
     type: String,
-    required: true,
+    required: true
   },
   telefono: {
     type: Number,
-    required: true,
+    required: true
   },
   empresa: {
     type: String,
-    required: true,
+    required: true
   },
-  ubicacion: {
+  departamento: {
     type: String,
-    required: true,
+    required: true
   },
- 
+  municipio: {
+    type: String,
+    required: true
+  },
+  direccion: String
 })
 
 module.exports = mongoose.model('Cliente', clienteSchema)
