@@ -6,6 +6,6 @@ const verifyJWT = require('../middlewares/verifyJWT')
 // router.use(verifyJWT)
 
 router.route('/').get(placesController.getAllDepartamentos)
-router.route('/:idDepartamento').get(placesController.getMunicipios)
+router.route('/:departamento').get(placesController.getMunicipiosByDepartamento)
 
 module.exports = router

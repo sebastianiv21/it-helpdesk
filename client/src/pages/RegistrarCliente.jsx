@@ -3,7 +3,7 @@ import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
-import { useForm } from '@hooks'
+import { useForm, useData } from '@hooks'
 import { Form, Row, Col, FormGroup, Input, Label, Button } from 'reactstrap'
 
 const initialState = {
@@ -20,6 +20,8 @@ const initialState = {
 const RegistrarCliente = () => {
   const CLIENTES_URL = '/clientes'
   const [errMsg, setErrMsg] = useState('')
+  const { departamentos, getMunicipios } = useData()
+  const [municipios, setMunicipios] = useState([])
 
   const { formData, onChange, onReset } = useForm(initialState)
 
@@ -35,20 +37,25 @@ const RegistrarCliente = () => {
     }
   }, [errMsg, formData])
 
-  // const opcionesDepartamentos = departamentos().map((departamento) => (
-  //   <option key={departamento} value={departamento}>
-  //     {departamento}
-  //   </option>
-  // ))
+  useEffect(() => {
+    if (formData.departamento) {
+      getMunicipios(formData.departamento).then((municipios) => {
+        setMunicipios(municipios)
+      })
+    }
+  }, [formData.departamento])
 
-  // const opcionesMunicipios =
-  //   formData.departamento && console.log(municipios('Chocó'))
-  // formData.departamento && console.log(cualquierMunicipio())
-  // municipios(formData.departamento).map((municipio) => (
-  //   <option key={municipio} value={municipio}>
-  //     {municipio}
-  //   </option>
-  // ))
+  const opcionesDepartamentos = departamentos?.map(({ _id, departamento }) => (
+    <option key={_id} value={departamento}>
+      {departamento}
+    </option>
+  ))
+
+  const opcionesMunicipios = municipios?.map(({ idMunicipio, municipio }) => (
+    <option key={idMunicipio} value={municipio}>
+      {municipio}
+    </option>
+  ))
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -142,7 +149,7 @@ const RegistrarCliente = () => {
                   value={formData.departamento}
                 >
                   <option value=''>Seleccione una opción</option>
-                  {/* {opcionesDepartamentos} */}
+                  {opcionesDepartamentos}
                 </Input>
               </FormGroup>
             </Col>
@@ -157,7 +164,7 @@ const RegistrarCliente = () => {
                   value={formData.municipio}
                 >
                   <option value=''>Seleccione una opción</option>
-                  {/* {opcionesMunicipios} */}
+                  {opcionesMunicipios}
                 </Input>
               </FormGroup>
             </Col>

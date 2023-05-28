@@ -16,9 +16,9 @@ const getAllDepartamentos = asyncHandler(async (req, res) => {
   res.json(departamentos)
 })
 
-const getMunicipios = asyncHandler(async (req, res) => {
+const getMunicipiosByDepartamento = asyncHandler(async (req, res) => {
   const municipios = await Place.find(
-    { idDepartamento: req.params.idDepartamento },
+    { departamento: req.params.departamento },
     'idMunicipio municipio'
   ).exec()
   res.json(municipios)
@@ -26,5 +26,5 @@ const getMunicipios = asyncHandler(async (req, res) => {
 
 module.exports = {
   getAllDepartamentos,
-  getMunicipios
+  getMunicipiosByDepartamento
 }
