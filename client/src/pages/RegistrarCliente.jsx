@@ -24,12 +24,31 @@ const RegistrarCliente = () => {
   const { formData, onChange, onReset } = useForm(initialState)
 
   useEffect(() => {
+    console.log(formData)
+  }, [formData])
+
+  useEffect(() => {
     setErrMsg('')
 
     if (errMsg) {
       toast.error(errMsg, { theme: 'colored' })
     }
   }, [errMsg, formData])
+
+  // const opcionesDepartamentos = departamentos().map((departamento) => (
+  //   <option key={departamento} value={departamento}>
+  //     {departamento}
+  //   </option>
+  // ))
+
+  // const opcionesMunicipios =
+  //   formData.departamento && console.log(municipios('Chocó'))
+  // formData.departamento && console.log(cualquierMunicipio())
+  // municipios(formData.departamento).map((municipio) => (
+  //   <option key={municipio} value={municipio}>
+  //     {municipio}
+  //   </option>
+  // ))
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -123,6 +142,7 @@ const RegistrarCliente = () => {
                   value={formData.departamento}
                 >
                   <option value=''>Seleccione una opción</option>
+                  {/* {opcionesDepartamentos} */}
                 </Input>
               </FormGroup>
             </Col>
@@ -137,6 +157,7 @@ const RegistrarCliente = () => {
                   value={formData.municipio}
                 >
                   <option value=''>Seleccione una opción</option>
+                  {/* {opcionesMunicipios} */}
                 </Input>
               </FormGroup>
             </Col>
