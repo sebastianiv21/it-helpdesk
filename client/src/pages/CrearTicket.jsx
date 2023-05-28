@@ -100,7 +100,9 @@ const initialState = {
   prioridad: '',
   categoria: '',
   subcategoria: '',
-  descripcion: ''
+  descripcionTicket: '',
+  agenteEncargado: '',
+  isp: false
 }
 
 const CrearTicket = () => {
@@ -186,7 +188,7 @@ const CrearTicket = () => {
   })
 
   const listaAgentes = agentes.map((agente) => (
-    <option key={agente.id} value={agente.nombre}>
+    <option key={agente._id} value={agente._id}>
       {agente.nombre}
     </option>
   ))
@@ -235,7 +237,7 @@ const CrearTicket = () => {
                     name='titulo'
                     id='titulo'
                     placeholder='Ingrese el nombre del ticket'
-                    pattern='[A-Z]+'
+                    // pattern='[A-Z]+'
                     title='El título sólo debe contener letras mayúsculas.'
                     minLength={1}
                     maxLength={50}
@@ -297,12 +299,12 @@ const CrearTicket = () => {
               </Col>
               <Col sm>
                 <FormGroup>
-                  <Label for='agente'>Agente de Servicio (*) </Label>
+                  <Label for='agenteEncargado'>Agente de Servicio (*) </Label>
                   <Input
                     type='select'
-                    name='agente'
-                    id='agente'
-                    value={formData.agente}
+                    name='agenteEncargado'
+                    id='agenteEncargado'
+                    value={formData.agenteEncargado}
                     onChange={onChange}
                     required
                   >
@@ -315,15 +317,17 @@ const CrearTicket = () => {
             <Row>
               <Col sm={8}>
                 <FormGroup>
-                  <Label for='descripcion'>Descripción del Servicio (*)</Label>
+                  <Label for='descripcionTicket'>
+                    Descripción del Servicio (*)
+                  </Label>
                   <Input
                     type='textarea'
-                    name='descripcion'
-                    id='descripcion'
+                    name='descripcionTicket'
+                    id='descripcionTicket'
                     placeholder='Digite una breve descripción'
                     minLength={1}
                     maxLength={250}
-                    value={formData.descripcion}
+                    value={formData.descripcionTicket}
                     onChange={onChange}
                     required
                   />
@@ -331,7 +335,13 @@ const CrearTicket = () => {
               </Col>
               <Col sm={4}>
                 <FormGroup check>
-                  <Input type='checkbox' />
+                  <Input
+                    type='checkbox'
+                    name='isp'
+                    onChange={onChange}
+                    value={formData.isp}
+                    checked={formData.isp}
+                  />
                   <Label check>ISP</Label>
                 </FormGroup>
               </Col>

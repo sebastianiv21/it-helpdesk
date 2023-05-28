@@ -6,9 +6,13 @@ const asyncHandler = require('express-async-handler')
 // @route GET /tickets
 // @access Private
 const getAllTickets = asyncHandler(async (req, res) => {
-    const tickets = await Ticket.find().lean().populate('cliente', {ticket: 0})
+  const tickets = await Ticket.find()
+    .lean()
+    .populate('cliente', { ticket: 0 })
+    .populate('agenteEncargado', { ticket: 0 })
+    .exec()
 
-    // si no hay tickets
+  // si no hay tickets
   if (!tickets?.length) {
     return res.status(400).json({ message: 'No se encontraron tickets' })
   }
@@ -20,15 +24,31 @@ const getAllTickets = asyncHandler(async (req, res) => {
 // @route POST /tickets
 // @access Private
 const createNewTicket = asyncHandler(async (req, res) => {
-    const { titulo, estado, prioridad, categoria, subcategoria, cliente } = req.body
+  const {
+    cliente,
+    titulo,
+    prioridad,
+    categoria,
+    subcategoria,
+    agenteEncargado
+  } = req.body
 
-     // Confirm data
-  if (!titulo || !estado || !prioridad || !categoria || !subcategoria || !cliente) {
+  // Confirm data
+  const camposRequeridos = [
+    cliente,
+    titulo,
+    prioridad,
+    categoria,
+    subcategoria,
+    agenteEncargado
+  ]
+
+  if (camposRequeridos.some((field) => !field)) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
   // Create and store the new ticket
-  const ticket = await Ticket.create({ titulo, estado, prioridad, categoria, subcategoria, cliente })
+  const ticket = await Ticket.create(req.body)
 
   if (ticket) {
     // Created
@@ -41,29 +61,52 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // @desc Update a ticket
 // @route PATCH /tickets
 // @access Private
+// const updateTicket = asyncHandler(async (req, res) => {
+//   const { id, prioridad, estado, fechadecierre, acciones } = req.body
+
+//   // Confirm data
+//   if (!id || !estado || !prioridad) {
+//     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
+//   }
+
+//   // Confirm ticket exists to update
+//   const ticket = await Ticket.findById(id).exec()
+
+//   if (!ticket) {
+//     return res.status(400).json({ message: 'No se encuentra el ticket' })
+//   }
+
+//   ticket.estado = estado
+//   ticket.prioridad = prioridad
+//   ticket.fechadecierre = fechadecierre
+//   ticket.acciones = acciones
+
+//   const updatedTicket = await ticket.save()
+
+//   res.json(`Ticket '${updatedTicket._id}' actualizado`)
+// })
+
 const updateTicket = asyncHandler(async (req, res) => {
-  const { id, prioridad, estado, fechadecierre, acciones } = req.body
+  const { id, ...ticketInfo } = req.body
 
-  // Confirm data
-  if (!id || !estado || !prioridad) {
-    return res.status(400).json({ message: 'Ingrese los campos requeridos' })
+  // Verificar si el ID proporcionado es válido
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'ID inválido' })
   }
 
-  // Confirm ticket exists to update
-  const ticket = await Ticket.findById(id).exec()
+  // Actualizar el documento en la base de datos
+  const updatedTicket = await Ticket.findOneAndUpdate(
+    { _id: id },
+    { ...ticketInfo },
+    { new: true }
+  )
 
-  if (!ticket) {
-    return res.status(400).json({ message: 'No se encuentra el ticket' })
+  // Verificar si el documento existe y fue actualizado
+  if (!updatedTicket) {
+    return res.status(404).json({ message: 'El ticket no existe' })
   }
 
-  ticket.estado = estado
-  ticket.prioridad = prioridad
-  ticket.fechadecierre = fechadecierre
-  ticket.acciones = acciones
-
-  const updatedTicket = await ticket.save()
-
-  res.json(`Ticket '${updatedTicket._id}' actualizado`)
+  res.json(`Ticket '${updatedTicket.ticketRef}' actualizado`)
 })
 
 // @desc Delete a ticket
@@ -95,5 +138,5 @@ module.exports = {
   getAllTickets,
   createNewTicket,
   updateTicket,
-  deleteTicket,
+  deleteTicket
 }

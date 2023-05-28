@@ -58,7 +58,7 @@ const ticketSchema = new mongoose.Schema(
 )
 
 ticketSchema.plugin(Autoincrement, {
-  inc_field: 'ticketRef',
+  inc_field: 'ticketRef', // Campo de referencia
   id: 'ticketNums',
   start_seq: 1000
 })
