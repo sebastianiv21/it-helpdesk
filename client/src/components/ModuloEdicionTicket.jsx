@@ -91,7 +91,6 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                 <Input
                   type='text'
                   name='usuarioEncargado'
-                  required='' pattern='[A-Z]+'
                   title="El titulo solo debe contener letras mayusculas."
                   id='usuarioEncargado'
                   placeholder='Digite en mayuscula sostenida'
