@@ -16,6 +16,8 @@ $font-family-sans-serif: "Poppins", sans-serif;
   background-size: cover;
   background-position-x: center;
   background-position-y: center;
+  @media (min-width: 991px) {
+  }
 }
 
 #inicioNombre {

@@ -41,18 +41,18 @@ const Inicio = () => {
   })
 
   return (
-    <div className='container-fluid vh-100 d-flex flex-column p-0 ' id='inicio'>
+    <div className='flex container-fluid vh-100 d-flex flex-column p-0 ' id='inicio'>
       <div className='container mt-5'>
         <div className='row justify-content-center mb-5'>
-          <div className='col-sm-5 me-2'>
+          <div className='col-sm-5'>
             <div
               className='card text-center'
-              style={{ width: '25rem', height: '353px' }}
+              style={{ width: '23rem', height: '353px' }}
             >
               <div className='card-header bg-primary text-white'>
                 Tickets pendientes
               </div>
-              <div className='card-body mt-4 text-primary'>
+              <div className='card-body mt-4 text-primary text-center text-aling-center'>
                 <strong id='numero' style={{ fontSize: '7rem' }}>
                   <span id='daily_revenue'>{`${pendientes}`}</span>
                 </strong>
@@ -106,5 +106,4 @@ const Inicio = () => {
     </div>
   )
 }
-
 export default Inicio
