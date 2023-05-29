@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Table } from 'reactstrap'
-import FilaCliente from '../components/FilaCliente'
+import FilaCliente from '@components/FilaCliente'
 import { useData } from '@hooks'
-import SearchBarClientes from '../components/SearchBarClientes'
+import SearchBarClientes from '@components/SearchBarClientes'
 import { useNavigate } from 'react-router-dom'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
-import Paginacion from '../components/Paginacion'
+import Paginacion from '@components/Paginacion'
+import { TablaClientes } from '@components/TablaClientes'
 
 const ListadoClientes = () => {
   const { getClientes } = useData()
@@ -127,6 +128,7 @@ const ListadoClientes = () => {
             setSearchResults={setSearchResults}
           />
         </div>
+        <TablaClientes items={searchResults} />
         <div>
           {/* <!--listado de contactos--> */}
           <div>

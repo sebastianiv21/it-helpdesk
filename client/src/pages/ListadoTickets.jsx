@@ -5,6 +5,7 @@ import { useData } from '@hooks'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import Paginacion from '../components/Paginacion'
+import { TablaTickets } from '@components/TablaTickets'
 
 const ListadoTickets = () => {
   const { getTickets } = useData()
@@ -119,8 +120,8 @@ const ListadoTickets = () => {
   return (
     <div className='container d-flex flex-column gap-3 mt-3 p-0'>
       <SearchBar items={tickets} setSearchResults={setSearchResults} />
+      <TablaTickets items={searchResults} />
       <div>
-        {/* <!-- Ver como agregar boton de envio--> */}
         <div className='p-2 mx-auto bg-primary rounded-top'>
           <div className='d-flex bg-primary justify-content-center align-items-center'>
             <h5 className='text-white m-0'> {searchResults.length} tickets</h5>
