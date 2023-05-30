@@ -1,30 +1,46 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'reactstrap'
+import { useForm } from '@hooks'
+import { useRef } from 'react'
 
-const SearchBar = ({ items, setSearchResults }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+const SearchBar = ({ items, handleData }) => {
+  const { busqueda, onChange, onReset } = useForm({ busqueda: '' })
+  const inputRef = useRef()
 
-  const handleSearchChange = (e) => {
-    if (!e.target.value) return setSearchResults(items);
+  const filterItems = (items, query) => {
+    const searchQuery = query.trim().toLowerCase()
 
-    // const keys = Object.keys(items[0])
+    const searchInObject = (obj) => {
+      for (const key in obj) {
+        const value = obj[key]
 
-    const resultsArray = items.filter(
-      (item) =>
-        item._id.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.titulo.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.prioridad.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.estado.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.categoria.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.createdAt.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.fechadecierre?.toLowerCase().includes(e.target.value.toLowerCase())
-      // keys.some(key => item[key].toLowerCase().includes(e.target.value.toLowerCase()))
-    );
+        if (typeof value === 'object') {
+          if (searchInObject(value)) {
+            return true
+          }
+        } else if (String(value).trim().toLowerCase().includes(searchQuery)) {
+          return true
+        }
+      }
+      return false
+    }
 
-    setSearchResults(resultsArray);
-  };
+    return items.filter((item) => {
+      return searchInObject(item)
+    })
+  }
+
+  const handleChange = (e) => {
+    onChange(e)
+    handleData(filterItems(items, e.target.value))
+  }
+
+  const handleReset = () => {
+    onReset()
+    handleData(items)
+    inputRef.current.focus()
+  }
 
   return (
     <div>
@@ -32,8 +48,8 @@ const SearchBar = ({ items, setSearchResults }) => {
         Búsqueda
       </h5>
       <form
+        onReset={handleReset}
         className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'
-        onSubmit={handleSubmit}
       >
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
@@ -43,22 +59,24 @@ const SearchBar = ({ items, setSearchResults }) => {
           type='text'
           name='busqueda'
           id='busqueda'
-          onChange={handleSearchChange}
+          onChange={handleChange}
+          value={busqueda}
+          ref={inputRef}
           className='form-control m-2'
-          placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoría, fecha de creación o fecha de cierre'
-          maxlength="50"
+          placeholder='Digite el elemento de búsqueda'
+          maxLength='250'
         />
-        <button
+        <Button
           type='reset'
-          className='btn btn-primary text-white d-flex align-items-center m-2'
-          onClick={() => setSearchResults(items)}
+          color='primary'
+          className='d-flex align-items-center m-2'
         >
           <FontAwesomeIcon icon={faEraser} />
           <span className='ms-2'>Limpiar</span>
-        </button>
+        </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

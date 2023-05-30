@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import SearchBar from '../components/SearchBar.jsx'
+import SearchBar from '../components/SearchBar'
 import { useData } from '@hooks'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaTickets } from '@components/TablaTickets'
+import { CustomSpinner } from '@components/CustomSpinner'
 import { Container } from 'reactstrap'
 
 const ListadoTickets = () => {
@@ -11,12 +12,15 @@ const ListadoTickets = () => {
   const [tickets, setTickets] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
   const TICKETS_URL = '/tickets'
 
   useEffect(() => {
+    setIsLoading(true)
     getTickets().then((json) => {
       setTickets(json)
       setSearchResults(json)
+      setIsLoading(false)
       return json
     })
   }, [getTickets])
@@ -81,8 +85,18 @@ const ListadoTickets = () => {
 
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
-      <SearchBar items={tickets} setSearchResults={setSearchResults} />
-      <TablaTickets items={searchResults} />
+      <SearchBar items={tickets} handleData={setSearchResults} />
+      <section>
+        {isLoading && <CustomSpinner className='mt-3' />}
+        {!isLoading && !tickets?.length && (
+          <h4 className='text-center text-primary'>
+            No hay tickets registrados...
+          </h4>
+        )}
+        {!isLoading && Boolean(tickets?.length) && (
+          <TablaTickets items={searchResults} />
+        )}
+      </section>
     </Container>
   )
 }

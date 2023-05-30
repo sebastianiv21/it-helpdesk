@@ -28,9 +28,6 @@ export const TablaTickets = ({ items }) => {
     arrayLength: items.length
   })
   const { parseDate } = useDate()
-  console.log('items', items)
-  console.log(start, end)
-  console.log(items.slice(start, end))
 
   const renderItems = items.slice(start, end).map((item) => (
     <tr key={item._id} style={{ verticalAlign: 'middle' }}>
@@ -61,7 +58,7 @@ export const TablaTickets = ({ items }) => {
   ))
 
   return (
-    <section>
+    <>
       <Table hover bordered striped className='text-center text-uppercase'>
         <thead className='bg-primary text-white'>
           <tr>
@@ -72,6 +69,6 @@ export const TablaTickets = ({ items }) => {
         <tbody className='bg-secondary text-primary'>{renderItems}</tbody>
       </Table>
       <div className='d-flex justify-content-center'>{renderPagination}</div>
-    </section>
+    </>
   )
 }
