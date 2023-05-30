@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useData } from '@hooks'
-import SearchBarClientes from '@components/SearchBarClientes'
+import SearchBar from '@components/SearchBar'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaClientes } from '@components/TablaClientes'
@@ -20,9 +20,9 @@ const ListadoClientes = () => {
     getClientes().then((json) => {
       setClientes(json)
       setSearchResults(json)
+      setIsLoading(false)
       return json
     })
-    setIsLoading(true)
   }, [getClientes])
 
   const onDelete = async (clienteId) => {
@@ -81,7 +81,7 @@ const ListadoClientes = () => {
 
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
-      <SearchBarClientes items={clientes} handleData={setSearchResults} />
+      <SearchBar items={clientes} handleData={setSearchResults} />
       <section>
         {isLoading && <CustomSpinner className='mt-3' />}
         {!isLoading && !clientes?.length && (
