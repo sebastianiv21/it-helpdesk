@@ -21,7 +21,7 @@ const ENCABEZADOS = [
 ]
 
 const renderEncabezados = ENCABEZADOS.map((encabezado) => (
-  <th key={encabezado} style={{ verticalAlign: 'middle' }}>
+  <th key={encabezado} className='align-middle'>
     {encabezado}
   </th>
 ))
@@ -34,7 +34,7 @@ export const TablaClientes = ({ items }) => {
   })
 
   const renderItems = items.slice(start, end).map((item) => (
-    <tr key={item._id} style={{ verticalAlign: 'middle' }}>
+    <tr key={item._id} className='align-middle'>
       <td>{item?.empresa}</td>
       <td>{item?.nombre}</td>
       <td>{item?.apellidos}</td>
