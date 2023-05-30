@@ -4,6 +4,7 @@ import SearchBarClientes from '@components/SearchBarClientes'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaClientes } from '@components/TablaClientes'
+import { CustomSpinner } from '@components/CustomSpinner'
 import { Container } from 'reactstrap'
 
 const ListadoClientes = () => {
@@ -11,14 +12,17 @@ const ListadoClientes = () => {
   const [clientes, setClientes] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
   const CLIENTES_URL = '/clientes'
 
   useEffect(() => {
+    setIsLoading(true)
     getClientes().then((json) => {
       setClientes(json)
       setSearchResults(json)
       return json
     })
+    setIsLoading(true)
   }, [getClientes])
 
   const onDelete = async (clienteId) => {
@@ -77,8 +81,18 @@ const ListadoClientes = () => {
 
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
-      <SearchBarClientes items={clientes} setSearchResults={setSearchResults} />
-      <TablaClientes items={searchResults} />
+      <SearchBarClientes items={clientes} handleData={setSearchResults} />
+      <section>
+        {isLoading && <CustomSpinner className='mt-3' />}
+        {!isLoading && !clientes?.length && (
+          <h4 className='text-center text-primary'>
+            No hay clientes registrados...
+          </h4>
+        )}
+        {!isLoading && Boolean(clientes?.length) && (
+          <TablaClientes items={searchResults} />
+        )}
+      </section>
     </Container>
   )
 }

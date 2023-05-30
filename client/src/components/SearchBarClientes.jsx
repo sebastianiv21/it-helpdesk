@@ -1,29 +1,30 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'reactstrap'
+import { useForm } from '@hooks'
+import { useRef } from 'react'
 
-const SearchBarClientes = ({ items, setSearchResults }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+const SearchBarClientes = ({ items, handleData }) => {
+  const { busqueda, onChange, onReset } = useForm({ busqueda: '' })
+  const inputRef = useRef()
 
-  const handleSearchChange = (e) => {
-    if (!e.target.value) return setSearchResults(items);
+  const filterItems = (items, query) => {
+    return items.filter((item) => {
+      const itemValues = Object.values(item).join('').trim().toLowerCase()
+      return query === '' || itemValues.includes(query.trim().toLowerCase())
+    })
+  }
 
-    // const keys = Object.keys(items[0])
+  const handleChange = (e) => {
+    onChange(e)
+    handleData(filterItems(items, e.target.value))
+  }
 
-    const resultsArray = items.filter(
-      (item) =>
-        item.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.nombre.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.apellidos.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.telefono.toString().includes(e.target.value) ||
-        item.empresa.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.ubicacion.toLowerCase().includes(e.target.value.toLowerCase()) 
-      // keys.some(key => item[key].toLowerCase().includes(e.target.value.toLowerCase()))
-    );
-
-    setSearchResults(resultsArray);
-  };
+  const handleReset = () => {
+    onReset()
+    handleData(items)
+    inputRef.current.focus()
+  }
 
   return (
     <div>
@@ -31,8 +32,8 @@ const SearchBarClientes = ({ items, setSearchResults }) => {
         Búsqueda
       </h5>
       <form
+        onReset={handleReset}
         className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'
-        onSubmit={handleSubmit}
       >
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
@@ -42,22 +43,24 @@ const SearchBarClientes = ({ items, setSearchResults }) => {
           type='text'
           name='busqueda'
           id='busqueda'
-          onChange={handleSearchChange}
+          onChange={handleChange}
+          value={busqueda}
+          ref={inputRef}
           className='form-control m-2'
-          placeholder='Ingrese email, nombres, apellidos, teléfono, empresa o ubicación'
-          maxlength="250"
+          placeholder='Digite el elemento de búsqueda'
+          maxLength='250'
         />
-        <button
+        <Button
           type='reset'
-          className='btn btn-primary text-white d-flex align-items-center m-2'
-          onClick={() => setSearchResults(items)}
+          color='primary'
+          className='d-flex align-items-center m-2'
         >
           <FontAwesomeIcon icon={faEraser} />
           <span className='ms-2'>Limpiar</span>
-        </button>
+        </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBarClientes;
+export default SearchBarClientes

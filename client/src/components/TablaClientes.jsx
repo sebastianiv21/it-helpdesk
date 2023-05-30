@@ -57,7 +57,7 @@ export const TablaClientes = ({ items }) => {
   ))
 
   return (
-    <section>
+    <>
       <Table hover bordered striped className='text-center text-uppercase'>
         <thead className='bg-primary text-white'>
           <tr className='position-relative'>
@@ -77,6 +77,6 @@ export const TablaClientes = ({ items }) => {
         <tbody className='bg-secondary text-primary'>{renderItems}</tbody>
       </Table>
       <div className='d-flex justify-content-center'>{renderPagination}</div>
-    </section>
+    </>
   )
 }

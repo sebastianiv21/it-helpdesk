@@ -1,13 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const SearchBar = ({ items, setSearchResults }) => {
   const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   const handleSearchChange = (e) => {
-    if (!e.target.value) return setSearchResults(items);
+    if (!e.target.value) return setSearchResults(items)
 
     // const keys = Object.keys(items[0])
 
@@ -21,10 +21,10 @@ const SearchBar = ({ items, setSearchResults }) => {
         item.createdAt.toLowerCase().includes(e.target.value.toLowerCase()) ||
         item.fechadecierre?.toLowerCase().includes(e.target.value.toLowerCase())
       // keys.some(key => item[key].toLowerCase().includes(e.target.value.toLowerCase()))
-    );
+    )
 
-    setSearchResults(resultsArray);
-  };
+    setSearchResults(resultsArray)
+  }
 
   return (
     <div>
@@ -46,7 +46,7 @@ const SearchBar = ({ items, setSearchResults }) => {
           onChange={handleSearchChange}
           className='form-control m-2'
           placeholder='Ingrese ID, Titulo, Prioridad, Estado, categoría, fecha de creación o fecha de cierre'
-          maxlength="50"
+          maxlength='50'
         />
         <button
           type='reset'
@@ -58,7 +58,7 @@ const SearchBar = ({ items, setSearchResults }) => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar
