@@ -2,46 +2,40 @@ import { useState } from 'react'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
 
 export function usePagination({ pageSize = 1, arrayLength = 1 }) {
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const pagesCount = Math.ceil(arrayLength / pageSize)
-  console.log(pagesCount)
-
-  const pages = []
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
-  }
-  console.log(pages)
 
   const start = currentPage * pageSize
   const end = start + pageSize
 
-  const renderPaginationNumbers = pages.map((number) => {
-    return (
-      <PaginationItem
-        key={number}
-        id={number}
-        onClick={() => setCurrentPage(number)}
-      >
-        <PaginationLink
-          className={`bg-${
-            currentPage === number ? 'secondary' : 'primary'
-          } text-${currentPage === number ? 'primary' : 'white'}`}
-        >
-          {number}
-        </PaginationLink>
-      </PaginationItem>
-    )
-  })
+  const RenderPaginationNumbers = () => {
+    // handles pages numbers and its render
+    const pages = []
+    for (let i = 0; i < pagesCount; i++) {
+      pages.push(
+        <PaginationItem key={i} id={i} onClick={() => setCurrentPage(i)}>
+          <PaginationLink
+            className={`bg-${
+              currentPage === i ? 'secondary' : 'primary'
+            } text-${currentPage === i ? 'primary' : 'white'}`}
+          >
+            {i + 1}
+          </PaginationLink>
+        </PaginationItem>
+      )
+    }
+    return pages
+  }
 
   const renderPagination = (
     <Pagination>
       {/* primer item */}
-      <PaginationItem onClick={() => setCurrentPage(1)}>
+      <PaginationItem onClick={() => setCurrentPage(0)}>
         <PaginationLink
           first
-          className={`text-white bg-${currentPage === 1 ? 'dark' : 'primary'}`}
-          disabled={currentPage === 1}
+          className={`text-white bg-${currentPage === 0 ? 'dark' : 'primary'}`}
+          disabled={currentPage === 0}
         />
       </PaginationItem>
       {/* item anterior */}
@@ -49,21 +43,21 @@ export function usePagination({ pageSize = 1, arrayLength = 1 }) {
         <PaginationLink
           previous
           onClick={() => setCurrentPage((page) => page - 1)}
-          className={`text-white bg-${currentPage === 1 ? 'dark' : 'primary'}`}
-          disabled={currentPage === 1}
+          className={`text-white bg-${currentPage === 0 ? 'dark' : 'primary'}`}
+          disabled={currentPage === 0}
         />
       </PaginationItem>
       {/* numeros de paginacion */}
-      {renderPaginationNumbers}
+      <RenderPaginationNumbers />
       {/* item siguiente */}
       <PaginationItem>
         <PaginationLink
           next
           onClick={() => setCurrentPage((page) => page + 1)}
           className={`text-white bg-${
-            currentPage === pagesCount ? 'dark' : 'primary'
+            currentPage === pagesCount - 1 ? 'dark' : 'primary'
           }`}
-          disabled={currentPage === pagesCount}
+          disabled={currentPage === pagesCount - 1}
         />
       </PaginationItem>
       {/* ultimo item */}
@@ -71,9 +65,9 @@ export function usePagination({ pageSize = 1, arrayLength = 1 }) {
         <PaginationLink
           last
           className={`text-white bg-${
-            currentPage === pagesCount ? 'dark' : 'primary'
+            currentPage === pagesCount - 1 ? 'dark' : 'primary'
           }`}
-          disabled={currentPage === pagesCount}
+          disabled={currentPage === pagesCount - 1}
         />
       </PaginationItem>
     </Pagination>

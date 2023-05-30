@@ -1,7 +1,11 @@
 import { Table, Button } from 'reactstrap'
 import { usePagination } from '@hooks'
 import { useNavigate } from 'react-router-dom'
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faUserPlus,
+  faPencil,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ENCABEZADOS = [
@@ -17,7 +21,9 @@ const ENCABEZADOS = [
 ]
 
 const renderEncabezados = ENCABEZADOS.map((encabezado) => (
-  <th key={encabezado}>{encabezado}</th>
+  <th key={encabezado} style={{ verticalAlign: 'middle' }}>
+    {encabezado}
+  </th>
 ))
 
 export const TablaClientes = ({ items }) => {
@@ -27,9 +33,32 @@ export const TablaClientes = ({ items }) => {
     arrayLength: items.length
   })
 
+  const renderItems = items.slice(start, end).map((item) => (
+    <tr key={item._id} style={{ verticalAlign: 'middle' }}>
+      <td>{item?.empresa}</td>
+      <td>{item?.nombre}</td>
+      <td>{item?.apellidos}</td>
+      <td>{item?.departamento}</td>
+      <td>{item?.municipio}</td>
+      <td>{item?.direccion}</td>
+      <td>{item?.telefono}</td>
+      <td>{item?.email}</td>
+      <td>
+        <div className='d-flex gap-2'>
+          <Button color='primary' onClick={() => console.log('edit')}>
+            <FontAwesomeIcon icon={faPencil} />
+          </Button>
+          <Button color='primary' onClick={() => console.log('delete')}>
+            <FontAwesomeIcon icon={faTrash} />
+          </Button>
+        </div>
+      </td>
+    </tr>
+  ))
+
   return (
     <section>
-      <Table hover bordered striped className='text-center'>
+      <Table hover bordered striped className='text-center text-uppercase'>
         <thead className='bg-primary text-white'>
           <tr className='position-relative'>
             <th colSpan={ENCABEZADOS.length} className='border-start-0 py-3'>
@@ -45,25 +74,9 @@ export const TablaClientes = ({ items }) => {
           </tr>
           <tr>{renderEncabezados}</tr>
         </thead>
-        <tbody className='bg-secondary text-primary'></tbody>
+        <tbody className='bg-secondary text-primary'>{renderItems}</tbody>
       </Table>
       <div className='d-flex justify-content-center'>{renderPagination}</div>
-      {/* <div>
-        <div className='p-2 mx-auto bg-primary rounded-top'>
-          <div className='d-flex bg-primary justify-content-center align-items-center'>
-            <h5 className='text-white m-0'> {searchResults.length} tickets</h5>
-          </div>
-        </div>
-        <table className='table table-hover table-bordered text-center align-middle'>
-          <thead className='text-white bg-primary text-center'>
-            <tr>{encabezados}</tr>
-          </thead>
-          <tbody className='bg-secondary text-primary'>
-            {listaTickets(currItems)}
-          </tbody>
-        </table>
-      </div>
-     */}
     </section>
   )
 }
