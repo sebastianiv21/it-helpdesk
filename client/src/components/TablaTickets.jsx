@@ -17,7 +17,7 @@ const ENCABEZADOS = [
 ]
 
 const renderEncabezados = ENCABEZADOS.map((encabezado) => (
-  <th key={encabezado} style={{ verticalAlign: 'middle' }}>
+  <th key={encabezado} className='align-middle'>
     {encabezado}
   </th>
 ))
@@ -30,7 +30,7 @@ export const TablaTickets = ({ items }) => {
   const { parseDate } = useDate()
 
   const renderItems = items.slice(start, end).map((item) => (
-    <tr key={item._id} style={{ verticalAlign: 'middle' }}>
+    <tr key={item._id} className='align-middle'>
       <td>{item?.ticketRef}</td>
       <td>{item?.cliente?.empresa}</td>
       <td>

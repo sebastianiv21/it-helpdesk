@@ -5,19 +5,17 @@ $dark: #495057;
 
 // TIPOGRAFIA
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700;900&display=swap');
-$font-family-sans-serif: "Poppins", sans-serif;
+$font-family-sans-serif: 'Poppins', sans-serif;
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
 
 // CUSTOM CSS
 #inicio {
-  background-image: url("/images/Background5.svg");
+  background-image: url('/images/Background5.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
   background-position-y: center;
-  @media (min-width: 991px) {
-  }
 }
 
 #inicioNombre {
@@ -26,39 +24,24 @@ $font-family-sans-serif: "Poppins", sans-serif;
   line-height: 96px;
 }
 
-#numero {
-  font-size: 90px;
+.indicadorNumero {
+  font-size: 7rem;
 }
 
-#numeroP {
-  font-size: 90px;
-}
 //FIREFOX
-#tabla {
+.tablaInicio {
   overflow-y: scroll;
   scrollbar-color: #004643 white;
   scrollbar-width: thin;
-  font-size: 90%;
-  height: 167px;
-
-  }
-
-  //CHROME HPTA IBARRA NO LO BORRE 
-  ::-webkit-scrollbar{
-    width: 9px;
-    height: auto;
-  }
-  ::-webkit-scrollbar-thumb{
-    background-color: #004643;
-    border-radius: 5px;
-  }
-
-
-
-#Linea {
   height: 300px;
 }
 
-#Barras{
-  height: 300px;
+//CHROME HPTA IBARRA NO LO BORRE
+::-webkit-scrollbar {
+  width: 9px;
+  height: auto;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #004643;
+  border-radius: 5px;
 }
