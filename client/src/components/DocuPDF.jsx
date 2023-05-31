@@ -7,7 +7,7 @@ import {
   Image,
   Font
 } from '@react-pdf/renderer'
-import GraficoBarras from "./GraficoBarras";
+
 const DocuPDF = ({ poema }) => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
   const COL_ANCHO_1 = 10
@@ -16,10 +16,7 @@ const DocuPDF = ({ poema }) => {
     family: 'Poppins',
     src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2'
   })
-  // Font.register({
-  //   family: 'Roboto',
-  //   src: 'https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf'
-  // })
+
   const styles = StyleSheet.create({
     encabezado: {
       flexDirection: 'row'
@@ -141,6 +138,7 @@ const DocuPDF = ({ poema }) => {
       fontFamily: 'Poppins'
     }
   })
+
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -381,8 +379,14 @@ const DocuPDF = ({ poema }) => {
                 color: '#004643'
               }}
             >
-              Grafica{' '}
+              Grafica
             </Text>
+            {Boolean(poema) && (
+              <Image
+                style={{ width: '200', height: '200', paddingTop: 30 }}
+                src={poema}
+              />
+            )}
           </View>
         </View>
       </Page>
