@@ -8,10 +8,18 @@ import {
   Font
 } from '@react-pdf/renderer'
 
-const DocuPDF = ({ poema }) => {
-  const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-  const COL_ANCHO_1 = 10
-  const COL_ANCHO_2 = 20
+const DocuPDF = ({ grafica, datos }) => {
+  const {
+    fechaInicio,
+    fechaFinal,
+    empresa,
+    cliente,
+    ticketsAbiertos,
+    ticketsCerrados,
+    tickets,
+    categorias
+  } = datos
+
   Font.register({
     family: 'Poppins',
     src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2'
@@ -153,7 +161,6 @@ const DocuPDF = ({ poema }) => {
           <Text
             style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold' }}
           >
-            {' '}
             IT TECHNOLOGY
           </Text>
           <Text
@@ -164,7 +171,6 @@ const DocuPDF = ({ poema }) => {
               paddingBottom: '4'
             }}
           >
-            {' '}
             HelpDesk
           </Text>
         </View>
@@ -179,18 +185,11 @@ const DocuPDF = ({ poema }) => {
         >
           <View style={styles.encabezado}>
             <Text style={{ color: 'white', fontSize: '13px' }}> EMPRESA:</Text>
-            <Text style={{ color: 'white', fontSize: '13px' }}>
-              {' '}
-              FUNDACION ALTO MAGDALENA
-            </Text>
+            <Text style={{ color: 'white', fontSize: '13px' }}>{empresa}</Text>
             <View style={{ flexDirection: 'row', marginLeft: '90' }}>
+              <Text style={{ color: 'white', fontSize: '13px' }}>PERIODO:</Text>
               <Text style={{ color: 'white', fontSize: '13px' }}>
-                {' '}
-                PERIODO:
-              </Text>
-              <Text style={{ color: 'white', fontSize: '13px' }}>
-                {' '}
-                20/05/2023 - 31/06/2023
+                {fechaInicio} - {fechaFinal}
               </Text>
             </View>
           </View>
@@ -381,10 +380,10 @@ const DocuPDF = ({ poema }) => {
             >
               Grafica
             </Text>
-            {Boolean(poema) && (
+            {Boolean(grafica) && (
               <Image
                 style={{ width: '200', height: '200', paddingTop: 30 }}
-                src={poema}
+                src={grafica}
               />
             )}
           </View>

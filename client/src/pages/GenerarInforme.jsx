@@ -11,7 +11,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
 import { format } from 'date-fns'
 import { PDFViewer } from '@react-pdf/renderer'
-import GraficoBarras from '@components/GraficoBarras'
+import GraficoInforme from '@components/GraficoInforme'
 
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
@@ -34,6 +34,87 @@ const GenerarInforme = () => {
 
   const chartCanvas = document.querySelector('canvas')
   const chartDataURL = chartCanvas && chartCanvas.toDataURL()
+
+  const datosInforme = {
+    fechaInicio: '2023-02-03',
+    fechaFinal: '2023-02-03',
+    empresa: 'Empresa 1',
+    cliente: 'Cliente 1',
+    ticketsAbiertos: 3,
+    ticketsCerrados: 6,
+    tickets: [
+      {
+        id: 1,
+        empresa: 'Empresa 1',
+        cliente: 'Cliente 1',
+        titulo: 'Titulo 1',
+        prioridad: 'Alta',
+        estado: 'Abierto',
+        categoria: 'Hardware',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 2,
+        empresa: 'Empresa 2',
+        cliente: 'Cliente 2',
+        titulo: 'Titulo 2',
+        prioridad: 'Media',
+        estado: 'Cerrado',
+        categoria: 'Software',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 3,
+        empresa: 'Empresa 3',
+        cliente: 'Cliente 3',
+        titulo: 'Titulo 3',
+        prioridad: 'Baja',
+        estado: 'Abierto',
+        categoria: 'Infraestructura',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      }
+    ],
+    categorias: [
+      {
+        categoria: 'Hardware',
+        cantidad: 3,
+        subcategorias: [
+          {
+            subcategoria: 'Escaner',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        categoria: 'Software',
+        cantidad: 6,
+        subcategorias: [
+          {
+            subcategoria: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            subcategoria: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      }
+    ]
+  }
 
   return (
     <div className='container m-4 mx-auto'>
@@ -96,7 +177,12 @@ const GenerarInforme = () => {
               {verPdf ? 'Ocultar pdf' : 'Ver pdf'}
             </Button>
             <PDFDownloadLink
-              document={<DocuPDF poema={chartCanvas && chartDataURL} />}
+              document={
+                <DocuPDF
+                  grafica={chartCanvas && chartDataURL}
+                  datos={datosInforme}
+                />
+              }
               fileName={nombreArchivo}
             >
               <Button
@@ -114,15 +200,20 @@ const GenerarInforme = () => {
       <div className='mt-3'>
         {verPdf ? (
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
-            <DocuPDF poema={chartCanvas && chartDataURL} />
+            <DocuPDF
+              grafica={chartCanvas && chartDataURL}
+              datos={datosInforme}
+            />
           </PDFViewer>
         ) : null}
       </div>
       <div className='offcanvas'>
-        <GraficoBarras />
+        <GraficoInforme />
       </div>
     </div>
   )
 }
 
 export default GenerarInforme
+
+// Se atendieron TANTOS tickets de la categoria TAL de los cuales TANTOS fueron resueltos y TANTOS no resueltos
