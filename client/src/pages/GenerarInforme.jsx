@@ -11,6 +11,8 @@ import { PDFDownloadLink } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
 import { format } from 'date-fns'
 import { PDFViewer } from '@react-pdf/renderer'
+import GraficoBarras from '@components/GraficoBarras'
+
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
   const [empresas, setEmpresas] = useState([])
@@ -29,6 +31,9 @@ const GenerarInforme = () => {
   const optEmpresas = empresas.map((empresa) => {
     return <option key={empresa} value={`${empresa}`}>{`${empresa}`}</option>
   })
+
+  const chartCanvas = document.querySelector('canvas')
+  const chartDataURL = chartCanvas && chartCanvas.toDataURL()
 
   return (
     <div className='container m-4 mx-auto'>
@@ -90,7 +95,10 @@ const GenerarInforme = () => {
               <FontAwesomeIcon icon={faEye} />
               {verPdf ? 'Ocultar pdf' : 'Ver pdf'}
             </Button>
-            <PDFDownloadLink document={<DocuPDF />} fileName={nombreArchivo}>
+            <PDFDownloadLink
+              document={<DocuPDF poema={chartCanvas && chartDataURL} />}
+              fileName={nombreArchivo}
+            >
               <Button
                 color='primary'
                 type='button'
@@ -106,9 +114,12 @@ const GenerarInforme = () => {
       <div className='mt-3'>
         {verPdf ? (
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
-            <DocuPDF />
+            <DocuPDF poema={chartCanvas && chartDataURL} />
           </PDFViewer>
         ) : null}
+      </div>
+      <div className='offcanvas'>
+        <GraficoBarras />
       </div>
     </div>
   )
