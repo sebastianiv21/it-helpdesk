@@ -90,25 +90,25 @@ const GenerarInforme = () => {
     ],
     categorias: [
       {
-        categoria: 'Hardware',
+        nombre: 'Hardware',
         cantidad: 3,
         subcategorias: [
           {
-            subcategoria: 'Escaner',
+            nombre: 'Escaner',
             cantidad: 3
           }
         ]
       },
       {
-        categoria: 'Software',
+        nombre: 'Software',
         cantidad: 6,
         subcategorias: [
           {
-            subcategoria: 'Antivirus',
+            nombre: 'Antivirus',
             cantidad: 3
           },
           {
-            subcategoria: 'Sistema Operativo',
+            nombre: 'Sistema Operativo',
             cantidad: 3
           }
         ]
@@ -208,7 +208,8 @@ const GenerarInforme = () => {
         ) : null}
       </div>
       <div className='offcanvas'>
-        <GraficoInforme />
+        <GraficoInforme 
+         datos={datosInforme}/>
       </div>
     </div>
   )

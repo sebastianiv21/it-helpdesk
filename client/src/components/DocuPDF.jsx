@@ -20,6 +20,24 @@ const DocuPDF = ({ grafica, datos }) => {
     categorias
   } = datos
 
+const descripcion =categorias?.map((categoria) => (
+`Categoría ${categoria.nombre} = ${categoria.cantidad}
+subcategoría
+ ${categoria.subcategorias?.map((subcategoria) => (
+  `${subcategoria.nombre}=${subcategoria.cantidad}\n`
+ ))}\n`
+
+))
+
+// categoria hardware = 28
+//   sub categoria 
+//     Escaner=9
+//     Impresora=8
+//     Monitor=1
+
+
+ 
+
   Font.register({
     family: 'Poppins',
     src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2'
@@ -147,6 +165,38 @@ const DocuPDF = ({ grafica, datos }) => {
     }
   })
 
+  const datosTabla = tickets?.map((ticket) => (
+    <View key={ticket.id} style={styles.tablaFila}>
+            <View style={styles.anchoColumna1}>
+              <Text style={styles.tablaCelda}>{ticket.id}</Text>
+            </View>
+            <View style={styles.anchoColumna1}>
+              <Text style={styles.tablaCelda}>{ticket.empresa}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.cliente}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.titulo}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.prioridad}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.estado}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.categoria}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.fechaCreacion}</Text>
+            </View>
+            <View style={styles.anchoColumna2}>
+              <Text style={styles.tablaCelda}>{ticket.fechaCierre}</Text>
+            </View>
+          </View> 
+  ) ) 
+
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -202,8 +252,7 @@ const DocuPDF = ({ grafica, datos }) => {
           >
             <Text style={{ color: 'white', fontSize: '13px' }}> CLIENTE:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>
-              {' '}
-              MIGUEL RUBIANO
+              {cliente}
             </Text>
           </View>
         </View>
@@ -227,7 +276,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 textAlign: 'center'
               }}
             >
-              Cerrados{' '}
+              Cerrados
             </Text>
             <Text
               style={{
@@ -238,7 +287,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 paddingTop: 5
               }}
             >
-              5{' '}
+              {ticketsCerrados}
             </Text>
           </View>
           <View style={styles.carta}>
@@ -250,7 +299,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 textAlign: 'center'
               }}
             >
-              Abiertos{' '}
+              Abiertos
             </Text>
             <Text
               style={{
@@ -261,7 +310,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 paddingTop: 5
               }}
             >
-              5{' '}
+              {ticketsAbiertos}
             </Text>
           </View>
         </View>
@@ -297,35 +346,7 @@ const DocuPDF = ({ grafica, datos }) => {
           </View>
         </View>
         <View style={styles.tablados}>
-          <View style={styles.tablaFila}>
-            <View style={styles.anchoColumna1}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna1}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>lolete</Text>
-            </View>
-          </View>
+         {datosTabla}
         </View>
 
         <View></View>
@@ -355,7 +376,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 color: '#004643'
               }}
             >
-              Descripción{' '}
+              Descripción
             </Text>
             <Text
               style={{
@@ -366,7 +387,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 paddingTop: 30
               }}
             >
-              ASDADSADDASDSADSDASDDASASASDASDADADASDASDSADADSADADASDADSASDSADASDA{' '}
+              {descripcion}
             </Text>
           </View>
           <View style={styles.descripcion}>
