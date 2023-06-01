@@ -112,7 +112,77 @@ const GenerarInforme = () => {
             cantidad: 3
           }
         ]
-      }
+      },
+      {
+        nombre: 'Infraestructura',
+        cantidad: 9,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Servidores',
+        cantidad: 12,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Ciberseguridad',
+        cantidad: 14,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Seguridad Electrónica',
+        cantidad: 4,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Telecomunicaciones',
+        cantidad: 3,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
     ]
   }
 
@@ -207,7 +277,7 @@ const GenerarInforme = () => {
           </PDFViewer>
         ) : null}
       </div>
-      <div className='offcanvas'>
+      <div className='offcanvas' style={{position:'relative', width:'80vw'}}>
         <GraficoInforme 
          datos={datosInforme}/>
       </div>

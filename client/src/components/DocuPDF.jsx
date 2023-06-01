@@ -401,7 +401,7 @@ subcategoría
           <View>
             {Boolean(grafica) && (
               <Image
-                style={{ width: '200', height: '200', paddingTop: 15 }}
+                style={{ width: '80vw' }}
                 src={grafica}
               />
             )}

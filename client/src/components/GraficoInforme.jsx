@@ -62,9 +62,28 @@ const GraficoInforme = ({ datos }) => {
   }
 
   const options = {
+    responsive: true,
+    
     plugins: {
       legend: { display: false }
-    }
+    },
+    scales: {
+      y: {
+          beginAtZero: true,
+          ticks: {
+              font: {
+                  size: 40 // Tamaño de las letras en el eje y
+              }
+          }
+      },
+      x: {
+          ticks: {
+              font: {
+                  size: 40 // Tamaño de las letras en el eje x
+              }
+          }
+      }
+  },
   }
 
   return <Bar data={data} options={options} />
