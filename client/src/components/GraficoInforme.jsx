@@ -12,21 +12,14 @@ import { Bar } from 'react-chartjs-2'
 
 CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
-const GraficoInforme = (props) => {
+const GraficoInforme = ({ datos }) => {
+  const { categorias } = datos
   const data = {
-    labels: [
-      'Hardware',
-      'Software',
-      'Infraestructura',
-      'Servidores',
-      'Ciberseguridad',
-      'Seguridad Electronica',
-      'Telecomunicaciones'
-    ],
+    labels: categorias?.map((categoria) => (categoria.nombre)),
     datasets: [
       {
-        label: 'Escaner',
-        data: [3, 6, 9, 7, 8, 4, 9],
+        label: 'Cantidad',
+        data: categorias?.map((categoria) => (categoria.cantidad)),
         backgroundColor: '#004643'
       }
       // datos de ensayo
@@ -68,7 +61,11 @@ const GraficoInforme = (props) => {
     ]
   }
 
-  const options = {}
+  const options = {
+    plugins: {
+      legend: { display: false }
+    }
+  }
 
   return <Bar data={data} options={options} />
 }
