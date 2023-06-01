@@ -50,24 +50,35 @@ subcategoría
 
     primera: {
       flexDirection: 'row',
-      alignSelf: 'center'
+      alignSelf: 'center',
     },
     text: {
       color: '#004643',
-      fontSize: '42px',
-      margin: '5'
+      fontSize: '35px',
+      textAlign: 'center'
     },
     carta: {
       display: 'flex',
       flexDirecion: 'colum',
       alingItem: 'center',
-      margin: '5px',
-      border: '1px',
+      margin: '25px',
       padding: '10px',
-      borderRadius: '10px',
+      borderRadius: '5px',
       backgroundColor: '#c2e7c9',
       height: '70',
       width: '100',
+      marginHorizontal: '15'
+    },
+    cartatotal: {
+      display: 'flex',
+      flexDirecion: 'colum',
+      alingItem: 'center',
+      margin: '5px',
+      padding: '10px',
+      borderRadius: '5px',
+      backgroundColor: '#004643',
+      height: '90',
+      width: '110',
       marginHorizontal: '15'
     },
     tabla: {
@@ -78,7 +89,7 @@ subcategoría
       borderWidth: 1,
       borderRightWidth: 0,
       borderBottomWidth: 0,
-      marginTop: 20,
+      marginTop: 10,
       backgroundColor: '#004643',
       marginLeft: 10,
       marginRight: 10,
@@ -150,15 +161,12 @@ subcategoría
     },
     descripcion: {
       display: 'flex',
-      flexDirecion: 'colum',
-      alingItem: 'center',
-      margin: '5px',
-      border: '1px',
-      padding: '20px',
-      borderRadius: '10px',
+      paddingTop: '5px',
+      borderRadius: '5px',
       backgroundColor: '#c2e7c9',
-      width: '250',
-      height: '350'
+      width: '550',
+      height: '150',
+      marginLeft: 20,
     },
     page: {
       fontFamily: 'Poppins'
@@ -264,7 +272,7 @@ subcategoría
             alignItems: 'center'
           }}
         >
-          <Text style={styles.text}> Tickets Generados</Text>
+          <Text style={styles.text}> Trazabilidad </Text>
         </View>
         <View style={styles.primera}>
           <View style={styles.carta}>
@@ -276,7 +284,7 @@ subcategoría
                 textAlign: 'center'
               }}
             >
-              Cerrados
+              CERRADOS
             </Text>
             <Text
               style={{
@@ -290,6 +298,29 @@ subcategoría
               {ticketsCerrados}
             </Text>
           </View>
+          <View style={styles.cartatotal}>
+            <Text
+              style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center'
+              }}
+            >
+              TOTALES
+            </Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: '30px',
+                color: 'white',
+                fontWeight: 'bold',
+                paddingTop: 5
+              }}
+            >
+              {ticketsAbiertos+ticketsCerrados}
+            </Text>
+          </View>
           <View style={styles.carta}>
             <Text
               style={{
@@ -299,7 +330,7 @@ subcategoría
                 textAlign: 'center'
               }}
             >
-              Abiertos
+              ABIERTOS
             </Text>
             <Text
               style={{
@@ -358,7 +389,7 @@ subcategoría
             alignItems: 'center'
           }}
         >
-          <Text style={styles.text}> Categorias mas solicitadas</Text>
+          <Text style={styles.text}> Categorias </Text>
         </View>
         <View
           style={{
@@ -367,48 +398,36 @@ subcategoría
             padding: '4'
           }}
         >
-          <View style={styles.descripcion}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643'
-              }}
-            >
-              Descripción
-            </Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643',
-                paddingTop: 30
-              }}
-            >
-              {descripcion}
-            </Text>
-          </View>
-          <View style={styles.descripcion}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643'
-              }}
-            >
-              Grafica
-            </Text>
+          <View>
             {Boolean(grafica) && (
               <Image
-                style={{ width: '200', height: '200', paddingTop: 30 }}
+                style={{ width: '200', height: '200', paddingTop: 15 }}
                 src={grafica}
               />
             )}
           </View>
         </View>
+        <View>
+        <Text
+              style={styles.text}
+            >
+              DESCRIPCION
+            </Text>
+
+        </View>
+        <View style={styles.descripcion}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: '15px',
+                fontWeight: 'bold',
+                color: '#004643',
+                paddingTop:2
+              }}
+            >
+              {descripcion}
+            </Text>
+          </View>
       </Page>
     </Document>
   )
