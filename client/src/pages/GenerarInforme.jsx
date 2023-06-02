@@ -86,7 +86,251 @@ const GenerarInforme = () => {
         categoria: 'Servidores',
         fechaCreacion: '2023-02-03',
         fechaCierre: '2023-02-03'
-      }
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      
+
     ],
     categorias: [
       {

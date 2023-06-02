@@ -7,7 +7,7 @@ import {
   Image,
   Font
 } from '@react-pdf/renderer'
-
+import logoinforme from "/images/logoinforme.png"
 const DocuPDF = ({ grafica, datos }) => {
   const {
     fechaInicio,
@@ -54,7 +54,7 @@ subcategoría
     },
     text: {
       color: '#004643',
-      fontSize: '35px',
+      fontSize: '25px',
       textAlign: 'center'
     },
     carta: {
@@ -133,7 +133,8 @@ subcategoría
       margin: 5,
       fontSize: 10,
       fontWeight: 200,
-      color: 'white'
+      color: 'white',
+      marginTop: '8'
     },
     anchoColumna1: {
       width: 68,
@@ -163,14 +164,24 @@ subcategoría
       display: 'flex',
       paddingTop: '5px',
       borderRadius: '5px',
-      backgroundColor: '#c2e7c9',
       width: '550',
       height: '150',
       marginLeft: 20,
     },
     page: {
-      fontFamily: 'Poppins'
-    }
+      fontFamily: 'Poppins',
+      paddingBottom: '60',
+      marginTop: '30'
+    },
+    pageNumber: {
+      position: 'absolute',
+      fontSize: 12,
+      bottom: 30,
+      left: 0,
+      right: 0,
+      textAlign: 'center',
+      color: '#004643',
+    },
   })
 
   const datosTabla = tickets?.map((ticket) => (
@@ -207,16 +218,21 @@ subcategoría
 
   return (
     <Document>
-      <Page size='A4' style={styles.page}>
+      <Page size='A4' style={styles.page} >
         <View
           style={{
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: '#c2e7c9',
-            paddingTop: '5'
-          }}
-        >
-          <Text
+            marginTop: '-30',
+          }}>
+            <View>
+            <Image
+        src={logoinforme} style={{width: '60'}}
+      />
+            </View>
+            <View>
+            <Text
             style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold' }}
           >
             IT TECHNOLOGY
@@ -231,6 +247,8 @@ subcategoría
           >
             HelpDesk
           </Text>
+            </View>
+          
         </View>
         <View
           style={{
@@ -242,11 +260,11 @@ subcategoría
           }}
         >
           <View style={styles.encabezado}>
-            <Text style={{ color: 'white', fontSize: '13px' }}> EMPRESA:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4'  }}> EMPRESA:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>{empresa}</Text>
-            <View style={{ flexDirection: 'row', marginLeft: '90' }}>
-              <Text style={{ color: 'white', fontSize: '13px' }}>PERIODO:</Text>
-              <Text style={{ color: 'white', fontSize: '13px' }}>
+            <View style={{ flexDirection: 'row', marginLeft: '230' }}>
+              <Text style={{ color: 'white', fontSize: '13px',marginTop: '2',marginRight: '4' }}>PERIODO:</Text>
+              <Text style={{ color: 'white', fontSize: '13px', }}>
                 {fechaInicio} - {fechaFinal}
               </Text>
             </View>
@@ -258,7 +276,7 @@ subcategoría
               paddingBottom: '4'
             }}
           >
-            <Text style={{ color: 'white', fontSize: '13px' }}> CLIENTE:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4' }}> CLIENTE:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>
               {cliente}
             </Text>
@@ -272,13 +290,13 @@ subcategoría
             alignItems: 'center'
           }}
         >
-          <Text style={styles.text}> Trazabilidad </Text>
+          <Text style={styles.text}> Informe de trazabilidad </Text>
         </View>
         <View style={styles.primera}>
           <View style={styles.carta}>
             <Text
               style={{
-                fontSize: '15px',
+                fontSize: '12px',
                 fontWeight: 'bold',
                 color: '#004643',
                 textAlign: 'center'
@@ -307,7 +325,7 @@ subcategoría
                 textAlign: 'center'
               }}
             >
-              TOTALES
+              TOTAL
             </Text>
             <Text
               style={{
@@ -324,7 +342,7 @@ subcategoría
           <View style={styles.carta}>
             <Text
               style={{
-                fontSize: '15px',
+                fontSize: '12px',
                 fontWeight: 'bold',
                 color: '#004643',
                 textAlign: 'center'
@@ -379,17 +397,17 @@ subcategoría
         <View style={styles.tablados}>
          {datosTabla}
         </View>
-
-        <View></View>
+        <View wrap={false}>
         <View
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: '25'
           }}
         >
-          <Text style={styles.text}> Categorias </Text>
+          <Text style={styles.text}> Grafico de categorias </Text>
         </View>
         <View
           style={{
@@ -407,11 +425,13 @@ subcategoría
             )}
           </View>
         </View>
-        <View>
+        </View>
+        <View wrap={false}>
+        <View style={{marginTop:'30'}}>
         <Text
               style={styles.text}
             >
-              DESCRIPCION
+              Descripción del grafico
             </Text>
 
         </View>
@@ -422,12 +442,16 @@ subcategoría
                 fontSize: '15px',
                 fontWeight: 'bold',
                 color: '#004643',
-                paddingTop:2
+                paddingTop:6
               }}
             >
               {descripcion}
             </Text>
           </View>
+        </View>
+        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+        `${pageNumber} / ${totalPages}`
+      )} fixed />
       </Page>
     </Document>
   )
