@@ -1,13 +1,14 @@
 import CampoFormulario from './CampoFormulario';
-import {Input, Label, FormGroup} from 'reactstrap'
+import {Input, Label, FormGroup, Container, Form} from 'reactstrap'
 const ModuloEdicionCliente = ({ onChange, data }) => {
   return (
-    <div className='container m-4 mx-auto'>
+    <Container className='m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
         <h5 className='m-0 ps-4 py-3'>Edicion de Cliente</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom text-primary'>
-        <form>
+        {/* PENDIENTE REVISAR SI CAUSA DAÑO EN CODIGO */}
+        <Form>
           <div className='d-flex justify-content-around mb-3'>
           <FormGroup>
             <Label for='empresa'> Empresa (*) </Label>
@@ -16,7 +17,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='empresa'
             value={data.empresa}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minLength="1" maxLength="50" 
             title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>
@@ -27,7 +28,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='nombre'
             value={data.nombre}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minLength="1" maxLength="50" 
             title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>
@@ -38,7 +39,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='apellidos'
             value={data.apellidos}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minLength="1" maxLength="50" 
             title="El titulo solo debe contener letras."
             > </Input>
             </FormGroup>           
@@ -61,7 +62,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             <FormGroup>
             <Label for='vereda'> Vereda (*) </Label>
             <Input type='text'
-             minlength="1" maxlength="50" 
+             minLength="1" maxLength="50" 
             name='vereda'
             id='vereda' 
             title="El titulo solo debe contener letras."> 
@@ -77,7 +78,7 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='telefono'
             value={data.telefono}
             onChange={onChange}
-            minlength="1" maxlength="15"
+            minLength="1" maxLength="15"
             required='' pattern='[0-9]+'
             title="El titulo solo debe contener numeros."
             > </Input>
@@ -89,13 +90,13 @@ const ModuloEdicionCliente = ({ onChange, data }) => {
             id='email'
             value={data.email}
             onChange={onChange}
-            minlength="1" maxlength="50" 
+            minLength="1" maxLength="50" 
             > </Input>
           </FormGroup>
           </div>
-        </form>
+        </Form>
       </div>
-    </div>
+    </Container>
   );
 };
 

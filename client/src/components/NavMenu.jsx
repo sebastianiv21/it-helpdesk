@@ -7,6 +7,8 @@ import {
 import NavMenuData from '../shared/NavMenuData'
 import { useData } from '@hooks'
 import useLogout from '../hooks/useLogout'
+import { Container, Button} from 'reactstrap'
+
 
 // Components
 import DropdownCustom from './DropdownCustom'
@@ -26,7 +28,7 @@ const NavMenu = () => {
   return (
     <>
       <nav className='navbar bg-primary p-1'>
-        <div className='container-fluid'>
+        <Container fluid>
           <ul className='navbar-nav d-flex flex-row align-items-center gap-1 me-auto'>
             <li className='nav-item'>
               <Link
@@ -43,13 +45,13 @@ const NavMenu = () => {
             ))}
           </ul>
           {auth.nombreUsuario ? (
-            <button
+            <Button
               onClick={signOut}
               className='bg-primary border-0 text-white text-decoration-none'
             >
               <FontAwesomeIcon icon={faRightFromBracket} />
               <span className='ms-2'>Cerrar sesión</span>
-            </button>
+            </Button>
           ) : (
             <Link
               to='/login'
@@ -59,7 +61,7 @@ const NavMenu = () => {
               <span className='ms-2'>Iniciar sesión</span>
             </Link>
           )}
-        </div>
+        </Container>
       </nav>
     </>
   )

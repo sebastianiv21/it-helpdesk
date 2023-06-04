@@ -5,13 +5,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormGroup, Input, Label, Button } from 'reactstrap'
+import { FormGroup, Input, Label, Button, Form } from 'reactstrap'
 import { useData, useDate } from '@hooks'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
 import { format } from 'date-fns'
 import { PDFViewer } from '@react-pdf/renderer'
 import GraficoInforme from '@components/GraficoInforme'
+import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
@@ -117,26 +118,26 @@ const GenerarInforme = () => {
   }
 
   return (
-    <div className='container m-4 mx-auto'>
+    <Container className='m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
         <h5 className='m-0 ps-4 py-3'>Generación de informes</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom'>
-        <form>
-          <div className='row d-flex justify-content-around mb-3 text-center'>
-            <div className='col-sm'>
+        <Form>
+          <Row className='d-flex justify-content-around mb-3 text-center'>
+            <Col sm>
               <FormGroup>
                 <Label for='fechaInicio'>Fecha Inicio</Label>
                 <Input type='date' name='fechaInicio' id='fechaInicio' />
               </FormGroup>
-            </div>
-            <div className='col-sm'>
+            </Col>
+            <Col sm>
               <FormGroup>
                 <Label for='fechaFinal'>Fecha Final</Label>
                 <Input type='date' name='fechaFinal' id='fechaFinal' />
               </FormGroup>
-            </div>
-            <div className='col-sm'>
+            </Col>
+            <Col sm>
               <FormGroup>
                 <Label for='empresa'>Empresa</Label>
                 <Input type='select' name='empresa' id='empresa'>
@@ -144,10 +145,10 @@ const GenerarInforme = () => {
                   {optEmpresas}
                 </Input>
               </FormGroup>
-            </div>
-          </div>
-          <div className='row d-flex justify-content-around mb-3 text-center'>
-            <div className='col-sm'>
+            </Col>
+          </Row>
+          <Row className='d-flex justify-content-around mb-3 text-center'>
+            <Col sm>
               <FormGroup>
                 <Label for='cliente'>Cliente</Label>
                 <Input type='select' name='cliente' id='cliente'>
@@ -155,8 +156,8 @@ const GenerarInforme = () => {
                   {optEmpresas}
                 </Input>
               </FormGroup>
-            </div>
-            <div className='col-sm'>
+            </Col>
+            <Col sm>
               <FormGroup>
                 <Label for='categoria'>Categoría</Label>
                 <Input type='select' name='categoria' id='categoria'>
@@ -164,8 +165,8 @@ const GenerarInforme = () => {
                   {optEmpresas}
                 </Input>
               </FormGroup>
-            </div>
-          </div>
+            </Col>
+          </Row>
           <div className='d-flex justify-content-end gap-2'>
             <Button
               type='button'
@@ -195,7 +196,7 @@ const GenerarInforme = () => {
               </Button>
             </PDFDownloadLink>
           </div>
-        </form>
+        </Form>
       </div>
       <div className='mt-3'>
         {verPdf ? (
@@ -211,7 +212,7 @@ const GenerarInforme = () => {
         <GraficoInforme 
          datos={datosInforme}/>
       </div>
-    </div>
+    </Container>
   )
 }
 

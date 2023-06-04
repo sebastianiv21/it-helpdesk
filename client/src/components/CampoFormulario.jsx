@@ -1,13 +1,14 @@
+import { Input, Label } from 'reactstrap'
 const CampoFormulario = ({ nombre, etiqueta, onChange, value }) => {
   return (
     <div>
-      <label
+      <Label
         htmlFor={nombre}
         className='form-label m-0'
       >
         {etiqueta} (*)
-      </label>
-      <input
+      </Label>
+      <Input
         type='text'
         name={nombre}
         id={nombre}

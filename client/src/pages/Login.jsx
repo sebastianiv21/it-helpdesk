@@ -2,7 +2,7 @@ import { useData } from '@hooks'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-
+import {Container, Form, Col, Label, Input, Button} from 'reactstrap'
 import axios from '../api/axios'
 const LOGIN_URL = '/auth'
 
@@ -55,7 +55,7 @@ const Login = () => {
   }
 
   return (
-    <div className='container mt-5 mx-auto d-flex'>
+    <Container className='mt-5 mx-auto d-flex'>
       <div
         className='rounded shadow-lg p-3 align-self-center mx-auto mt-5'
         style={{
@@ -64,55 +64,53 @@ const Login = () => {
           backgroundSize: 'contain'
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <div className='col-auto d-flex align-items-center mb-3 fs-4'>
-            <label
+        <Form onSubmit={handleSubmit}>
+          <Col xs='auto' className='d-flex align-items-center mb-3 fs-4'>
+            <Label
               htmlFor='nombreUsuario'
-              className='form-label m-0 me-2 text-primary'
+              className=' m-0 me-2 text-primary'
             >
               Usuario
-            </label>
+            </Label>
             <div className='w-100'>
-              <input
+              <Input
                 type='text'
                 name='nombreUsuario'
                 id='nombreUsuario'
-                className='form-control'
                 autoComplete='off'
                 onChange={(e) => setUser(e.target.value)}
                 value={user}
                 required
               />
             </div>
-          </div>
-          <div className='col-auto d-flex align-items-center mb-3 fs-4'>
-            <label
+          </Col>
+          <Col xs='auto' className='d-flex align-items-center mb-3 fs-4'>
+            <Label
               htmlFor='contrasenha'
               className='form-label m-0 me-2 text-primary'
             >
               Contraseña
-            </label>
+            </Label>
             <div className='w-100'>
-              <input
+              <Input
                 type='password'
                 name='contrasenha'
                 id='contrasenha'
-                className='form-control'
                 onChange={(e) => setPwd(e.target.value)}
                 value={pwd}
                 required
               />
             </div>
-          </div>
+          </Col>
           {/* <p className={errMsg ? 'text-'}>No autorizado</p> */}
           <div className='d-flex justify-content-end'>
-            <button className='btn btn-primary text-white me-3'>
+            <Button color='primary' className='text-white me-3'>
               Iniciar sesión
-            </button>
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
-    </div>
+    </Container>
   )
 }
 
