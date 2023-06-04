@@ -26,7 +26,7 @@ const renderEncabezados = ENCABEZADOS.map((encabezado) => (
   </th>
 ))
 
-export const TablaClientes = ({ items }) => {
+export const TablaClientes = ({ items, acciones }) => {
   const navigate = useNavigate()
   const { start, end, renderPagination } = usePagination({
     pageSize: 10,
@@ -44,11 +44,14 @@ export const TablaClientes = ({ items }) => {
       <td>{item?.telefono}</td>
       <td>{item?.email}</td>
       <td>
-        <div className='d-flex gap-2'>
+        <div className='d-flex gap-2 justify-content-center'>
           <Button color='primary' onClick={() => console.log('edit')}>
             <FontAwesomeIcon icon={faPencil} />
           </Button>
-          <Button color='primary' onClick={() => console.log('delete')}>
+          <Button
+            color='primary'
+            onClick={() => acciones.handleDeleteToggle(item)}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </Button>
         </div>

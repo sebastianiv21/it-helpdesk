@@ -9,10 +9,10 @@ import { FormGroup, Input, Label, Button, Form } from 'reactstrap'
 import { useData, useDate } from '@hooks'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
-import { format } from 'date-fns'
+import { format, parseISO, startOfDay, endOfDay } from 'date-fns'
 import { PDFViewer } from '@react-pdf/renderer'
 import GraficoInforme from '@components/GraficoInforme'
-import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
@@ -20,6 +20,7 @@ const GenerarInforme = () => {
   const [verPdf, setVerPdf] = useState(false)
   const { parseDate } = useDate()
   const nombreArchivo = `Informe-${format(new Date(), 'dd-MM-yyyy')}.pdf`
+  const { formData, onChange } = useForm()
 
   useEffect(() => {
     getClientes().then((json) => {
@@ -117,6 +118,16 @@ const GenerarInforme = () => {
     ]
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const { fechaInicio, fechaFinal } = formData
+
+    const fechaInicioParseada = startOfDay(new Date(fechaInicio))
+    const fechaFinalParseada = endOfDay(new Date(fechaFinal))
+
+    console.log(fechaInicioParseada, fechaFinalParseada)
+  }
+
   return (
     <Container className='m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
@@ -128,13 +139,25 @@ const GenerarInforme = () => {
             <Col sm>
               <FormGroup>
                 <Label for='fechaInicio'>Fecha Inicio</Label>
-                <Input type='date' name='fechaInicio' id='fechaInicio' />
+                <Input
+                  type='date'
+                  name='fechaInicio'
+                  id='fechaInicio'
+                  value={formData.fechaInicio}
+                  onChange={onChange}
+                />
               </FormGroup>
             </Col>
             <Col sm>
               <FormGroup>
                 <Label for='fechaFinal'>Fecha Final</Label>
-                <Input type='date' name='fechaFinal' id='fechaFinal' />
+                <Input
+                  type='date'
+                  name='fechaFinal'
+                  id='fechaFinal'
+                  value={formData.fechaFinal}
+                  onChange={onChange}
+                />
               </FormGroup>
             </Col>
             <Col sm>
@@ -169,7 +192,7 @@ const GenerarInforme = () => {
           </Row>
           <div className='d-flex justify-content-end gap-2'>
             <Button
-              type='button'
+              type='submit'
               onClick={() => setVerPdf(!verPdf)}
               color='primary'
               className='d-flex gap-2 align-items-center'
@@ -209,8 +232,7 @@ const GenerarInforme = () => {
         ) : null}
       </div>
       <div className='offcanvas'>
-        <GraficoInforme 
-         datos={datosInforme}/>
+        <GraficoInforme datos={datosInforme} />
       </div>
     </Container>
   )

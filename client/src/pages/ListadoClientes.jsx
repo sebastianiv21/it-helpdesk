@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useData } from '@hooks'
+import { useData, useToggle } from '@hooks'
 import SearchBar from '@components/SearchBar'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaClientes } from '@components/TablaClientes'
 import { CustomSpinner } from '@components/CustomSpinner'
-import { Container } from 'reactstrap'
+import {
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 
 const ListadoClientes = () => {
   const { getClientes } = useData()
@@ -13,6 +20,9 @@ const ListadoClientes = () => {
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isDeleteOpen, toggleDelete] = useToggle()
+  const [currentCliente, setCurrentCliente] = useState(null)
+
   const CLIENTES_URL = '/clientes'
 
   useEffect(() => {
@@ -25,16 +35,18 @@ const ListadoClientes = () => {
     })
   }, [getClientes])
 
-  const onDelete = async (clienteId) => {
+  const onDelete = async (cliente) => {
     try {
       await axios.delete(CLIENTES_URL, {
-        data: { id: clienteId }
+        data: { id: cliente._id }
       })
       toast.info(`Cliente eliminado exitosamente`, {
         theme: 'colored'
       })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== clienteId)
+        const updatedItems = prevItems.filter(
+          (item) => item._id !== cliente._id
+        )
         return updatedItems
       })
     } catch (err) {
@@ -45,6 +57,8 @@ const ListadoClientes = () => {
       } else {
         setErrMsg('No se pudo eliminar el cliente')
       }
+    } finally {
+      toggleDelete()
     }
   }
 
@@ -79,6 +93,20 @@ const ListadoClientes = () => {
     }
   }
 
+  const handleDeleteToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleDelete()
+  }
+
+  const acciones = {
+    handleDeleteToggle,
+    onUpdate
+  }
+
+  useEffect(() => {
+    console.log(currentCliente)
+  }, [currentCliente])
+
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
       <SearchBar items={clientes} handleData={setSearchResults} />
@@ -90,9 +118,28 @@ const ListadoClientes = () => {
           </h4>
         )}
         {!isLoading && Boolean(clientes?.length) && (
-          <TablaClientes items={searchResults} />
+          <TablaClientes items={searchResults} acciones={acciones} />
         )}
       </section>
+      {/* modal de eliminacion */}
+      <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
+        <ModalHeader toggle={toggleDelete}>Eliminar cliente</ModalHeader>
+        <ModalBody>
+          <p>
+            {`¿Está seguro que desea eliminar al cliente ${currentCliente?.nombre}
+            ${currentCliente?.apellidos}?`}
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleDelete}>
+            Cancelar
+          </Button>
+          <Button color='primary' onClick={() => onDelete(currentCliente)}>
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
     </Container>
   )
 }
