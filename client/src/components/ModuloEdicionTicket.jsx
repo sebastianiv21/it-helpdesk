@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup, Label, Input, Col, Row, Table } from 'reactstrap';
 import FilaAccion from './FilaAccion';
 
 const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, addAccionHandler }) => {
@@ -17,8 +17,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
     <>
       <div className='bg-secondary rounded'>
         <div className='d-flex justify-content-around mb-2 text-center p-3'>
-          <div className='col-2'>
-            <label htmlFor='prioridad'> Prioridad (*)</label>
+          <Col xs={2} >
+            <Label htmlFor='prioridad'> Prioridad (*)</Label>
             <select
               name='prioridad'
               className='form-select text-center mt-2'
@@ -29,9 +29,9 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               <option value='Media'>Media</option>
               <option value='Baja'>Baja</option>
             </select>
-          </div>
-          <div className='col-2'>
-            <label htmlFor='estado'> Estado (*)</label>
+          </Col>
+          <Col xs={2} >
+            <Label htmlFor='estado'> Estado (*)</Label>
             <select
               name='estado'
               className='form-select text-center mt-2'
@@ -41,9 +41,9 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               <option value='Abierto'>Abierto</option>
               <option value='Cerrado'>Cerrado</option>
             </select>
-          </div>
+          </Col>
           {data.estado === 'Cerrado' && (
-            <div className='col-2'>
+             <Col xs={2} >
               <Label htmlFor='fechadecierre'>Fecha de cierre</Label>
               <Input
                 className='text-center'
@@ -54,7 +54,7 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                 value={data?.fechadecierre}
                 type='date'
               />
-            </div>
+            </Col>
           )}
         </div>
       </div>
@@ -62,8 +62,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
         <div className='bg-primary text-white rounded-top'>
           <h4 className='m-0 ps-4 py-2'>Historial de acciones</h4>
         </div>
-        <div className='row d-flex p-1 rounded-bottom text-primary'>
-          <div className='col-6'>
+        <Row className='d-flex p-1 rounded-bottom text-primary'>
+        <Col xs={6} >
             <FormGroup>
               <Label
                 for='fecha'
@@ -96,8 +96,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   placeholder='Digite en mayuscula sostenida'
                   value={formAccionData.usuarioEncargado}
                   onChange={onChangeAccion}
-                  minlength="1"
-                  maxlength="50"
+                  minLength="1"
+                  maxLength="50"
                 />
               </FormGroup>
               <FormGroup>
@@ -111,8 +111,8 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   id='descripcion'
                   name='descripcion'
                   type='text'
-                  minlength="1"
-                  maxlength="250"
+                  minLength="1"
+                  maxLength="250"
                   value={formAccionData.descripcion}
                   onChange={onChangeAccion}
                   placeholder='Ingrese la accion y/o procedimiento realizado'
@@ -126,12 +126,15 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
               <FontAwesomeIcon icon={faPlus} />
               Agregar
             </Button>
-          </div>
-          <div className='col-6'>
+          </Col>
+          <Col xs={6} >
             <div className='bg-secondary rounded-bottom d-flex justify-content-around mt-3'>
-              <table
+              {/* REVISAR SI DAÑA EL CODIGO TABLE */}
+              <Table
                 border={1}
-                className='table table-hover table-bordered rounded rounded-2 overflow-hidden'
+                className='overflow-hidden'
+                bordered
+                hover
                 id='datatable'
               >
                 <thead>
@@ -142,10 +145,10 @@ const ModuloEdicionTicket = ({ onChange, onChangeAccion, data, formAccionData, a
                   </tr>
                 </thead>
                 <tbody className='text-primary bg-white'>{listaAcciones}</tbody>
-              </table>
+              </Table>
             </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     </>
   );

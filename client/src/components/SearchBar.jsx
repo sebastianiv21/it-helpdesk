@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEraser, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { Button } from 'reactstrap'
+import { Button, Form, Input } from 'reactstrap'
 import { useForm } from '@hooks'
 import { useRef } from 'react'
 
@@ -47,7 +47,7 @@ const SearchBar = ({ items, handleData }) => {
       <h5 className='bg-primary text-white p-2 m-0 rounded-top ps-3'>
         Búsqueda
       </h5>
-      <form
+      <Form
         onReset={handleReset}
         className='bg-secondary rounded-bottom p-2 px-4 d-flex gap-3 justify-content-around'
       >
@@ -55,7 +55,7 @@ const SearchBar = ({ items, handleData }) => {
           icon={faMagnifyingGlass}
           className='align-self-center text-primary fs-4'
         />
-        <input
+        <Input
           type='text'
           name='busqueda'
           id='busqueda'
@@ -74,7 +74,7 @@ const SearchBar = ({ items, handleData }) => {
           <FontAwesomeIcon icon={faEraser} />
           <span className='ms-2'>Limpiar</span>
         </Button>
-      </form>
+      </Form>
     </div>
   )
 }

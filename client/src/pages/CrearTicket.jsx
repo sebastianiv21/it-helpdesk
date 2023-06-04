@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from '../api/axios.js'
 import { toast } from 'react-toastify'
 import {
+  Container,
   Form,
   Row,
   Col,
@@ -194,7 +195,7 @@ const CrearTicket = () => {
   ))
 
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'>
+    <Container className='d-flex flex-column gap-3 mt-3'>
       <div>
         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
@@ -359,7 +360,7 @@ const CrearTicket = () => {
           </Form>
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

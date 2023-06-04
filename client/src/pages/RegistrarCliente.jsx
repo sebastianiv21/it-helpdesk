@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { useForm, useData } from '@hooks'
-import { Form, Row, Col, FormGroup, Input, Label, Button } from 'reactstrap'
+import { Form, Row, Col, FormGroup, Input, Label, Button, Container } from 'reactstrap'
 
 const initialState = {
   empresa: '',
@@ -84,7 +84,7 @@ const RegistrarCliente = () => {
   }
 
   return (
-    <div className='container m-4 mx-auto'>
+    <Container className='m-4 mx-auto'>
       <div className='bg-primary text-white rounded-top'>
         <h5 className='m-0 ps-4 py-3'>Registrar Cliente</h5>
       </div>
@@ -231,7 +231,7 @@ const RegistrarCliente = () => {
           </Row>
         </Form>
       </div>
-    </div>
+    </Container>
   )
 }
 
