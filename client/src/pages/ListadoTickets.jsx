@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react'
-import SearchBar from '../components/SearchBar'
-import { useData } from '@hooks'
+import SearchBar from '@components/SearchBar'
+import { useData, useToggle } from '@hooks'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaTickets } from '@components/TablaTickets'
 import { CustomSpinner } from '@components/CustomSpinner'
-import { Container } from 'reactstrap'
+import {
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 
 const ListadoTickets = () => {
   const { getTickets } = useData()
@@ -13,6 +20,9 @@ const ListadoTickets = () => {
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isDeleteOpen, toggleDelete] = useToggle()
+  const [currentTicket, setCurrentTicket] = useState(null)
+
   const TICKETS_URL = '/tickets'
 
   useEffect(() => {
@@ -29,16 +39,16 @@ const ListadoTickets = () => {
   //   console.log('searchResults', searchResults)
   // }, [searchResults])
 
-  const onDelete = async (ticketId) => {
+  const onDelete = async (ticket) => {
     try {
       await axios.delete(TICKETS_URL, {
-        data: { id: ticketId }
+        data: { id: ticket._id }
       })
       toast.info(`Ticket eliminado exitosamente`, {
         theme: 'colored'
       })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== ticketId)
+        const updatedItems = prevItems.filter((item) => item._id !== ticket._id)
         return updatedItems
       })
     } catch (err) {
@@ -49,6 +59,8 @@ const ListadoTickets = () => {
       } else {
         setErrMsg('No se pudo eliminar el ticket')
       }
+    } finally {
+      toggleDelete()
     }
   }
 
@@ -83,6 +95,16 @@ const ListadoTickets = () => {
     }
   }
 
+  const handleDeleteToggle = (ticket) => {
+    setCurrentTicket(ticket)
+    toggleDelete()
+  }
+
+  const acciones = {
+    handleDeleteToggle,
+    onUpdate
+  }
+
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
       <SearchBar items={tickets} handleData={setSearchResults} />
@@ -94,9 +116,27 @@ const ListadoTickets = () => {
           </h4>
         )}
         {!isLoading && Boolean(tickets?.length) && (
-          <TablaTickets items={searchResults} />
+          <TablaTickets items={searchResults} acciones={acciones} />
         )}
       </section>
+      {/* modal de eliminacion */}
+      <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
+        <ModalHeader toggle={toggleDelete}>Eliminar cliente</ModalHeader>
+        <ModalBody>
+          <p>
+            {`¿Está seguro que desea eliminar el ticket ${currentTicket?.ticketRef}?`}
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleDelete}>
+            Cancelar
+          </Button>
+          <Button color='primary' onClick={() => onDelete(currentTicket)}>
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
     </Container>
   )
 }

@@ -22,7 +22,7 @@ const renderEncabezados = ENCABEZADOS.map((encabezado) => (
   </th>
 ))
 
-export const TablaTickets = ({ items }) => {
+export const TablaTickets = ({ items, acciones }) => {
   const { start, end, renderPagination } = usePagination({
     pageSize: 10,
     arrayLength: items.length
@@ -49,7 +49,10 @@ export const TablaTickets = ({ items }) => {
           <Button color='primary' onClick={() => console.log('edit')}>
             <FontAwesomeIcon icon={faPencil} />
           </Button>
-          <Button color='primary' onClick={() => console.log('delete')}>
+          <Button
+            color='primary'
+            onClick={() => acciones.handleDeleteToggle(item)}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </Button>
         </div>
