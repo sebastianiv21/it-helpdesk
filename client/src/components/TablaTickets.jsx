@@ -46,7 +46,10 @@ export const TablaTickets = ({ items, acciones }) => {
       </td>
       <td>
         <div className='d-flex gap-2'>
-          <Button color='primary' onClick={() => console.log('edit')}>
+          <Button
+            color='primary'
+            onClick={() => acciones.handleEditToggle(item)}
+          >
             <FontAwesomeIcon icon={faPencil} />
           </Button>
           <Button
