@@ -219,36 +219,38 @@ subcategoría
   return (
     <Document>
       <Page size='A4' style={styles.page} >
-        <View
+        <View  
           style={{
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: '#c2e7c9',
-            marginTop: '-30',
+            marginTop: '-40',
+            marginBottom: -25
           }}>
-            <View>
+            <View style={{flexDirection:'row', marginTop: -20}}>
+
             <Image
-        src={logoinforme} style={{width: '60'}}
+        src={logoinforme} style={{width: '200', marginLeft:'-50', marginTop: -5}}
       />
-            </View>
-            <View>
-            <Text
-            style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold' }}
+
+      <View>
+      <Text
+            style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold', marginTop:'30', marginLeft: -60 }}
           >
             IT TECHNOLOGY
           </Text>
-          <Text
+      <Text
             style={{
               color: '#004643',
-              fontSize: '15px',
-              paddingLeft: '4',
-              paddingBottom: '4'
+              fontSize: '25px',
+              marginLeft: -58,
+              marginTop: -10
             }}
           >
             HelpDesk
           </Text>
+      </View>
             </View>
-          
         </View>
         <View
           style={{
