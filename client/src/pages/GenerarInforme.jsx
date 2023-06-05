@@ -46,10 +46,7 @@ const GenerarInforme = () => {
     ticketsCerrados: 6,
     tickets: [
       {
-        id: 1,
-        empresa: 'Empresa 1',
-        cliente: 'Cliente 1',
-        titulo: 'Titulo 1',
+        titulo: 'El raton se comio los cables del pc',
         prioridad: 'Alta',
         estado: 'Abierto',
         categoria: 'Hardware',
@@ -57,10 +54,7 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 2,
-        empresa: 'Empresa 2',
-        cliente: 'Cliente 2',
-        titulo: 'Titulo 2',
+        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
         prioridad: 'Media',
         estado: 'Cerrado',
         categoria: 'Software',
@@ -68,10 +62,7 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 3,
-        empresa: 'Empresa 3',
-        cliente: 'Cliente 3',
-        titulo: 'Titulo 3',
+        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
         prioridad: 'Baja',
         estado: 'Abierto',
         categoria: 'Infraestructura',
@@ -79,9 +70,14 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
+        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -90,9 +86,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -101,9 +94,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -112,9 +102,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -123,9 +110,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -134,9 +118,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -145,9 +126,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -156,9 +134,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -167,9 +142,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -178,9 +150,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -189,9 +158,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -200,9 +166,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -211,9 +174,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -222,9 +182,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -233,9 +190,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -244,9 +198,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -255,9 +206,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -266,9 +214,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -277,9 +222,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -288,9 +230,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -299,9 +238,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -310,9 +246,6 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
         titulo: 'Titulo 4',
         prioridad: 'Alta',
         estado: 'Cerrado',
@@ -320,19 +253,6 @@ const GenerarInforme = () => {
         fechaCreacion: '2023-02-03',
         fechaCierre: '2023-02-03'
       },
-      {
-        id: 4,
-        empresa: 'Empresa 4',
-        cliente: 'Cliente 4',
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      
-
     ],
     categorias: [
       {
