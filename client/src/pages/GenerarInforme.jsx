@@ -6,7 +6,7 @@ import {
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormGroup, Input, Label, Button, Form } from 'reactstrap'
-import { useData, useDate } from '@hooks'
+import { useData, useDate, useForm } from '@hooks'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
 import { format, parseISO, startOfDay, endOfDay } from 'date-fns'
@@ -88,7 +88,251 @@ const GenerarInforme = () => {
         categoria: 'Servidores',
         fechaCreacion: '2023-02-03',
         fechaCierre: '2023-02-03'
-      }
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      {
+        id: 4,
+        empresa: 'Empresa 4',
+        cliente: 'Cliente 4',
+        titulo: 'Titulo 4',
+        prioridad: 'Alta',
+        estado: 'Cerrado',
+        categoria: 'Servidores',
+        fechaCreacion: '2023-02-03',
+        fechaCierre: '2023-02-03'
+      },
+      
+
     ],
     categorias: [
       {
@@ -114,7 +358,77 @@ const GenerarInforme = () => {
             cantidad: 3
           }
         ]
-      }
+      },
+      {
+        nombre: 'Infraestructura',
+        cantidad: 9,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Servidores',
+        cantidad: 12,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Ciberseguridad',
+        cantidad: 14,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Seguridad Electrónica',
+        cantidad: 4,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
+      {
+        nombre: 'Telecomunicaciones',
+        cantidad: 3,
+        subcategorias: [
+          {
+            nombre: 'Antivirus',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema Operativo',
+            cantidad: 3
+          }
+        ]
+      },
     ]
   }
 
@@ -231,7 +545,7 @@ const GenerarInforme = () => {
           </PDFViewer>
         ) : null}
       </div>
-      <div className='offcanvas'>
+      <div className='offcanvas' style={{position:'relative', width:'80vw'}}>
         <GraficoInforme datos={datosInforme} />
       </div>
     </Container>

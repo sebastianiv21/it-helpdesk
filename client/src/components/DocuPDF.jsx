@@ -7,7 +7,7 @@ import {
   Image,
   Font
 } from '@react-pdf/renderer'
-
+import logoinforme from "/images/logoinforme.png"
 const DocuPDF = ({ grafica, datos }) => {
   const {
     fechaInicio,
@@ -50,24 +50,35 @@ subcategoría
 
     primera: {
       flexDirection: 'row',
-      alignSelf: 'center'
+      alignSelf: 'center',
     },
     text: {
       color: '#004643',
-      fontSize: '42px',
-      margin: '5'
+      fontSize: '25px',
+      textAlign: 'center'
     },
     carta: {
       display: 'flex',
       flexDirecion: 'colum',
       alingItem: 'center',
-      margin: '5px',
-      border: '1px',
+      margin: '25px',
       padding: '10px',
-      borderRadius: '10px',
+      borderRadius: '5px',
       backgroundColor: '#c2e7c9',
       height: '70',
       width: '100',
+      marginHorizontal: '15'
+    },
+    cartatotal: {
+      display: 'flex',
+      flexDirecion: 'colum',
+      alingItem: 'center',
+      margin: '5px',
+      padding: '10px',
+      borderRadius: '5px',
+      backgroundColor: '#004643',
+      height: '90',
+      width: '110',
       marginHorizontal: '15'
     },
     tabla: {
@@ -78,7 +89,7 @@ subcategoría
       borderWidth: 1,
       borderRightWidth: 0,
       borderBottomWidth: 0,
-      marginTop: 20,
+      marginTop: 10,
       backgroundColor: '#004643',
       marginLeft: 10,
       marginRight: 10,
@@ -122,7 +133,8 @@ subcategoría
       margin: 5,
       fontSize: 10,
       fontWeight: 200,
-      color: 'white'
+      color: 'white',
+      marginTop: '8'
     },
     anchoColumna1: {
       width: 68,
@@ -150,19 +162,26 @@ subcategoría
     },
     descripcion: {
       display: 'flex',
-      flexDirecion: 'colum',
-      alingItem: 'center',
-      margin: '5px',
-      border: '1px',
-      padding: '20px',
-      borderRadius: '10px',
-      backgroundColor: '#c2e7c9',
-      width: '250',
-      height: '350'
+      paddingTop: '5px',
+      borderRadius: '5px',
+      width: '550',
+      height: '150',
+      marginLeft: 20,
     },
     page: {
-      fontFamily: 'Poppins'
-    }
+      fontFamily: 'Poppins',
+      paddingBottom: '60',
+      marginTop: '30'
+    },
+    pageNumber: {
+      position: 'absolute',
+      fontSize: 12,
+      bottom: 30,
+      left: 0,
+      right: 0,
+      textAlign: 'center',
+      color: '#004643',
+    },
   })
 
   const datosTabla = tickets?.map((ticket) => (
@@ -199,30 +218,39 @@ subcategoría
 
   return (
     <Document>
-      <Page size='A4' style={styles.page}>
-        <View
+      <Page size='A4' style={styles.page} >
+        <View  
           style={{
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: '#c2e7c9',
-            paddingTop: '5'
-          }}
-        >
-          <Text
-            style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold' }}
+            marginTop: '-40',
+            marginBottom: -25
+          }}>
+            <View style={{flexDirection:'row', marginTop: -20}}>
+
+            <Image
+        src={logoinforme} style={{width: '200', marginLeft:'-50', marginTop: -5}}
+      />
+
+      <View>
+      <Text
+            style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold', marginTop:'30', marginLeft: -60 }}
           >
             IT TECHNOLOGY
           </Text>
-          <Text
+      <Text
             style={{
               color: '#004643',
-              fontSize: '15px',
-              paddingLeft: '4',
-              paddingBottom: '4'
+              fontSize: '25px',
+              marginLeft: -58,
+              marginTop: -10
             }}
           >
             HelpDesk
           </Text>
+      </View>
+            </View>
         </View>
         <View
           style={{
@@ -234,11 +262,11 @@ subcategoría
           }}
         >
           <View style={styles.encabezado}>
-            <Text style={{ color: 'white', fontSize: '13px' }}> EMPRESA:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4'  }}> EMPRESA:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>{empresa}</Text>
-            <View style={{ flexDirection: 'row', marginLeft: '90' }}>
-              <Text style={{ color: 'white', fontSize: '13px' }}>PERIODO:</Text>
-              <Text style={{ color: 'white', fontSize: '13px' }}>
+            <View style={{ flexDirection: 'row', marginLeft: '230' }}>
+              <Text style={{ color: 'white', fontSize: '13px',marginTop: '2',marginRight: '4' }}>PERIODO:</Text>
+              <Text style={{ color: 'white', fontSize: '13px', }}>
                 {fechaInicio} - {fechaFinal}
               </Text>
             </View>
@@ -250,7 +278,7 @@ subcategoría
               paddingBottom: '4'
             }}
           >
-            <Text style={{ color: 'white', fontSize: '13px' }}> CLIENTE:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4' }}> CLIENTE:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>
               {cliente}
             </Text>
@@ -264,19 +292,19 @@ subcategoría
             alignItems: 'center'
           }}
         >
-          <Text style={styles.text}> Tickets Generados</Text>
+          <Text style={styles.text}> Informe de trazabilidad </Text>
         </View>
         <View style={styles.primera}>
           <View style={styles.carta}>
             <Text
               style={{
-                fontSize: '15px',
+                fontSize: '12px',
                 fontWeight: 'bold',
                 color: '#004643',
                 textAlign: 'center'
               }}
             >
-              Cerrados
+              CERRADOS
             </Text>
             <Text
               style={{
@@ -290,16 +318,39 @@ subcategoría
               {ticketsCerrados}
             </Text>
           </View>
+          <View style={styles.cartatotal}>
+            <Text
+              style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: 'white',
+                textAlign: 'center'
+              }}
+            >
+              TOTAL
+            </Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: '30px',
+                color: 'white',
+                fontWeight: 'bold',
+                paddingTop: 5
+              }}
+            >
+              {ticketsAbiertos+ticketsCerrados}
+            </Text>
+          </View>
           <View style={styles.carta}>
             <Text
               style={{
-                fontSize: '15px',
+                fontSize: '12px',
                 fontWeight: 'bold',
                 color: '#004643',
                 textAlign: 'center'
               }}
             >
-              Abiertos
+              ABIERTOS
             </Text>
             <Text
               style={{
@@ -348,17 +399,17 @@ subcategoría
         <View style={styles.tablados}>
          {datosTabla}
         </View>
-
-        <View></View>
+        <View wrap={false}>
         <View
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            marginTop: '25'
           }}
         >
-          <Text style={styles.text}> Categorias mas solicitadas</Text>
+          <Text style={styles.text}> Grafico de categorias </Text>
         </View>
         <View
           style={{
@@ -367,48 +418,42 @@ subcategoría
             padding: '4'
           }}
         >
-          <View style={styles.descripcion}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643'
-              }}
-            >
-              Descripción
-            </Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643',
-                paddingTop: 30
-              }}
-            >
-              {descripcion}
-            </Text>
-          </View>
-          <View style={styles.descripcion}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#004643'
-              }}
-            >
-              Grafica
-            </Text>
+          <View>
             {Boolean(grafica) && (
               <Image
-                style={{ width: '200', height: '200', paddingTop: 30 }}
+                style={{ width: '80vw' }}
                 src={grafica}
               />
             )}
           </View>
         </View>
+        </View>
+        <View wrap={false}>
+        <View style={{marginTop:'30'}}>
+        <Text
+              style={styles.text}
+            >
+              Descripción del grafico
+            </Text>
+
+        </View>
+        <View style={styles.descripcion}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: '15px',
+                fontWeight: 'bold',
+                color: '#004643',
+                paddingTop:6
+              }}
+            >
+              {descripcion}
+            </Text>
+          </View>
+        </View>
+        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+        `${pageNumber} / ${totalPages}`
+      )} fixed />
       </Page>
     </Document>
   )
