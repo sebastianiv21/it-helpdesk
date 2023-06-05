@@ -39,7 +39,6 @@ const ticketSchema = new mongoose.Schema(
         usuarioEncargado: {
           type: String
         }
-        // TODO: revisar estructura de la subcolección
       }
     ],
     fechadecierre: Date,

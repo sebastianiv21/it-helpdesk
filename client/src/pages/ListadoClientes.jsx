@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useData, useToggle } from '@hooks'
 import SearchBar from '@components/SearchBar'
+import EditarCliente from '@components/EditarCliente'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaClientes } from '@components/TablaClientes'
@@ -20,12 +21,13 @@ const ListadoClientes = () => {
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isEditOpen, toggleEdit] = useToggle()
   const [isDeleteOpen, toggleDelete] = useToggle()
   const [currentCliente, setCurrentCliente] = useState(null)
 
   const CLIENTES_URL = '/clientes'
 
-  useEffect(() => {
+  const handleGetClientes = () => {
     setIsLoading(true)
     getClientes().then((json) => {
       setClientes(json)
@@ -33,7 +35,11 @@ const ListadoClientes = () => {
       setIsLoading(false)
       return json
     })
-  }, [getClientes])
+  }
+
+  useEffect(() => {
+    handleGetClientes()
+  }, [])
 
   const onDelete = async (cliente) => {
     try {
@@ -49,6 +55,7 @@ const ListadoClientes = () => {
         )
         return updatedItems
       })
+      // handleGetClientes()
     } catch (err) {
       if (!err?.response) {
         setErrMsg('El servidor no responde')
@@ -63,23 +70,19 @@ const ListadoClientes = () => {
   }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData
-
     try {
       await axios.patch(CLIENTES_URL, formData)
-      toast.info(`Cliente actualizado exitosamente`, {
+      toast.info('Cliente actualizado exitosamente', {
         theme: 'colored'
       })
+
       const clientIndex = searchResults.findIndex(
-        (client) => client._id === formData.id
+        (client) => client._id === formData._id
       )
-      const existingClient = searchResults[clientIndex]
+
       setSearchResults((prevItems) => {
-        prevItems[clientIndex] = {
-          ...existingClient,
-          ...rest
-        }
         const updatedItems = [...prevItems]
+        updatedItems[clientIndex] = formData
         return updatedItems
       })
     } catch (err) {
@@ -90,6 +93,8 @@ const ListadoClientes = () => {
       } else {
         setErrMsg('La actualización del cliente falló')
       }
+    } finally {
+      toggleEdit()
     }
   }
 
@@ -98,14 +103,25 @@ const ListadoClientes = () => {
     toggleDelete()
   }
 
+  const handleEditToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleEdit()
+  }
+
   const acciones = {
     handleDeleteToggle,
-    onUpdate
+    handleEditToggle
   }
 
   useEffect(() => {
     console.log(currentCliente)
   }, [currentCliente])
+
+  const editarClienteProps = {
+    cliente: currentCliente,
+    onUpdate,
+    toggleEdit
+  }
 
   return (
     <Container className='d-flex flex-column gap-3 mt-3'>
@@ -140,6 +156,10 @@ const ListadoClientes = () => {
         </ModalFooter>
       </Modal>
       {/* modal de edicion */}
+      <Modal centered size='lg' isOpen={isEditOpen} toggle={toggleEdit}>
+        <ModalHeader toggle={toggleEdit}>Editar cliente</ModalHeader>
+        <EditarCliente {...editarClienteProps} />
+      </Modal>
     </Container>
   )
 }

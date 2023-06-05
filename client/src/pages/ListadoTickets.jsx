@@ -5,6 +5,7 @@ import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaTickets } from '@components/TablaTickets'
 import { CustomSpinner } from '@components/CustomSpinner'
+import EditarTicket from '@components/EditarTicket'
 import {
   Container,
   Button,
@@ -20,6 +21,7 @@ const ListadoTickets = () => {
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isEditOpen, toggleEdit] = useToggle()
   const [isDeleteOpen, toggleDelete] = useToggle()
   const [currentTicket, setCurrentTicket] = useState(null)
 
@@ -65,23 +67,25 @@ const ListadoTickets = () => {
   }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData
+    if (formData?.estado === 'Cerrado' && !formData?.fechadecierre) {
+      toast.error('Ingrese la fecha de cierre', {
+        theme: 'colored'
+      })
+      return
+    }
 
     try {
       await axios.patch(TICKETS_URL, formData)
-      toast.info(`Ticket actualizado exitosamente`, {
+      toast.info('Ticket actualizado exitosamente', {
         theme: 'colored'
       })
       const ticketIndex = searchResults.findIndex(
-        (ticket) => ticket._id === formData.id
+        (ticket) => ticket._id === formData._id
       )
-      const existingTicket = searchResults[ticketIndex]
+
       setSearchResults((prevItems) => {
-        prevItems[ticketIndex] = {
-          ...existingTicket,
-          ...rest
-        }
         const updatedItems = [...prevItems]
+        updatedItems[ticketIndex] = formData
         return updatedItems
       })
     } catch (err) {
@@ -92,7 +96,14 @@ const ListadoTickets = () => {
       } else {
         setErrMsg('La actualización del ticket falló')
       }
+    } finally {
+      toggleEdit()
     }
+  }
+
+  const handleEditToggle = (ticket) => {
+    setCurrentTicket(ticket)
+    toggleEdit()
   }
 
   const handleDeleteToggle = (ticket) => {
@@ -102,7 +113,13 @@ const ListadoTickets = () => {
 
   const acciones = {
     handleDeleteToggle,
-    onUpdate
+    handleEditToggle
+  }
+
+  const editarTicketProps = {
+    ticket: currentTicket,
+    onUpdate,
+    toggleEdit
   }
 
   return (
@@ -121,7 +138,7 @@ const ListadoTickets = () => {
       </section>
       {/* modal de eliminacion */}
       <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
-        <ModalHeader toggle={toggleDelete}>Eliminar cliente</ModalHeader>
+        <ModalHeader toggle={toggleDelete}>Eliminar ticket</ModalHeader>
         <ModalBody>
           <p>
             {`¿Está seguro que desea eliminar el ticket ${currentTicket?.ticketRef}?`}
@@ -137,6 +154,12 @@ const ListadoTickets = () => {
         </ModalFooter>
       </Modal>
       {/* modal de edicion */}
+      <Modal centered fullscreen isOpen={isEditOpen} toggle={toggleEdit}>
+        <ModalHeader toggle={toggleEdit}>
+          Editar ticket {currentTicket?.ticketRef}
+        </ModalHeader>
+        <EditarTicket {...editarTicketProps} />
+      </Modal>
     </Container>
   )
 }
