@@ -72,7 +72,7 @@ const ListadoClientes = () => {
   const onUpdate = async (formData) => {
     try {
       await axios.patch(CLIENTES_URL, formData)
-      toast.info(`Cliente actualizado exitosamente`, {
+      toast.info('Cliente actualizado exitosamente', {
         theme: 'colored'
       })
 
@@ -85,7 +85,6 @@ const ListadoClientes = () => {
         updatedItems[clientIndex] = formData
         return updatedItems
       })
-      // handleGetClientes()
     } catch (err) {
       if (!err?.response) {
         setErrMsg('El servidor no responde')

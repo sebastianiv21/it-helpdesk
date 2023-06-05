@@ -1,6 +1,6 @@
 const Ticket = require('../models/Ticket')
-const Cliente = require('../models/Cliente')
 const asyncHandler = require('express-async-handler')
+const mongoose = require('mongoose')
 
 // @desc Get all tickets
 // @route GET /tickets
@@ -87,7 +87,7 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // })
 
 const updateTicket = asyncHandler(async (req, res) => {
-  const { id, ...ticketInfo } = req.body
+  const { _id: id, ...ticketInfo } = req.body
 
   // Verificar si el ID proporcionado es válido
   if (!mongoose.Types.ObjectId.isValid(id)) {

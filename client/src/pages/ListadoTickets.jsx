@@ -67,23 +67,25 @@ const ListadoTickets = () => {
   }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData
+    if (formData?.estado === 'Cerrado' && !formData?.fechadecierre) {
+      toast.error('Ingrese la fecha de cierre', {
+        theme: 'colored'
+      })
+      return
+    }
 
     try {
       await axios.patch(TICKETS_URL, formData)
-      toast.info(`Ticket actualizado exitosamente`, {
+      toast.info('Ticket actualizado exitosamente', {
         theme: 'colored'
       })
       const ticketIndex = searchResults.findIndex(
-        (ticket) => ticket._id === formData.id
+        (ticket) => ticket._id === formData._id
       )
-      const existingTicket = searchResults[ticketIndex]
+
       setSearchResults((prevItems) => {
-        prevItems[ticketIndex] = {
-          ...existingTicket,
-          ...rest
-        }
         const updatedItems = [...prevItems]
+        updatedItems[ticketIndex] = formData
         return updatedItems
       })
     } catch (err) {
@@ -94,6 +96,8 @@ const ListadoTickets = () => {
       } else {
         setErrMsg('La actualización del ticket falló')
       }
+    } finally {
+      toggleEdit()
     }
   }
 

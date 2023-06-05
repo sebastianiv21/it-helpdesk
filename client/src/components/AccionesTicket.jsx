@@ -1,20 +1,55 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Input, Label, FormGroup, Row, Col, Button, Table } from 'reactstrap'
-import FilaAccion from './FilaAccion'
-import { useForm, useData } from '@hooks'
+import { useForm, useData, useDate } from '@hooks'
+import { toast } from 'react-toastify'
 
-export const AccionesTicket = () => {
-  const { formData: formAccionData, onChange: onChangeAccion } = useForm()
+const initialState = {
+  fecha: '',
+  descripcion: '',
+  usuarioEncargado: ''
+}
+
+export const AccionesTicket = ({ formData, setFormData }) => {
+  const {
+    formData: formAccionData,
+    onChange: onChangeAccion,
+    onReset
+  } = useForm(initialState)
   const { agentes } = useData()
+  const { parseDate } = useDate()
 
   const listaAgentes = agentes.map((agente) => (
-    <option key={agente._id} value={agente._id}>
+    <option key={agente._id} value={agente.nombre}>
       {agente.nombre}
     </option>
   ))
 
-  const addAccionHandler = () => {}
+  const addAccionHandler = () => {
+    const isFormEmpty = Object.values(formAccionData).some(
+      (value) => !value || (Array.isArray(value) && !value.length)
+    )
+    if (isFormEmpty) {
+      return toast.error('Todos los campos son requeridos', {
+        theme: 'colored'
+      })
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      acciones: [...prevState.acciones, formAccionData]
+    }))
+
+    onReset()
+  }
+
+  const renderAcciones = formData?.acciones?.map((accion, index) => (
+    <tr key={index}>
+      <td>{parseDate(accion.fecha, 'yyyy-MM-dd HH:mm')}</td>
+      <td>{accion.descripcion}</td>
+      <td>{accion.usuarioEncargado}</td>
+    </tr>
+  ))
 
   return (
     <section className='bg-secondary rounded'>
@@ -49,6 +84,7 @@ export const AccionesTicket = () => {
             </Label>
             <Input
               type='select'
+              className='text-center'
               name='usuarioEncargado'
               id='usuarioEncargado'
               value={formAccionData.usuarioEncargado}
@@ -78,7 +114,7 @@ export const AccionesTicket = () => {
           </FormGroup>
           <Button
             color='primary'
-            className='d-flex align-items-center m-2 gap-2 ms-auto'
+            className='d-flex align-items-center mb-2 gap-2 ms-auto'
             onClick={addAccionHandler}
           >
             <FontAwesomeIcon icon={faPlus} />
@@ -86,25 +122,16 @@ export const AccionesTicket = () => {
           </Button>
         </Col>
         <Col xs={8}>
-          <div className='bg-secondary rounded-bottom d-flex justify-content-around mt-3'>
-            {/* REVISAR SI DAÑA EL CODIGO TABLE */}
-            <Table
-              border={1}
-              className='overflow-hidden'
-              bordered
-              hover
-              id='datatable'
-            >
-              <thead>
-                <tr className='text-white text-center bg-primary'>
-                  <th>Fecha</th>
-                  <th>Descripción</th>
-                  <th>Encargado</th>
-                </tr>
-              </thead>
-              {/* <tbody className='text-primary bg-white'>{listaAcciones}</tbody> */}
-            </Table>
-          </div>
+          <Table bordered hover className='overflow-hidden mt-3 text-center'>
+            <thead>
+              <tr className='text-white bg-primary'>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Agente de Servicio</th>
+              </tr>
+            </thead>
+            <tbody className='text-primary bg-white'>{renderAcciones}</tbody>
+          </Table>
         </Col>
       </Row>
     </section>

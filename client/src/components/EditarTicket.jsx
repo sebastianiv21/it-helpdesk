@@ -9,21 +9,30 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap'
-import { useForm, useData } from '@hooks'
-import { useState, useEffect } from 'react'
+import { useForm } from '@hooks'
 import { AccionesTicket } from './AccionesTicket'
 
 const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
-  const { formData, onChange } = useForm(ticket)
+  const { formData, onChange, setFormData } = useForm(ticket)
+
+  const accionesTicketProps = {
+    formData,
+    setFormData
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    onUpdate(formData)
+  }
 
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <ModalBody>
         <section className='bg-secondary rounded'>
           <Row className='d-flex justify-content-around align-items-center mb-2 text-center p-3'>
             <Col xs={3}>
               <FormGroup>
-                <Label htmlFor='prioridad'> Prioridad (*)</Label>
+                <Label htmlFor='prioridad'>Prioridad (*)</Label>
                 <Input
                   type='select'
                   name='prioridad'
@@ -71,7 +80,7 @@ const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
             )}
           </Row>
         </section>
-        <AccionesTicket />
+        <AccionesTicket {...accionesTicketProps} />
       </ModalBody>
       <ModalFooter>
         <Button color='secondary' onClick={toggleEdit}>

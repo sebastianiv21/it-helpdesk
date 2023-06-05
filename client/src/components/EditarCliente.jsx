@@ -27,7 +27,6 @@ const EditarCliente = ({ cliente, onUpdate, toggleEdit }) => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('onSubmit', formData)
     onUpdate(formData)
   }
 
