@@ -1,11 +1,19 @@
 import { useState, useEffect } from 'react'
-import { useData } from '@hooks'
+import { useData, useToggle } from '@hooks'
 import SearchBar from '@components/SearchBar'
+import EditarCliente from '@components/EditarCliente'
 import axios from '../api/axios'
 import { toast } from 'react-toastify'
 import { TablaClientes } from '@components/TablaClientes'
 import { CustomSpinner } from '@components/CustomSpinner'
-import { Container } from 'reactstrap'
+import {
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 
 const ListadoClientes = () => {
   const { getClientes } = useData()
@@ -13,9 +21,13 @@ const ListadoClientes = () => {
   const [searchResults, setSearchResults] = useState([])
   const [errMsg, setErrMsg] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isEditOpen, toggleEdit] = useToggle()
+  const [isDeleteOpen, toggleDelete] = useToggle()
+  const [currentCliente, setCurrentCliente] = useState(null)
+
   const CLIENTES_URL = '/clientes'
 
-  useEffect(() => {
+  const handleGetClientes = () => {
     setIsLoading(true)
     getClientes().then((json) => {
       setClientes(json)
@@ -23,20 +35,27 @@ const ListadoClientes = () => {
       setIsLoading(false)
       return json
     })
-  }, [getClientes])
+  }
 
-  const onDelete = async (clienteId) => {
+  useEffect(() => {
+    handleGetClientes()
+  }, [])
+
+  const onDelete = async (cliente) => {
     try {
       await axios.delete(CLIENTES_URL, {
-        data: { id: clienteId }
+        data: { id: cliente._id }
       })
       toast.info(`Cliente eliminado exitosamente`, {
         theme: 'colored'
       })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== clienteId)
+        const updatedItems = prevItems.filter(
+          (item) => item._id !== cliente._id
+        )
         return updatedItems
       })
+      // handleGetClientes()
     } catch (err) {
       if (!err?.response) {
         setErrMsg('El servidor no responde')
@@ -45,27 +64,25 @@ const ListadoClientes = () => {
       } else {
         setErrMsg('No se pudo eliminar el cliente')
       }
+    } finally {
+      toggleDelete()
     }
   }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData
-
     try {
       await axios.patch(CLIENTES_URL, formData)
-      toast.info(`Cliente actualizado exitosamente`, {
+      toast.info('Cliente actualizado exitosamente', {
         theme: 'colored'
       })
+
       const clientIndex = searchResults.findIndex(
-        (client) => client._id === formData.id
+        (client) => client._id === formData._id
       )
-      const existingClient = searchResults[clientIndex]
+
       setSearchResults((prevItems) => {
-        prevItems[clientIndex] = {
-          ...existingClient,
-          ...rest
-        }
         const updatedItems = [...prevItems]
+        updatedItems[clientIndex] = formData
         return updatedItems
       })
     } catch (err) {
@@ -76,7 +93,34 @@ const ListadoClientes = () => {
       } else {
         setErrMsg('La actualización del cliente falló')
       }
+    } finally {
+      toggleEdit()
     }
+  }
+
+  const handleDeleteToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleDelete()
+  }
+
+  const handleEditToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleEdit()
+  }
+
+  const acciones = {
+    handleDeleteToggle,
+    handleEditToggle
+  }
+
+  useEffect(() => {
+    console.log(currentCliente)
+  }, [currentCliente])
+
+  const editarClienteProps = {
+    cliente: currentCliente,
+    onUpdate,
+    toggleEdit
   }
 
   return (
@@ -90,9 +134,32 @@ const ListadoClientes = () => {
           </h4>
         )}
         {!isLoading && Boolean(clientes?.length) && (
-          <TablaClientes items={searchResults} />
+          <TablaClientes items={searchResults} acciones={acciones} />
         )}
       </section>
+      {/* modal de eliminacion */}
+      <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
+        <ModalHeader toggle={toggleDelete}>Eliminar cliente</ModalHeader>
+        <ModalBody>
+          <p>
+            {`¿Está seguro que desea eliminar al cliente ${currentCliente?.nombre}
+            ${currentCliente?.apellidos}?`}
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleDelete}>
+            Cancelar
+          </Button>
+          <Button color='primary' onClick={() => onDelete(currentCliente)}>
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
+      <Modal centered size='lg' isOpen={isEditOpen} toggle={toggleEdit}>
+        <ModalHeader toggle={toggleEdit}>Editar cliente</ModalHeader>
+        <EditarCliente {...editarClienteProps} />
+      </Modal>
     </Container>
   )
 }
