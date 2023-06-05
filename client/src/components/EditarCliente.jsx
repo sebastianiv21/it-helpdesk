@@ -1,50 +1,21 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect } from 'react'
-import axios from '../api/axios'
-import { toast } from 'react-toastify'
-import { useForm, useData } from '@hooks'
 import {
+  Input,
+  Label,
+  FormGroup,
   Form,
   Row,
   Col,
-  FormGroup,
-  Input,
-  Label,
   Button,
-  Container
+  ModalBody,
+  ModalFooter
 } from 'reactstrap'
+import { useForm, useData } from '@hooks'
+import { useState, useEffect } from 'react'
 
-const initialState = {
-  empresa: '',
-  nombre: '',
-  apellidos: '',
-  departamento: '',
-  municipio: '',
-  direccion: '',
-  telefono: '',
-  email: ''
-}
-
-const RegistrarCliente = () => {
-  const CLIENTES_URL = '/clientes'
-  const [errMsg, setErrMsg] = useState('')
+const EditarCliente = ({ cliente, onUpdate, toggleEdit }) => {
+  const { formData, onChange } = useForm(cliente)
   const { departamentos, getMunicipios } = useData()
   const [municipios, setMunicipios] = useState([])
-
-  const { formData, onChange, onReset } = useForm(initialState)
-
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
-
-  useEffect(() => {
-    setErrMsg('')
-
-    if (errMsg) {
-      toast.error(errMsg, { theme: 'colored' })
-    }
-  }, [errMsg, formData])
 
   useEffect(() => {
     if (formData.departamento) {
@@ -53,6 +24,12 @@ const RegistrarCliente = () => {
       })
     }
   }, [formData.departamento])
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log('onSubmit', formData)
+    onUpdate(formData)
+  }
 
   const opcionesDepartamentos = departamentos?.map(({ _id, departamento }) => (
     <option key={_id} value={departamento}>
@@ -66,39 +43,10 @@ const RegistrarCliente = () => {
     </option>
   ))
 
-  const onSubmit = async (e) => {
-    e.preventDefault()
-
-    const clientData = {
-      ...formData,
-      empresa: formData.empresa.toLowerCase()
-    }
-
-    try {
-      await axios.post(CLIENTES_URL, JSON.stringify(clientData), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
-      onReset()
-      toast.info('Cliente creado exitosamente', { theme: 'colored' })
-    } catch (err) {
-      if (!err?.response) {
-        setErrMsg('El servidor no responde')
-      } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario')
-      } else {
-        setErrMsg('La creación de cliente falló')
-      }
-    }
-  }
-
   return (
-    <Container className='m-4 mx-auto'>
-      <div className='bg-primary text-white rounded-top'>
-        <h5 className='m-0 ps-4 py-3'>Registrar Cliente</h5>
-      </div>
-      <div className='bg-secondary p-3 rounded-bottom text-primary'>
-        <Form onSubmit={onSubmit}>
+    <>
+      <Form onSubmit={onSubmit}>
+        <ModalBody>
           <Row>
             <Col sm>
               <FormGroup>
@@ -179,7 +127,7 @@ const RegistrarCliente = () => {
             </Col>
             <Col sm>
               <FormGroup>
-                <Label for='direccion'> Dirección (*) </Label>
+                <Label for='direccion'> Dirección</Label>
                 <Input
                   type='text'
                   name='direccion'
@@ -226,22 +174,18 @@ const RegistrarCliente = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Row>
-            <Col className='d-flex justify-content-end gap-2'>
-              <Button type='reset' color='primary' onClick={onReset}>
-                <FontAwesomeIcon icon={faBan} />
-                <span className='ms-2'>Cancelar</span>
-              </Button>
-              <Button type='submit' color='primary'>
-                <FontAwesomeIcon icon={faFloppyDisk} />
-                <span className='ms-2'>Guardar</span>
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </div>
-    </Container>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleEdit}>
+            Cancelar
+          </Button>
+          <Button color='primary' type='submit'>
+            Guardar cambios
+          </Button>
+        </ModalFooter>
+      </Form>
+    </>
   )
 }
 
-export default RegistrarCliente
+export default EditarCliente

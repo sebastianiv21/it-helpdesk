@@ -1,5 +1,6 @@
 const Cliente = require('../models/Cliente')
 const asyncHandler = require('express-async-handler')
+const mongoose = require('mongoose')
 
 // @desc Get all clientes
 // @route GET /clientes
@@ -60,7 +61,7 @@ const createNewCliente = asyncHandler(async (req, res) => {
 // @access Private
 const updateCliente = asyncHandler(async (req, res) => {
   const {
-    id,
+    _id: id,
     email,
     nombre,
     apellidos,
@@ -92,7 +93,7 @@ const updateCliente = asyncHandler(async (req, res) => {
   }
 
   // Actualizar el documento en la base de datos
-  const updatedCliente = await Ticket.findOneAndUpdate(
+  const updatedCliente = await Cliente.findOneAndUpdate(
     { _id: id },
     {
       email,

@@ -33,7 +33,7 @@ export const TablaClientes = ({ items, acciones }) => {
     arrayLength: items.length
   })
 
-  const renderItems = items.slice(start, end).map((item) => (
+  const renderItems = items?.slice(start, end).map((item) => (
     <tr key={item._id} className='align-middle'>
       <td>{item?.empresa}</td>
       <td>{item?.nombre}</td>
@@ -45,7 +45,10 @@ export const TablaClientes = ({ items, acciones }) => {
       <td>{item?.email}</td>
       <td>
         <div className='d-flex gap-2 justify-content-center'>
-          <Button color='primary' onClick={() => console.log('edit')}>
+          <Button
+            color='primary'
+            onClick={() => acciones.handleEditToggle(item)}
+          >
             <FontAwesomeIcon icon={faPencil} />
           </Button>
           <Button
