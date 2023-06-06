@@ -111,17 +111,8 @@ subcategoría
     tablaFila: {
       flexDirection: 'row'
     },
-    tablaColumna1: {
-      width: 68,
-      borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
-      borderWidth: 1,
-      borderLeftWidth: 0,
-      borderTopWidth: 0
-    },
     tablaColumna2: {
-      width: 68,
+      width: 80,
       borderStyle: 'solid',
       borderColor: '#c2e7c9',
       borderBottomColor: '#c2e7c9',
@@ -130,29 +121,19 @@ subcategoría
       borderTopWidth: 0
     },
     tablaCeldaHeader: {
-      margin: 5,
-      fontSize: 10,
-      fontWeight: 200,
+      fontSize: 11,
       color: 'white',
-      marginTop: '8'
-    },
-    anchoColumna1: {
-      width: 68,
-      borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
-      borderWidth: 1,
-      borderLeftWidth: 0,
-      borderTopWidth: 0
+      margin: 10,
+      textAlign: 'center'
     },
     anchoColumna2: {
-      width: 68,
+      width: 80,
       borderStyle: 'solid',
       borderColor: '#c2e7c9',
       borderBottomColor: '#c2e7c9',
       borderWidth: 1,
       borderLeftWidth: 0,
-      borderTopWidth: 0
+      borderTopWidth: 0,
     },
     tablaCelda: {
       margin: 5,
@@ -186,16 +167,14 @@ subcategoría
 
   const datosTabla = tickets?.map((ticket) => (
     <View key={ticket.id} style={styles.tablaFila}>
-            <View style={styles.anchoColumna1}>
-              <Text style={styles.tablaCelda}>{ticket.id}</Text>
-            </View>
-            <View style={styles.anchoColumna1}>
-              <Text style={styles.tablaCelda}>{ticket.empresa}</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
-              <Text style={styles.tablaCelda}>{ticket.cliente}</Text>
-            </View>
-            <View style={styles.anchoColumna2}>
+            <View style={{ width: 200,
+      borderStyle: 'solid',
+      borderColor: '#c2e7c9',
+      borderBottomColor: '#c2e7c9',
+      borderWidth: 1,
+      borderLeftWidth: 0,
+      borderTopWidth: 0,
+      textAlign: 'center'}}>
               <Text style={styles.tablaCelda}>{ticket.titulo}</Text>
             </View>
             <View style={styles.anchoColumna2}>
@@ -225,12 +204,12 @@ subcategoría
             flexDirection: 'column',
             backgroundColor: '#c2e7c9',
             marginTop: '-40',
-            marginBottom: -25
+            marginBottom: -30
           }}>
             <View style={{flexDirection:'row', marginTop: -20}}>
 
             <Image
-        src={logoinforme} style={{width: '200', marginLeft:'-50', marginTop: -5}}
+        src={logoinforme} style={{width: '200', marginLeft:'-60', marginTop: -5}}
       />
 
       <View>
@@ -262,26 +241,14 @@ subcategoría
           }}
         >
           <View style={styles.encabezado}>
-            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4'  }}> EMPRESA:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '7'  }}> EMPRESA/CLIENTE:</Text>
             <Text style={{ color: 'white', fontSize: '13px' }}>{empresa}</Text>
-            <View style={{ flexDirection: 'row', marginLeft: '230' }}>
-              <Text style={{ color: 'white', fontSize: '13px',marginTop: '2',marginRight: '4' }}>PERIODO:</Text>
+            <View style={{ flexDirection: 'row', marginLeft: 160}}>
+              <Text style={{ color: 'white', fontSize: '13px',marginTop: '2',marginRight: '7' }}>PERIODO:</Text>
               <Text style={{ color: 'white', fontSize: '13px', }}>
                 {fechaInicio} - {fechaFinal}
               </Text>
             </View>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingTop: '4',
-              paddingBottom: '4'
-            }}
-          >
-            <Text style={{ color: 'white', fontSize: '13px',marginRight: '4' }}> CLIENTE:</Text>
-            <Text style={{ color: 'white', fontSize: '13px' }}>
-              {cliente}
-            </Text>
           </View>
         </View>
         <View
@@ -367,16 +334,13 @@ subcategoría
         </View>
         <View style={styles.tabla}>
           <View style={styles.tablaFila}>
-            <View style={styles.tablaColumna1}>
-              <Text style={styles.tablaCeldaHeader}>ID</Text>
-            </View>
-            <View style={styles.tablaColumna1}>
-              <Text style={styles.tablaCeldaHeader}>Empresa</Text>
-            </View>
-            <View style={styles.tablaColumna2}>
-              <Text style={styles.tablaCeldaHeader}>Cliente</Text>
-            </View>
-            <View style={styles.tablaColumna2}>
+            <View style={{ width: 200,
+      borderStyle: 'solid',
+      borderColor: '#c2e7c9',
+      borderBottomColor: '#c2e7c9',
+      borderWidth: 1,
+      borderLeftWidth: 0,
+      borderTopWidth: 0}}>
               <Text style={styles.tablaCeldaHeader}>Titulo</Text>
             </View>
             <View style={styles.tablaColumna2}>
