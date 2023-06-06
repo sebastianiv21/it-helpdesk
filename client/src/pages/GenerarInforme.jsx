@@ -474,22 +474,13 @@ const GenerarInforme = () => {
                 />
               </FormGroup>
             </Col>
-            <Col sm>
-              <FormGroup>
-                <Label for='empresa'>Empresa</Label>
-                <Input type='select' name='empresa' id='empresa'>
-                  <option value=''>Seleccione empresa</option>
-                  {optEmpresas}
-                </Input>
-              </FormGroup>
-            </Col>
           </Row>
           <Row className='d-flex justify-content-around mb-3 text-center'>
             <Col sm>
               <FormGroup>
-                <Label for='cliente'>Cliente</Label>
+                <Label for='cliente'>Empresa/Cliente</Label>
                 <Input type='select' name='cliente' id='cliente'>
-                  <option value=''>Seleccione cliente</option>
+                  <option value=''>Seleccione empresa o cliente</option>
                   {optEmpresas}
                 </Input>
               </FormGroup>
