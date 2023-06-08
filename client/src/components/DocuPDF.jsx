@@ -1,12 +1,4 @@
-import {
-  Page,
-  Document,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Font
-} from '@react-pdf/renderer'
+import { Page, Document, View, Text, StyleSheet, Image, Font} from '@react-pdf/renderer'
 import logoinforme from "/images/logoinforme.png"
 const DocuPDF = ({ grafica, datos }) => {
   const {
@@ -19,7 +11,6 @@ const DocuPDF = ({ grafica, datos }) => {
     tickets,
     categorias
   } = datos
-
 const descripcion =categorias?.map((categoria) => (
 `Categoría ${categoria.nombre} = ${categoria.cantidad}
 subcategoría
@@ -34,8 +25,6 @@ subcategoría
 //     Escaner=9
 //     Impresora=8
 //     Monitor=1
-
-
  
 
   Font.register({
@@ -85,7 +74,7 @@ subcategoría
       display: 'table',
       width: 'auto',
       borderStyle: 'solid',
-      borderColor: '#c2e7c9',
+      borderColor: 'white',
       borderWidth: 1,
       borderRightWidth: 0,
       borderBottomWidth: 0,
@@ -99,10 +88,8 @@ subcategoría
       display: 'table',
       width: 'auto',
       borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderWidth: 1,
-      borderRightWidth: 0,
-      borderBottomWidth: 0,
+      borderColor: 'white',
+      borderWidth: 0,
       backgroundColor: '#c2e7c9',
       marginLeft: 10,
       marginRight: 10,
@@ -114,23 +101,30 @@ subcategoría
     tablaColumna2: {
       width: 80,
       borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
+      borderColor: 'white',
       borderWidth: 1,
       borderLeftWidth: 0,
       borderTopWidth: 0
+    },
+    tablaColumna3: {
+      width: 200,
+              borderColor: 'white',
+              borderWidth: 1,
+              borderLeftWidth: 0,
+              borderTopWidth: 0
     },
     tablaCeldaHeader: {
       fontSize: 11,
       color: 'white',
       margin: 10,
-      textAlign: 'center'
+      textAlign: 'center',
+      borderColor: 'white',
     },
     anchoColumna2: {
       width: 80,
       borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
+      borderColor: 'white',
+      borderBottomColor: 'white',
       borderWidth: 1,
       borderLeftWidth: 0,
       borderTopWidth: 0,
@@ -167,14 +161,8 @@ subcategoría
 
   const datosTabla = tickets?.map((ticket) => (
     <View key={ticket.id} style={styles.tablaFila}>
-            <View style={{ width: 200,
-      borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
-      borderWidth: 1,
-      borderLeftWidth: 0,
-      borderTopWidth: 0,
-      textAlign: 'center'}}>
+            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderBottomColor: 'white', borderWidth: 1,
+                borderLeftWidth: 0, borderTopWidth: 0, textAlign: 'center'}}>
               <Text style={styles.tablaCelda}>{ticket.titulo}</Text>
             </View>
             <View style={styles.anchoColumna2}>
@@ -192,155 +180,74 @@ subcategoría
             <View style={styles.anchoColumna2}>
               <Text style={styles.tablaCelda}>{ticket.fechaCierre}</Text>
             </View>
-          </View> 
+    </View> 
   ) ) 
-
+  const datosCategoria = categorias?.map((categoria) => (
+    <View key={categoria.name} style={styles.tablaFila}>
+            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1 , 
+            borderLeftWidth: 1,borderTopWidth: 0, textAlign: 'center'}}>
+              <Text style={styles.tablaCelda}>{categoria.nombre}</Text>
+            </View>
+            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
+            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
+              <Text style={styles.tablaCelda}></Text>
+            </View>
+            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
+            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
+              <Text style={styles.tablaCelda}>{categoria.cantidad} </Text>
+            </View>
+    </View> 
+  ) ) 
   return (
     <Document>
       <Page size='A4' style={styles.page} >
-        <View  
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: '#c2e7c9',
-            marginTop: '-40',
-            marginBottom: -30
-          }}>
+        <View style={{display: 'flex',flexDirection: 'column',backgroundColor: '#c2e7c9',marginTop: '-40', marginBottom: -30}}>
             <View style={{flexDirection:'row', marginTop: -20}}>
-
-            <Image
-        src={logoinforme} style={{width: '200', marginLeft:'-60', marginTop: -5}}
-      />
-
-      <View>
-      <Text
-            style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold', marginTop:'30', marginLeft: -60 }}
-          >
-            IT TECHNOLOGY
-          </Text>
-      <Text
-            style={{
-              color: '#004643',
-              fontSize: '25px',
-              marginLeft: -58,
-              marginTop: -10
-            }}
-          >
-            HelpDesk
-          </Text>
-      </View>
+            <Image src={logoinforme} style={{width: '200', marginLeft:'-60', marginTop: -5}}/>
+              <View>
+                  <Text style={{ color: '#004643', fontSize: '30px', fontWeight: 'bold', marginTop:'30', marginLeft: -60 }} >IT TECHNOLOGY</Text>
+                  <Text style={{ color: '#004643', fontSize: '25px', marginLeft: -58, marginTop: -10}}>HelpDesk</Text>
+              </View>
             </View>
         </View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: '#004643',
-            fontSize: '12px',
-            padding: '5'
-          }}
-        >
+        <View style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#004643', fontSize: '12px', padding: '5'}}>
           <View style={styles.encabezado}>
-            <Text style={{ color: 'white', fontSize: '13px',marginRight: '7'  }}> EMPRESA/CLIENTE:</Text>
+            <Text style={{ color: 'white', fontSize: '13px',marginRight: '7'  }}> EMPRESA / CLIENTE:</Text>
+            <View>
             <Text style={{ color: 'white', fontSize: '13px' }}>{empresa}</Text>
+            </View>
             <View style={{ flexDirection: 'row', marginLeft: 160}}>
               <Text style={{ color: 'white', fontSize: '13px',marginTop: '2',marginRight: '7' }}>PERIODO:</Text>
-              <Text style={{ color: 'white', fontSize: '13px', }}>
-                {fechaInicio} - {fechaFinal}
-              </Text>
+            </View>
+            <View>
+            <Text style={{ color: 'white', fontSize: '13px', }}>{fechaInicio} - {fechaFinal}</Text>
             </View>
           </View>
-        </View>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Text style={styles.text}> Informe de trazabilidad </Text>
+        </View> 
+        <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={styles.text}>INFORME DE TRAZABILIDAD</Text>
         </View>
         <View style={styles.primera}>
           <View style={styles.carta}>
-            <Text
-              style={{
-                fontSize: '12px',
-                fontWeight: 'bold',
-                color: '#004643',
-                textAlign: 'center'
-              }}
-            >
-              CERRADOS
-            </Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '25px',
-                fontWeight: 'bold',
-                color: '#004643',
-                paddingTop: 5
-              }}
-            >
+            <Text style={{ fontSize: '12px', fontWeight: 'bold', color: '#004643',textAlign: 'center'}}>CERRADOS</Text>
+            <Text style={{ textAlign: 'center', fontSize: '25px',fontWeight: 'bold', color: '#004643', paddingTop: 5 }}>
               {ticketsCerrados}
             </Text>
           </View>
           <View style={styles.cartatotal}>
-            <Text
-              style={{
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: 'white',
-                textAlign: 'center'
-              }}
-            >
-              TOTAL
-            </Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '30px',
-                color: 'white',
-                fontWeight: 'bold',
-                paddingTop: 5
-              }}
-            >
-              {ticketsAbiertos+ticketsCerrados}
-            </Text>
+            <Text style={{ fontSize: '20px', fontWeight: 'bold', color: 'white', textAlign: 'center' }} >TOTAL</Text>
+            <Text style={{ textAlign: 'center', fontSize: '30px', color: 'white',fontWeight: 'bold',paddingTop: 5}}>
+              {ticketsAbiertos+ticketsCerrados} </Text>
           </View>
           <View style={styles.carta}>
-            <Text
-              style={{
-                fontSize: '12px',
-                fontWeight: 'bold',
-                color: '#004643',
-                textAlign: 'center'
-              }}
-            >
-              ABIERTOS
-            </Text>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '25px',
-                color: '#004643',
-                fontWeight: 'bold',
-                paddingTop: 5
-              }}
-            >
-              {ticketsAbiertos}
-            </Text>
+            <Text style={{ fontSize: '12px', fontWeight: 'bold', color: '#004643', textAlign: 'center' }}>ABIERTOS</Text>
+            <Text style={{ textAlign: 'center', fontSize: '25px', color: '#004643', fontWeight: 'bold',paddingTop: 5}}>
+              {ticketsAbiertos} </Text>
           </View>
         </View>
         <View style={styles.tabla}>
           <View style={styles.tablaFila}>
-            <View style={{ width: 200,
-      borderStyle: 'solid',
-      borderColor: '#c2e7c9',
-      borderBottomColor: '#c2e7c9',
-      borderWidth: 1,
-      borderLeftWidth: 0,
-      borderTopWidth: 0}}>
+            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderBottomColor: 'white', borderWidth: 1,borderLeftWidth: 0, borderTopWidth: 0}}>
               <Text style={styles.tablaCeldaHeader}>Titulo</Text>
             </View>
             <View style={styles.tablaColumna2}>
@@ -360,60 +267,37 @@ subcategoría
             </View>
           </View>
         </View>
-        <View style={styles.tablados}>
-         {datosTabla}
-        </View>
+        <View style={styles.tablados}> {datosTabla} </View>
         <View wrap={false}>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '25'
-          }}
-        >
-          <Text style={styles.text}> Grafico de categorias </Text>
+        <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginTop: '25'}}>
+          <Text style={styles.text}>GRAFICO DE CATEGORIAS</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            padding: '4'
-          }}
-        >
+        <View style={{flexDirection: 'row',justifyContent: 'center',padding: '4'}}>
           <View>
-            {Boolean(grafica) && (
-              <Image
-                style={{ width: '80vw' }}
-                src={grafica}
-              />
-            )}
+            {Boolean(grafica) && (<Image style={{ width: '80vw' }} src={grafica}/>)}
           </View>
         </View>
         </View>
         <View wrap={false}>
         <View style={{marginTop:'30'}}>
-        <Text
-              style={styles.text}
-            >
-              Descripción del grafico
-            </Text>
-
+        <Text style={styles.text} >DETALLADO DE SUB CATEGORIA</Text>
+          <View style={styles.tabla}>
+            <View style={styles.tablaFila}>
+            <View style={styles.tablaColumna3}>
+              <Text style={styles.tablaCeldaHeader}>CATEGORIA</Text>
+            </View>
+            <View style={styles.tablaColumna3}>
+              <Text style={styles.tablaCeldaHeader}>SUB CATEGORIA</Text>
+            </View>
+            <View style={styles.tablaColumna3}>
+              <Text style={styles.tablaCeldaHeader}>CANT.TICKETS</Text>
+            </View>
+          </View>         
         </View>
-        <View style={styles.descripcion}>
-            <Text
-              style={{
-                textAlign: 'center',
-                fontSize: '15px',
-                fontWeight: 'bold',
-                color: '#004643',
-                paddingTop:6
-              }}
-            >
-              {descripcion}
-            </Text>
-          </View>
+        <View style={styles.tablados}>
+         {datosCategoria}
+        </View>
+        </View>
         </View>
         <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
         `${pageNumber} / ${totalPages}`
