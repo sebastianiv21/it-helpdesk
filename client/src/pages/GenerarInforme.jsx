@@ -250,7 +250,7 @@ const GenerarInforme = () => {
           </Row>
           <div className='d-flex justify-content-end gap-2'>
             <Button
-              type='submit'
+              type='button'
               onClick={() => setVerPdf(!verPdf)}
               color='primary'
               className='d-flex gap-2 align-items-center'
@@ -273,7 +273,7 @@ const GenerarInforme = () => {
                 className='d-flex gap-2 align-items-center'
               >
                 <FontAwesomeIcon icon={faFilePdf} />
-                Generar PDF{' '}
+                Generar PDF
               </Button>
             </PDFDownloadLink>
           </div>
