@@ -95,7 +95,35 @@ const GenerarInforme = () => {
           {
             nombre: 'Escaner',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Impresora',
+            cantidad: 3
+          },
+          {
+            nombre: 'Monitor',
+            cantidad: 3
+          },
+          {
+            nombre: 'PC',
+            cantidad: 3
+          },
+          {
+            nombre: 'Portatil',
+            cantidad: 3
+          },
+          {
+            nombre: 'Servidor',
+            cantidad: 3
+          },
+          {
+            nombre: 'Smartphone',
+            cantidad: 3
+          },
+          {
+            nombre: 'UPS',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -103,13 +131,25 @@ const GenerarInforme = () => {
         cantidad: 6,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Configuración periferico',
             cantidad: 3
           },
           {
             nombre: 'Sistema Operativo',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Copia de información',
+            cantidad: 3
+          },
+          {
+            nombre: 'Correo electronico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Office',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -117,13 +157,29 @@ const GenerarInforme = () => {
         cantidad: 9,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Cableado estructurado',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Caseta nodo',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Sistema electronico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema electrico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Solución solar',
+            cantidad: 3
+          },
+          {
+            nombre: 'Torre de comunicaciones',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -131,13 +187,21 @@ const GenerarInforme = () => {
         cantidad: 12,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Backup',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Configuración',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Cuentas de usuario',
+            cantidad: 3
+          },
+          {
+            nombre: 'Politicas-Reglas',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -149,9 +213,13 @@ const GenerarInforme = () => {
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Firewall',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'VPN',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -159,13 +227,17 @@ const GenerarInforme = () => {
         cantidad: 4,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Biometrico',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Camara',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Sensor',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -173,17 +245,18 @@ const GenerarInforme = () => {
         cantidad: 3,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Enlace satelital ',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Radio enlace terrestre',
             cantidad: 3
           }
         ]
       },
     ]
   }
+  
 
   const onSubmit = (e) => {
     e.preventDefault()

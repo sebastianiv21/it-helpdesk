@@ -42,12 +42,17 @@ subcategoría
 
   const styles = StyleSheet.create({
     encabezado: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      justifyContent:  'space-between',
+      marginLeft: 10,
+      marginRight: 10,
     },
 
     primera: {
       flexDirection: 'row',
-      alignSelf: 'center'
+      alignSelf: 'center',
+      marginLeft: 10,
+      marginRight: 10,
     },
     text: {
       color: '#004643',
@@ -97,14 +102,15 @@ subcategoría
       width: 'auto',
       borderStyle: 'solid',
       borderColor: 'white',
-      borderWidth: 0,
+      borderWidth: 1,
       backgroundColor: '#c2e7c9',
       marginLeft: 10,
       marginRight: 10,
-      textAlign: 'center'
+      textAlign: 'center',
     },
     tablaFila: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      textAlign: 'center',
     },
     tablaColumna2: {
       width: 80,
@@ -119,7 +125,7 @@ subcategoría
       borderColor: 'white',
       borderWidth: 1,
       borderLeftWidth: 0,
-      borderTopWidth: 0
+      borderTopWidth: 0,
     },
     tablaCeldaHeader: {
       fontSize: 11,
@@ -138,10 +144,10 @@ subcategoría
       borderTopWidth: 0
     },
     tablaCelda: {
-      margin: 5,
+      margin: 10,
       fontSize: 10,
-      fontWeight: 200,
-      color: '#004643'
+      color: '#004643',
+      textAlign: 'center'
     },
     descripcion: {
       display: 'flex',
@@ -209,12 +215,15 @@ subcategoría
           borderStyle: 'solid',
           borderColor: 'white',
           borderWidth: 1,
-          borderLeftWidth: 1,
+          borderLeftWidth: 0,
           borderTopWidth: 0,
-          textAlign: 'center'
         }}
       >
-        <Text style={styles.tablaCelda}>{categoria.nombre}</Text>
+        <Text style={{      marginTop:15,
+      fontSize: 12,
+      color: '#004643',
+      textAlign: 'center',
+      alignItems: 'center'}}>{categoria.nombre}</Text>
       </View>
       <View
         style={{
@@ -224,7 +233,7 @@ subcategoría
           borderWidth: 1,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          textAlign: 'center'
+          borderBottomWidth: 1,
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
@@ -233,10 +242,11 @@ subcategoría
               width: 200,
               borderStyle: 'solid',
               borderColor: 'white',
-              borderWidth: 1,
+              borderWidth: 0,
               borderLeftWidth: 0,
               borderTopWidth: 0,
-              textAlign: 'center'
+              borderBottomWidth: 0,
+              textAlign: 'center',
             }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.nombre}</Text>
@@ -248,23 +258,25 @@ subcategoría
           width: 200,
           borderStyle: 'solid',
           borderColor: 'white',
-          borderWidth: 1,
+          borderWidth: 0,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          textAlign: 'center'
+          borderBottomWidth: 1  ,
+          textAlign: 'center',
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
           <View
-            style={{
-              width: 200,
-              borderStyle: 'solid',
-              borderColor: 'white',
-              borderWidth: 1,
-              borderLeftWidth: 0,
-              borderTopWidth: 0,
-              textAlign: 'center'
-            }}
+          style={{
+            width: 200,
+            borderStyle: 'solid',
+            borderColor: 'white',
+            borderWidth: 0,
+            borderLeftWidth: 0,
+            borderTopWidth: 0,
+            borderBottomWidth: 0,
+            textAlign: 'center',
+          }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.cantidad}</Text>
           </View>
@@ -289,8 +301,10 @@ subcategoría
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: '#c2e7c9',
-            marginTop: '-40',
-            marginBottom: -30
+            marginTop: -20,
+            marginBottom: -30,
+            marginLeft: 10,
+      marginRight: 10,
           }}
         >
           <View style={{ flexDirection: 'row', marginTop: -20 }}>
@@ -329,31 +343,36 @@ subcategoría
             flexDirection: 'column',
             backgroundColor: '#004643',
             fontSize: '12px',
-            padding: '5'
+            padding: '5',
+            marginLeft: 10,
+      marginRight: 10,
           }}
         >
           <View style={styles.encabezado}>
+            <View >
             <Text
-              style={{ color: 'white', fontSize: '13px', marginRight: '7' }}
+              style={{ color: 'white', fontSize: '13px',  }}
             >
-              {' '}
               EMPRESA / CLIENTE:
             </Text>
-            <View>
-              <Text style={{ color: 'white', fontSize: '13px' }}>
-                {empresa}
-              </Text>
             </View>
-            <View style={{ flexDirection: 'row', marginLeft: 160 }}>
+            <View>
               <Text
                 style={{
                   color: 'white',
                   fontSize: '13px',
                   marginTop: '2',
-                  marginRight: '7'
+                  marginRight: 80
                 }}
               >
                 PERIODO:
+              </Text>
+            </View>
+          </View>
+          <View style={styles.encabezado}>
+          <View>
+              <Text style={{ color: 'white', fontSize: '13px' }}>
+                {empresa}
               </Text>
             </View>
             <View>
@@ -454,19 +473,39 @@ subcategoría
                 borderBottomColor: 'white',
                 borderWidth: 1,
                 borderLeftWidth: 0,
-                borderTopWidth: 0
+                borderTopWidth: 0,
               }}
             >
-              <Text style={styles.tablaCeldaHeader}>Titulo</Text>
+              <Text style={{  fontSize: 11,
+      color: 'white',
+      marginTop: 15,
+      textAlign: 'center',
+      borderColor: 'white',
+      alignItems: 'center'}}>Titulo</Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={styles.tablaCeldaHeader}>Prioridad</Text>
+              <Text style={{  fontSize: 11,
+      color: 'white',
+      marginTop: 15,
+      textAlign: 'center',
+      borderColor: 'white',
+      alignItems: 'center'}}>Prioridad</Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={styles.tablaCeldaHeader}>Estado</Text>
+              <Text style={{  fontSize: 11,
+      color: 'white',
+      marginTop: 15,
+      textAlign: 'center',
+      borderColor: 'white',
+      alignItems: 'center'}}>Estado</Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={styles.tablaCeldaHeader}>Categoría</Text>
+              <Text style={{  fontSize: 11,
+      color: 'white',
+      marginTop: 15,
+      textAlign: 'center',
+      borderColor: 'white',
+      alignItems: 'center'}}>Categoría</Text>
             </View>
             <View style={styles.tablaColumna2}>
               <Text style={styles.tablaCeldaHeader}>Fecha de Creación</Text>
@@ -503,9 +542,9 @@ subcategoría
             </View>
           </View>
         </View>
-        <View wrap={false}>
+        <View>
           <View style={{ marginTop: '30' }}>
-            <Text style={styles.text}>DETALLADO DE SUB CATEGORIA</Text>
+            <Text style={styles.text}>DETALLADO DE SUB CATEGORIAS</Text>
             <View style={styles.tabla}>
               <View style={styles.tablaFila}>
                 <View style={styles.tablaColumna3}>
@@ -519,7 +558,15 @@ subcategoría
                 </View>
               </View>
             </View>
-            <View style={styles.tablados}>{datosCategoria}</View>
+            <View style={{
+               display: 'table',
+               borderStyle: 'solid',
+               borderColor: 'white',
+               borderWidth: 1,
+               backgroundColor: '#c2e7c9',
+               marginLeft: 10,
+               marginRight: 10,
+            }}>{datosCategoria}</View>
           </View>
         </View>
         <Text
