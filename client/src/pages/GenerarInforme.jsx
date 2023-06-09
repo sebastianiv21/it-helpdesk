@@ -14,13 +14,88 @@ import { PDFViewer } from '@react-pdf/renderer'
 import GraficoInforme from '@components/GraficoInforme'
 import { Container, Row, Col } from 'reactstrap'
 
+const listadoCategorias = [
+  {
+    nombreCategoria: 'Hardware',
+    subcategorias: [
+      { nombre: 'Escáner' },
+      { nombre: 'Impresora' },
+      { nombre: 'Monitor' },
+      { nombre: 'PC' },
+      { nombre: 'Portátil' },
+      { nombre: 'Servidor' },
+      { nombre: 'Smartphone' },
+      { nombre: 'UPS' }
+    ]
+  },
+  {
+    nombreCategoria: 'Software',
+    subcategorias: [
+      { nombre: 'Configuración periférico' },
+      { nombre: 'Copia de información' },
+      { nombre: 'Correo electrónico' },
+      { nombre: 'Office' },
+      { nombre: 'Sistema Operativo' }
+    ]
+  },
+  {
+    nombreCategoria: 'Infraestructura',
+    subcategorias: [
+      { nombre: 'Cableado estructurado' },
+      { nombre: 'Caseta nodo' },
+      { nombre: 'Sistema eléctrico' },
+      { nombre: 'Solución solar' },
+      { nombre: 'Torre de comunicaciones' }
+    ]
+  },
+  {
+    nombreCategoria: 'Servidores',
+    subcategorias: [
+      { nombre: 'Backup' },
+      { nombre: 'Configuración' },
+      { nombre: 'Cuentas de usuario' },
+      { nombre: 'Políticas- Reglas' }
+    ]
+  },
+  {
+    nombreCategoria: 'Ciberseguridad',
+    subcategorias: [
+      { nombre: 'Antivirus' },
+      { nombre: 'Firewall' },
+      { nombre: 'VPN' }
+    ]
+  },
+  {
+    nombreCategoria: 'Seguridad electrónica',
+    subcategorias: [
+      { nombre: 'Biométrico' },
+      { nombre: 'Cámara' },
+      { nombre: 'Sensor' }
+    ]
+  },
+  {
+    nombreCategoria: 'Telecomunicaciones',
+    subcategorias: [
+      { nombre: 'Enlace satelital' },
+      { nombre: 'Radio enlace terrestre' }
+    ]
+  }
+]
+
+const initialState = {
+  fechaInicio: '',
+  fechaFinal: '',
+  empresa: '',
+  categoria: ''
+}
+
 const GenerarInforme = () => {
   const { getClientes, uniqueProperty } = useData()
   const [empresas, setEmpresas] = useState([])
   const [verPdf, setVerPdf] = useState(false)
   const { parseDate } = useDate()
   const nombreArchivo = `Informe-${format(new Date(), 'dd-MM-yyyy')}.pdf`
-  const { formData, onChange } = useForm()
+  const { formData, onChange, onReset } = useForm(initialState)
 
   useEffect(() => {
     getClientes().then((json) => {
@@ -32,6 +107,14 @@ const GenerarInforme = () => {
 
   const optEmpresas = empresas.map((empresa) => {
     return <option key={empresa} value={`${empresa}`}>{`${empresa}`}</option>
+  })
+
+  const categorias = listadoCategorias.map((categoria) => {
+    return (
+      <option key={categoria.nombreCategoria} value={categoria.nombreCategoria}>
+        {categoria.nombreCategoria}
+      </option>
+    )
   })
 
   const chartCanvas = document.querySelector('canvas')
@@ -54,7 +137,8 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
+        titulo:
+          'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
         prioridad: 'Media',
         estado: 'Cerrado',
         categoria: 'Software',
@@ -62,7 +146,8 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
+        titulo:
+          'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
         prioridad: 'Baja',
         estado: 'Abierto',
         categoria: 'Infraestructura',
@@ -70,7 +155,8 @@ const GenerarInforme = () => {
         fechaCierre: '2023-02-03'
       },
       {
-        titulo: 'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
+        titulo:
+          'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
         prioridad: 'Alta',
         estado: 'Cerrado',
         categoria: 'Servidores',
@@ -84,175 +170,7 @@ const GenerarInforme = () => {
         categoria: 'Servidores',
         fechaCreacion: '2023-02-03',
         fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
-      {
-        titulo: 'Titulo 4',
-        prioridad: 'Alta',
-        estado: 'Cerrado',
-        categoria: 'Servidores',
-        fechaCreacion: '2023-02-03',
-        fechaCierre: '2023-02-03'
-      },
+      }
     ],
     categorias: [
       {
@@ -262,7 +180,35 @@ const GenerarInforme = () => {
           {
             nombre: 'Escaner',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Impresora',
+            cantidad: 3
+          },
+          {
+            nombre: 'Monitor',
+            cantidad: 3
+          },
+          {
+            nombre: 'PC',
+            cantidad: 3
+          },
+          {
+            nombre: 'Portatil',
+            cantidad: 3
+          },
+          {
+            nombre: 'Servidor',
+            cantidad: 3
+          },
+          {
+            nombre: 'Smartphone',
+            cantidad: 3
+          },
+          {
+            nombre: 'UPS',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -270,13 +216,25 @@ const GenerarInforme = () => {
         cantidad: 6,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Configuración periferico',
             cantidad: 3
           },
           {
             nombre: 'Sistema Operativo',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Copia de información',
+            cantidad: 3
+          },
+          {
+            nombre: 'Correo electronico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Office',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -284,13 +242,29 @@ const GenerarInforme = () => {
         cantidad: 9,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Cableado estructurado',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Caseta nodo',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Sistema electronico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Sistema electrico',
+            cantidad: 3
+          },
+          {
+            nombre: 'Solución solar',
+            cantidad: 3
+          },
+          {
+            nombre: 'Torre de comunicaciones',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -298,13 +272,21 @@ const GenerarInforme = () => {
         cantidad: 12,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Backup',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Configuración',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Cuentas de usuario',
+            cantidad: 3
+          },
+          {
+            nombre: 'Politicas-Reglas',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -316,9 +298,13 @@ const GenerarInforme = () => {
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Firewall',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'VPN',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -326,13 +312,17 @@ const GenerarInforme = () => {
         cantidad: 4,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Biometrico',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Camara',
             cantidad: 3
-          }
+          },
+          {
+            nombre: 'Sensor',
+            cantidad: 3
+          },
         ]
       },
       {
@@ -340,17 +330,18 @@ const GenerarInforme = () => {
         cantidad: 3,
         subcategorias: [
           {
-            nombre: 'Antivirus',
+            nombre: 'Enlace satelital ',
             cantidad: 3
           },
           {
-            nombre: 'Sistema Operativo',
+            nombre: 'Radio enlace terrestre',
             cantidad: 3
           }
         ]
-      },
+      }
     ]
   }
+  
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -360,6 +351,8 @@ const GenerarInforme = () => {
     const fechaFinalParseada = endOfDay(new Date(fechaFinal))
 
     console.log(fechaInicioParseada, fechaFinalParseada)
+    console.log(formData)
+    onReset()
   }
 
   return (
@@ -368,7 +361,7 @@ const GenerarInforme = () => {
         <h5 className='m-0 ps-4 py-3'>Generación de informes</h5>
       </div>
       <div className='bg-secondary p-3 rounded-bottom'>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Row className='d-flex justify-content-around mb-3 text-center'>
             <Col sm>
               <FormGroup>
@@ -398,8 +391,14 @@ const GenerarInforme = () => {
           <Row className='d-flex justify-content-around mb-3 text-center'>
             <Col sm>
               <FormGroup>
-                <Label for='cliente'>Empresa/Cliente</Label>
-                <Input type='select' name='cliente' id='cliente'>
+                <Label for='empresa'>Empresa/Cliente</Label>
+                <Input
+                  type='select'
+                  name='empresa'
+                  id='empresa'
+                  value={formData.empresa}
+                  onChange={onChange}
+                >
                   <option value=''>Seleccione empresa o cliente</option>
                   {optEmpresas}
                 </Input>
@@ -408,16 +407,22 @@ const GenerarInforme = () => {
             <Col sm>
               <FormGroup>
                 <Label for='categoria'>Categoría</Label>
-                <Input type='select' name='categoria' id='categoria'>
+                <Input
+                  type='select'
+                  name='categoria'
+                  id='categoria'
+                  value={formData.categoria}
+                  onChange={onChange}
+                >
                   <option value=''>Seleccione categoría</option>
-                  {optEmpresas}
+                  {categorias}
                 </Input>
               </FormGroup>
             </Col>
           </Row>
           <div className='d-flex justify-content-end gap-2'>
             <Button
-              type='submit'
+              type='button'
               onClick={() => setVerPdf(!verPdf)}
               color='primary'
               className='d-flex gap-2 align-items-center'
@@ -436,11 +441,11 @@ const GenerarInforme = () => {
             >
               <Button
                 color='primary'
-                type='button'
+                type='submit'
                 className='d-flex gap-2 align-items-center'
               >
                 <FontAwesomeIcon icon={faFilePdf} />
-                Generar PDF{' '}
+                Generar PDF
               </Button>
             </PDFDownloadLink>
           </div>
@@ -456,7 +461,10 @@ const GenerarInforme = () => {
           </PDFViewer>
         ) : null}
       </div>
-      <div className='offcanvas' style={{position:'relative', width:'80vw'}}>
+      <div
+        className='offcanvas'
+        style={{ position: 'relative', width: '80vw' }}
+      >
         <GraficoInforme datos={datosInforme} />
       </div>
     </Container>
