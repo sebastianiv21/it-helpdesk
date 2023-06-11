@@ -416,6 +416,7 @@ const GenerarInforme = () => {
                 >
                   <option value=''>Seleccione categoría</option>
                   {categorias}
+                  <option value='Todas'>Todas</option>
                 </Input>
               </FormGroup>
             </Col>

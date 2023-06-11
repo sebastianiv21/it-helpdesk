@@ -44,7 +44,7 @@ const NavMenu = () => {
               </li>
             ))}
           </ul>
-          {auth.nombreUsuario ? (
+          {auth.nombreUsuario && (
             <Button
               onClick={signOut}
               className='bg-primary border-0 text-white text-decoration-none'
@@ -52,14 +52,6 @@ const NavMenu = () => {
               <FontAwesomeIcon icon={faRightFromBracket} />
               <span className='ms-2'>Cerrar sesión</span>
             </Button>
-          ) : (
-            <Link
-              to='/login'
-              className='nav-item text-white text-decoration-none'
-            >
-              <FontAwesomeIcon icon={faRightToBracket} />
-              <span className='ms-2'>Iniciar sesión</span>
-            </Link>
           )}
         </Container>
       </nav>
