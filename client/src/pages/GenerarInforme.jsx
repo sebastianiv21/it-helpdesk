@@ -1,9 +1,4 @@
-import {
-  faEye,
-  faEyeSlash,
-  faFilePdf,
-  faMagnifyingGlass
-} from '@fortawesome/free-solid-svg-icons'
+import { faFilePdf, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -139,17 +134,28 @@ const GenerarInforme = () => {
     )
   })
 
-  useEffect(() => {
-    const generarGrafico = () => {
-      if (datosInforme) {
-        const chartCanvas = document.querySelector('canvas')
-        const newChartDataURL = chartCanvas.toDataURL()
-        setChartDataURL(newChartDataURL)
-      }
-    }
+  // useEffect(() => {
+  //   const generarGrafico = () => {
+  //     if (datosInforme) {
+  //       const chartCanvas = document.querySelector('canvas')
+  //       const newChartDataURL = chartCanvas.toDataURL()
+  //       setChartDataURL(newChartDataURL)
+  //     }
+  //   }
 
-    generarGrafico()
-  }, [datosInforme])
+  //   generarGrafico()
+  //   setVerPdf(true)
+  // }, [datosInforme])
+
+  const generarGrafico = () => {
+    if (datosInforme) {
+      const chartCanvas = document.querySelector('canvas')
+      const newChartDataURL = chartCanvas.toDataURL()
+      setChartDataURL(newChartDataURL)
+    }
+  }
+
+  // funcion para renderizar el grafico en el pdf
 
   // const chartCanvas = document.querySelector('canvas')
   // const chartDataURL = chartCanvas && chartCanvas.toDataURL()
@@ -158,8 +164,6 @@ const GenerarInforme = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    console.log(formData)
-
     try {
       const { data } = await axios.post(INFORME_URL, JSON.stringify(formData), {
         headers: { 'Content-Type': 'application/json' },
@@ -167,10 +171,14 @@ const GenerarInforme = () => {
       })
       console.log(data)
       setDatosInforme(data)
+      const chartCanvas = document.querySelector('canvas')
+      const newChartDataURL = chartCanvas?.toDataURL()
+      setChartDataURL(newChartDataURL)
       setVerPdf(true)
       onReset()
       toast.info('Consulta realizada exitosamente', { theme: 'colored' })
     } catch (err) {
+      console.error(err)
       if (!err?.response) {
         setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
@@ -186,7 +194,7 @@ const GenerarInforme = () => {
     setTimeout(() => {
       setDatosInforme(null)
       setChartDataURL(null)
-    }, 500);
+    }, 500)
   }
 
   return (
@@ -257,7 +265,7 @@ const GenerarInforme = () => {
             </Col>
           </Row>
           <div className='d-flex justify-content-end gap-2'>
-            {datosInforme && (
+            {datosInforme && chartDataURL && (
               <>
                 {/* <Button
                   type='button'
@@ -298,14 +306,14 @@ const GenerarInforme = () => {
         </Form>
       </div>
       <div className='mt-3'>
-        {verPdf && datosInforme ? (
+        {verPdf && datosInforme && chartDataURL ? (
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
             <DocuPDF grafica={chartDataURL} datos={datosInforme} />
           </PDFViewer>
-        ) : null}
+        ) : 'nada'}
       </div>
       <div
-        className='offcanvas'
+        // className='offcanvas'
         style={{ position: 'relative', width: '80vw' }}
       >
         {datosInforme && <GraficoInforme datos={datosInforme} />}
@@ -315,5 +323,3 @@ const GenerarInforme = () => {
 }
 
 export default GenerarInforme
-
-// Se atendieron TANTOS tickets de la categoria TAL de los cuales TANTOS fueron resueltos y TANTOS no resueltos

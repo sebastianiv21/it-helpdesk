@@ -8,7 +8,7 @@ import {
   Font
 } from '@react-pdf/renderer'
 import logoinforme from '/images/logoinforme.png'
-import {useDate} from '@hooks'
+import { useDate } from '@hooks'
 
 const DocuPDF = ({ grafica, datos }) => {
   const {
@@ -30,16 +30,16 @@ const DocuPDF = ({ grafica, datos }) => {
   const styles = StyleSheet.create({
     encabezado: {
       flexDirection: 'row',
-      justifyContent:  'space-between',
+      justifyContent: 'space-between',
       marginLeft: 10,
-      marginRight: 10,
+      marginRight: 10
     },
 
     primera: {
       flexDirection: 'row',
       alignSelf: 'center',
       marginLeft: 10,
-      marginRight: 10,
+      marginRight: 10
     },
     text: {
       color: '#004643',
@@ -93,11 +93,11 @@ const DocuPDF = ({ grafica, datos }) => {
       backgroundColor: '#c2e7c9',
       marginLeft: 10,
       marginRight: 10,
-      textAlign: 'center',
+      textAlign: 'center'
     },
     tablaFila: {
       flexDirection: 'row',
-      textAlign: 'center',
+      textAlign: 'center'
     },
     tablaColumna2: {
       width: 80,
@@ -112,7 +112,7 @@ const DocuPDF = ({ grafica, datos }) => {
       borderColor: 'white',
       borderWidth: 1,
       borderLeftWidth: 0,
-      borderTopWidth: 0,
+      borderTopWidth: 0
     },
     tablaCeldaHeader: {
       fontSize: 11,
@@ -425,7 +425,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 paddingTop: 5
               }}
             >
-              {ticketsAbiertos + ticketsCerrados}{' '}
+              {ticketsAbiertos + ticketsCerrados}
             </Text>
           </View>
           <View style={styles.carta}>
@@ -448,7 +448,7 @@ const DocuPDF = ({ grafica, datos }) => {
                 paddingTop: 5
               }}
             >
-              {ticketsAbiertos}{' '}
+              {ticketsAbiertos}
             </Text>
           </View>
         </View>
@@ -475,7 +475,7 @@ const DocuPDF = ({ grafica, datos }) => {
                   alignItems: 'center'
                 }}
               >
-                Titulo
+                Título
               </Text>
             </View>
             <View style={styles.tablaColumna2}>

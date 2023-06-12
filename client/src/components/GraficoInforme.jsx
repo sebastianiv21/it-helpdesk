@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   Chart as CartJS,
   BarElement,
@@ -16,11 +15,11 @@ const GraficoInforme = ({ datos }) => {
   const { categorias } = datos
   console.log('grafico', categorias)
   const data = {
-    labels: categorias?.map((categoria) => (categoria.nombre)),
+    labels: categorias?.map((categoria) => categoria.nombre),
     datasets: [
       {
         label: 'Cantidad',
-        data: categorias?.map((categoria) => (categoria.cantidad)),
+        data: categorias?.map((categoria) => categoria.cantidad),
         backgroundColor: '#004643'
       }
     ]
@@ -28,27 +27,27 @@ const GraficoInforme = ({ datos }) => {
 
   const options = {
     responsive: true,
-    
+
     plugins: {
       legend: { display: false }
     },
     scales: {
       y: {
-          beginAtZero: true,
-          ticks: {
-              font: {
-                  size: 40 // Tamaño de las letras en el eje y
-              }
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 40 // Tamaño de las letras en el eje y
           }
+        }
       },
       x: {
-          ticks: {
-              font: {
-                  size: 40 // Tamaño de las letras en el eje x
-              }
+        ticks: {
+          font: {
+            size: 40 // Tamaño de las letras en el eje x
           }
+        }
       }
-  },
+    }
   }
 
   return <Bar data={data} options={options} />
