@@ -26,6 +26,7 @@ app.use('/clientes', require('./routes/clienteRoutes'))
 app.use('/tickets', require('./routes/ticketRoutes'))
 app.use('/agentes', require('./routes/agenteRoutes'))
 app.use('/places', require('./routes/placeRoutes'))
+app.use('/informe', require('./routes/informeRoutes'))
 
 // 404 route
 app.all('*', (req, res) => {

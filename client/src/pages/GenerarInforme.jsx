@@ -1,5 +1,6 @@
 import {
   faEye,
+  faEyeSlash,
   faFileExcel,
   faFilePdf
 } from '@fortawesome/free-solid-svg-icons'
@@ -96,6 +97,10 @@ const GenerarInforme = () => {
   const { parseDate } = useDate()
   const nombreArchivo = `Informe-${format(new Date(), 'dd-MM-yyyy')}.pdf`
   const { formData, onChange, onReset } = useForm(initialState)
+
+  useEffect(() => {
+    console.log(formData)
+  }, [formData])
 
   useEffect(() => {
     getClientes().then((json) => {
@@ -428,7 +433,7 @@ const GenerarInforme = () => {
               color='primary'
               className='d-flex gap-2 align-items-center'
             >
-              <FontAwesomeIcon icon={faEye} />
+              <FontAwesomeIcon icon={verPdf ? faEyeSlash : faEye} />
               {verPdf ? 'Ocultar pdf' : 'Ver pdf'}
             </Button>
             <PDFDownloadLink

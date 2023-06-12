@@ -20,21 +20,6 @@ const DocuPDF = ({ grafica, datos }) => {
     categorias
   } = datos
 
-  const descripcion = categorias?.map(
-    (categoria) =>
-      `Categoría ${categoria.nombre} = ${categoria.cantidad}
-subcategoría
- ${categoria.subcategorias?.map(
-   (subcategoria) => `${subcategoria.nombre}=${subcategoria.cantidad}\n`
- )}\n`
-  )
-
-  // categoria hardware = 28
-  //   sub categoria
-  //     Escaner=9
-  //     Impresora=8
-  //     Monitor=1
-
   Font.register({
     family: 'Poppins',
     src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2'
@@ -282,14 +267,6 @@ subcategoría
           </View>
         ))}
       </View>
-      {/* <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
-            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
-              <Text style={styles.tablaCelda}></Text>
-            </View>
-            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
-            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
-              <Text style={styles.tablaCelda}>{categoria.cantidad} </Text>
-            </View> */}
     </View>
   ))
 
