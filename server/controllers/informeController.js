@@ -3,14 +3,13 @@ const asyncHandler = require('express-async-handler')
 const { startOfDay, endOfDay, parseISO } = require('date-fns')
 
 // @desc Get tickets in a date range
-// @route GET /informe
+// @route POST /informe
 // @access Private
 const getTicketsByDateRange = asyncHandler(async (req, res) => {
   const { fechaInicio, fechaFinal, empresa, categoria } = req.body
 
   // Confirm data
   const camposRequeridos = [fechaInicio, fechaFinal]
-  console.log('camposRequeridos', camposRequeridos)
 
   if (camposRequeridos.some((field) => !field)) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })

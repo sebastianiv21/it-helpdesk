@@ -109,10 +109,7 @@ const GenerarInforme = () => {
   const INFORME_URL = '/informe'
   const [errMsg, setErrMsg] = useState('')
   const [datosInforme, setDatosInforme] = useState(null)
-
-  useEffect(() => {
-    console.log(formData)
-  }, [formData])
+  const [chartDataURL, setChartDataURL] = useState(null)
 
   useEffect(() => {
     setErrMsg('')
@@ -142,229 +139,21 @@ const GenerarInforme = () => {
     )
   })
 
-  const chartCanvas = document.querySelector('canvas')
-  const chartDataURL = chartCanvas && chartCanvas.toDataURL()
+  useEffect(() => {
+    const generarGrafico = () => {
+      if (datosInforme) {
+        const chartCanvas = document.querySelector('canvas')
+        const newChartDataURL = chartCanvas.toDataURL()
+        setChartDataURL(newChartDataURL)
+      }
+    }
 
-  // const datosInforme = {
-  //   fechaInicio: '2023-02-03',
-  //   fechaFinal: '2023-02-03',
-  //   empresa: 'Empresa 1'.toUpperCase(),
-  //   ticketsAbiertos: 3,
-  //   ticketsCerrados: 6,
-  //   tickets: [
-  //     {
-  //       titulo: 'El raton se comio los cables del pc',
-  //       prioridad: 'Alta',
-  //       estado: 'Abierto',
-  //       categoria: 'Hardware',
-  //       fechaCreacion: '2023-02-03',
-  //       fechaCierre: '2023-02-03'
-  //     },
-  //     {
-  //       titulo:
-  //         'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
-  //       prioridad: 'Media',
-  //       estado: 'Cerrado',
-  //       categoria: 'Software',
-  //       fechaCreacion: '2023-02-03',
-  //       fechaCierre: '2023-02-03'
-  //     },
-  //     {
-  //       titulo:
-  //         'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
-  //       prioridad: 'Baja',
-  //       estado: 'Abierto',
-  //       categoria: 'Infraestructura',
-  //       fechaCreacion: '2023-02-03',
-  //       fechaCierre: '2023-02-03'
-  //     },
-  //     {
-  //       titulo:
-  //         'lola camino por la vereda cuidando que no se cayera al rio para llegar del otro lado con sus amigos',
-  //       prioridad: 'Alta',
-  //       estado: 'Cerrado',
-  //       categoria: 'Servidores',
-  //       fechaCreacion: '2023-02-03',
-  //       fechaCierre: '2023-02-03'
-  //     },
-  //     {
-  //       titulo: 'Titulo 4',
-  //       prioridad: 'Alta',
-  //       estado: 'Cerrado',
-  //       categoria: 'Servidores',
-  //       fechaCreacion: '2023-02-03',
-  //       fechaCierre: '2023-02-03'
-  //     }
-  //   ],
-  //   categorias: [
-  //     {
-  //       nombre: 'Hardware',
-  //       cantidad: 3,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Escaner',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Impresora',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Monitor',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'PC',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Portatil',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Servidor',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Smartphone',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'UPS',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Software',
-  //       cantidad: 6,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Configuración periferico',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Sistema Operativo',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Copia de información',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Correo electronico',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Office',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Infraestructura',
-  //       cantidad: 9,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Cableado estructurado',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Caseta nodo',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Sistema electronico',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Sistema electrico',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Solución solar',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Torre de comunicaciones',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Servidores',
-  //       cantidad: 12,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Backup',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Configuración',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Cuentas de usuario',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Politicas-Reglas',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Ciberseguridad',
-  //       cantidad: 14,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Antivirus',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Firewall',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'VPN',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Seguridad Electrónica',
-  //       cantidad: 4,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Biometrico',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Camara',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Sensor',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       nombre: 'Telecomunicaciones',
-  //       cantidad: 3,
-  //       subcategorias: [
-  //         {
-  //           nombre: 'Enlace satelital ',
-  //           cantidad: 3
-  //         },
-  //         {
-  //           nombre: 'Radio enlace terrestre',
-  //           cantidad: 3
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
+    generarGrafico()
+  }, [datosInforme])
+
+  // const chartCanvas = document.querySelector('canvas')
+  // const chartDataURL = chartCanvas && chartCanvas.toDataURL()
+  // }, [datosInforme])
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -378,6 +167,7 @@ const GenerarInforme = () => {
       })
       console.log(data)
       setDatosInforme(data)
+      setVerPdf(true)
       onReset()
       toast.info('Consulta realizada exitosamente', { theme: 'colored' })
     } catch (err) {
@@ -389,6 +179,14 @@ const GenerarInforme = () => {
         setErrMsg('La consulta falló')
       }
     }
+  }
+
+  const handleGenerarPDF = () => {
+    setVerPdf(false)
+    setTimeout(() => {
+      setDatosInforme(null)
+      setChartDataURL(null)
+    }, 500);
   }
 
   return (
@@ -461,7 +259,7 @@ const GenerarInforme = () => {
           <div className='d-flex justify-content-end gap-2'>
             {datosInforme && (
               <>
-                <Button
+                {/* <Button
                   type='button'
                   onClick={() => setVerPdf(!verPdf)}
                   color='primary'
@@ -469,13 +267,10 @@ const GenerarInforme = () => {
                 >
                   <FontAwesomeIcon icon={verPdf ? faEyeSlash : faEye} />
                   {verPdf ? 'Ocultar pdf' : 'Ver pdf'}
-                </Button>
+                </Button> */}
                 <PDFDownloadLink
                   document={
-                    <DocuPDF
-                      grafica={chartCanvas && chartDataURL}
-                      datos={datosInforme}
-                    />
+                    <DocuPDF grafica={chartDataURL} datos={datosInforme} />
                   }
                   fileName={nombreArchivo}
                 >
@@ -483,6 +278,7 @@ const GenerarInforme = () => {
                     color='primary'
                     type='button'
                     className='d-flex gap-2 align-items-center'
+                    onClick={handleGenerarPDF}
                   >
                     <FontAwesomeIcon icon={faFilePdf} />
                     Generar PDF
@@ -504,10 +300,7 @@ const GenerarInforme = () => {
       <div className='mt-3'>
         {verPdf && datosInforme ? (
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
-            <DocuPDF
-              grafica={chartCanvas && chartDataURL}
-              datos={datosInforme && datosInforme}
-            />
+            <DocuPDF grafica={chartDataURL} datos={datosInforme} />
           </PDFViewer>
         ) : null}
       </div>

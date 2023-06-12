@@ -8,6 +8,8 @@ import {
   Font
 } from '@react-pdf/renderer'
 import logoinforme from '/images/logoinforme.png'
+import {useDate} from '@hooks'
+
 const DocuPDF = ({ grafica, datos }) => {
   const {
     fechaInicio,
@@ -18,6 +20,7 @@ const DocuPDF = ({ grafica, datos }) => {
     tickets,
     categorias
   } = datos
+  const { parseDate } = useDate()
 
   Font.register({
     family: 'Poppins',
@@ -158,7 +161,7 @@ const DocuPDF = ({ grafica, datos }) => {
   })
 
   const datosTabla = tickets?.map((ticket) => (
-    <View key={ticket.id} style={styles.tablaFila}>
+    <View key={ticket._id} style={styles.tablaFila}>
       <View
         style={{
           width: 200,
@@ -183,16 +186,20 @@ const DocuPDF = ({ grafica, datos }) => {
         <Text style={styles.tablaCelda}>{ticket.categoria}</Text>
       </View>
       <View style={styles.anchoColumna2}>
-        <Text style={styles.tablaCelda}>{ticket.fechaCreacion}</Text>
+        <Text style={styles.tablaCelda}>{parseDate(ticket.createdAt)}</Text>
       </View>
       <View style={styles.anchoColumna2}>
-        <Text style={styles.tablaCelda}>{ticket.fechaCierre}</Text>
+        <Text style={styles.tablaCelda}>
+          {ticket?.fechadecierre
+            ? ticket?.fechadecierre.slice(0, 10)
+            : 'En trámite'}
+        </Text>
       </View>
     </View>
   ))
 
   const datosCategoria = categorias?.map((categoria) => (
-    <View key={categoria.name} style={styles.tablaFila}>
+    <View key={categoria.nombre} style={styles.tablaFila}>
       <View
         style={{
           width: 200,
@@ -200,14 +207,20 @@ const DocuPDF = ({ grafica, datos }) => {
           borderColor: 'white',
           borderWidth: 1,
           borderLeftWidth: 0,
-          borderTopWidth: 0,
+          borderTopWidth: 0
         }}
       >
-        <Text style={{      marginTop:15,
-      fontSize: 12,
-      color: '#004643',
-      textAlign: 'center',
-      alignItems: 'center'}}>{categoria.nombre}</Text>
+        <Text
+          style={{
+            marginTop: 15,
+            fontSize: 12,
+            color: '#004643',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}
+        >
+          {categoria.nombre}
+        </Text>
       </View>
       <View
         style={{
@@ -217,11 +230,12 @@ const DocuPDF = ({ grafica, datos }) => {
           borderWidth: 1,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          borderBottomWidth: 1,
+          borderBottomWidth: 1
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
           <View
+            key={subcategoria.nombre}
             style={{
               width: 200,
               borderStyle: 'solid',
@@ -230,7 +244,7 @@ const DocuPDF = ({ grafica, datos }) => {
               borderLeftWidth: 0,
               borderTopWidth: 0,
               borderBottomWidth: 0,
-              textAlign: 'center',
+              textAlign: 'center'
             }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.nombre}</Text>
@@ -245,22 +259,23 @@ const DocuPDF = ({ grafica, datos }) => {
           borderWidth: 0,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          borderBottomWidth: 1  ,
-          textAlign: 'center',
+          borderBottomWidth: 1,
+          textAlign: 'center'
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
           <View
-          style={{
-            width: 200,
-            borderStyle: 'solid',
-            borderColor: 'white',
-            borderWidth: 0,
-            borderLeftWidth: 0,
-            borderTopWidth: 0,
-            borderBottomWidth: 0,
-            textAlign: 'center',
-          }}
+            key={subcategoria.nombre}
+            style={{
+              width: 200,
+              borderStyle: 'solid',
+              borderColor: 'white',
+              borderWidth: 0,
+              borderLeftWidth: 0,
+              borderTopWidth: 0,
+              borderBottomWidth: 0,
+              textAlign: 'center'
+            }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.cantidad}</Text>
           </View>
@@ -537,19 +552,22 @@ const DocuPDF = ({ grafica, datos }) => {
               {Boolean(grafica) && (
                 <Image style={{ width: '80vw' }} src={grafica} />
               )}
+              {!Boolean(grafica) && (
+                <Text style={styles.text}>No me genere</Text>
+              )}
             </View>
           </View>
         </View>
         <View>
           <View style={{ marginTop: '30' }}>
-            <Text style={styles.text}>DETALLADO DE SUB CATEGORIAS</Text>
+            <Text style={styles.text}>DETALLADO DE SUBCATEGORIAS</Text>
             <View style={styles.tabla}>
               <View style={styles.tablaFila}>
                 <View style={styles.tablaColumna3}>
                   <Text style={styles.tablaCeldaHeader}>CATEGORIA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
-                  <Text style={styles.tablaCeldaHeader}>SUB CATEGORIA</Text>
+                  <Text style={styles.tablaCeldaHeader}>SUBCATEGORIA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
                   <Text style={styles.tablaCeldaHeader}>CANT.TICKETS</Text>
