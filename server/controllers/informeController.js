@@ -27,16 +27,36 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
   const fechaDesde = startOfDay(parseISO(fechaInicio))
   const fechaHasta = endOfDay(parseISO(fechaFinal))
 
-  // TODO: filtrar por empresa y categoria
-
-  // Get tickets
   const tickets = await Ticket.find({
-    createdAt: { $gte: fechaDesde, $lte: fechaHasta }
+    createdAt: {
+      $gte: fechaDesde,
+      $lte: fechaHasta
+    }
   })
+    .populate('cliente')
     .lean()
-    .populate('cliente', { ticket: 0 })
-    .populate('agenteEncargado', { ticket: 0 })
     .exec()
+    // filtra por empresa y categoria si se selecciono alguna de ellas en el formulario
+    .then((tickets) => {
+      if (empresa && empresa !== 'Todas') {
+        return tickets.filter((ticket) => ticket.cliente.empresa === empresa)
+      }
+      return tickets
+    })
+    .then((tickets) => {
+      if (categoria && categoria !== 'Todas') {
+        return tickets.filter((ticket) => ticket.categoria === categoria)
+      }
+      return tickets
+    })
+
+    // const tickets = await Ticket.find({
+    //   createdAt: { $gte: fechaDesde, $lte: fechaHasta }
+    // })
+    //   .lean()
+    //   .populate('cliente', { ticket: 0 })
+    //   .populate('agenteEncargado', { ticket: 0 })
+    //   .exec()
 
   const ticketsAbiertos = tickets.filter(
     (ticket) => ticket.estado === 'Abierto'
@@ -45,16 +65,6 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
     (ticket) => ticket.estado === 'Cerrado'
   ).length
 
-  // filtra por categoria
-  // if (categoria && categoria !== 'Todas') {
-  //   const ticketsFiltrados = tickets.filter(
-  //     (ticket) => ticket.categoria === categoria
-  //   )
-  //   // return res.json(ticketsFiltrados)
-  // }
-
-  // cantidad de tickets por categoria y subcategoria en formato { categoria: 'Hardware', cantidad: 2, subcategorias: [{ subcategoria: 'Mouse', cantidad: 1 }, { subcategoria: 'Teclado', cantidad: 1 }] }
-  // si ya existe la categoria, aumenta la cantidad de tickets y si ya existe la subcategoria, aumenta la cantidad de tickets
   const categorias = tickets.reduce((acc, ticket) => {
     const { categoria, subcategoria } = ticket
     const categoriaIndex = acc.findIndex(
@@ -88,18 +98,21 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
     return acc
   }, [])
 
+  // si no hay tickets
+  // if (!tickets?.length) {
+  //   return res.status(400).json({ message: 'No se encontraron tickets' })
+  // }
+ 
   res.json({
+    fechaInicio,
+    fechaFinal,
+    empresa: empresa.toUpperCase(),
     ticketsAbiertos,
     ticketsCerrados,
     tickets,
     categorias
   })
-  // si no hay tickets
-  if (!tickets?.length) {
-    return res.status(400).json({ message: 'No se encontraron tickets' })
-  }
 
-  res.json(tickets)
   // res.json({ fechaInicio, fechaFinal, empresa, ticketsAbiertos, ticketsCerrados, tickets, categorias })
 })
 

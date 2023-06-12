@@ -404,6 +404,7 @@ const GenerarInforme = () => {
                 >
                   <option value=''>Seleccione empresa o cliente</option>
                   {optEmpresas}
+                  <option value='Todas'>Todas</option>
                 </Input>
               </FormGroup>
             </Col>
