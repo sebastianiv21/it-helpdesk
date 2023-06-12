@@ -42,7 +42,7 @@ export const TablaTickets = ({ items, acciones }) => {
       <td>{item?.categoria}</td>
       <td>{parseDate(item?.createdAt)}</td>
       <td>
-        {item?.fechadecierre ? parseDate(item?.fechadecierre) : 'En trámite'}
+        {item?.fechadecierre ? item?.fechadecierre.slice(0, 10) : 'En trámite'}
       </td>
       <td>
         <div className='d-flex gap-2'>

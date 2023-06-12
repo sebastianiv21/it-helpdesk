@@ -20,21 +20,11 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
 
     const fechaDesde = startOfDay(parseISO(fechaInicio))
     const fechaHasta = endOfDay(parseISO(fechaFinal))
-
-    // Establecer la hora de inicio del día en la fecha
-    
-    //   const isoDateObj = new Date(isoDate)
-    //   const isoDateObj2 = new Date(isoDate2)
-    
-    // Formatear la fecha en formato ISO 8601 utilizando date-fns
     
     const allTickets = await Ticket.find({}, 'createdAt').lean().exec()
-    //   res.json({ allTickets, fechaDesde, fechaHasta })
-    //   res.json({ allTickets, isoDate, isoDate2 })
     
     // Get tickets
     const tickets = await Ticket.find({
-      // createdAt: { $gte: fechaDesde, $lte: fechaHasta }
       createdAt: { $gte: fechaDesde, $lte: fechaHasta }
     })
     .lean()

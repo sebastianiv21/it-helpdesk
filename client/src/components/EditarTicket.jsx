@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap'
-import { useForm } from '@hooks'
+import { useForm, useDate } from '@hooks'
 import { AccionesTicket } from './AccionesTicket'
 
 const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
@@ -72,7 +72,7 @@ const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
                     id='fechadecierre'
                     name='fechadecierre'
                     onChange={onChange}
-                    value={formData?.fechadecierre}
+                    value={formData?.fechadecierre?.split('T')[0]}
                     type='date'
                   />
                 </FormGroup>
