@@ -8,32 +8,19 @@ import {
   Font
 } from '@react-pdf/renderer'
 import logoinforme from '/images/logoinforme.png'
+import { useDate } from '@hooks'
+
 const DocuPDF = ({ grafica, datos }) => {
   const {
     fechaInicio,
     fechaFinal,
     empresa,
-    cliente,
     ticketsAbiertos,
     ticketsCerrados,
     tickets,
     categorias
   } = datos
-
-  const descripcion = categorias?.map(
-    (categoria) =>
-      `Categoría ${categoria.nombre} = ${categoria.cantidad}
-subcategoría
- ${categoria.subcategorias?.map(
-   (subcategoria) => `${subcategoria.nombre}=${subcategoria.cantidad}\n`
- )}\n`
-  )
-
-  // categoria hardware = 28
-  //   sub categoria
-  //     Escaner=9
-  //     Impresora=8
-  //     Monitor=1
+  const { parseDate } = useDate()
 
   Font.register({
     family: 'Poppins',
@@ -43,16 +30,16 @@ subcategoría
   const styles = StyleSheet.create({
     encabezado: {
       flexDirection: 'row',
-      justifyContent:  'space-between',
+      justifyContent: 'space-between',
       marginLeft: 10,
-      marginRight: 10,
+      marginRight: 10
     },
 
     primera: {
       flexDirection: 'row',
       alignSelf: 'center',
       marginLeft: 10,
-      marginRight: 10,
+      marginRight: 10
     },
     text: {
       color: '#004643',
@@ -106,11 +93,11 @@ subcategoría
       backgroundColor: '#c2e7c9',
       marginLeft: 10,
       marginRight: 10,
-      textAlign: 'center',
+      textAlign: 'center'
     },
     tablaFila: {
       flexDirection: 'row',
-      textAlign: 'center',
+      textAlign: 'center'
     },
     tablaColumna2: {
       width: 80,
@@ -125,7 +112,7 @@ subcategoría
       borderColor: 'white',
       borderWidth: 1,
       borderLeftWidth: 0,
-      borderTopWidth: 0,
+      borderTopWidth: 0
     },
     tablaCeldaHeader: {
       fontSize: 11,
@@ -174,7 +161,7 @@ subcategoría
   })
 
   const datosTabla = tickets?.map((ticket) => (
-    <View key={ticket.id} style={styles.tablaFila}>
+    <View key={ticket._id} style={styles.tablaFila}>
       <View
         style={{
           width: 200,
@@ -199,16 +186,20 @@ subcategoría
         <Text style={styles.tablaCelda}>{ticket.categoria}</Text>
       </View>
       <View style={styles.anchoColumna2}>
-        <Text style={styles.tablaCelda}>{ticket.fechaCreacion}</Text>
+        <Text style={styles.tablaCelda}>{parseDate(ticket.createdAt)}</Text>
       </View>
       <View style={styles.anchoColumna2}>
-        <Text style={styles.tablaCelda}>{ticket.fechaCierre}</Text>
+        <Text style={styles.tablaCelda}>
+          {ticket?.fechadecierre
+            ? ticket?.fechadecierre.slice(0, 10)
+            : 'En trámite'}
+        </Text>
       </View>
     </View>
   ))
 
   const datosCategoria = categorias?.map((categoria) => (
-    <View key={categoria.name} style={styles.tablaFila}>
+    <View key={categoria.nombre} style={styles.tablaFila}>
       <View
         style={{
           width: 200,
@@ -216,14 +207,20 @@ subcategoría
           borderColor: 'white',
           borderWidth: 1,
           borderLeftWidth: 0,
-          borderTopWidth: 0,
+          borderTopWidth: 0
         }}
       >
-        <Text style={{      marginTop:15,
-      fontSize: 12,
-      color: '#004643',
-      textAlign: 'center',
-      alignItems: 'center'}}>{categoria.nombre}</Text>
+        <Text
+          style={{
+            marginTop: 15,
+            fontSize: 12,
+            color: '#004643',
+            textAlign: 'center',
+            alignItems: 'center'
+          }}
+        >
+          {categoria.nombre}
+        </Text>
       </View>
       <View
         style={{
@@ -233,11 +230,12 @@ subcategoría
           borderWidth: 1,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          borderBottomWidth: 1,
+          borderBottomWidth: 1
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
           <View
+            key={subcategoria.nombre}
             style={{
               width: 200,
               borderStyle: 'solid',
@@ -246,7 +244,7 @@ subcategoría
               borderLeftWidth: 0,
               borderTopWidth: 0,
               borderBottomWidth: 0,
-              textAlign: 'center',
+              textAlign: 'center'
             }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.nombre}</Text>
@@ -261,35 +259,28 @@ subcategoría
           borderWidth: 0,
           borderLeftWidth: 0,
           borderTopWidth: 0,
-          borderBottomWidth: 1  ,
-          textAlign: 'center',
+          borderBottomWidth: 1,
+          textAlign: 'center'
         }}
       >
         {categoria.subcategorias?.map((subcategoria) => (
           <View
-          style={{
-            width: 200,
-            borderStyle: 'solid',
-            borderColor: 'white',
-            borderWidth: 0,
-            borderLeftWidth: 0,
-            borderTopWidth: 0,
-            borderBottomWidth: 0,
-            textAlign: 'center',
-          }}
+            key={subcategoria.nombre}
+            style={{
+              width: 200,
+              borderStyle: 'solid',
+              borderColor: 'white',
+              borderWidth: 0,
+              borderLeftWidth: 0,
+              borderTopWidth: 0,
+              borderBottomWidth: 0,
+              textAlign: 'center'
+            }}
           >
             <Text style={styles.tablaCelda}>{subcategoria.cantidad}</Text>
           </View>
         ))}
       </View>
-      {/* <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
-            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
-              <Text style={styles.tablaCelda}></Text>
-            </View>
-            <View style={{ width: 200, borderStyle: 'solid', borderColor: 'white', borderWidth: 1, 
-            borderLeftWidth: 0,borderTopWidth: 0, textAlign: 'center'}}>
-              <Text style={styles.tablaCelda}>{categoria.cantidad} </Text>
-            </View> */}
     </View>
   ))
 
@@ -304,7 +295,7 @@ subcategoría
             marginTop: -20,
             marginBottom: -30,
             marginLeft: 10,
-      marginRight: 10,
+            marginRight: 10
           }}
         >
           <View style={{ flexDirection: 'row', marginTop: -20 }}>
@@ -345,16 +336,14 @@ subcategoría
             fontSize: '12px',
             padding: '5',
             marginLeft: 10,
-      marginRight: 10,
+            marginRight: 10
           }}
         >
           <View style={styles.encabezado}>
-            <View >
-            <Text
-              style={{ color: 'white', fontSize: '13px',  }}
-            >
-              EMPRESA / CLIENTE:
-            </Text>
+            <View>
+              <Text style={{ color: 'white', fontSize: '13px' }}>
+                EMPRESA / CLIENTE:
+              </Text>
             </View>
             <View>
               <Text
@@ -370,7 +359,7 @@ subcategoría
             </View>
           </View>
           <View style={styles.encabezado}>
-          <View>
+            <View>
               <Text style={{ color: 'white', fontSize: '13px' }}>
                 {empresa}
               </Text>
@@ -436,7 +425,7 @@ subcategoría
                 paddingTop: 5
               }}
             >
-              {ticketsAbiertos + ticketsCerrados}{' '}
+              {ticketsAbiertos + ticketsCerrados}
             </Text>
           </View>
           <View style={styles.carta}>
@@ -459,7 +448,7 @@ subcategoría
                 paddingTop: 5
               }}
             >
-              {ticketsAbiertos}{' '}
+              {ticketsAbiertos}
             </Text>
           </View>
         </View>
@@ -473,39 +462,63 @@ subcategoría
                 borderBottomColor: 'white',
                 borderWidth: 1,
                 borderLeftWidth: 0,
-                borderTopWidth: 0,
+                borderTopWidth: 0
               }}
             >
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Titulo</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Título
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Prioridad</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Prioridad
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Estado</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Estado
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Categoría</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Categoría
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
               <Text style={styles.tablaCeldaHeader}>Fecha de Creación</Text>
@@ -526,7 +539,7 @@ subcategoría
               marginTop: '25'
             }}
           >
-            <Text style={styles.text}>GRAFICO DE CATEGORIAS</Text>
+            <Text style={styles.text}>GRÁFICO DE CATEGORIAS</Text>
           </View>
           <View
             style={{
@@ -539,34 +552,41 @@ subcategoría
               {Boolean(grafica) && (
                 <Image style={{ width: '80vw' }} src={grafica} />
               )}
+              {!Boolean(grafica) && (
+                <Text style={styles.text}>No me genere</Text>
+              )}
             </View>
           </View>
         </View>
         <View>
           <View style={{ marginTop: '30' }}>
-            <Text style={styles.text}>DETALLADO DE SUB CATEGORIAS</Text>
+            <Text style={styles.text}>DETALLADO DE SUBCATEGORIAS</Text>
             <View style={styles.tabla}>
               <View style={styles.tablaFila}>
                 <View style={styles.tablaColumna3}>
-                  <Text style={styles.tablaCeldaHeader}>CATEGORIA</Text>
+                  <Text style={styles.tablaCeldaHeader}>CATEGORÍA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
-                  <Text style={styles.tablaCeldaHeader}>SUB CATEGORIA</Text>
+                  <Text style={styles.tablaCeldaHeader}>SUBCATEGORÍA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
                   <Text style={styles.tablaCeldaHeader}>CANT.TICKETS</Text>
                 </View>
               </View>
             </View>
-            <View style={{
-               display: 'table',
-               borderStyle: 'solid',
-               borderColor: 'white',
-               borderWidth: 1,
-               backgroundColor: '#c2e7c9',
-               marginLeft: 10,
-               marginRight: 10,
-            }}>{datosCategoria}</View>
+            <View
+              style={{
+                display: 'table',
+                borderStyle: 'solid',
+                borderColor: 'white',
+                borderWidth: 1,
+                backgroundColor: '#c2e7c9',
+                marginLeft: 10,
+                marginRight: 10
+              }}
+            >
+              {datosCategoria}
+            </View>
           </View>
         </View>
         <Text

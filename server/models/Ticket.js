@@ -43,8 +43,6 @@ const ticketSchema = new mongoose.Schema(
     ],
     fechadecierre: Date,
     agenteEncargado: {
-      // type: String,
-      // required: true
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'Agente'
@@ -64,3 +62,9 @@ ticketSchema.plugin(Autoincrement, {
 })
 
 module.exports = mongoose.model('Ticket', ticketSchema)
+
+// Obtiene la fecha y hora actual en Colombia
+// const horaActual = new Date();
+// const horaColombiana = format(horaActual, 'yyyy-MM-dd HH:mm:ss', {
+//   timeZone: 'America/Bogota'
+// });
