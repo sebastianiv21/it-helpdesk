@@ -1,16 +1,7 @@
 const Ticket = require('../models/Ticket')
 const asyncHandler = require('express-async-handler')
-const {
-  startOfDay,
-  endOfDay,
-  parseISO,
-  formatISO,
-  format
-} = require('date-fns')
+const { startOfDay, endOfDay, parseISO } = require('date-fns')
 
-const parseDate = (date, dateFormat = 'yyyy-MM-dd') => {
-  return format(parseISO(date), dateFormat)
-}
 // @desc Get tickets in a date range
 // @route GET /informe
 // @access Private
@@ -19,6 +10,7 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
 
   // Confirm data
   const camposRequeridos = [fechaInicio, fechaFinal]
+  console.log('camposRequeridos', camposRequeridos)
 
   if (camposRequeridos.some((field) => !field)) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
@@ -50,13 +42,13 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
       return tickets
     })
 
-    // const tickets = await Ticket.find({
-    //   createdAt: { $gte: fechaDesde, $lte: fechaHasta }
-    // })
-    //   .lean()
-    //   .populate('cliente', { ticket: 0 })
-    //   .populate('agenteEncargado', { ticket: 0 })
-    //   .exec()
+  // const tickets = await Ticket.find({
+  //   createdAt: { $gte: fechaDesde, $lte: fechaHasta }
+  // })
+  //   .lean()
+  //   .populate('cliente', { ticket: 0 })
+  //   .populate('agenteEncargado', { ticket: 0 })
+  //   .exec()
 
   const ticketsAbiertos = tickets.filter(
     (ticket) => ticket.estado === 'Abierto'
@@ -102,7 +94,7 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
   // if (!tickets?.length) {
   //   return res.status(400).json({ message: 'No se encontraron tickets' })
   // }
- 
+
   res.json({
     fechaInicio,
     fechaFinal,

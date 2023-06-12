@@ -5,6 +5,6 @@ const verifyJWT = require('../middlewares/verifyJWT')
 
 // router.use(verifyJWT)
 
-router.route('/').get(informeController.getTicketsByDateRange)
+router.route('/').post(informeController.getTicketsByDateRange)
 
 module.exports = router
