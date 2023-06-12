@@ -34,9 +34,11 @@ $font-family-sans-serif: 'Poppins', sans-serif;
   scrollbar-color: #004643 white;
   scrollbar-width: thin;
   height: 300px;
+  td {
+    cursor: pointer;
+  }
 }
 
-//CHROME HPTA IBARRA NO LO BORRE
 ::-webkit-scrollbar {
   width: 9px;
   height: auto;

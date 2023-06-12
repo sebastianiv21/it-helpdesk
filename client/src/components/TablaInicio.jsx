@@ -8,9 +8,13 @@ const renderEncabezados = ENCABEZADOS.map((encabezado) => (
   </th>
 ))
 
-export const TablaInicio = ({ items }) => {
+export const TablaInicio = ({ items, handleEditToggle }) => {
   const renderItems = items.map((item) => (
-    <tr key={item._id} className='align-middle'>
+    <tr
+      key={item._id}
+      className='align-middle'
+      onClick={() => handleEditToggle(item)}
+    >
       <td>{item?.ticketRef}</td>
       <td>{item?.cliente?.empresa}</td>
       <td>
