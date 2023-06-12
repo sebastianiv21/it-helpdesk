@@ -37,6 +37,14 @@ const ListadoTickets = () => {
     })
   }, [getTickets])
 
+   useEffect(() => {
+     if (errMsg) {
+       toast.error(errMsg, {
+         theme: 'colored'
+       })
+     }
+   }, [errMsg])
+
   const onDelete = async (ticket) => {
     try {
       await axios.delete(TICKETS_URL, {

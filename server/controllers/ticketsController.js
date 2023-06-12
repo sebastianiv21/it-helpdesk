@@ -61,31 +61,6 @@ const createNewTicket = asyncHandler(async (req, res) => {
 // @desc Update a ticket
 // @route PATCH /tickets
 // @access Private
-// const updateTicket = asyncHandler(async (req, res) => {
-//   const { id, prioridad, estado, fechadecierre, acciones } = req.body
-
-//   // Confirm data
-//   if (!id || !estado || !prioridad) {
-//     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
-//   }
-
-//   // Confirm ticket exists to update
-//   const ticket = await Ticket.findById(id).exec()
-
-//   if (!ticket) {
-//     return res.status(400).json({ message: 'No se encuentra el ticket' })
-//   }
-
-//   ticket.estado = estado
-//   ticket.prioridad = prioridad
-//   ticket.fechadecierre = fechadecierre
-//   ticket.acciones = acciones
-
-//   const updatedTicket = await ticket.save()
-
-//   res.json(`Ticket '${updatedTicket._id}' actualizado`)
-// })
-
 const updateTicket = asyncHandler(async (req, res) => {
   const { _id: id, ...ticketInfo } = req.body
 

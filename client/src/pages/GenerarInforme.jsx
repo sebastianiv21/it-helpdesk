@@ -12,10 +12,9 @@ import {
   Col
 } from 'reactstrap'
 import { useData, useForm } from '@hooks'
-import { PDFDownloadLink } from '@react-pdf/renderer'
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
 import DocuPDF from '@components/DocuPDF'
 import { format } from 'date-fns'
-import { PDFViewer } from '@react-pdf/renderer'
 import GraficoInforme from '@components/GraficoInforme'
 import { toast } from 'react-toastify'
 import axios from '../api/axios'
@@ -148,20 +147,6 @@ const GenerarInforme = () => {
     generarGrafico()
     setVerPdf(true)
   }, [datosInforme])
-
-  const generarGrafico = () => {
-    if (datosInforme) {
-      const chartCanvas = document.querySelector('canvas')
-      const newChartDataURL = chartCanvas.toDataURL()
-      setChartDataURL(newChartDataURL)
-    }
-  }
-
-  // funcion para renderizar el grafico en el pdf
-
-  // const chartCanvas = document.querySelector('canvas')
-  // const chartDataURL = chartCanvas && chartCanvas.toDataURL()
-  // }, [datosInforme])
 
   const onSubmit = async (e) => {
     e.preventDefault()

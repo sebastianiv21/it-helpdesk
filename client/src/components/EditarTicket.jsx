@@ -9,7 +9,7 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap'
-import { useForm, useDate } from '@hooks'
+import { useForm } from '@hooks'
 import { AccionesTicket } from './AccionesTicket'
 
 const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
