@@ -41,6 +41,14 @@ const ListadoClientes = () => {
     handleGetClientes()
   }, [])
 
+  useEffect(() => {
+    if (errMsg) {
+      toast.error(errMsg, {
+        theme: 'colored'
+      })
+    }
+  }, [errMsg])
+
   const onDelete = async (cliente) => {
     try {
       await axios.delete(CLIENTES_URL, {

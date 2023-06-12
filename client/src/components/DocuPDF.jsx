@@ -552,9 +552,6 @@ const DocuPDF = ({ grafica, datos }) => {
               {Boolean(grafica) && (
                 <Image style={{ width: '80vw' }} src={grafica} />
               )}
-              {!Boolean(grafica) && (
-                <Text style={styles.text}>No me genere</Text>
-              )}
             </View>
           </View>
         </View>

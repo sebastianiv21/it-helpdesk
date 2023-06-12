@@ -1,14 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faRightFromBracket,
-  faRightToBracket
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons'
 import NavMenuData from '../shared/NavMenuData'
 import { useData } from '@hooks'
 import useLogout from '../hooks/useLogout'
 import { Container, Button} from 'reactstrap'
-
 
 // Components
 import DropdownCustom from './DropdownCustom'
