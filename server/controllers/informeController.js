@@ -54,30 +54,36 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
   // }
 
   // cantidad de tickets por categoria y subcategoria en formato { categoria: 'Hardware', cantidad: 2, subcategorias: [{ subcategoria: 'Mouse', cantidad: 1 }, { subcategoria: 'Teclado', cantidad: 1 }] }
-  const categorias = tickets.reduce((acc, curr) => {
-    const categoria = curr.categoria
-    const subcategoria = curr.subcategoria
-    const categoriaExistente = acc.find((obj) => obj.categoria === categoria)
-    const subcategoriaExistente = categoriaExistente?.subcategorias?.find(
-      (obj) => obj.subcategoria === subcategoria
+  // si ya existe la categoria, aumenta la cantidad de tickets y si ya existe la subcategoria, aumenta la cantidad de tickets
+  const categorias = tickets.reduce((acc, ticket) => {
+    const { categoria, subcategoria } = ticket
+    const categoriaIndex = acc.findIndex(
+      (arrCategoria) => arrCategoria.nombre === categoria
     )
-
-    if (categoriaExistente) {
-      categoriaExistente.cantidad++
-      if (subcategoriaExistente) {
-        subcategoriaExistente.cantidad++
-      } else {
-        categoriaExistente.subcategorias.push({
-          nombre: subcategoria,
-          cantidad: 1
-        })
-      }
-    } else {
+    if (categoriaIndex === -1) {
       acc.push({
         nombre: categoria,
         cantidad: 1,
-        subcategorias: [{ nombre: subcategoria, cantidad: 1 }]
+        subcategorias: [
+          {
+            nombre: subcategoria,
+            cantidad: 1
+          }
+        ]
       })
+    } else {
+      acc[categoriaIndex].cantidad++
+      const subcategoriaIndex = acc[categoriaIndex].subcategorias.findIndex(
+        (arrSubcategoria) => arrSubcategoria.nombre === subcategoria
+      )
+      if (subcategoriaIndex === -1) {
+        acc[categoriaIndex].subcategorias.push({
+          nombre: subcategoria,
+          cantidad: 1
+        })
+      } else {
+        acc[categoriaIndex].subcategorias[subcategoriaIndex].cantidad++
+      }
     }
     return acc
   }, [])
