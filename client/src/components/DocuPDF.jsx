@@ -13,7 +13,6 @@ const DocuPDF = ({ grafica, datos }) => {
     fechaInicio,
     fechaFinal,
     empresa,
-    cliente,
     ticketsAbiertos,
     ticketsCerrados,
     tickets,
@@ -281,7 +280,7 @@ const DocuPDF = ({ grafica, datos }) => {
             marginTop: -20,
             marginBottom: -30,
             marginLeft: 10,
-      marginRight: 10,
+            marginRight: 10
           }}
         >
           <View style={{ flexDirection: 'row', marginTop: -20 }}>
@@ -322,16 +321,14 @@ const DocuPDF = ({ grafica, datos }) => {
             fontSize: '12px',
             padding: '5',
             marginLeft: 10,
-      marginRight: 10,
+            marginRight: 10
           }}
         >
           <View style={styles.encabezado}>
-            <View >
-            <Text
-              style={{ color: 'white', fontSize: '13px',  }}
-            >
-              EMPRESA / CLIENTE:
-            </Text>
+            <View>
+              <Text style={{ color: 'white', fontSize: '13px' }}>
+                EMPRESA / CLIENTE:
+              </Text>
             </View>
             <View>
               <Text
@@ -347,7 +344,7 @@ const DocuPDF = ({ grafica, datos }) => {
             </View>
           </View>
           <View style={styles.encabezado}>
-          <View>
+            <View>
               <Text style={{ color: 'white', fontSize: '13px' }}>
                 {empresa}
               </Text>
@@ -450,39 +447,63 @@ const DocuPDF = ({ grafica, datos }) => {
                 borderBottomColor: 'white',
                 borderWidth: 1,
                 borderLeftWidth: 0,
-                borderTopWidth: 0,
+                borderTopWidth: 0
               }}
             >
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Titulo</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Titulo
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Prioridad</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Prioridad
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Estado</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Estado
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
-              <Text style={{  fontSize: 11,
-      color: 'white',
-      marginTop: 15,
-      textAlign: 'center',
-      borderColor: 'white',
-      alignItems: 'center'}}>Categoría</Text>
+              <Text
+                style={{
+                  fontSize: 11,
+                  color: 'white',
+                  marginTop: 15,
+                  textAlign: 'center',
+                  borderColor: 'white',
+                  alignItems: 'center'
+                }}
+              >
+                Categoría
+              </Text>
             </View>
             <View style={styles.tablaColumna2}>
               <Text style={styles.tablaCeldaHeader}>Fecha de Creación</Text>
@@ -535,15 +556,19 @@ const DocuPDF = ({ grafica, datos }) => {
                 </View>
               </View>
             </View>
-            <View style={{
-               display: 'table',
-               borderStyle: 'solid',
-               borderColor: 'white',
-               borderWidth: 1,
-               backgroundColor: '#c2e7c9',
-               marginLeft: 10,
-               marginRight: 10,
-            }}>{datosCategoria}</View>
+            <View
+              style={{
+                display: 'table',
+                borderStyle: 'solid',
+                borderColor: 'white',
+                borderWidth: 1,
+                backgroundColor: '#c2e7c9',
+                marginLeft: 10,
+                marginRight: 10
+              }}
+            >
+              {datosCategoria}
+            </View>
           </View>
         </View>
         <Text

@@ -128,8 +128,7 @@ const GenerarInforme = () => {
   const datosInforme = {
     fechaInicio: '2023-02-03',
     fechaFinal: '2023-02-03',
-    empresa: 'Empresa 1',
-    cliente: 'Cliente 1',
+    empresa: 'Empresa 1'.toUpperCase(),
     ticketsAbiertos: 3,
     ticketsCerrados: 6,
     tickets: [
@@ -346,7 +345,6 @@ const GenerarInforme = () => {
       }
     ]
   }
-  
 
   const onSubmit = (e) => {
     e.preventDefault()
