@@ -51,7 +51,7 @@ const Inicio = () => {
                 TICKETS SEMANALES
               </CardHeader>
               <CardBody>
-                <GraficoBarras />
+                <GraficoBarras tickets={tickets} />
               </CardBody>
             </Card>
           </Col>
