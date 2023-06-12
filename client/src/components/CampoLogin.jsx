@@ -1,16 +1,17 @@
 import React from 'react'
+import { Input, Label } from 'reactstrap'
 
 const CampoLogin = ({ identificacion, etiqueta }) => {
   return (
     <>
-      <label
+      <Label
         htmlFor={identificacion}
         className='form-label m-0 me-2 text-primary'
       >
         {etiqueta}
-      </label>
+      </Label>
       <div className='w-100'>
-        <input
+        <Input
           type='text'
           name={identificacion}
           id={identificacion}

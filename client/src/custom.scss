@@ -24,30 +24,24 @@ $font-family-sans-serif: 'Poppins', sans-serif;
   line-height: 96px;
 }
 
-#numero {
-  font-size: 90px;
+.indicadorNumero {
+  font-size: 7rem;
 }
 
-#numeroP {
-  font-size: 90px;
-}
-
-#tabla {
+//FIREFOX
+.tablaInicio {
   overflow-y: scroll;
   scrollbar-color: #004643 white;
   scrollbar-width: thin;
-  font-size: 90%;
-  height: 167px;
-}
-
-#Linea {
   height: 300px;
 }
 
-#Barras {
-  height: 300px;
+//CHROME HPTA IBARRA NO LO BORRE
+::-webkit-scrollbar {
+  width: 9px;
+  height: auto;
 }
-
-.pendientes {
-  cursor: pointer;
+::-webkit-scrollbar-thumb {
+  background-color: #004643;
+  border-radius: 5px;
 }

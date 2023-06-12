@@ -1,155 +1,166 @@
-import { useState, useEffect } from 'react';
-import FilaTicket from '../components/FilaTicket';
-import SearchBar from '../components/SearchBar.jsx';
-import useData from '../hooks/useData.js';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
-import Paginacion from '../components/Paginacion';
+import { useState, useEffect } from 'react'
+import SearchBar from '@components/SearchBar'
+import { useData, useToggle } from '@hooks'
+import axios from '../api/axios'
+import { toast } from 'react-toastify'
+import { TablaTickets } from '@components/TablaTickets'
+import { CustomSpinner } from '@components/CustomSpinner'
+import EditarTicket from '@components/EditarTicket'
+import {
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 
 const ListadoTickets = () => {
-  const { getTickets } = useData();
-  const [tickets, setTickets] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [errMsg, setErrMsg] = useState('');
-  const TICKETS_URL = '/tickets';
-  // Pagination
-  const [currPage, setCurrPage] = useState(1);
-  const [itemsPerPage] = useState(10);
+  const { getTickets } = useData()
+  const [tickets, setTickets] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+  const [errMsg, setErrMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [isEditOpen, toggleEdit] = useToggle()
+  const [isDeleteOpen, toggleDelete] = useToggle()
+  const [currentTicket, setCurrentTicket] = useState(null)
 
-  const handleClick = (pageNumber) => {
-    setCurrPage(pageNumber);
-  };
-
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(searchResults.length / itemsPerPage); i++) {
-    pages.push(i);
-  }
-
-  const indexOfLastItem = currPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
+  const TICKETS_URL = '/tickets'
 
   useEffect(() => {
+    setIsLoading(true)
     getTickets().then((json) => {
-      setTickets(json);
-      setSearchResults(json);
-      return json;
-    });
-  }, [getTickets]);
+      setTickets(json)
+      setSearchResults(json)
+      setIsLoading(false)
+      return json
+    })
+  }, [getTickets])
 
-  const onDelete = async (ticketId) => {
+  // useEffect(() => {
+  //   console.log('searchResults', searchResults)
+  // }, [searchResults])
+
+  const onDelete = async (ticket) => {
     try {
       await axios.delete(TICKETS_URL, {
-        data: { id: ticketId },
-      });
+        data: { id: ticket._id }
+      })
       toast.info(`Ticket eliminado exitosamente`, {
-        theme: 'colored',
-      });
+        theme: 'colored'
+      })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== ticketId);
-        return updatedItems;
-      });
+        const updatedItems = prevItems.filter((item) => item._id !== ticket._id)
+        return updatedItems
+      })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('No se pudo eliminar el ticket');
+        setErrMsg('No se pudo eliminar el ticket')
       }
+    } finally {
+      toggleDelete()
     }
-  };
+  }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData;
+    if (formData?.estado === 'Cerrado' && !formData?.fechadecierre) {
+      toast.error('Ingrese la fecha de cierre', {
+        theme: 'colored'
+      })
+      return
+    }
 
     try {
-      await axios.patch(TICKETS_URL, formData);
-      toast.info(`Ticket actualizado exitosamente`, {
-        theme: 'colored',
-      });
+      await axios.patch(TICKETS_URL, formData)
+      toast.info('Ticket actualizado exitosamente', {
+        theme: 'colored'
+      })
       const ticketIndex = searchResults.findIndex(
-        (ticket) => ticket._id === formData.id
-      );
-      const existingTicket = searchResults[ticketIndex];
+        (ticket) => ticket._id === formData._id
+      )
+
       setSearchResults((prevItems) => {
-        prevItems[ticketIndex] = {
-          ...existingTicket,
-          ...rest,
-        };
-        const updatedItems = [...prevItems];
-        return updatedItems;
-      });
+        const updatedItems = [...prevItems]
+        updatedItems[ticketIndex] = formData
+        return updatedItems
+      })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('La actualización del ticket falló');
+        setErrMsg('La actualización del ticket falló')
       }
+    } finally {
+      toggleEdit()
     }
-  };
+  }
 
-  const listaTickets = (data) => {
-    return data.map((item) => (
-      <FilaTicket
-        key={item._id}
-        id={item._id}
-        titulo={item.titulo}
-        prioridad={item.prioridad}
-        estado={item.estado}
-        categoria={item.categoria}
-        fechadecreacion={item.createdAt?.slice(0, 10)}
-        fechadecierre={item.fechadecierre?.slice(0, 10) ?? 'En trámite'}
-        acciones={item.acciones}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
-        errMsg={errMsg}
-        setErrMsg={setErrMsg}
-      />
-    ));
-  };
+  const handleEditToggle = (ticket) => {
+    setCurrentTicket(ticket)
+    toggleEdit()
+  }
+
+  const handleDeleteToggle = (ticket) => {
+    setCurrentTicket(ticket)
+    toggleDelete()
+  }
+
+  const acciones = {
+    handleDeleteToggle,
+    handleEditToggle
+  }
+
+  const editarTicketProps = {
+    ticket: currentTicket,
+    onUpdate,
+    toggleEdit
+  }
+
   return (
-    <div className='container d-flex flex-column gap-3 mt-3 p-0'>
-      <SearchBar
-        items={tickets}
-        setSearchResults={setSearchResults}
-      />
-      <div>
-        {/* <!-- Ver como agregar boton de envio--> */}
-        <div className='p-2 mx-auto bg-primary rounded-top'>
-          <div className='d-flex bg-primary justify-content-center align-items-center'>
-            <h5 className='text-white m-0'> {searchResults.length} tickets</h5>
-          </div>
-        </div>
-        <table className='table table-hover table-bordered text-center align-middle'>
-          <thead className='text-white bg-primary text-center'>
-            <tr>
-              <th>ID</th>
-              <th>Titulo</th>
-              <th>Prioridad</th>
-              <th>Estado</th>
-              <th>Categoria</th>
-              <th>Fecha de Creacion</th>
-              <th>Fecha de Cierre</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody className='bg-secondary text-primary'>
-            {listaTickets(currItems)}
-          </tbody>
-        </table>
-      </div>
-      <div className='row mb-4'>
-        <Paginacion
-          pages={pages}
-          handleClick={handleClick}
-          currPage={currPage}
-          setCurrPage={setCurrPage}
-        />
-      </div>
-    </div>
-  );
-};
-export default ListadoTickets;
+    <Container className='d-flex flex-column gap-3 mt-3'>
+      <SearchBar items={tickets} handleData={setSearchResults} />
+      <section>
+        {isLoading && <CustomSpinner className='mt-3' />}
+        {!isLoading && !tickets?.length && (
+          <h4 className='text-center text-primary'>
+            No hay tickets registrados...
+          </h4>
+        )}
+        {!isLoading && Boolean(tickets?.length) && (
+          <TablaTickets items={searchResults} acciones={acciones} />
+        )}
+      </section>
+      {/* modal de eliminacion */}
+      <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
+        <ModalHeader toggle={toggleDelete}>Eliminar ticket</ModalHeader>
+        <ModalBody>
+          <p>
+            {`¿Está seguro que desea eliminar el ticket ${currentTicket?.ticketRef}?`}
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleDelete}>
+            Cancelar
+          </Button>
+          <Button color='primary' onClick={() => onDelete(currentTicket)}>
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
+      <Modal centered fullscreen isOpen={isEditOpen} toggle={toggleEdit}>
+        <ModalHeader toggle={toggleEdit}>
+          Editar ticket {currentTicket?.ticketRef}
+        </ModalHeader>
+        <EditarTicket {...editarTicketProps} />
+      </Modal>
+    </Container>
+  )
+}
+export default ListadoTickets

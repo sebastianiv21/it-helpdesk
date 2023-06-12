@@ -1,13 +1,14 @@
 const Cliente = require('../models/Cliente')
 const asyncHandler = require('express-async-handler')
+const mongoose = require('mongoose')
 
 // @desc Get all clientes
 // @route GET /clientes
 // @access Private
 const getAllClientes = asyncHandler(async (req, res) => {
-    const clientes = await Cliente.find().lean()
+  const clientes = await Cliente.find().lean()
 
-    // si no hay clientes
+  // si no hay clientes
   if (!clientes?.length) {
     return res.status(400).json({ message: 'No se encontraron clientes' })
   }
@@ -19,15 +20,33 @@ const getAllClientes = asyncHandler(async (req, res) => {
 // @route POST /clientes
 // @access Private
 const createNewCliente = asyncHandler(async (req, res) => {
-    const { email, nombre, apellidos, telefono, empresa, ubicacion } = req.body
+  const {
+    email,
+    nombre,
+    apellidos,
+    telefono,
+    empresa,
+    departamento,
+    municipio
+  } = req.body
 
-     // Confirm data
-  if (!email || !nombre || !apellidos || !telefono || !empresa || !ubicacion) {
+  // Confirm data
+  const camposRequeridos = [
+    email,
+    nombre,
+    apellidos,
+    telefono,
+    empresa,
+    departamento,
+    municipio
+  ]
+
+  if (camposRequeridos.some((field) => !field)) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
   // Create and store the new cliente
-  const cliente = await Cliente.create({ email, nombre, apellidos, telefono, empresa, ubicacion })
+  const cliente = await Cliente.create(req.body)
 
   if (cliente) {
     // Created
@@ -41,30 +60,62 @@ const createNewCliente = asyncHandler(async (req, res) => {
 // @route PATCH /clientes
 // @access Private
 const updateCliente = asyncHandler(async (req, res) => {
-  const { id, email, nombre, apellidos, telefono, empresa, ubicacion } = req.body
+  const {
+    _id: id,
+    email,
+    nombre,
+    apellidos,
+    telefono,
+    empresa,
+    departamento,
+    municipio,
+    direccion
+  } = req.body
+
+  // Verificar si el ID proporcionado es válido
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'ID inválido' })
+  }
 
   // Confirm data
-  if (!id || !email || !nombre || !apellidos || !telefono || !empresa || !ubicacion) {
+  const camposRequeridos = [
+    email,
+    nombre,
+    apellidos,
+    telefono,
+    empresa,
+    departamento,
+    municipio
+  ]
+
+  if (camposRequeridos.some((field) => !field)) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
-  // Confirm cliente exists to update
-  const cliente = await Cliente.findById(id).exec()
+  // Actualizar el documento en la base de datos
+  const updatedCliente = await Cliente.findOneAndUpdate(
+    { _id: id },
+    {
+      email,
+      nombre,
+      apellidos,
+      telefono,
+      empresa,
+      departamento,
+      municipio,
+      direccion
+    },
+    { new: true }
+  )
 
-  if (!cliente) {
-    return res.status(400).json({ message: 'No se encuentra el cliente' })
+  // Verificar si el documento existe y fue actualizado
+  if (!updatedCliente) {
+    return res.status(404).json({ message: 'El cliente no existe' })
   }
 
-  cliente.email = email
-  cliente.nombre = nombre
-  cliente.apellidos = apellidos
-  cliente.telefono = telefono
-  cliente.empresa = empresa
-  cliente.ubicacion = ubicacion
-
-  const updatedCliente = await cliente.save()
-
-  res.json(`Cliente ${updatedCliente.nombre} ${updatedCliente.apellidos} actualizado`)
+  res.json(
+    `Cliente ${updatedCliente.nombre} ${updatedCliente.apellidos} actualizado`
+  )
 })
 
 // @desc Delete a cliente
@@ -96,5 +147,5 @@ module.exports = {
   getAllClientes,
   createNewCliente,
   updateCliente,
-  deleteCliente,
+  deleteCliente
 }

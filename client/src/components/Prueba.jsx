@@ -1,11 +1,12 @@
-import { Button } from "reactstrap";
+import {Form, Button, Input } from "reactstrap";
+
 
 const Prueba = () => {
   return (
-    <form>
-      <input type="text" />
+    <Form>
+      <Input type="text" />
       <Button />
-    </form>
+    </Form>
   );
 };
 

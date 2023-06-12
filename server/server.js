@@ -11,7 +11,7 @@ const connectDB = require('./config/dbConn')
 
 connectDB()
 
-app.disable("x-powered-by");
+app.disable('x-powered-by')
 // configura CORS
 app.use(cors(corsOptions))
 
@@ -24,7 +24,8 @@ app.use(cookieParser())
 app.use('/auth', require('./routes/authRoutes'))
 app.use('/clientes', require('./routes/clienteRoutes'))
 app.use('/tickets', require('./routes/ticketRoutes'))
-
+app.use('/agentes', require('./routes/agenteRoutes'))
+app.use('/places', require('./routes/placeRoutes'))
 
 // 404 route
 app.all('*', (req, res) => {

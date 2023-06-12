@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
-import useData from '../hooks/useData'
-import { Table } from 'reactstrap'
-import FilaPrioritarios from '../components/FilaPrioritarios'
-import GraficoLinea from '../components/GraficoLinea'
+import { useData } from '@hooks'
+import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
 import GraficoBarras from '../components/GraficoBarras'
-import { useNavigate } from 'react-router-dom'
+import { TablaInicio } from '../components/TablaInicio'
 
 const Inicio = () => {
   const { getTickets, countObjectsWithPropertyValue } = useData()
   const [pendientes, setPendientes] = useState(0)
   const [prioritarios, setPrioritarios] = useState([])
   const [tickets, setTickets] = useState([])
-  const navigate = useNavigate()
+
+  const hayPrioritarios = Boolean(prioritarios.length)
 
   useEffect(() => {
     getTickets().then((json) => {
@@ -32,96 +31,52 @@ const Inicio = () => {
     })
   }, [getTickets, countObjectsWithPropertyValue])
 
-  const listaPrioritarios = prioritarios.map(({ _id, categoria, cliente }) => {
-    return (
-      <FilaPrioritarios
-        key={_id}
-        id={_id.slice(-6)}
-        categoria={categoria}
-        empresa={cliente?.empresa}
-      />
-    )
-  })
-
-  const handlePendientes = () => {
-    navigate('listado-tickets')
-  }
-
   return (
-    <div className='container-fluid vh-100 d-flex flex-column p-0 ' id='inicio'>
-      <div className='container mt-5'>
-        <div className='row justify-content-center mb-5'>
-          <div className='col-sm-5 me-5'>
-            <div
-              className='card text-center pendientes'
-              onClick={handlePendientes}
-            >
-              <div className='card-header bg-primary text-white'>
-                Tickets pendientes
-              </div>
-              <div className='card-body'>
-                <strong id='numero'>
-                  <span id='daily_revenue'>{`${pendientes}`}</span>
-                </strong>
-              </div>
-            </div>
-          </div>
-          <div className='col-sm-5 ms-5'>
-            <div className='card text-center'>
-              <div className='card-header bg-primary text-white'>
-                Tickets Prioritarios
-              </div>
-              {prioritarios.length ? (
-                <div className='card-body' id='tabla'>
-                  <Table
-                    responsive
-                    className='table table-sm table-striped text-center align-middle'
-                  >
-                    <thead className='text-primary bg-white text-center'>
-                      <tr>
-                        <th>ID</th>
-                        <th>CATEGORIA</th>
-                        <th>EMPRESA</th>
-                      </tr>
-                    </thead>
-                    <tbody>{listaPrioritarios}</tbody>
-                  </Table>
-                </div>
-              ) : (
-                <div className='card-body'>
-                  <strong id='numeroP'>
-                    <span>{`${prioritarios.length}`}</span>
-                  </strong>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        <div className='row justify-content-center mb-5'>
-          <div className='col-sm-5 me-5'>
-            <div className='card text-center'>
-              <div className='card-header bg-primary text-white'>
-                Tickets Semanales
-              </div>
-              <div className='card-body my-auto' id='Barras'>
-                <GraficoBarras />
-              </div>
-            </div>
-          </div>
-          <div className='col-sm-5 ms-5'>
-            <div className='card text-center'>
-              <div className='card-header bg-primary text-white'>
-                Tickets Mensuales por Empresa
-              </div>
-              <div className='card-body mx-auto' id='Linea'>
-                {/* <GraficoLinea data={tickets} /> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container fluid className='vh-100 d-flex flex-column' id='inicio'>
+      <Container className='mt-5'>
+        <Row className='justify-content-center mb-4'>
+          <Col sm={5}>
+            <Card className='text-center h-100'>
+              <CardHeader className='bg-primary text-white'>
+                TICKETS PENDIENTES
+              </CardHeader>
+              <CardBody className='text-primary text-center d-flex align-items-center justify-content-center'>
+                <strong className='indicadorNumero'>{pendientes}</strong>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col sm={5}>
+            <Card className='text-center h-100'>
+              <CardHeader className='bg-primary text-white'>
+                TICKETS SEMANALES
+              </CardHeader>
+              <CardBody>
+                <GraficoBarras tickets={tickets} />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row className='justify-content-center mb-5'>
+          <Col sm={10}>
+            <Card className='text-center'>
+              <CardHeader className='bg-primary text-white'>
+                TICKETS PRIORITARIOS
+              </CardHeader>
+              <CardBody
+                className={
+                  hayPrioritarios
+                    ? 'tablaInicio'
+                    : 'indicadorNumero text-primary'
+                }
+              >
+                {hayPrioritarios && <TablaInicio items={prioritarios} />}
+                {!hayPrioritarios && <strong>{prioritarios.length}</strong>}
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </Container>
   )
 }
-
 export default Inicio

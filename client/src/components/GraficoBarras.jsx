@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Chart as CartJS,
   BarElement,
@@ -6,27 +5,34 @@ import {
   LinearScale,
   Title,
   Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+  Legend
+} from 'chart.js'
+import { Bar } from 'react-chartjs-2'
+import { useDate } from '@hooks'
 
-CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
-const GraficoBarras = () => {
+const GraficoBarras = ({ tickets }) => {
+  const { arrayUltimos7Dias, obtenerCantidadTicketsPorDia } =
+    useDate()
+
+  const listaDias = arrayUltimos7Dias()
+
+  const ticketsDeLaSemana = obtenerCantidadTicketsPorDia(tickets)?.map(ticket => ticket.cantidad)
+
   const data = {
-    labels: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab'],
+    // labels: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
+    labels: listaDias,
     datasets: [
       {
         label: 'Cantidad',
-        data: [3, 6, 9, 7, 8, 4],
-        backgroundColor: '#A155B9',
-      },
-    ],
-  };
+        data: ticketsDeLaSemana,
+        backgroundColor: '#004643'
+      }
+    ]
+  }
 
-  const options = {};
+  return <Bar data={data} />
+}
 
-  return <Bar data={data} options={options} />;
-};
-
-export default GraficoBarras;
+export default GraficoBarras

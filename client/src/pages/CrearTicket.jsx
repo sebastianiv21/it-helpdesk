@@ -1,105 +1,155 @@
-import { useState, useEffect } from 'react';
-import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useData from '../hooks/useData.js';
-import axios from '../api/axios.js';
-import { toast } from 'react-toastify';
+import { useState, useEffect } from 'react'
+import {
+  faBan,
+  faFloppyDisk,
+  faUserPlus
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useData, useForm } from '@hooks'
+import { useNavigate } from 'react-router-dom'
+import axios from '../api/axios.js'
+import { toast } from 'react-toastify'
+import {
+  Container,
+  Form,
+  Row,
+  Col,
+  FormGroup,
+  Input,
+  InputGroup,
+  Label,
+  Button
+} from 'reactstrap'
+
+const listadoCategorias = [
+  {
+    nombreCategoria: 'Hardware',
+    subcategorias: [
+      { nombre: 'Escáner' },
+      { nombre: 'Impresora' },
+      { nombre: 'Monitor' },
+      { nombre: 'PC' },
+      { nombre: 'Portátil' },
+      { nombre: 'Servidor' },
+      { nombre: 'Smartphone' },
+      { nombre: 'UPS' }
+    ]
+  },
+  {
+    nombreCategoria: 'Software',
+    subcategorias: [
+      { nombre: 'Configuración periférico' },
+      { nombre: 'Copia de información' },
+      { nombre: 'Correo electrónico' },
+      { nombre: 'Office' },
+      { nombre: 'Sistema Operativo' }
+    ]
+  },
+  {
+    nombreCategoria: 'Infraestructura',
+    subcategorias: [
+      { nombre: 'Cableado estructurado' },
+      { nombre: 'Caseta nodo' },
+      { nombre: 'Sistema eléctrico' },
+      { nombre: 'Solución solar' },
+      { nombre: 'Torre de comunicaciones' }
+    ]
+  },
+  {
+    nombreCategoria: 'Servidores',
+    subcategorias: [
+      { nombre: 'Backup' },
+      { nombre: 'Configuración' },
+      { nombre: 'Cuentas de usuario' },
+      { nombre: 'Políticas- Reglas' }
+    ]
+  },
+  {
+    nombreCategoria: 'Ciberseguridad',
+    subcategorias: [
+      { nombre: 'Antivirus' },
+      { nombre: 'Firewall' },
+      { nombre: 'VPN' }
+    ]
+  },
+  {
+    nombreCategoria: 'Seguridad electrónica',
+    subcategorias: [
+      { nombre: 'Biométrico' },
+      { nombre: 'Cámara' },
+      { nombre: 'Sensor' }
+    ]
+  },
+  {
+    nombreCategoria: 'Telecomunicaciones',
+    subcategorias: [
+      { nombre: 'Enlace satelital' },
+      { nombre: 'Radio enlace terrestre' }
+    ]
+  }
+]
+
+const listadoPrioridades = [
+  { id: 1, nombre: 'Alta' },
+  { id: 2, nombre: 'Media' },
+  { id: 3, nombre: 'Baja' }
+]
+
+const initialState = {
+  titulo: '',
+  cliente: '',
+  prioridad: '',
+  categoria: '',
+  subcategoria: '',
+  descripcionTicket: '',
+  agenteEncargado: '',
+  isp: false
+}
 
 const CrearTicket = () => {
-  const { getClientes } = useData();
-  const [clientes, setClientes] = useState([]);
+  const { getClientes, agentes } = useData()
+  const [clientes, setClientes] = useState([])
+  const { formData, onChange, onReset } = useForm(initialState)
+  const navigate = useNavigate()
 
-  //? inicio formulario
-  const TICKETS_URL = '/tickets';
-  const [errMsg, setErrMsg] = useState('');
-
-  const [formData, setFormData] = useState({
-    titulo: '',
-    cliente: '',
-    estado: '',
-    prioridad: '',
-    categoria: '',
-    subcategoria: '',
-  });
+  const TICKETS_URL = '/tickets'
+  const [errMsg, setErrMsg] = useState('')
 
   useEffect(() => {
-    setErrMsg('');
+    setErrMsg('')
 
     if (errMsg) {
-      toast.error(errMsg, { theme: 'colored' });
+      toast.error(errMsg, { theme: 'colored' })
     }
-  }, [errMsg, formData]);
-
-  const { titulo, cliente, estado, prioridad, categoria, subcategoria } =
-    formData;
-
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  }, [errMsg, formData])
 
   const onSubmit = async (e) => {
-    e.preventDefault();
-
-    const ticketData = {
-      titulo,
-      cliente,
-      estado,
-      prioridad,
-      categoria,
-      subcategoria,
-    };
+    e.preventDefault()
 
     try {
-      await axios.post(
-        TICKETS_URL,
-        JSON.stringify(ticketData),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        }
-      );
-      setFormData({
-        titulo: '',
-        cliente: '',
-        estado: '',
-        prioridad: '',
-        categoria: '',
-        subcategoria: '',
-      });
-      toast.info('Ticket creado exitosamente', { theme: 'colored' });
+      await axios.post(TICKETS_URL, JSON.stringify(formData), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+      })
+      onReset()
+      toast.info('Ticket creado exitosamente', { theme: 'colored' })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('La creación del ticket falló');
+        setErrMsg('La creación del ticket falló')
       }
     }
-  };
-
-  const onReset = () => {
-    setFormData({
-      titulo: '',
-      cliente: '',
-      estado: '',
-      prioridad: '',
-      categoria: '',
-      subcategoria: '',
-    });
   }
-
-  //? fin formulario
 
   useEffect(() => {
     getClientes().then((json) => {
-      setClientes(json);
-      return json;
-    });
-  }, [getClientes]);
+      setClientes(json)
+      return json
+    })
+  }, [getClientes])
 
   const optClientes = clientes.map((cliente) => {
     return (
@@ -107,194 +157,211 @@ const CrearTicket = () => {
         key={cliente._id}
         value={`${cliente._id}`}
       >{`${cliente.nombre} ${cliente.apellidos}`}</option>
-    );
-  });
+    )
+  })
+
+  const prioridades = listadoPrioridades.map((prioridad) => (
+    <option key={prioridad.id} value={prioridad.nombre}>
+      {prioridad.nombre}
+    </option>
+  ))
+
+  const categorias = listadoCategorias.map((categoria) => {
+    return (
+      <option key={categoria.nombreCategoria} value={categoria.nombreCategoria}>
+        {categoria.nombreCategoria}
+      </option>
+    )
+  })
+
+  const subcategorias = listadoCategorias.map((categoria) => {
+    if (categoria.nombreCategoria === formData.categoria) {
+      return categoria.subcategorias.map((subcategoria) => {
+        return (
+          <option key={subcategoria.nombre} value={subcategoria.nombre}>
+            {subcategoria.nombre}
+          </option>
+        )
+      })
+    } else {
+      return null
+    }
+  })
+
+  const listaAgentes = agentes.map((agente) => (
+    <option key={agente._id} value={agente._id}>
+      {agente.nombre}
+    </option>
+  ))
 
   return (
-    <div className='container d-flex flex-column gap-3 mt-3'>
+    <Container className='d-flex flex-column gap-3 mt-3'>
       <div>
         <div className='bg-primary text-white rounded-top'>
           <div className='bg-primary rounded-bottom p-2 px-3 d-flex gap-3 rounded-top'>
-            <h4 className='ps-1 py-0 me-auto mb-auto'>Creacion del Ticket</h4>
+            <h4 className='ps-1 py-0 me-auto mb-auto'>Creación del Ticket</h4>
           </div>
         </div>
-        <div className='bg-secondary p-2 rounded-bottom text-primary'>
-          <form onSubmit={onSubmit}>
-            <div className='row d-flex justify-content-around mb-3 text-center'>
-              <div className='col-sm'>
-                <label hmlfor='titulo'> Titulo (*)</label>
-                <input
-                  type='text'
-                  className='form-control'
-                  name='titulo'
-                  id='titulo'
-                  placeholder='Ingrese el nombre del ticket'
-                  value={titulo}
-                  onChange={onChange}
-                />
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='estado'> Estado (*)</label>
-                <select
-                  name='estado'
-                  className='form-select '
-                  id='estado'
-                  value={estado}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione estado</option>
-                  <option value='Abierto'>Abierto</option>
-                  <option value='Cerrado'>Cerrado</option>
-                </select>
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='prioridad'> Prioridad (*)</label>
-                <select
-                  name='prioridad'
-                  className='form-select'
-                  id='prioridad'
-                  value={prioridad}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione prioridad</option>
-                  <option value='Alta'>Alta</option>
-                  <option value='Media'>Media</option>
-                  <option value='Baja'>Baja</option>
-                </select>
-              </div>
-            </div>
-            <div className='row d-flex justify-content-around mb-2 text-center'>
-              <div className='col-sm'>
-                <label htmlFor='categoria'> Categoria (*)</label>
-                <select
-                  name='categoria'
-                  className='form-select'
-                  id='categoria'
-                  value={categoria}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione categoría</option>
-                  <option value='Actualización'>Actualización</option>
-                  <option value='Cambio'>Cambio</option>
-                  <option value='Configuración'>Configuración</option>
-                  <option value='Hadware'>Hadware</option>
-                  <option value='Software'>Software</option>
-                  <option value='Instalación'>Instalación</option>
-                  <option value='Otro'>Otro</option>
-                  <option value='Redes'>Redes</option>
-                </select>
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='subcategoria'> SubCategoria (*)</label>
-                <select
-                  name='subcategoria'
-                  className='form-select'
-                  id='subcategoria'
-                  value={subcategoria}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione subcategoría</option>
-                  <option value='Antivirus'>Antivirus</option>
-                  <option value='Cambio de radio enlace'>
-                    Cambio de radio enlace
-                  </option>
-                  <option value='Certificación de cableado'>
-                    Certificación de cableado
-                  </option>
-                  <option value='Contraseña'>Contraseña</option>
-                  <option value='Creacion de Backup'>Creacion de Backup</option>
-                  <option value='CRM'>CRM</option>
-                  <option value='Desinstalación de radio enlace'>
-                    Desinstalación de radio enlace
-                  </option>
-                  <option value='Email'>Email</option>
-                  <option value='ERP'>ERP</option>
-                  <option value='Firewall'>Firewall</option>
-                  <option value='Impresora'>Impresora</option>
-                  <option value='Instalación de Ap'>Instalación de Ap</option>
-                  <option value='Instalacion de enlace satelital'>
-                    Instalacion de enlace satelital
-                  </option>
-                  <option value=' Instalación de radio enlace'>
-                    Instalación de radio enlace
-                  </option>
-                  <option value=' Instalación de solución solar'>
-                    Instalación de solución solar
-                  </option>
-                  <option value='Instalacion de ups'>Instalacion de ups</option>
-                  <option value='Instalación de cableado estructural'>
-                    Instalación de cableado estructural
-                  </option>
-                  <option value='Internet'>Internet</option>
-                  <option value='Intranet'>Intranet</option>
-                  <option value='LAN'>LAN</option>
-                  <option value='Mantenimiento de radio enlace'>
-                    Mantenimiento de radio enlace
-                  </option>
-                  <option value='Mantenimiento de ups'>
-                    Mantenimiento de ups
-                  </option>
-                  <option value='Monitor'>Monitor</option>
-                  <option value='Office'>Office</option>
-                  <option value='Otro'>Otro</option>
-                  <option value='PC'>PC</option>
-                  <option value='Periféricos'>Periféricos</option>
-                  <option value='Portatil'>Portatil</option>
-                  <option value='Recuperación de información'>
-                    Recuperación de información
-                  </option>
-                  <option value='Restauración de backup'>
-                    Restauración de backup
-                  </option>
-                  <option value='Revisión de enlace satelital'>
-                    Revisión de enlace satelital
-                  </option>
-                  <option value='Revisión de enlace de red'>
-                    Revisión de enlace de red
-                  </option>
-                  <option value='Servidor'>Servidor</option>
-                  <option value='Sistema Operativo'>Sistema Operativo</option>
-                  <option value='Smartphone'>Smartphone</option>
-                  <option value='Teléfono'>Teléfono</option>
-                  <option value='Videoconferencia'>Videoconferencia</option>
-                  <option value='VPN'>VPN</option>
-                  <option value='Web'>Web</option>
-                  <option value='WiFi'>WiFi</option>
-                </select>
-              </div>
-              <div className='col-sm'>
-                <label htmlFor='cliente'> Cliente (*)</label>
-                <select
-                  name='cliente'
-                  className='form-select '
-                  id='cliente'
-                  value={cliente}
-                  onChange={onChange}
-                >
-                  <option value=''>Seleccione cliente</option>
-                  {optClientes}
-                </select>
-              </div>
-            </div>
-            <div className='d-flex justify-content-end p-2'>
-              <button
-                type='reset'
-                className='btn btn-primary text-white me-3'
-                onClick={onReset}
-              >
-                <FontAwesomeIcon icon={faBan} />
-                <span className='ms-2'>Cancelar</span>
-              </button>
-              <button className='btn btn-primary text-white me-5'>
-                <FontAwesomeIcon icon={faFloppyDisk} />
-                <span className='ms-2'>Guardar</span>
-              </button>
-            </div>
-          </form>
+        <div className='bg-secondary p-3 rounded-bottom text-primary'>
+          <Form onSubmit={onSubmit}>
+            <Row>
+              <Col sm>
+                <FormGroup>
+                  <Label for='cliente'>Cliente (*)</Label>
+                  <InputGroup>
+                    <Button
+                      type='button'
+                      color='primary'
+                      onClick={() => navigate('/registrar-cliente')}
+                    >
+                      <FontAwesomeIcon icon={faUserPlus} />
+                    </Button>
+                    <Input
+                      name='cliente'
+                      id='cliente'
+                      type='select'
+                      value={formData.cliente}
+                      onChange={onChange}
+                      required
+                    >
+                      <option value=''>Seleccione el cliente</option>
+                      {optClientes}
+                    </Input>
+                  </InputGroup>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='titulo'>Título del Servicio (*)</Label>
+                  <Input
+                    type='text'
+                    name='titulo'
+                    id='titulo'
+                    placeholder='Ingrese el nombre del ticket'
+                    minLength={1}
+                    maxLength={50}
+                    value={formData.titulo}
+                    onChange={onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='prioridad'>Prioridad (*)</Label>
+                  <Input
+                    type='select'
+                    name='prioridad'
+                    id='prioridad'
+                    value={formData.prioridad}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione la prioridad</option>
+                    {prioridades}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm>
+                <FormGroup>
+                  <Label for='categoria'>Categoría (*)</Label>
+                  <Input
+                    type='select'
+                    name='categoria'
+                    id='categoria'
+                    value={formData.categoria}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione categoría</option>
+                    {categorias}
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='subcategoria'>SubCategoría (*)</Label>
+                  <Input
+                    type='select'
+                    name='subcategoria'
+                    id='subcategoria'
+                    value={formData.subcategoria}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione subcategoría</option>
+                    {subcategorias}
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col sm>
+                <FormGroup>
+                  <Label for='agenteEncargado'>Agente de Servicio (*) </Label>
+                  <Input
+                    type='select'
+                    name='agenteEncargado'
+                    id='agenteEncargado'
+                    value={formData.agenteEncargado}
+                    onChange={onChange}
+                    required
+                  >
+                    <option value=''>Seleccione el agente</option>
+                    {listaAgentes}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col sm={8}>
+                <FormGroup>
+                  <Label for='descripcionTicket'>
+                    Descripción del Servicio (*)
+                  </Label>
+                  <Input
+                    type='textarea'
+                    name='descripcionTicket'
+                    id='descripcionTicket'
+                    placeholder='Digite una breve descripción'
+                    minLength={1}
+                    maxLength={250}
+                    value={formData.descripcionTicket}
+                    onChange={onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm={4}>
+                <FormGroup check>
+                  <Input
+                    type='checkbox'
+                    name='isp'
+                    onChange={onChange}
+                    value={formData.isp}
+                    checked={formData.isp}
+                  />
+                  <Label check>ISP</Label>
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col className='d-flex justify-content-end gap-2'>
+                <Button type='reset' color='primary' onClick={onReset}>
+                  <FontAwesomeIcon icon={faBan} />
+                  <span className='ms-2'>Cancelar</span>
+                </Button>
+                <Button type='submit' color='primary'>
+                  <FontAwesomeIcon icon={faFloppyDisk} />
+                  <span className='ms-2'>Guardar</span>
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </div>
       </div>
-    </div>
-  );
-};
+    </Container>
+  )
+}
 
-export default CrearTicket;
+export default CrearTicket

@@ -1,180 +1,167 @@
-import { useState, useEffect } from 'react';
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Table } from 'reactstrap';
-import FilaCliente from '../components/FilaCliente';
-import useData from '../hooks/useData';
-import SearchBarClientes from '../components/SearchBarClientes';
-import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
-import { toast } from 'react-toastify';
-import Paginacion from '../components/Paginacion';
+import { useState, useEffect } from 'react'
+import { useData, useToggle } from '@hooks'
+import SearchBar from '@components/SearchBar'
+import EditarCliente from '@components/EditarCliente'
+import axios from '../api/axios'
+import { toast } from 'react-toastify'
+import { TablaClientes } from '@components/TablaClientes'
+import { CustomSpinner } from '@components/CustomSpinner'
+import {
+  Container,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from 'reactstrap'
 
 const ListadoClientes = () => {
-  const { getClientes } = useData();
-  const [clientes, setClientes] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const [errMsg, setErrMsg] = useState('');
-  const CLIENTES_URL = '/clientes';
+  const { getClientes } = useData()
+  const [clientes, setClientes] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+  const [errMsg, setErrMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
+  const [isEditOpen, toggleEdit] = useToggle()
+  const [isDeleteOpen, toggleDelete] = useToggle()
+  const [currentCliente, setCurrentCliente] = useState(null)
 
-  const navigate = useNavigate();
+  const CLIENTES_URL = '/clientes'
 
-  // Pagination
-  const [currPage, setCurrPage] = useState(1);
-  const [itemsPerPage] = useState(10);
-
-  const handleClick = (pageNumber) => {
-    setCurrPage(pageNumber);
-  };
-
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(searchResults.length / itemsPerPage); i++) {
-    pages.push(i);
+  const handleGetClientes = () => {
+    setIsLoading(true)
+    getClientes().then((json) => {
+      setClientes(json)
+      setSearchResults(json)
+      setIsLoading(false)
+      return json
+    })
   }
 
-  const indexOfLastItem = currPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currItems = searchResults.slice(indexOfFirstItem, indexOfLastItem);
-
   useEffect(() => {
-    getClientes().then((json) => {
-      setClientes(json);
-      setSearchResults(json);
-      return json;
-    });
-  }, [getClientes]);
+    handleGetClientes()
+  }, [])
 
-  const onDelete = async (clienteId) => {
+  const onDelete = async (cliente) => {
     try {
       await axios.delete(CLIENTES_URL, {
-        data: { id: clienteId },
-      });
+        data: { id: cliente._id }
+      })
       toast.info(`Cliente eliminado exitosamente`, {
-        theme: 'colored',
-      });
+        theme: 'colored'
+      })
       setSearchResults((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item._id !== clienteId);
-        return updatedItems;
-      });
+        const updatedItems = prevItems.filter(
+          (item) => item._id !== cliente._id
+        )
+        return updatedItems
+      })
+      // handleGetClientes()
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('No se pudo eliminar el cliente');
+        setErrMsg('No se pudo eliminar el cliente')
       }
+    } finally {
+      toggleDelete()
     }
-  };
+  }
 
   const onUpdate = async (formData) => {
-    const { id, ...rest } = formData;
-
     try {
-      await axios.patch(CLIENTES_URL, formData);
-      toast.info(`Cliente actualizado exitosamente`, {
-        theme: 'colored',
-      });
+      await axios.patch(CLIENTES_URL, formData)
+      toast.info('Cliente actualizado exitosamente', {
+        theme: 'colored'
+      })
+
       const clientIndex = searchResults.findIndex(
-        (client) => client._id === formData.id
-      );
-      const existingClient = searchResults[clientIndex];
+        (client) => client._id === formData._id
+      )
+
       setSearchResults((prevItems) => {
-        prevItems[clientIndex] = {
-          ...existingClient,
-          ...rest,
-        };
-        const updatedItems = [...prevItems];
-        return updatedItems;
-      });
+        const updatedItems = [...prevItems]
+        updatedItems[clientIndex] = formData
+        return updatedItems
+      })
     } catch (err) {
       if (!err?.response) {
-        setErrMsg('El servidor no responde');
+        setErrMsg('El servidor no responde')
       } else if (err.response?.status === 400) {
-        setErrMsg('Ingrese todos los campos del formulario');
+        setErrMsg('Ingrese todos los campos del formulario')
       } else {
-        setErrMsg('La actualización del cliente falló');
+        setErrMsg('La actualización del cliente falló')
       }
+    } finally {
+      toggleEdit()
     }
-  };
+  }
 
-  const listaCliente = (data) => {
-    return data.map((item) => (
-      <FilaCliente
-        key={item._id}
-        id={item._id}
-        email={item.email}
-        nombre={item.nombre}
-        apellidos={item.apellidos}
-        telefono={item.telefono}
-        empresa={item.empresa}
-        ubicacion={item.ubicacion}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
-        errMsg={errMsg}
-        setErrMsg={setErrMsg}
-      />
-    ));
-  };
+  const handleDeleteToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleDelete()
+  }
+
+  const handleEditToggle = (cliente) => {
+    setCurrentCliente(cliente)
+    toggleEdit()
+  }
+
+  const acciones = {
+    handleDeleteToggle,
+    handleEditToggle
+  }
+
+  useEffect(() => {
+    console.log(currentCliente)
+  }, [currentCliente])
+
+  const editarClienteProps = {
+    cliente: currentCliente,
+    onUpdate,
+    toggleEdit
+  }
 
   return (
-    <>
-      <div className='container d-flex flex-column gap-3 mt-3'>
-        <div>
-          {/* <!--modulo busqueda--> */}
-          <SearchBarClientes
-            items={clientes}
-            setSearchResults={setSearchResults}
-          />
-        </div>
-        <div>
-          {/* <!--listado de contactos--> */}
-          <div>
-            {/* <!--Primera fila--> */}
-            <div className='bg-primary rounded-top p-2 d-flex gap-2'>
-              <button
-                className='btn btn-secondary text-primary'
-                onClick={() => navigate('/registrar-cliente')}
-              >
-                <FontAwesomeIcon icon={faUserPlus} />
-              </button>
-              <h5 className='text-white m-0 mx-auto align-self-center'>
-                {searchResults.length} clientes
-              </h5>
-            </div>
-            <Table
-              bordered
-              hover
-              responsive
-              striped
-              className='text-center align-middle'
-            >
-              <thead className='bg-primary text-white'>
-                <tr>
-                  <th>Email</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>Teléfono</th>
-                  <th>Empresa</th>
-                  <th>Ubicación</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody className='bg-secondary text-primary'>
-                {listaCliente(currItems)}
-              </tbody>
-            </Table>
-          </div>
-          <Paginacion
-            pages={pages}
-            handleClick={handleClick}
-            currPage={currPage}
-            setCurrPage={setCurrPage}
-          />
-        </div>
-      </div>
-    </>
-  );
-};
+    <Container className='d-flex flex-column gap-3 mt-3'>
+      <SearchBar items={clientes} handleData={setSearchResults} />
+      <section>
+        {isLoading && <CustomSpinner className='mt-3' />}
+        {!isLoading && !clientes?.length && (
+          <h4 className='text-center text-primary'>
+            No hay clientes registrados...
+          </h4>
+        )}
+        {!isLoading && Boolean(clientes?.length) && (
+          <TablaClientes items={searchResults} acciones={acciones} />
+        )}
+      </section>
+      {/* modal de eliminacion */}
+      <Modal centered isOpen={isDeleteOpen} toggle={toggleDelete}>
+        <ModalHeader toggle={toggleDelete}>Eliminar cliente</ModalHeader>
+        <ModalBody>
+          <p>
+            {`¿Está seguro que desea eliminar al cliente ${currentCliente?.nombre}
+            ${currentCliente?.apellidos}?`}
+          </p>
+        </ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={toggleDelete}>
+            Cancelar
+          </Button>
+          <Button color='primary' onClick={() => onDelete(currentCliente)}>
+            Eliminar
+          </Button>
+        </ModalFooter>
+      </Modal>
+      {/* modal de edicion */}
+      <Modal centered size='lg' isOpen={isEditOpen} toggle={toggleEdit}>
+        <ModalHeader toggle={toggleEdit}>Editar cliente</ModalHeader>
+        <EditarCliente {...editarClienteProps} />
+      </Modal>
+    </Container>
+  )
+}
 
-export default ListadoClientes;
+export default ListadoClientes
