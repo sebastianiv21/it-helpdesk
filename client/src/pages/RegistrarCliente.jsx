@@ -35,10 +35,6 @@ const RegistrarCliente = () => {
   const { formData, onChange, onReset } = useForm(initialState)
 
   useEffect(() => {
-    console.log(formData)
-  }, [formData])
-
-  useEffect(() => {
     setErrMsg('')
 
     if (errMsg) {

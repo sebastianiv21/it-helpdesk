@@ -113,10 +113,6 @@ const ListadoClientes = () => {
     handleEditToggle
   }
 
-  useEffect(() => {
-    console.log(currentCliente)
-  }, [currentCliente])
-
   const editarClienteProps = {
     cliente: currentCliente,
     onUpdate,

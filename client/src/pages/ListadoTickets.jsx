@@ -37,10 +37,6 @@ const ListadoTickets = () => {
     })
   }, [getTickets])
 
-  // useEffect(() => {
-  //   console.log('searchResults', searchResults)
-  // }, [searchResults])
-
   const onDelete = async (ticket) => {
     try {
       await axios.delete(TICKETS_URL, {

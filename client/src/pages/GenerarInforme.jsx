@@ -134,18 +134,20 @@ const GenerarInforme = () => {
     )
   })
 
-  // useEffect(() => {
-  //   const generarGrafico = () => {
-  //     if (datosInforme) {
-  //       const chartCanvas = document.querySelector('canvas')
-  //       const newChartDataURL = chartCanvas.toDataURL()
-  //       setChartDataURL(newChartDataURL)
-  //     }
-  //   }
+  useEffect(() => {
+    const generarGrafico = () => {
+      if (datosInforme) {
+        const chartCanvas = document.querySelector('canvas')
+        setTimeout(() => {
+          const newChartDataURL = chartCanvas.toDataURL()
+          setChartDataURL(newChartDataURL)
+        }, 1000)
+      }
+    }
 
-  //   generarGrafico()
-  //   setVerPdf(true)
-  // }, [datosInforme])
+    generarGrafico()
+    setVerPdf(true)
+  }, [datosInforme])
 
   const generarGrafico = () => {
     if (datosInforme) {
@@ -169,7 +171,6 @@ const GenerarInforme = () => {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
-      console.log(data)
       setDatosInforme(data)
       const chartCanvas = document.querySelector('canvas')
       const newChartDataURL = chartCanvas?.toDataURL()
@@ -310,10 +311,10 @@ const GenerarInforme = () => {
           <PDFViewer style={{ width: '100%', height: '90vh' }}>
             <DocuPDF grafica={chartDataURL} datos={datosInforme} />
           </PDFViewer>
-        ) : 'nada'}
+        ) : null}
       </div>
       <div
-        // className='offcanvas'
+        className='offcanvas'
         style={{ position: 'relative', width: '80vw' }}
       >
         {datosInforme && <GraficoInforme datos={datosInforme} />}

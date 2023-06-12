@@ -12,14 +12,14 @@ import { Bar } from 'react-chartjs-2'
 CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
 const GraficoInforme = ({ datos }) => {
-  const { categorias } = datos
-  console.log('grafico', categorias)
+  const { graficoLabels, graficoData } = datos
+  
   const data = {
-    labels: categorias?.map((categoria) => categoria.nombre),
+    labels: graficoLabels,
     datasets: [
       {
         label: 'Cantidad',
-        data: categorias?.map((categoria) => categoria.cantidad),
+        data: graficoData,
         backgroundColor: '#004643'
       }
     ]

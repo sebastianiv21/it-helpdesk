@@ -81,6 +81,9 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
     return acc
   }, [])
 
+  const graficoLabels = categorias.map((categoria) => categoria.nombre)
+  const graficoData = categorias.map((categoria) => categoria.cantidad)
+
   // si no hay tickets
   // if (!tickets?.length) {
   //   return res.status(400).json({ message: 'No se encontraron tickets' })
@@ -93,7 +96,9 @@ const getTicketsByDateRange = asyncHandler(async (req, res) => {
     ticketsAbiertos,
     ticketsCerrados,
     tickets,
-    categorias
+    categorias, 
+    graficoLabels,
+    graficoData
   })
 
   // res.json({ fechaInicio, fechaFinal, empresa, ticketsAbiertos, ticketsCerrados, tickets, categorias })

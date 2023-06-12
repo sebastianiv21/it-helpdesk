@@ -539,7 +539,7 @@ const DocuPDF = ({ grafica, datos }) => {
               marginTop: '25'
             }}
           >
-            <Text style={styles.text}>GRAFICO DE CATEGORIAS</Text>
+            <Text style={styles.text}>GRÁFICO DE CATEGORIAS</Text>
           </View>
           <View
             style={{
@@ -564,10 +564,10 @@ const DocuPDF = ({ grafica, datos }) => {
             <View style={styles.tabla}>
               <View style={styles.tablaFila}>
                 <View style={styles.tablaColumna3}>
-                  <Text style={styles.tablaCeldaHeader}>CATEGORIA</Text>
+                  <Text style={styles.tablaCeldaHeader}>CATEGORÍA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
-                  <Text style={styles.tablaCeldaHeader}>SUBCATEGORIA</Text>
+                  <Text style={styles.tablaCeldaHeader}>SUBCATEGORÍA</Text>
                 </View>
                 <View style={styles.tablaColumna3}>
                   <Text style={styles.tablaCeldaHeader}>CANT.TICKETS</Text>
