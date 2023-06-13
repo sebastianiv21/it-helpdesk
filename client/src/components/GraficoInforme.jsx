@@ -13,7 +13,8 @@ CartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
 const GraficoInforme = ({ datos }) => {
   const { graficoLabels, graficoData } = datos
-  
+  const mayorquecinco = graficoData.some((cantidad)=>cantidad > 5)
+ const maximo = graficoData.length === 0 ? null :  Math.max(...graficoData)
   const data = {
     labels: graficoLabels,
     datasets: [
@@ -34,10 +35,13 @@ const GraficoInforme = ({ datos }) => {
     scales: {
       y: {
         beginAtZero: true,
+        min: 0,
+        max: !mayorquecinco ? 5 : maximo,
         ticks: {
           font: {
             size: 40 // Tamaño de las letras en el eje y
-          }
+          },
+          stepSize: 1,
         }
       },
       x: {

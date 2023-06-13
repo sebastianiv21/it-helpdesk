@@ -19,6 +19,20 @@ const GraficoBarras = ({ tickets }) => {
   const listaDias = arrayUltimos7Dias()
 
   const ticketsDeLaSemana = obtenerCantidadTicketsPorDia(tickets)?.map(ticket => ticket.cantidad)
+ const mayorquecinco = ticketsDeLaSemana.some((cantidad)=>cantidad > 5)
+ const maximo = ticketsDeLaSemana.length === 0 ? null :  Math.max(...ticketsDeLaSemana)
+const options = {
+  scales: {
+    y: {
+      beginAtZero: true,
+        min: 0,
+      max: !mayorquecinco ? 5 : maximo,
+        ticks: {
+          stepSize: 1,
+        }
+    },
+  }
+}
 
   const data = {
     // labels: ['Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab', 'Dom'],
@@ -27,12 +41,12 @@ const GraficoBarras = ({ tickets }) => {
       {
         label: 'Cantidad',
         data: ticketsDeLaSemana,
-        backgroundColor: '#004643'
-      }
+        backgroundColor: '#004643',
+      } 
+      
     ]
   }
-
-  return <Bar data={data} />
+  return <Bar data={data} options={options} />
 }
 
 export default GraficoBarras
