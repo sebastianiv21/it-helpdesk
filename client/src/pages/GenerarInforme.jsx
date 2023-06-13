@@ -226,6 +226,7 @@ const GenerarInforme = () => {
                   id='empresa'
                   value={formData.empresa}
                   onChange={onChange}
+                  required
                 >
                   <option value=''>Seleccione empresa o cliente</option>
                   {optEmpresas}
@@ -242,6 +243,7 @@ const GenerarInforme = () => {
                   id='categoria'
                   value={formData.categoria}
                   onChange={onChange}
+                  required
                 >
                   <option value=''>Seleccione categoría</option>
                   {categorias}
