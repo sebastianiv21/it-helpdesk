@@ -158,7 +158,7 @@ const ListadoTickets = () => {
         </ModalFooter>
       </Modal>
       {/* modal de edicion */}
-      <Modal centered fullscreen isOpen={isEditOpen} toggle={toggleEdit}>
+      <Modal centered size='xl' isOpen={isEditOpen} toggle={toggleEdit}>
         <ModalHeader toggle={toggleEdit}>
           Editar ticket {currentTicket?.ticketRef}
         </ModalHeader>
