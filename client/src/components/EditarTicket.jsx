@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import {
   Input,
   Label,
@@ -248,9 +248,7 @@ const EditarTicket = ({ ticket, onUpdate, toggleEdit }) => {
                   onChange={onChange}
                   value={formData.prioridad}
                 >
-                  <option value='Alta'>Alta</option>
-                  <option value='Media'>Media</option>
-                  <option value='Baja'>Baja</option>
+                  {prioridades}
                 </Input>
               </FormGroup>
             </Col>
