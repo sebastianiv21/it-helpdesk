@@ -81,11 +81,11 @@ export const DataProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getAgentes().then((data) => setAgentes(data))
+    getAgentes().then((data) => setAgentes(data)).catch((err) => console.error(err))
   }, [])
 
   useEffect(() => {
-    getDepartamentos().then((data) => setDepartamentos(data))
+    getDepartamentos().then((data) => setDepartamentos(data)).catch((err) => console.error(err))
   }, [])
 
   const uniqueProperty = (array, property) => {

@@ -28,6 +28,7 @@ const Inicio = () => {
   const hayPrioritarios = Boolean(prioritarios.length)
 
   const getTicketsInfo = async () => {
+    try {
     const json = await getTickets()
     const [pendientesArr, pendientes] = countObjectsWithPropertyValue(
       json,
@@ -42,6 +43,9 @@ const Inicio = () => {
     setTickets(json)
     setPendientes(pendientes)
     setPrioritarios(prioritariosArr)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
