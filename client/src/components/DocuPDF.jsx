@@ -39,7 +39,8 @@ const DocuPDF = ({ grafica, datos }) => {
       flexDirection: 'row',
       alignSelf: 'center',
       marginLeft: 10,
-      marginRight: 10
+      marginRight: 10,
+      marginBottom: -5
     },
     text: {
       color: '#004643',
@@ -78,7 +79,7 @@ const DocuPDF = ({ grafica, datos }) => {
       borderWidth: 1,
       borderRightWidth: 0,
       borderBottomWidth: 0,
-      marginTop: 10,
+      marginTop: 5,
       backgroundColor: '#004643',
       marginLeft: 10,
       marginRight: 10,
@@ -212,7 +213,7 @@ const DocuPDF = ({ grafica, datos }) => {
       >
         <Text
           style={{
-            marginTop: 15,
+            marginTop: 10,
             fontSize: 12,
             color: '#004643',
             textAlign: 'center',
@@ -381,7 +382,7 @@ const DocuPDF = ({ grafica, datos }) => {
         >
           <Text style={styles.text}>INFORME DE TRAZABILIDAD</Text>
         </View>
-        <View style={styles.primera}>
+        <View style={styles.primera} wrap={false}>
           <View style={styles.carta}>
             <Text
               style={{
@@ -452,7 +453,7 @@ const DocuPDF = ({ grafica, datos }) => {
             </Text>
           </View>
         </View>
-        <View style={styles.tabla}>
+        <View style={styles.tabla}  >
           <View style={styles.tablaFila}>
             <View
               style={{
@@ -528,7 +529,7 @@ const DocuPDF = ({ grafica, datos }) => {
             </View>
           </View>
         </View>
-        <View style={styles.tablados}> {datosTabla} </View>
+        <View style={styles.tablados}> {datosTabla}  </View>
         <View wrap={false}>
           <View
             style={{
@@ -536,7 +537,7 @@ const DocuPDF = ({ grafica, datos }) => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: '25'
+              marginTop: '15'
             }}
           >
             <Text style={styles.text}>GRÁFICO DE CATEGORIAS</Text>
@@ -556,7 +557,7 @@ const DocuPDF = ({ grafica, datos }) => {
           </View>
         </View>
         <View>
-          <View style={{ marginTop: '30' }}>
+          <View style={{ marginTop: '15' }} wrap={false}>
             <Text style={styles.text}>DETALLADO DE SUBCATEGORIAS</Text>
             <View style={styles.tabla}>
               <View style={styles.tablaFila}>
